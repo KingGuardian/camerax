@@ -1,12 +1,13 @@
 import 'package:camerax/camerax.dart';
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 
-class AnalyzeView extends StatefulWidget {
+class AnalyzerView extends StatefulWidget {
   @override
-  _AnalyzeViewState createState() => _AnalyzeViewState();
+  _AnalyzerViewState createState() => _AnalyzerViewState();
 }
 
-class _AnalyzeViewState extends State<AnalyzeView>
+class _AnalyzerViewState extends State<AnalyzerView>
     with SingleTickerProviderStateMixin {
   late CameraController cameraController;
   late AnimationController animationConrtroller;
@@ -16,27 +17,43 @@ class _AnalyzeViewState extends State<AnalyzeView>
   @override
   void initState() {
     super.initState();
-    cameraController = CameraController();
+    cameraController = CameraController(CameraSelector.DEFAULT_BACK_CAMERA);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation =
         CurvedAnimation(parent: animationConrtroller, curve: OpacityCurve());
-    animationConrtroller.repeat();
-
-    start();
+    setup();
   }
+
+  Future<void> setup() async {
+    unawaited(animationConrtroller.repeat());
+    await cameraController.bind();
+    // try {
+    //   final barcode = await cameraController.barcodes.first;
+    //   display(barcode);
+    // } catch (e) {
+    //   print(e);
+    // }
+  }
+
+  // void display(Barcode barcode) {
+  //   Navigator.of(context).popAndPushNamed('display', arguments: barcode);
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          CameraView(cameraController),
+          // 相机
+          CameraView(controller: cameraController),
+          // 扫描线
           AnimatedLine(
             offsetAnimation: offsetAnimation,
             opacityAnimation: opacityAnimation,
           ),
+          // 返回按钮
           Positioned(
             left: 24.0,
             top: 32.0,
@@ -45,20 +62,13 @@ class _AnalyzeViewState extends State<AnalyzeView>
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
+          // 闪光灯
           Container(
             alignment: Alignment.bottomCenter,
             margin: EdgeInsets.only(bottom: 80.0),
-            child: IconButton(
-              icon: ValueListenableBuilder(
-                valueListenable: cameraController.torchState,
-                builder: (context, state, child) {
-                  final color =
-                      state == TorchState.off ? Colors.grey : Colors.white;
-                  return Icon(Icons.bolt, color: color);
-                },
-              ),
-              iconSize: 32.0,
-              onPressed: () => cameraController.torch(),
+            child: ValueListenableBuilder(
+              valueListenable: cameraController.torchState,
+              builder: buildTorchState,
             ),
           ),
         ],
@@ -66,25 +76,25 @@ class _AnalyzeViewState extends State<AnalyzeView>
     );
   }
 
+  Widget buildTorchState(BuildContext context, bool? state, Widget? child) {
+    final color = (state != null && state) ? Colors.white : Colors.grey;
+    final action = state == null ? null : () => torch(!state);
+    return IconButton(
+      icon: Icon(Icons.bolt, color: color),
+      iconSize: 32.0,
+      onPressed: action,
+    );
+  }
+
+  Future<void> torch(bool state) async {
+    await cameraController.torch(state);
+  }
+
   @override
   void dispose() {
     animationConrtroller.dispose();
-    cameraController.dispose();
+    cameraController.unbind();
     super.dispose();
-  }
-
-  void start() async {
-    await cameraController.startAsync();
-    try {
-      final barcode = await cameraController.barcodes.first;
-      display(barcode);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void display(Barcode barcode) {
-    Navigator.of(context).popAndPushNamed('display', arguments: barcode);
   }
 }
 

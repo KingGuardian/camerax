@@ -7,14 +7,21 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('CameraX'),
       ),
+      // body: Center(
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(40.0),
+      //     child: Text(
+      //       'Click the camera button at bottom to start scan:)',
+      //       style: TextStyle(fontSize: 20.0),
+      //       textAlign: TextAlign.center,
+      //     ),
+      //   ),
+      // ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(40.0),
-          child: Text(
-            'Click the camera button at bottom to start scan:)',
-            style: TextStyle(fontSize: 20.0),
-            textAlign: TextAlign.center,
-          ),
+        child: Container(
+          width: 200.0,
+          height: 100.0,
+          color: Colors.amber,
         ),
       ),
       bottomNavigationBar: BottomAppBar(

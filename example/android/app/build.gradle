@@ -26,24 +26,14 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
+    compileSdk 30
     defaultConfig {
         applicationId "dev.yanshouwang.camerax.example"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        targetSdk 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

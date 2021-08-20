@@ -1,0 +1,70 @@
+syntax = "proto3";
+package communication;
+
+option java_package = "dev.yanshouwang.camerax.communication";
+
+message Message {
+    MessageCategory category = 1;
+    oneof stub {
+        BindArgs bindArgs = 2;
+        UnbindArgs unbindArgs = 3;
+        TorchArgs torchArgs = 4;
+        DisplayRotation rotation = 5;
+    }
+}
+
+message BindArgs {
+    CameraSelector selector = 1;
+}
+
+message CameraSelector {
+    CameraFacing facing = 1;
+}
+
+message CameraBinding {
+    string key = 1;
+    CameraArgs cameraArgs = 2;
+    bool torchState = 3;
+}
+
+message UnbindArgs {
+    string key = 1;
+}
+
+message TorchArgs {
+    string key = 1;
+    bool state = 2;
+}
+
+message CameraArgs {
+    int32 textureId = 1;
+    CameraSize size = 2;
+    bool hasTorch = 3;
+}
+
+message CameraSize {
+    int32 width = 1;
+    int32 height = 2;
+}
+
+enum MessageCategory {
+    CAMERA_CONTROLLER_BIND = 0;
+    CAMERA_CONTROLLER_UNBIND = 1;
+    CAMERA_CONTROLLER_TORCH = 2;
+    CAMERA_ARGS_CHANGED = 3;
+    TORCH_STATE_CHANGED = 4;
+    DEVICE_GET_ROTATION = 5;
+    DEVICE_ROTATION_CHANGED = 6;
+}
+
+enum CameraFacing {
+    FRONT = 0;
+    BACK = 1;
+}
+
+enum DisplayRotation {
+    ROTATION_0 = 0;
+    ROTATION_90 = 1;
+    ROTATION_180 = 2;
+    ROTATION_270 = 3;
+}

@@ -1,3 +1,5 @@
+part of camerax;
+
 /// The facing of a camera.
 enum CameraFacing {
   /// Front facing camera.
