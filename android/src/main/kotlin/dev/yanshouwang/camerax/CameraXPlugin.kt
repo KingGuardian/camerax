@@ -110,7 +110,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
             val listener = Runnable {
                 val cameraProvider = cameraProviderFuture.get()
                 val keeper = keepers.remove(unbindArgs.key)!!
-                cameraProvider.unbind(*keeper.useCases)
+                val useCases = keeper.useCases.toTypedArray()
+                cameraProvider.unbind(*useCases)
             }
             cameraProviderFuture.addListener(listener, mainExecutor)
         }
@@ -140,8 +141,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             Communication.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
                         }
                         val surfaceProvider = Preview.SurfaceProvider { request ->
-                            val textureRegistry = bindingOfFlutter.textureRegistry
-                            val textureEntry = textureRegistry.createSurfaceTexture()
+                            val keeper = keepers[key]!!
+                            val camera = keeper.camera
+                            val textureEntry = keeper.textureEntry
                             val texture = textureEntry.surfaceTexture()
                             val width = request.resolution.width
                             val height = request.resolution.height
@@ -149,7 +151,6 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             val surface = Surface(texture)
                             request.provideSurface(surface, mainExecutor, {})
                             val textureId = textureEntry.id().toInt()
-                            val camera = keepers[key]!!.camera
                             val sensorDegrees = camera.cameraInfo.sensorRotationDegrees
                             val size =
                                 if (sensorDegrees % 180 == 0) Size(width, height)
@@ -171,13 +172,16 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                         val preview = Preview.Builder()
                             .build()
                             .apply { setSurfaceProvider(surfaceProvider) }
-                        val useCases = arrayOf<UseCase>(preview)
                         val camera = cameraProvider.bindToLifecycle(
                             lifecycleOwner,
                             cameraSelector,
-                            *useCases,
+                            preview,
                         )
-                        keepers[key] = CameraKeeper(camera, useCases)
+                        val useCases = listOf<UseCase>(preview)
+                        val textureRegistry = bindingOfFlutter.textureRegistry
+                        val textureEntry = textureRegistry.createSurfaceTexture()
+                        // 保持 textureEntry 的引用，防止被 GC 回收
+                        keepers[key] = CameraKeeper(camera, useCases, textureEntry)
                     } catch (e: Exception) {
                         result.error(e)
                     }

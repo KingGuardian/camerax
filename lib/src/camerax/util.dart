@@ -12,11 +12,11 @@ extension on DeviceOrientation {
       case DeviceOrientation.portraitUp:
         return 0;
       case DeviceOrientation.landscapeRight:
-        return 1;
+        return 3;
       case DeviceOrientation.portraitDown:
         return 2;
       case DeviceOrientation.landscapeLeft:
-        return 3;
+        return 1;
       default:
         throw ArgumentError();
     }

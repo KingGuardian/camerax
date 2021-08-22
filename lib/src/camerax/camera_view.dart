@@ -51,9 +51,9 @@ class _CameraViewState extends State<CameraView> {
         builder: buildOrientation,
         child: Container(
           constraints: BoxConstraints.expand(),
-          color: Color.fromARGB(255, 0, 0, 255),
+          color: Color.fromARGB(255, 0, 0, 0),
           child: FittedBox(
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             clipBehavior: Clip.hardEdge,
             child: SizedBox(
               width: width,
