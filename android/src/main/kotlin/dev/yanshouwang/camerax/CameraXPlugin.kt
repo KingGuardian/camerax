@@ -10,6 +10,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
 import dev.yanshouwang.camerax.communication.Communication
 import dev.yanshouwang.camerax.communication.Communication.CameraFacing.*
@@ -37,15 +38,15 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 
     private val method by lazy {
         val messenger = bindingOfFlutter!!.binaryMessenger
-        return@lazy MethodChannel(messenger, "$NAMESPACE/method")
+        MethodChannel(messenger, "$NAMESPACE/method")
     }
     private val event by lazy {
         val messenger = bindingOfFlutter!!.binaryMessenger
-        return@lazy EventChannel(messenger, "$NAMESPACE/event")
+        EventChannel(messenger, "$NAMESPACE/event")
     }
     private val handler by lazy {
         val mainLooper = bindingOfActivity!!.activity.mainLooper
-        return@lazy Handler(mainLooper)
+        Handler(mainLooper)
     }
 
     private var rotation: Int? = null
@@ -130,7 +131,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
             val runnable = Runnable {
                 val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
                 val mainExecutor = ContextCompat.getMainExecutor(context)
-                val listener = {
+                val listener = Runnable {
                     try {
                         val key = UUID.randomUUID().toString()
                         val cameraProvider = cameraProviderFuture.get()
@@ -149,7 +150,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             val height = request.resolution.height
                             texture.setDefaultBufferSize(width, height)
                             val surface = Surface(texture)
-                            request.provideSurface(surface, mainExecutor, {})
+                            request.provideSurface(surface, mainExecutor, Consumer { })
                             val textureId = textureEntry.id().toInt()
                             val sensorDegrees = camera.cameraInfo.sensorRotationDegrees
                             val size =
@@ -175,7 +176,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                         val camera = cameraProvider.bindToLifecycle(
                             lifecycleOwner,
                             cameraSelector,
-                            preview,
+                            preview
                         )
                         val useCases = listOf<UseCase>(preview)
                         val textureRegistry = bindingOfFlutter.textureRegistry
