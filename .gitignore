@@ -5,3 +5,7 @@
 .pub/
 
 build/
+
+pubspec.lock
+.idea/
+.vscode/
