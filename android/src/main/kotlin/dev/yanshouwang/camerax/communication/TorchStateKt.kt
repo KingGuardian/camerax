@@ -4,23 +4,23 @@
 package dev.yanshouwang.camerax.communication;
 
 @kotlin.jvm.JvmSynthetic
-inline fun torchArgs(block: dev.yanshouwang.camerax.communication.TorchArgsKt.Dsl.() -> Unit): dev.yanshouwang.camerax.communication.Communication.TorchArgs =
-  dev.yanshouwang.camerax.communication.TorchArgsKt.Dsl._create(dev.yanshouwang.camerax.communication.Communication.TorchArgs.newBuilder()).apply { block() }._build()
-object TorchArgsKt {
+inline fun torchState(block: dev.yanshouwang.camerax.communication.TorchStateKt.Dsl.() -> Unit): dev.yanshouwang.camerax.communication.Communication.TorchState =
+  dev.yanshouwang.camerax.communication.TorchStateKt.Dsl._create(dev.yanshouwang.camerax.communication.Communication.TorchState.newBuilder()).apply { block() }._build()
+object TorchStateKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder
+    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.communication.Communication.TorchState.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: dev.yanshouwang.camerax.communication.Communication.TorchState.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): dev.yanshouwang.camerax.communication.Communication.TorchArgs = _builder.build()
+    internal fun _build(): dev.yanshouwang.camerax.communication.Communication.TorchState = _builder.build()
 
     /**
      * <code>int32 key = 1;</code>
@@ -58,5 +58,5 @@ object TorchArgsKt {
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.communication.Communication.TorchArgs.copy(block: dev.yanshouwang.camerax.communication.TorchArgsKt.Dsl.() -> Unit): dev.yanshouwang.camerax.communication.Communication.TorchArgs =
-  dev.yanshouwang.camerax.communication.TorchArgsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+inline fun dev.yanshouwang.camerax.communication.Communication.TorchState.copy(block: dev.yanshouwang.camerax.communication.TorchStateKt.Dsl.() -> Unit): dev.yanshouwang.camerax.communication.Communication.TorchState =
+  dev.yanshouwang.camerax.communication.TorchStateKt.Dsl._create(this.toBuilder()).apply { block() }._build()

@@ -15,53 +15,58 @@ export 'communication.pbenum.dart';
 
 enum Message_Stub {
   bindArgs, 
-  unbindArgs, 
-  torchArgs, 
-  rotation, 
+  textureInfo, 
+  torchState, 
+  analysis, 
   notSet
 }
 
 class Message extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, Message_Stub> _Message_StubByTag = {
-    2 : Message_Stub.bindArgs,
-    3 : Message_Stub.unbindArgs,
-    4 : Message_Stub.torchArgs,
-    5 : Message_Stub.rotation,
+    3 : Message_Stub.bindArgs,
+    4 : Message_Stub.textureInfo,
+    5 : Message_Stub.torchState,
+    6 : Message_Stub.analysis,
     0 : Message_Stub.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Message', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..oo(0, [2, 3, 4, 5])
-    ..e<MessageCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MessageCategory.CAMERA_CONTROLLER_BIND, valueOf: MessageCategory.valueOf, enumValues: MessageCategory.values)
-    ..aOM<BindArgs>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bindArgs', protoName: 'bindArgs', subBuilder: BindArgs.create)
-    ..aOM<UnbindArgs>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'unbindArgs', protoName: 'unbindArgs', subBuilder: UnbindArgs.create)
-    ..aOM<TorchArgs>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchArgs', protoName: 'torchArgs', subBuilder: TorchArgs.create)
-    ..e<DisplayRotation>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rotation', $pb.PbFieldType.OE, defaultOrMaker: DisplayRotation.ROTATION_0, valueOf: DisplayRotation.valueOf, enumValues: DisplayRotation.values)
+    ..oo(0, [3, 4, 5, 6])
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'key', $pb.PbFieldType.O3)
+    ..e<MessageCategory>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MessageCategory.BIND, valueOf: MessageCategory.valueOf, enumValues: MessageCategory.values)
+    ..aOM<BindArgs>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bindArgs', subBuilder: BindArgs.create)
+    ..aOM<TextureInfo>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureInfo', subBuilder: TextureInfo.create)
+    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchState')
+    ..a<$core.List<$core.int>>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'analysis', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
   Message._() : super();
   factory Message({
+    $core.int? key,
     MessageCategory? category,
     BindArgs? bindArgs,
-    UnbindArgs? unbindArgs,
-    TorchArgs? torchArgs,
-    DisplayRotation? rotation,
+    TextureInfo? textureInfo,
+    $core.bool? torchState,
+    $core.List<$core.int>? analysis,
   }) {
     final _result = create();
+    if (key != null) {
+      _result.key = key;
+    }
     if (category != null) {
       _result.category = category;
     }
     if (bindArgs != null) {
       _result.bindArgs = bindArgs;
     }
-    if (unbindArgs != null) {
-      _result.unbindArgs = unbindArgs;
+    if (textureInfo != null) {
+      _result.textureInfo = textureInfo;
     }
-    if (torchArgs != null) {
-      _result.torchArgs = torchArgs;
+    if (torchState != null) {
+      _result.torchState = torchState;
     }
-    if (rotation != null) {
-      _result.rotation = rotation;
+    if (analysis != null) {
+      _result.analysis = analysis;
     }
     return _result;
   }
@@ -90,60 +95,67 @@ class Message extends $pb.GeneratedMessage {
   void clearStub() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
-  MessageCategory get category => $_getN(0);
+  $core.int get key => $_getIZ(0);
   @$pb.TagNumber(1)
-  set category(MessageCategory v) { setField(1, v); }
+  set key($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCategory() => $_has(0);
+  $core.bool hasKey() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCategory() => clearField(1);
+  void clearKey() => clearField(1);
 
   @$pb.TagNumber(2)
-  BindArgs get bindArgs => $_getN(1);
+  MessageCategory get category => $_getN(1);
   @$pb.TagNumber(2)
-  set bindArgs(BindArgs v) { setField(2, v); }
+  set category(MessageCategory v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasBindArgs() => $_has(1);
+  $core.bool hasCategory() => $_has(1);
   @$pb.TagNumber(2)
-  void clearBindArgs() => clearField(2);
-  @$pb.TagNumber(2)
-  BindArgs ensureBindArgs() => $_ensure(1);
+  void clearCategory() => clearField(2);
 
   @$pb.TagNumber(3)
-  UnbindArgs get unbindArgs => $_getN(2);
+  BindArgs get bindArgs => $_getN(2);
   @$pb.TagNumber(3)
-  set unbindArgs(UnbindArgs v) { setField(3, v); }
+  set bindArgs(BindArgs v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasUnbindArgs() => $_has(2);
+  $core.bool hasBindArgs() => $_has(2);
   @$pb.TagNumber(3)
-  void clearUnbindArgs() => clearField(3);
+  void clearBindArgs() => clearField(3);
   @$pb.TagNumber(3)
-  UnbindArgs ensureUnbindArgs() => $_ensure(2);
+  BindArgs ensureBindArgs() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  TorchArgs get torchArgs => $_getN(3);
+  TextureInfo get textureInfo => $_getN(3);
   @$pb.TagNumber(4)
-  set torchArgs(TorchArgs v) { setField(4, v); }
+  set textureInfo(TextureInfo v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasTorchArgs() => $_has(3);
+  $core.bool hasTextureInfo() => $_has(3);
   @$pb.TagNumber(4)
-  void clearTorchArgs() => clearField(4);
+  void clearTextureInfo() => clearField(4);
   @$pb.TagNumber(4)
-  TorchArgs ensureTorchArgs() => $_ensure(3);
+  TextureInfo ensureTextureInfo() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  DisplayRotation get rotation => $_getN(4);
+  $core.bool get torchState => $_getBF(4);
   @$pb.TagNumber(5)
-  set rotation(DisplayRotation v) { setField(5, v); }
+  set torchState($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasRotation() => $_has(4);
+  $core.bool hasTorchState() => $_has(4);
   @$pb.TagNumber(5)
-  void clearRotation() => clearField(5);
+  void clearTorchState() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.int> get analysis => $_getN(5);
+  @$pb.TagNumber(6)
+  set analysis($core.List<$core.int> v) { $_setBytes(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasAnalysis() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAnalysis() => clearField(6);
 }
 
 class BindArgs extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BindArgs', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..aOM<CameraSelector>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selector', subBuilder: CameraSelector.create)
+    ..aOM<CameraSelector>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selector', subBuilder: CameraSelector.create)
     ..hasRequiredFields = false
   ;
 
@@ -178,15 +190,15 @@ class BindArgs extends $pb.GeneratedMessage {
   static BindArgs getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BindArgs>(create);
   static BindArgs? _defaultInstance;
 
-  @$pb.TagNumber(1)
+  @$pb.TagNumber(2)
   CameraSelector get selector => $_getN(0);
-  @$pb.TagNumber(1)
-  set selector(CameraSelector v) { setField(1, v); }
-  @$pb.TagNumber(1)
+  @$pb.TagNumber(2)
+  set selector(CameraSelector v) { setField(2, v); }
+  @$pb.TagNumber(2)
   $core.bool hasSelector() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSelector() => clearField(1);
-  @$pb.TagNumber(1)
+  @$pb.TagNumber(2)
+  void clearSelector() => clearField(2);
+  @$pb.TagNumber(2)
   CameraSelector ensureSelector() => $_ensure(0);
 }
 
@@ -237,277 +249,139 @@ class CameraSelector extends $pb.GeneratedMessage {
   void clearFacing() => clearField(1);
 }
 
-class CameraBinding extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraBinding', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'key')
-    ..aOM<CameraArgs>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'cameraArgs', protoName: 'cameraArgs', subBuilder: CameraArgs.create)
-    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchState', protoName: 'torchState')
+class CameraInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
+    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hasTorch')
     ..hasRequiredFields = false
   ;
 
-  CameraBinding._() : super();
-  factory CameraBinding({
-    $core.String? key,
-    CameraArgs? cameraArgs,
-    $core.bool? torchState,
-  }) {
-    final _result = create();
-    if (key != null) {
-      _result.key = key;
-    }
-    if (cameraArgs != null) {
-      _result.cameraArgs = cameraArgs;
-    }
-    if (torchState != null) {
-      _result.torchState = torchState;
-    }
-    return _result;
-  }
-  factory CameraBinding.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraBinding.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  CameraBinding clone() => CameraBinding()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  CameraBinding copyWith(void Function(CameraBinding) updates) => super.copyWith((message) => updates(message as CameraBinding)) as CameraBinding; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CameraBinding create() => CameraBinding._();
-  CameraBinding createEmptyInstance() => create();
-  static $pb.PbList<CameraBinding> createRepeated() => $pb.PbList<CameraBinding>();
-  @$core.pragma('dart2js:noInline')
-  static CameraBinding getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraBinding>(create);
-  static CameraBinding? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get key => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set key($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasKey() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearKey() => clearField(1);
-
-  @$pb.TagNumber(2)
-  CameraArgs get cameraArgs => $_getN(1);
-  @$pb.TagNumber(2)
-  set cameraArgs(CameraArgs v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCameraArgs() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCameraArgs() => clearField(2);
-  @$pb.TagNumber(2)
-  CameraArgs ensureCameraArgs() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $core.bool get torchState => $_getBF(2);
-  @$pb.TagNumber(3)
-  set torchState($core.bool v) { $_setBool(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasTorchState() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearTorchState() => clearField(3);
-}
-
-class UnbindArgs extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UnbindArgs', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'key')
-    ..hasRequiredFields = false
-  ;
-
-  UnbindArgs._() : super();
-  factory UnbindArgs({
-    $core.String? key,
-  }) {
-    final _result = create();
-    if (key != null) {
-      _result.key = key;
-    }
-    return _result;
-  }
-  factory UnbindArgs.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UnbindArgs.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  UnbindArgs clone() => UnbindArgs()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  UnbindArgs copyWith(void Function(UnbindArgs) updates) => super.copyWith((message) => updates(message as UnbindArgs)) as UnbindArgs; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static UnbindArgs create() => UnbindArgs._();
-  UnbindArgs createEmptyInstance() => create();
-  static $pb.PbList<UnbindArgs> createRepeated() => $pb.PbList<UnbindArgs>();
-  @$core.pragma('dart2js:noInline')
-  static UnbindArgs getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UnbindArgs>(create);
-  static UnbindArgs? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get key => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set key($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasKey() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearKey() => clearField(1);
-}
-
-class TorchArgs extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TorchArgs', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'key')
-    ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state')
-    ..hasRequiredFields = false
-  ;
-
-  TorchArgs._() : super();
-  factory TorchArgs({
-    $core.String? key,
-    $core.bool? state,
-  }) {
-    final _result = create();
-    if (key != null) {
-      _result.key = key;
-    }
-    if (state != null) {
-      _result.state = state;
-    }
-    return _result;
-  }
-  factory TorchArgs.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory TorchArgs.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  TorchArgs clone() => TorchArgs()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  TorchArgs copyWith(void Function(TorchArgs) updates) => super.copyWith((message) => updates(message as TorchArgs)) as TorchArgs; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static TorchArgs create() => TorchArgs._();
-  TorchArgs createEmptyInstance() => create();
-  static $pb.PbList<TorchArgs> createRepeated() => $pb.PbList<TorchArgs>();
-  @$core.pragma('dart2js:noInline')
-  static TorchArgs getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TorchArgs>(create);
-  static TorchArgs? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get key => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set key($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasKey() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearKey() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.bool get state => $_getBF(1);
-  @$pb.TagNumber(2)
-  set state($core.bool v) { $_setBool(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasState() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearState() => clearField(2);
-}
-
-class CameraArgs extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraArgs', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', $pb.PbFieldType.O3, protoName: 'textureId')
-    ..aOM<CameraSize>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: CameraSize.create)
-    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'hasTorch', protoName: 'hasTorch')
-    ..hasRequiredFields = false
-  ;
-
-  CameraArgs._() : super();
-  factory CameraArgs({
-    $core.int? textureId,
-    CameraSize? size,
+  CameraInfo._() : super();
+  factory CameraInfo({
     $core.bool? hasTorch,
   }) {
     final _result = create();
-    if (textureId != null) {
-      _result.textureId = textureId;
-    }
-    if (size != null) {
-      _result.size = size;
-    }
     if (hasTorch != null) {
       _result.hasTorch = hasTorch;
     }
     return _result;
   }
-  factory CameraArgs.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraArgs.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory CameraInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CameraInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  CameraArgs clone() => CameraArgs()..mergeFromMessage(this);
+  CameraInfo clone() => CameraInfo()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  CameraArgs copyWith(void Function(CameraArgs) updates) => super.copyWith((message) => updates(message as CameraArgs)) as CameraArgs; // ignore: deprecated_member_use
+  CameraInfo copyWith(void Function(CameraInfo) updates) => super.copyWith((message) => updates(message as CameraInfo)) as CameraInfo; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CameraArgs create() => CameraArgs._();
-  CameraArgs createEmptyInstance() => create();
-  static $pb.PbList<CameraArgs> createRepeated() => $pb.PbList<CameraArgs>();
+  static CameraInfo create() => CameraInfo._();
+  CameraInfo createEmptyInstance() => create();
+  static $pb.PbList<CameraInfo> createRepeated() => $pb.PbList<CameraInfo>();
   @$core.pragma('dart2js:noInline')
-  static CameraArgs getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraArgs>(create);
-  static CameraArgs? _defaultInstance;
+  static CameraInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraInfo>(create);
+  static CameraInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get textureId => $_getIZ(0);
+  $core.bool get hasTorch => $_getBF(0);
   @$pb.TagNumber(1)
-  set textureId($core.int v) { $_setSignedInt32(0, v); }
+  set hasTorch($core.bool v) { $_setBool(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasTextureId() => $_has(0);
+  $core.bool hasHasTorch() => $_has(0);
   @$pb.TagNumber(1)
-  void clearTextureId() => clearField(1);
+  void clearHasTorch() => clearField(1);
+}
+
+class TextureInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TextureInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOM<TextureSize>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: TextureSize.create)
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quarterTurns', $pb.PbFieldType.O3, protoName: 'quarterTurns')
+    ..hasRequiredFields = false
+  ;
+
+  TextureInfo._() : super();
+  factory TextureInfo({
+    $core.int? id,
+    TextureSize? size,
+    $core.int? quarterTurns,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (size != null) {
+      _result.size = size;
+    }
+    if (quarterTurns != null) {
+      _result.quarterTurns = quarterTurns;
+    }
+    return _result;
+  }
+  factory TextureInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TextureInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  TextureInfo clone() => TextureInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  TextureInfo copyWith(void Function(TextureInfo) updates) => super.copyWith((message) => updates(message as TextureInfo)) as TextureInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static TextureInfo create() => TextureInfo._();
+  TextureInfo createEmptyInstance() => create();
+  static $pb.PbList<TextureInfo> createRepeated() => $pb.PbList<TextureInfo>();
+  @$core.pragma('dart2js:noInline')
+  static TextureInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TextureInfo>(create);
+  static TextureInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  CameraSize get size => $_getN(1);
+  TextureSize get size => $_getN(1);
   @$pb.TagNumber(2)
-  set size(CameraSize v) { setField(2, v); }
+  set size(TextureSize v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSize() => $_has(1);
   @$pb.TagNumber(2)
   void clearSize() => clearField(2);
   @$pb.TagNumber(2)
-  CameraSize ensureSize() => $_ensure(1);
+  TextureSize ensureSize() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.bool get hasTorch => $_getBF(2);
+  $core.int get quarterTurns => $_getIZ(2);
   @$pb.TagNumber(3)
-  set hasTorch($core.bool v) { $_setBool(2, v); }
+  set quarterTurns($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasHasTorch() => $_has(2);
+  $core.bool hasQuarterTurns() => $_has(2);
   @$pb.TagNumber(3)
-  void clearHasTorch() => clearField(3);
+  void clearQuarterTurns() => clearField(3);
 }
 
-class CameraSize extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraSize', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
+class TextureSize extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TextureSize', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'communication'), createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.O3)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'height', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
-  CameraSize._() : super();
-  factory CameraSize({
+  TextureSize._() : super();
+  factory TextureSize({
     $core.int? width,
     $core.int? height,
   }) {
@@ -520,26 +394,26 @@ class CameraSize extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory CameraSize.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraSize.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory TextureSize.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory TextureSize.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  CameraSize clone() => CameraSize()..mergeFromMessage(this);
+  TextureSize clone() => TextureSize()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  CameraSize copyWith(void Function(CameraSize) updates) => super.copyWith((message) => updates(message as CameraSize)) as CameraSize; // ignore: deprecated_member_use
+  TextureSize copyWith(void Function(TextureSize) updates) => super.copyWith((message) => updates(message as TextureSize)) as TextureSize; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CameraSize create() => CameraSize._();
-  CameraSize createEmptyInstance() => create();
-  static $pb.PbList<CameraSize> createRepeated() => $pb.PbList<CameraSize>();
+  static TextureSize create() => TextureSize._();
+  TextureSize createEmptyInstance() => create();
+  static $pb.PbList<TextureSize> createRepeated() => $pb.PbList<TextureSize>();
   @$core.pragma('dart2js:noInline')
-  static CameraSize getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraSize>(create);
-  static CameraSize? _defaultInstance;
+  static TextureSize getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TextureSize>(create);
+  static TextureSize? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get width => $_getIZ(0);

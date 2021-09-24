@@ -23,7 +23,24 @@ object MessageKt {
     internal fun _build(): dev.yanshouwang.camerax.communication.Communication.Message = _builder.build()
 
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>int32 key = 1;</code>
+     */
+    var key: kotlin.Int
+      @JvmName("getKey")
+      get() = _builder.getKey()
+      @JvmName("setKey")
+      set(value) {
+        _builder.setKey(value)
+      }
+    /**
+     * <code>int32 key = 1;</code>
+     */
+    fun clearKey() {
+      _builder.clearKey()
+    }
+
+    /**
+     * <code>.communication.MessageCategory category = 2;</code>
      */
     var category: dev.yanshouwang.camerax.communication.Communication.MessageCategory
       @JvmName("getCategory")
@@ -33,14 +50,14 @@ object MessageKt {
         _builder.setCategory(value)
       }
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>.communication.MessageCategory category = 2;</code>
      */
     fun clearCategory() {
       _builder.clearCategory()
     }
 
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      */
     var bindArgs: dev.yanshouwang.camerax.communication.Communication.BindArgs
       @JvmName("getBindArgs")
@@ -50,13 +67,13 @@ object MessageKt {
         _builder.setBindArgs(value)
       }
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      */
     fun clearBindArgs() {
       _builder.clearBindArgs()
     }
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      * @return Whether the bindArgs field is set.
      */
     fun hasBindArgs(): kotlin.Boolean {
@@ -64,75 +81,75 @@ object MessageKt {
     }
 
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
+     * <code>.communication.TextureInfo texture_info = 4;</code>
      */
-    var unbindArgs: dev.yanshouwang.camerax.communication.Communication.UnbindArgs
-      @JvmName("getUnbindArgs")
-      get() = _builder.getUnbindArgs()
-      @JvmName("setUnbindArgs")
+    var textureInfo: dev.yanshouwang.camerax.communication.Communication.TextureInfo
+      @JvmName("getTextureInfo")
+      get() = _builder.getTextureInfo()
+      @JvmName("setTextureInfo")
       set(value) {
-        _builder.setUnbindArgs(value)
+        _builder.setTextureInfo(value)
       }
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
+     * <code>.communication.TextureInfo texture_info = 4;</code>
      */
-    fun clearUnbindArgs() {
-      _builder.clearUnbindArgs()
+    fun clearTextureInfo() {
+      _builder.clearTextureInfo()
     }
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     * @return Whether the unbindArgs field is set.
+     * <code>.communication.TextureInfo texture_info = 4;</code>
+     * @return Whether the textureInfo field is set.
      */
-    fun hasUnbindArgs(): kotlin.Boolean {
-      return _builder.hasUnbindArgs()
+    fun hasTextureInfo(): kotlin.Boolean {
+      return _builder.hasTextureInfo()
     }
 
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
+     * <code>bool torch_state = 5;</code>
      */
-    var torchArgs: dev.yanshouwang.camerax.communication.Communication.TorchArgs
-      @JvmName("getTorchArgs")
-      get() = _builder.getTorchArgs()
-      @JvmName("setTorchArgs")
+    var torchState: kotlin.Boolean
+      @JvmName("getTorchState")
+      get() = _builder.getTorchState()
+      @JvmName("setTorchState")
       set(value) {
-        _builder.setTorchArgs(value)
+        _builder.setTorchState(value)
       }
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
+     * <code>bool torch_state = 5;</code>
      */
-    fun clearTorchArgs() {
-      _builder.clearTorchArgs()
+    fun clearTorchState() {
+      _builder.clearTorchState()
     }
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     * @return Whether the torchArgs field is set.
+     * <code>bool torch_state = 5;</code>
+     * @return Whether the torchState field is set.
      */
-    fun hasTorchArgs(): kotlin.Boolean {
-      return _builder.hasTorchArgs()
+    fun hasTorchState(): kotlin.Boolean {
+      return _builder.hasTorchState()
     }
 
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
+     * <code>bytes analysis = 6;</code>
      */
-    var rotation: dev.yanshouwang.camerax.communication.Communication.DisplayRotation
-      @JvmName("getRotation")
-      get() = _builder.getRotation()
-      @JvmName("setRotation")
+    var analysis: com.google.protobuf.ByteString
+      @JvmName("getAnalysis")
+      get() = _builder.getAnalysis()
+      @JvmName("setAnalysis")
       set(value) {
-        _builder.setRotation(value)
+        _builder.setAnalysis(value)
       }
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
+     * <code>bytes analysis = 6;</code>
      */
-    fun clearRotation() {
-      _builder.clearRotation()
+    fun clearAnalysis() {
+      _builder.clearAnalysis()
     }
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return Whether the rotation field is set.
+     * <code>bytes analysis = 6;</code>
+     * @return Whether the analysis field is set.
      */
-    fun hasRotation(): kotlin.Boolean {
-      return _builder.hasRotation()
+    fun hasAnalysis(): kotlin.Boolean {
+      return _builder.hasAnalysis()
     }
     val stubCase: dev.yanshouwang.camerax.communication.Communication.Message.StubCase
       @JvmName("getStubCase")

@@ -13,42 +13,52 @@ class CameraView extends StatefulWidget {
 }
 
 class _CameraViewState extends State<CameraView> {
-  late ValueNotifier<DeviceOrientation?> orientation;
-  late StreamSubscription<DeviceOrientation> orientationSubscription;
+  late ValueNotifier<TextureInfo?> textureInfo;
+  late StreamSubscription<TextureInfo> textureInfoSubscription;
 
   @override
   void initState() {
     super.initState();
-    orientation = ValueNotifier(null);
+    textureInfo = ValueNotifier(null);
     setup();
   }
 
   void setup() async {
-    orientation.value = await device.orientation;
-    orientationSubscription = device.orientationChanged
-        .listen((orientation) => this.orientation.value = orientation);
+    // 监听方向
+    final arguments = comm.Message(
+      key: hashCode,
+      category: comm.MessageCategory.TEXTURE_INFO,
+    );
+    textureInfo.value = await method
+        .invokeMethod<Uint8List>('', arguments)
+        .then((binaries) => comm.TextureInfo.fromBuffer(binaries!).mirror);
+    textureInfoSubscription = stream
+        .where((message) =>
+            message.key == widget.controller.hashCode &&
+            message.category == comm.MessageCategory.TEXTURE_INFO_EVENT)
+        .map((message) => message.textureInfo.mirror)
+        .listen((textureInfo) => this.textureInfo.value = textureInfo);
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: widget.controller.cameraArgs,
-      builder: buildCameraArgs,
+      valueListenable: textureInfo,
+      builder: buildTexture,
     );
   }
 
-  Widget buildCameraArgs(
-      BuildContext context, CameraArgs? cameraArgs, Widget? child) {
-    if (cameraArgs == null) {
+  Widget buildTexture(
+      BuildContext context, TextureInfo? textureInfo, Widget? child) {
+    if (textureInfo == null) {
       return buildPlaceHolder(context);
     } else {
       // 获取物理像素与逻辑像素的比值
       final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-      final width = cameraArgs.size.width / devicePixelRatio;
-      final height = cameraArgs.size.height / devicePixelRatio;
-      return ValueListenableBuilder(
-        valueListenable: orientation,
-        builder: buildOrientation,
+      final width = textureInfo.size.width / devicePixelRatio;
+      final height = textureInfo.size.height / devicePixelRatio;
+      return RotatedBox(
+        quarterTurns: textureInfo.quarterTurns,
         child: Container(
           constraints: BoxConstraints.expand(),
           color: Color.fromARGB(255, 0, 0, 0),
@@ -59,23 +69,11 @@ class _CameraViewState extends State<CameraView> {
               width: width,
               height: height,
               child: Texture(
-                textureId: cameraArgs.textureId,
+                textureId: textureInfo.id,
               ),
             ),
           ),
         ),
-      );
-    }
-  }
-
-  Widget buildOrientation(
-      BuildContext context, DeviceOrientation? orientation, Widget? child) {
-    if (orientation == null) {
-      return buildPlaceHolder(context);
-    } else {
-      return RotatedBox(
-        quarterTurns: orientation.quarterTurns,
-        child: child,
       );
     }
   }
@@ -88,8 +86,8 @@ class _CameraViewState extends State<CameraView> {
 
   @override
   void dispose() {
-    orientationSubscription.cancel();
-    orientation.dispose();
+    textureInfoSubscription.cancel();
+    textureInfo.dispose();
     super.dispose();
   }
 }

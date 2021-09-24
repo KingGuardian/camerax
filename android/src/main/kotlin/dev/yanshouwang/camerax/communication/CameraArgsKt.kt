@@ -23,24 +23,7 @@ object CameraArgsKt {
     internal fun _build(): dev.yanshouwang.camerax.communication.Communication.CameraArgs = _builder.build()
 
     /**
-     * <code>int32 textureId = 1;</code>
-     */
-    var textureId: kotlin.Int
-      @JvmName("getTextureId")
-      get() = _builder.getTextureId()
-      @JvmName("setTextureId")
-      set(value) {
-        _builder.setTextureId(value)
-      }
-    /**
-     * <code>int32 textureId = 1;</code>
-     */
-    fun clearTextureId() {
-      _builder.clearTextureId()
-    }
-
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
+     * <code>.communication.CameraSize size = 3;</code>
      */
     var size: dev.yanshouwang.camerax.communication.Communication.CameraSize
       @JvmName("getSize")
@@ -50,13 +33,13 @@ object CameraArgsKt {
         _builder.setSize(value)
       }
     /**
-     * <code>.communication.CameraSize size = 2;</code>
+     * <code>.communication.CameraSize size = 3;</code>
      */
     fun clearSize() {
       _builder.clearSize()
     }
     /**
-     * <code>.communication.CameraSize size = 2;</code>
+     * <code>.communication.CameraSize size = 3;</code>
      * @return Whether the size field is set.
      */
     fun hasSize(): kotlin.Boolean {
@@ -64,7 +47,7 @@ object CameraArgsKt {
     }
 
     /**
-     * <code>bool hasTorch = 3;</code>
+     * <code>bool has_torch = 4;</code>
      */
     var hasTorch: kotlin.Boolean
       @JvmName("getHasTorch")
@@ -74,7 +57,7 @@ object CameraArgsKt {
         _builder.setHasTorch(value)
       }
     /**
-     * <code>bool hasTorch = 3;</code>
+     * <code>bool has_torch = 4;</code>
      */
     fun clearHasTorch() {
       _builder.clearHasTorch()

@@ -23,7 +23,7 @@ object BindArgsKt {
     internal fun _build(): dev.yanshouwang.camerax.communication.Communication.BindArgs = _builder.build()
 
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      */
     var selector: dev.yanshouwang.camerax.communication.Communication.CameraSelector
       @JvmName("getSelector")
@@ -33,13 +33,13 @@ object BindArgsKt {
         _builder.setSelector(value)
       }
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      */
     fun clearSelector() {
       _builder.clearSelector()
     }
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      * @return Whether the selector field is set.
      */
     fun hasSelector(): kotlin.Boolean {

@@ -12,18 +12,18 @@ import 'dart:typed_data' as $typed_data;
 const MessageCategory$json = const {
   '1': 'MessageCategory',
   '2': const [
-    const {'1': 'CAMERA_CONTROLLER_BIND', '2': 0},
-    const {'1': 'CAMERA_CONTROLLER_UNBIND', '2': 1},
-    const {'1': 'CAMERA_CONTROLLER_TORCH', '2': 2},
-    const {'1': 'CAMERA_ARGS_CHANGED', '2': 3},
-    const {'1': 'TORCH_STATE_CHANGED', '2': 4},
-    const {'1': 'DEVICE_GET_ROTATION', '2': 5},
-    const {'1': 'DEVICE_ROTATION_CHANGED', '2': 6},
+    const {'1': 'BIND', '2': 0},
+    const {'1': 'UNBIND', '2': 1},
+    const {'1': 'TEXTURE_INFO', '2': 2},
+    const {'1': 'TEXTURE_INFO_EVENT', '2': 3},
+    const {'1': 'TORCH', '2': 4},
+    const {'1': 'TORCH_EVENT', '2': 5},
+    const {'1': 'ANALYSIS_EVENT', '2': 6},
   ],
 };
 
 /// Descriptor for `MessageCategory`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List messageCategoryDescriptor = $convert.base64Decode('Cg9NZXNzYWdlQ2F0ZWdvcnkSGgoWQ0FNRVJBX0NPTlRST0xMRVJfQklORBAAEhwKGENBTUVSQV9DT05UUk9MTEVSX1VOQklORBABEhsKF0NBTUVSQV9DT05UUk9MTEVSX1RPUkNIEAISFwoTQ0FNRVJBX0FSR1NfQ0hBTkdFRBADEhcKE1RPUkNIX1NUQVRFX0NIQU5HRUQQBBIXChNERVZJQ0VfR0VUX1JPVEFUSU9OEAUSGwoXREVWSUNFX1JPVEFUSU9OX0NIQU5HRUQQBg==');
+final $typed_data.Uint8List messageCategoryDescriptor = $convert.base64Decode('Cg9NZXNzYWdlQ2F0ZWdvcnkSCAoEQklORBAAEgoKBlVOQklORBABEhAKDFRFWFRVUkVfSU5GTxACEhYKElRFWFRVUkVfSU5GT19FVkVOVBADEgkKBVRPUkNIEAQSDwoLVE9SQ0hfRVZFTlQQBRISCg5BTkFMWVNJU19FVkVOVBAG');
 @$core.Deprecated('Use cameraFacingDescriptor instead')
 const CameraFacing$json = const {
   '1': 'CameraFacing',
@@ -35,28 +35,16 @@ const CameraFacing$json = const {
 
 /// Descriptor for `CameraFacing`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List cameraFacingDescriptor = $convert.base64Decode('CgxDYW1lcmFGYWNpbmcSCQoFRlJPTlQQABIICgRCQUNLEAE=');
-@$core.Deprecated('Use displayRotationDescriptor instead')
-const DisplayRotation$json = const {
-  '1': 'DisplayRotation',
-  '2': const [
-    const {'1': 'ROTATION_0', '2': 0},
-    const {'1': 'ROTATION_90', '2': 1},
-    const {'1': 'ROTATION_180', '2': 2},
-    const {'1': 'ROTATION_270', '2': 3},
-  ],
-};
-
-/// Descriptor for `DisplayRotation`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List displayRotationDescriptor = $convert.base64Decode('Cg9EaXNwbGF5Um90YXRpb24SDgoKUk9UQVRJT05fMBAAEg8KC1JPVEFUSU9OXzkwEAESEAoMUk9UQVRJT05fMTgwEAISEAoMUk9UQVRJT05fMjcwEAM=');
 @$core.Deprecated('Use messageDescriptor instead')
 const Message$json = const {
   '1': 'Message',
   '2': const [
-    const {'1': 'category', '3': 1, '4': 1, '5': 14, '6': '.communication.MessageCategory', '10': 'category'},
-    const {'1': 'bindArgs', '3': 2, '4': 1, '5': 11, '6': '.communication.BindArgs', '9': 0, '10': 'bindArgs'},
-    const {'1': 'unbindArgs', '3': 3, '4': 1, '5': 11, '6': '.communication.UnbindArgs', '9': 0, '10': 'unbindArgs'},
-    const {'1': 'torchArgs', '3': 4, '4': 1, '5': 11, '6': '.communication.TorchArgs', '9': 0, '10': 'torchArgs'},
-    const {'1': 'rotation', '3': 5, '4': 1, '5': 14, '6': '.communication.DisplayRotation', '9': 0, '10': 'rotation'},
+    const {'1': 'key', '3': 1, '4': 1, '5': 5, '10': 'key'},
+    const {'1': 'category', '3': 2, '4': 1, '5': 14, '6': '.communication.MessageCategory', '10': 'category'},
+    const {'1': 'bind_args', '3': 3, '4': 1, '5': 11, '6': '.communication.BindArgs', '9': 0, '10': 'bindArgs'},
+    const {'1': 'texture_info', '3': 4, '4': 1, '5': 11, '6': '.communication.TextureInfo', '9': 0, '10': 'textureInfo'},
+    const {'1': 'torch_state', '3': 5, '4': 1, '5': 8, '9': 0, '10': 'torchState'},
+    const {'1': 'analysis', '3': 6, '4': 1, '5': 12, '9': 0, '10': 'analysis'},
   ],
   '8': const [
     const {'1': 'stub'},
@@ -64,17 +52,17 @@ const Message$json = const {
 };
 
 /// Descriptor for `Message`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List messageDescriptor = $convert.base64Decode('CgdNZXNzYWdlEjoKCGNhdGVnb3J5GAEgASgOMh4uY29tbXVuaWNhdGlvbi5NZXNzYWdlQ2F0ZWdvcnlSCGNhdGVnb3J5EjUKCGJpbmRBcmdzGAIgASgLMhcuY29tbXVuaWNhdGlvbi5CaW5kQXJnc0gAUghiaW5kQXJncxI7Cgp1bmJpbmRBcmdzGAMgASgLMhkuY29tbXVuaWNhdGlvbi5VbmJpbmRBcmdzSABSCnVuYmluZEFyZ3MSOAoJdG9yY2hBcmdzGAQgASgLMhguY29tbXVuaWNhdGlvbi5Ub3JjaEFyZ3NIAFIJdG9yY2hBcmdzEjwKCHJvdGF0aW9uGAUgASgOMh4uY29tbXVuaWNhdGlvbi5EaXNwbGF5Um90YXRpb25IAFIIcm90YXRpb25CBgoEc3R1Yg==');
+final $typed_data.Uint8List messageDescriptor = $convert.base64Decode('CgdNZXNzYWdlEhAKA2tleRgBIAEoBVIDa2V5EjoKCGNhdGVnb3J5GAIgASgOMh4uY29tbXVuaWNhdGlvbi5NZXNzYWdlQ2F0ZWdvcnlSCGNhdGVnb3J5EjYKCWJpbmRfYXJncxgDIAEoCzIXLmNvbW11bmljYXRpb24uQmluZEFyZ3NIAFIIYmluZEFyZ3MSPwoMdGV4dHVyZV9pbmZvGAQgASgLMhouY29tbXVuaWNhdGlvbi5UZXh0dXJlSW5mb0gAUgt0ZXh0dXJlSW5mbxIhCgt0b3JjaF9zdGF0ZRgFIAEoCEgAUgp0b3JjaFN0YXRlEhwKCGFuYWx5c2lzGAYgASgMSABSCGFuYWx5c2lzQgYKBHN0dWI=');
 @$core.Deprecated('Use bindArgsDescriptor instead')
 const BindArgs$json = const {
   '1': 'BindArgs',
   '2': const [
-    const {'1': 'selector', '3': 1, '4': 1, '5': 11, '6': '.communication.CameraSelector', '10': 'selector'},
+    const {'1': 'selector', '3': 2, '4': 1, '5': 11, '6': '.communication.CameraSelector', '10': 'selector'},
   ],
 };
 
 /// Descriptor for `BindArgs`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List bindArgsDescriptor = $convert.base64Decode('CghCaW5kQXJncxI5CghzZWxlY3RvchgBIAEoCzIdLmNvbW11bmljYXRpb24uQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9y');
+final $typed_data.Uint8List bindArgsDescriptor = $convert.base64Decode('CghCaW5kQXJncxI5CghzZWxlY3RvchgCIAEoCzIdLmNvbW11bmljYXRpb24uQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9y');
 @$core.Deprecated('Use cameraSelectorDescriptor instead')
 const CameraSelector$json = const {
   '1': 'CameraSelector',
@@ -85,59 +73,36 @@ const CameraSelector$json = const {
 
 /// Descriptor for `CameraSelector`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cameraSelectorDescriptor = $convert.base64Decode('Cg5DYW1lcmFTZWxlY3RvchIzCgZmYWNpbmcYASABKA4yGy5jb21tdW5pY2F0aW9uLkNhbWVyYUZhY2luZ1IGZmFjaW5n');
-@$core.Deprecated('Use cameraBindingDescriptor instead')
-const CameraBinding$json = const {
-  '1': 'CameraBinding',
+@$core.Deprecated('Use cameraInfoDescriptor instead')
+const CameraInfo$json = const {
+  '1': 'CameraInfo',
   '2': const [
-    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    const {'1': 'cameraArgs', '3': 2, '4': 1, '5': 11, '6': '.communication.CameraArgs', '10': 'cameraArgs'},
-    const {'1': 'torchState', '3': 3, '4': 1, '5': 8, '10': 'torchState'},
+    const {'1': 'has_torch', '3': 1, '4': 1, '5': 8, '10': 'hasTorch'},
   ],
 };
 
-/// Descriptor for `CameraBinding`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraBindingDescriptor = $convert.base64Decode('Cg1DYW1lcmFCaW5kaW5nEhAKA2tleRgBIAEoCVIDa2V5EjkKCmNhbWVyYUFyZ3MYAiABKAsyGS5jb21tdW5pY2F0aW9uLkNhbWVyYUFyZ3NSCmNhbWVyYUFyZ3MSHgoKdG9yY2hTdGF0ZRgDIAEoCFIKdG9yY2hTdGF0ZQ==');
-@$core.Deprecated('Use unbindArgsDescriptor instead')
-const UnbindArgs$json = const {
-  '1': 'UnbindArgs',
+/// Descriptor for `CameraInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cameraInfoDescriptor = $convert.base64Decode('CgpDYW1lcmFJbmZvEhsKCWhhc190b3JjaBgBIAEoCFIIaGFzVG9yY2g=');
+@$core.Deprecated('Use textureInfoDescriptor instead')
+const TextureInfo$json = const {
+  '1': 'TextureInfo',
   '2': const [
-    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'size', '3': 2, '4': 1, '5': 11, '6': '.communication.TextureSize', '10': 'size'},
+    const {'1': 'quarterTurns', '3': 3, '4': 1, '5': 5, '10': 'quarterTurns'},
   ],
 };
 
-/// Descriptor for `UnbindArgs`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List unbindArgsDescriptor = $convert.base64Decode('CgpVbmJpbmRBcmdzEhAKA2tleRgBIAEoCVIDa2V5');
-@$core.Deprecated('Use torchArgsDescriptor instead')
-const TorchArgs$json = const {
-  '1': 'TorchArgs',
-  '2': const [
-    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    const {'1': 'state', '3': 2, '4': 1, '5': 8, '10': 'state'},
-  ],
-};
-
-/// Descriptor for `TorchArgs`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List torchArgsDescriptor = $convert.base64Decode('CglUb3JjaEFyZ3MSEAoDa2V5GAEgASgJUgNrZXkSFAoFc3RhdGUYAiABKAhSBXN0YXRl');
-@$core.Deprecated('Use cameraArgsDescriptor instead')
-const CameraArgs$json = const {
-  '1': 'CameraArgs',
-  '2': const [
-    const {'1': 'textureId', '3': 1, '4': 1, '5': 5, '10': 'textureId'},
-    const {'1': 'size', '3': 2, '4': 1, '5': 11, '6': '.communication.CameraSize', '10': 'size'},
-    const {'1': 'hasTorch', '3': 3, '4': 1, '5': 8, '10': 'hasTorch'},
-  ],
-};
-
-/// Descriptor for `CameraArgs`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraArgsDescriptor = $convert.base64Decode('CgpDYW1lcmFBcmdzEhwKCXRleHR1cmVJZBgBIAEoBVIJdGV4dHVyZUlkEi0KBHNpemUYAiABKAsyGS5jb21tdW5pY2F0aW9uLkNhbWVyYVNpemVSBHNpemUSGgoIaGFzVG9yY2gYAyABKAhSCGhhc1RvcmNo');
-@$core.Deprecated('Use cameraSizeDescriptor instead')
-const CameraSize$json = const {
-  '1': 'CameraSize',
+/// Descriptor for `TextureInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List textureInfoDescriptor = $convert.base64Decode('CgtUZXh0dXJlSW5mbxIOCgJpZBgBIAEoBVICaWQSLgoEc2l6ZRgCIAEoCzIaLmNvbW11bmljYXRpb24uVGV4dHVyZVNpemVSBHNpemUSIgoMcXVhcnRlclR1cm5zGAMgASgFUgxxdWFydGVyVHVybnM=');
+@$core.Deprecated('Use textureSizeDescriptor instead')
+const TextureSize$json = const {
+  '1': 'TextureSize',
   '2': const [
     const {'1': 'width', '3': 1, '4': 1, '5': 5, '10': 'width'},
     const {'1': 'height', '3': 2, '4': 1, '5': 5, '10': 'height'},
   ],
 };
 
-/// Descriptor for `CameraSize`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraSizeDescriptor = $convert.base64Decode('CgpDYW1lcmFTaXplEhQKBXdpZHRoGAEgASgFUgV3aWR0aBIWCgZoZWlnaHQYAiABKAVSBmhlaWdodA==');
+/// Descriptor for `TextureSize`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List textureSizeDescriptor = $convert.base64Decode('CgtUZXh0dXJlU2l6ZRIUCgV3aWR0aBgBIAEoBVIFd2lkdGgSFgoGaGVpZ2h0GAIgASgFUgZoZWlnaHQ=');

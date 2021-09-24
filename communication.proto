@@ -4,67 +4,50 @@ package communication;
 option java_package = "dev.yanshouwang.camerax.communication";
 
 message Message {
-    MessageCategory category = 1;
+    int32 key = 1;
+    MessageCategory category = 2;
     oneof stub {
-        BindArgs bindArgs = 2;
-        UnbindArgs unbindArgs = 3;
-        TorchArgs torchArgs = 4;
-        DisplayRotation rotation = 5;
+        BindArgs bind_args = 3;
+        TextureInfo texture_info = 4;
+        bool torch_state = 5;
+        bytes analysis = 6;
     }
 }
 
 message BindArgs {
-    CameraSelector selector = 1;
+    CameraSelector selector = 2;
 }
 
 message CameraSelector {
     CameraFacing facing = 1;
 }
 
-message CameraBinding {
-    string key = 1;
-    CameraArgs cameraArgs = 2;
-    bool torchState = 3;
+message CameraInfo {
+    bool has_torch = 1;
 }
 
-message UnbindArgs {
-    string key = 1;
+message TextureInfo {
+    int32 id = 1;
+    TextureSize size = 2;
+    int32 quarterTurns = 3;
 }
 
-message TorchArgs {
-    string key = 1;
-    bool state = 2;
-}
-
-message CameraArgs {
-    int32 textureId = 1;
-    CameraSize size = 2;
-    bool hasTorch = 3;
-}
-
-message CameraSize {
+message TextureSize {
     int32 width = 1;
     int32 height = 2;
 }
 
 enum MessageCategory {
-    CAMERA_CONTROLLER_BIND = 0;
-    CAMERA_CONTROLLER_UNBIND = 1;
-    CAMERA_CONTROLLER_TORCH = 2;
-    CAMERA_ARGS_CHANGED = 3;
-    TORCH_STATE_CHANGED = 4;
-    DEVICE_GET_ROTATION = 5;
-    DEVICE_ROTATION_CHANGED = 6;
+    BIND = 0;
+    UNBIND = 1;
+    TEXTURE_INFO = 2;
+    TEXTURE_INFO_EVENT = 3;
+    TORCH = 4;
+    TORCH_EVENT = 5;
+    ANALYSIS_EVENT = 6;
 }
 
 enum CameraFacing {
     FRONT = 0;
     BACK = 1;
-}
-
-enum DisplayRotation {
-    ROTATION_0 = 0;
-    ROTATION_90 = 1;
-    ROTATION_180 = 2;
-    ROTATION_270 = 3;
 }

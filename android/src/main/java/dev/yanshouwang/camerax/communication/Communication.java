@@ -20,64 +20,64 @@ public final class Communication {
   public enum MessageCategory
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>CAMERA_CONTROLLER_BIND = 0;</code>
+     * <code>BIND = 0;</code>
      */
-    CAMERA_CONTROLLER_BIND(0),
+    BIND(0),
     /**
-     * <code>CAMERA_CONTROLLER_UNBIND = 1;</code>
+     * <code>UNBIND = 1;</code>
      */
-    CAMERA_CONTROLLER_UNBIND(1),
+    UNBIND(1),
     /**
-     * <code>CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>TEXTURE_INFO = 2;</code>
      */
-    CAMERA_CONTROLLER_TORCH(2),
+    TEXTURE_INFO(2),
     /**
-     * <code>CAMERA_ARGS_CHANGED = 3;</code>
+     * <code>TEXTURE_INFO_EVENT = 3;</code>
      */
-    CAMERA_ARGS_CHANGED(3),
+    TEXTURE_INFO_EVENT(3),
     /**
-     * <code>TORCH_STATE_CHANGED = 4;</code>
+     * <code>TORCH = 4;</code>
      */
-    TORCH_STATE_CHANGED(4),
+    TORCH(4),
     /**
-     * <code>DEVICE_GET_ROTATION = 5;</code>
+     * <code>TORCH_EVENT = 5;</code>
      */
-    DEVICE_GET_ROTATION(5),
+    TORCH_EVENT(5),
     /**
-     * <code>DEVICE_ROTATION_CHANGED = 6;</code>
+     * <code>ANALYSIS_EVENT = 6;</code>
      */
-    DEVICE_ROTATION_CHANGED(6),
+    ANALYSIS_EVENT(6),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>CAMERA_CONTROLLER_BIND = 0;</code>
+     * <code>BIND = 0;</code>
      */
-    public static final int CAMERA_CONTROLLER_BIND_VALUE = 0;
+    public static final int BIND_VALUE = 0;
     /**
-     * <code>CAMERA_CONTROLLER_UNBIND = 1;</code>
+     * <code>UNBIND = 1;</code>
      */
-    public static final int CAMERA_CONTROLLER_UNBIND_VALUE = 1;
+    public static final int UNBIND_VALUE = 1;
     /**
-     * <code>CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>TEXTURE_INFO = 2;</code>
      */
-    public static final int CAMERA_CONTROLLER_TORCH_VALUE = 2;
+    public static final int TEXTURE_INFO_VALUE = 2;
     /**
-     * <code>CAMERA_ARGS_CHANGED = 3;</code>
+     * <code>TEXTURE_INFO_EVENT = 3;</code>
      */
-    public static final int CAMERA_ARGS_CHANGED_VALUE = 3;
+    public static final int TEXTURE_INFO_EVENT_VALUE = 3;
     /**
-     * <code>TORCH_STATE_CHANGED = 4;</code>
+     * <code>TORCH = 4;</code>
      */
-    public static final int TORCH_STATE_CHANGED_VALUE = 4;
+    public static final int TORCH_VALUE = 4;
     /**
-     * <code>DEVICE_GET_ROTATION = 5;</code>
+     * <code>TORCH_EVENT = 5;</code>
      */
-    public static final int DEVICE_GET_ROTATION_VALUE = 5;
+    public static final int TORCH_EVENT_VALUE = 5;
     /**
-     * <code>DEVICE_ROTATION_CHANGED = 6;</code>
+     * <code>ANALYSIS_EVENT = 6;</code>
      */
-    public static final int DEVICE_ROTATION_CHANGED_VALUE = 6;
+    public static final int ANALYSIS_EVENT_VALUE = 6;
 
 
     public final int getNumber() {
@@ -104,13 +104,13 @@ public final class Communication {
      */
     public static MessageCategory forNumber(int value) {
       switch (value) {
-        case 0: return CAMERA_CONTROLLER_BIND;
-        case 1: return CAMERA_CONTROLLER_UNBIND;
-        case 2: return CAMERA_CONTROLLER_TORCH;
-        case 3: return CAMERA_ARGS_CHANGED;
-        case 4: return TORCH_STATE_CHANGED;
-        case 5: return DEVICE_GET_ROTATION;
-        case 6: return DEVICE_ROTATION_CHANGED;
+        case 0: return BIND;
+        case 1: return UNBIND;
+        case 2: return TEXTURE_INFO;
+        case 3: return TEXTURE_INFO_EVENT;
+        case 4: return TORCH;
+        case 5: return TORCH_EVENT;
+        case 6: return ANALYSIS_EVENT;
         default: return null;
       }
     }
@@ -275,207 +275,78 @@ public final class Communication {
     // @@protoc_insertion_point(enum_scope:communication.CameraFacing)
   }
 
-  /**
-   * Protobuf enum {@code communication.DisplayRotation}
-   */
-  public enum DisplayRotation
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>ROTATION_0 = 0;</code>
-     */
-    ROTATION_0(0),
-    /**
-     * <code>ROTATION_90 = 1;</code>
-     */
-    ROTATION_90(1),
-    /**
-     * <code>ROTATION_180 = 2;</code>
-     */
-    ROTATION_180(2),
-    /**
-     * <code>ROTATION_270 = 3;</code>
-     */
-    ROTATION_270(3),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>ROTATION_0 = 0;</code>
-     */
-    public static final int ROTATION_0_VALUE = 0;
-    /**
-     * <code>ROTATION_90 = 1;</code>
-     */
-    public static final int ROTATION_90_VALUE = 1;
-    /**
-     * <code>ROTATION_180 = 2;</code>
-     */
-    public static final int ROTATION_180_VALUE = 2;
-    /**
-     * <code>ROTATION_270 = 3;</code>
-     */
-    public static final int ROTATION_270_VALUE = 3;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static DisplayRotation valueOf(int value) {
-      return forNumber(value);
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     */
-    public static DisplayRotation forNumber(int value) {
-      switch (value) {
-        case 0: return ROTATION_0;
-        case 1: return ROTATION_90;
-        case 2: return ROTATION_180;
-        case 3: return ROTATION_270;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<DisplayRotation>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        DisplayRotation> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<DisplayRotation>() {
-            public DisplayRotation findValueByNumber(int number) {
-              return DisplayRotation.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
-      }
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.getDescriptor().getEnumTypes().get(2);
-    }
-
-    private static final DisplayRotation[] VALUES = values();
-
-    public static DisplayRotation valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private DisplayRotation(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:communication.DisplayRotation)
-  }
-
   public interface MessageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:communication.Message)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>int32 key = 1;</code>
+     * @return The key.
+     */
+    int getKey();
+
+    /**
+     * <code>.communication.MessageCategory category = 2;</code>
      * @return The enum numeric value on the wire for category.
      */
     int getCategoryValue();
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>.communication.MessageCategory category = 2;</code>
      * @return The category.
      */
     dev.yanshouwang.camerax.communication.Communication.MessageCategory getCategory();
 
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      * @return Whether the bindArgs field is set.
      */
     boolean hasBindArgs();
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      * @return The bindArgs.
      */
     dev.yanshouwang.camerax.communication.Communication.BindArgs getBindArgs();
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      */
     dev.yanshouwang.camerax.communication.Communication.BindArgsOrBuilder getBindArgsOrBuilder();
 
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     * @return Whether the unbindArgs field is set.
+     * <code>.communication.TextureInfo texture_info = 4;</code>
+     * @return Whether the textureInfo field is set.
      */
-    boolean hasUnbindArgs();
+    boolean hasTextureInfo();
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     * @return The unbindArgs.
+     * <code>.communication.TextureInfo texture_info = 4;</code>
+     * @return The textureInfo.
      */
-    dev.yanshouwang.camerax.communication.Communication.UnbindArgs getUnbindArgs();
+    dev.yanshouwang.camerax.communication.Communication.TextureInfo getTextureInfo();
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
+     * <code>.communication.TextureInfo texture_info = 4;</code>
      */
-    dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder getUnbindArgsOrBuilder();
+    dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder getTextureInfoOrBuilder();
 
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     * @return Whether the torchArgs field is set.
+     * <code>bool torch_state = 5;</code>
+     * @return Whether the torchState field is set.
      */
-    boolean hasTorchArgs();
+    boolean hasTorchState();
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     * @return The torchArgs.
+     * <code>bool torch_state = 5;</code>
+     * @return The torchState.
      */
-    dev.yanshouwang.camerax.communication.Communication.TorchArgs getTorchArgs();
-    /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     */
-    dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder getTorchArgsOrBuilder();
+    boolean getTorchState();
 
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return Whether the rotation field is set.
+     * <code>bytes analysis = 6;</code>
+     * @return Whether the analysis field is set.
      */
-    boolean hasRotation();
+    boolean hasAnalysis();
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return The enum numeric value on the wire for rotation.
+     * <code>bytes analysis = 6;</code>
+     * @return The analysis.
      */
-    int getRotationValue();
-    /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return The rotation.
-     */
-    dev.yanshouwang.camerax.communication.Communication.DisplayRotation getRotation();
+    com.google.protobuf.ByteString getAnalysis();
 
     public dev.yanshouwang.camerax.communication.Communication.Message.StubCase getStubCase();
   }
@@ -526,14 +397,19 @@ public final class Communication {
               done = true;
               break;
             case 8: {
+
+              key_ = input.readInt32();
+              break;
+            }
+            case 16: {
               int rawValue = input.readEnum();
 
               category_ = rawValue;
               break;
             }
-            case 18: {
+            case 26: {
               dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder subBuilder = null;
-              if (stubCase_ == 2) {
+              if (stubCase_ == 3) {
                 subBuilder = ((dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_).toBuilder();
               }
               stub_ =
@@ -542,41 +418,31 @@ public final class Communication {
                 subBuilder.mergeFrom((dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_);
                 stub_ = subBuilder.buildPartial();
               }
-              stubCase_ = 2;
-              break;
-            }
-            case 26: {
-              dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder subBuilder = null;
-              if (stubCase_ == 3) {
-                subBuilder = ((dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_).toBuilder();
-              }
-              stub_ =
-                  input.readMessage(dev.yanshouwang.camerax.communication.Communication.UnbindArgs.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_);
-                stub_ = subBuilder.buildPartial();
-              }
               stubCase_ = 3;
               break;
             }
             case 34: {
-              dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder subBuilder = null;
+              dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder subBuilder = null;
               if (stubCase_ == 4) {
-                subBuilder = ((dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_).toBuilder();
+                subBuilder = ((dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_).toBuilder();
               }
               stub_ =
-                  input.readMessage(dev.yanshouwang.camerax.communication.Communication.TorchArgs.parser(), extensionRegistry);
+                  input.readMessage(dev.yanshouwang.camerax.communication.Communication.TextureInfo.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_);
+                subBuilder.mergeFrom((dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_);
                 stub_ = subBuilder.buildPartial();
               }
               stubCase_ = 4;
               break;
             }
             case 40: {
-              int rawValue = input.readEnum();
               stubCase_ = 5;
-              stub_ = rawValue;
+              stub_ = input.readBool();
+              break;
+            }
+            case 50: {
+              stubCase_ = 6;
+              stub_ = input.readBytes();
               break;
             }
             default: {
@@ -616,10 +482,10 @@ public final class Communication {
     public enum StubCase
         implements com.google.protobuf.Internal.EnumLite,
             com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-      BINDARGS(2),
-      UNBINDARGS(3),
-      TORCHARGS(4),
-      ROTATION(5),
+      BIND_ARGS(3),
+      TEXTURE_INFO(4),
+      TORCH_STATE(5),
+      ANALYSIS(6),
       STUB_NOT_SET(0);
       private final int value;
       private StubCase(int value) {
@@ -637,10 +503,10 @@ public final class Communication {
 
       public static StubCase forNumber(int value) {
         switch (value) {
-          case 2: return BINDARGS;
-          case 3: return UNBINDARGS;
-          case 4: return TORCHARGS;
-          case 5: return ROTATION;
+          case 3: return BIND_ARGS;
+          case 4: return TEXTURE_INFO;
+          case 5: return TORCH_STATE;
+          case 6: return ANALYSIS;
           case 0: return STUB_NOT_SET;
           default: return null;
         }
@@ -656,17 +522,28 @@ public final class Communication {
           stubCase_);
     }
 
-    public static final int CATEGORY_FIELD_NUMBER = 1;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private int key_;
+    /**
+     * <code>int32 key = 1;</code>
+     * @return The key.
+     */
+    @java.lang.Override
+    public int getKey() {
+      return key_;
+    }
+
+    public static final int CATEGORY_FIELD_NUMBER = 2;
     private int category_;
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>.communication.MessageCategory category = 2;</code>
      * @return The enum numeric value on the wire for category.
      */
     @java.lang.Override public int getCategoryValue() {
       return category_;
     }
     /**
-     * <code>.communication.MessageCategory category = 1;</code>
+     * <code>.communication.MessageCategory category = 2;</code>
      * @return The category.
      */
     @java.lang.Override public dev.yanshouwang.camerax.communication.Communication.MessageCategory getCategory() {
@@ -675,129 +552,108 @@ public final class Communication {
       return result == null ? dev.yanshouwang.camerax.communication.Communication.MessageCategory.UNRECOGNIZED : result;
     }
 
-    public static final int BINDARGS_FIELD_NUMBER = 2;
+    public static final int BIND_ARGS_FIELD_NUMBER = 3;
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      * @return Whether the bindArgs field is set.
      */
     @java.lang.Override
     public boolean hasBindArgs() {
-      return stubCase_ == 2;
+      return stubCase_ == 3;
     }
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      * @return The bindArgs.
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.communication.Communication.BindArgs getBindArgs() {
-      if (stubCase_ == 2) {
+      if (stubCase_ == 3) {
          return (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_;
       }
       return dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
     }
     /**
-     * <code>.communication.BindArgs bindArgs = 2;</code>
+     * <code>.communication.BindArgs bind_args = 3;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.communication.Communication.BindArgsOrBuilder getBindArgsOrBuilder() {
-      if (stubCase_ == 2) {
+      if (stubCase_ == 3) {
          return (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_;
       }
       return dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
     }
 
-    public static final int UNBINDARGS_FIELD_NUMBER = 3;
+    public static final int TEXTURE_INFO_FIELD_NUMBER = 4;
     /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     * @return Whether the unbindArgs field is set.
+     * <code>.communication.TextureInfo texture_info = 4;</code>
+     * @return Whether the textureInfo field is set.
      */
     @java.lang.Override
-    public boolean hasUnbindArgs() {
-      return stubCase_ == 3;
-    }
-    /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     * @return The unbindArgs.
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.UnbindArgs getUnbindArgs() {
-      if (stubCase_ == 3) {
-         return (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_;
-      }
-      return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-    }
-    /**
-     * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder getUnbindArgsOrBuilder() {
-      if (stubCase_ == 3) {
-         return (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_;
-      }
-      return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-    }
-
-    public static final int TORCHARGS_FIELD_NUMBER = 4;
-    /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     * @return Whether the torchArgs field is set.
-     */
-    @java.lang.Override
-    public boolean hasTorchArgs() {
+    public boolean hasTextureInfo() {
       return stubCase_ == 4;
     }
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
-     * @return The torchArgs.
+     * <code>.communication.TextureInfo texture_info = 4;</code>
+     * @return The textureInfo.
      */
     @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.TorchArgs getTorchArgs() {
+    public dev.yanshouwang.camerax.communication.Communication.TextureInfo getTextureInfo() {
       if (stubCase_ == 4) {
-         return (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_;
+         return (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_;
       }
-      return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+      return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
     }
     /**
-     * <code>.communication.TorchArgs torchArgs = 4;</code>
+     * <code>.communication.TextureInfo texture_info = 4;</code>
      */
     @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder getTorchArgsOrBuilder() {
+    public dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder getTextureInfoOrBuilder() {
       if (stubCase_ == 4) {
-         return (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_;
+         return (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_;
       }
-      return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+      return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
     }
 
-    public static final int ROTATION_FIELD_NUMBER = 5;
+    public static final int TORCH_STATE_FIELD_NUMBER = 5;
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return Whether the rotation field is set.
+     * <code>bool torch_state = 5;</code>
+     * @return Whether the torchState field is set.
      */
-    public boolean hasRotation() {
+    @java.lang.Override
+    public boolean hasTorchState() {
       return stubCase_ == 5;
     }
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return The enum numeric value on the wire for rotation.
+     * <code>bool torch_state = 5;</code>
+     * @return The torchState.
      */
-    public int getRotationValue() {
+    @java.lang.Override
+    public boolean getTorchState() {
       if (stubCase_ == 5) {
-        return (java.lang.Integer) stub_;
+        return (java.lang.Boolean) stub_;
       }
-      return 0;
+      return false;
+    }
+
+    public static final int ANALYSIS_FIELD_NUMBER = 6;
+    /**
+     * <code>bytes analysis = 6;</code>
+     * @return Whether the analysis field is set.
+     */
+    @java.lang.Override
+    public boolean hasAnalysis() {
+      return stubCase_ == 6;
     }
     /**
-     * <code>.communication.DisplayRotation rotation = 5;</code>
-     * @return The rotation.
+     * <code>bytes analysis = 6;</code>
+     * @return The analysis.
      */
-    public dev.yanshouwang.camerax.communication.Communication.DisplayRotation getRotation() {
-      if (stubCase_ == 5) {
-        @SuppressWarnings("deprecation")
-        dev.yanshouwang.camerax.communication.Communication.DisplayRotation result = dev.yanshouwang.camerax.communication.Communication.DisplayRotation.valueOf(
-            (java.lang.Integer) stub_);
-        return result == null ? dev.yanshouwang.camerax.communication.Communication.DisplayRotation.UNRECOGNIZED : result;
+    @java.lang.Override
+    public com.google.protobuf.ByteString getAnalysis() {
+      if (stubCase_ == 6) {
+        return (com.google.protobuf.ByteString) stub_;
       }
-      return dev.yanshouwang.camerax.communication.Communication.DisplayRotation.ROTATION_0;
+      return com.google.protobuf.ByteString.EMPTY;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -814,20 +670,25 @@ public final class Communication {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (category_ != dev.yanshouwang.camerax.communication.Communication.MessageCategory.CAMERA_CONTROLLER_BIND.getNumber()) {
-        output.writeEnum(1, category_);
+      if (key_ != 0) {
+        output.writeInt32(1, key_);
       }
-      if (stubCase_ == 2) {
-        output.writeMessage(2, (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_);
+      if (category_ != dev.yanshouwang.camerax.communication.Communication.MessageCategory.BIND.getNumber()) {
+        output.writeEnum(2, category_);
       }
       if (stubCase_ == 3) {
-        output.writeMessage(3, (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_);
+        output.writeMessage(3, (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_);
       }
       if (stubCase_ == 4) {
-        output.writeMessage(4, (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_);
+        output.writeMessage(4, (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_);
       }
       if (stubCase_ == 5) {
-        output.writeEnum(5, ((java.lang.Integer) stub_));
+        output.writeBool(
+            5, (boolean)((java.lang.Boolean) stub_));
+      }
+      if (stubCase_ == 6) {
+        output.writeBytes(
+            6, (com.google.protobuf.ByteString) stub_);
       }
       unknownFields.writeTo(output);
     }
@@ -838,25 +699,31 @@ public final class Communication {
       if (size != -1) return size;
 
       size = 0;
-      if (category_ != dev.yanshouwang.camerax.communication.Communication.MessageCategory.CAMERA_CONTROLLER_BIND.getNumber()) {
+      if (key_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, category_);
+          .computeInt32Size(1, key_);
       }
-      if (stubCase_ == 2) {
+      if (category_ != dev.yanshouwang.camerax.communication.Communication.MessageCategory.BIND.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_);
+          .computeEnumSize(2, category_);
       }
       if (stubCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_);
+          .computeMessageSize(3, (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_);
       }
       if (stubCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_);
+          .computeMessageSize(4, (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_);
       }
       if (stubCase_ == 5) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, ((java.lang.Integer) stub_));
+          .computeBoolSize(
+              5, (boolean)((java.lang.Boolean) stub_));
+      }
+      if (stubCase_ == 6) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(
+              6, (com.google.protobuf.ByteString) stub_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -873,24 +740,26 @@ public final class Communication {
       }
       dev.yanshouwang.camerax.communication.Communication.Message other = (dev.yanshouwang.camerax.communication.Communication.Message) obj;
 
+      if (getKey()
+          != other.getKey()) return false;
       if (category_ != other.category_) return false;
       if (!getStubCase().equals(other.getStubCase())) return false;
       switch (stubCase_) {
-        case 2:
+        case 3:
           if (!getBindArgs()
               .equals(other.getBindArgs())) return false;
           break;
-        case 3:
-          if (!getUnbindArgs()
-              .equals(other.getUnbindArgs())) return false;
-          break;
         case 4:
-          if (!getTorchArgs()
-              .equals(other.getTorchArgs())) return false;
+          if (!getTextureInfo()
+              .equals(other.getTextureInfo())) return false;
           break;
         case 5:
-          if (getRotationValue()
-              != other.getRotationValue()) return false;
+          if (getTorchState()
+              != other.getTorchState()) return false;
+          break;
+        case 6:
+          if (!getAnalysis()
+              .equals(other.getAnalysis())) return false;
           break;
         case 0:
         default:
@@ -906,24 +775,27 @@ public final class Communication {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + KEY_FIELD_NUMBER;
+      hash = (53 * hash) + getKey();
       hash = (37 * hash) + CATEGORY_FIELD_NUMBER;
       hash = (53 * hash) + category_;
       switch (stubCase_) {
-        case 2:
-          hash = (37 * hash) + BINDARGS_FIELD_NUMBER;
+        case 3:
+          hash = (37 * hash) + BIND_ARGS_FIELD_NUMBER;
           hash = (53 * hash) + getBindArgs().hashCode();
           break;
-        case 3:
-          hash = (37 * hash) + UNBINDARGS_FIELD_NUMBER;
-          hash = (53 * hash) + getUnbindArgs().hashCode();
-          break;
         case 4:
-          hash = (37 * hash) + TORCHARGS_FIELD_NUMBER;
-          hash = (53 * hash) + getTorchArgs().hashCode();
+          hash = (37 * hash) + TEXTURE_INFO_FIELD_NUMBER;
+          hash = (53 * hash) + getTextureInfo().hashCode();
           break;
         case 5:
-          hash = (37 * hash) + ROTATION_FIELD_NUMBER;
-          hash = (53 * hash) + getRotationValue();
+          hash = (37 * hash) + TORCH_STATE_FIELD_NUMBER;
+          hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+              getTorchState());
+          break;
+        case 6:
+          hash = (37 * hash) + ANALYSIS_FIELD_NUMBER;
+          hash = (53 * hash) + getAnalysis().hashCode();
           break;
         case 0:
         default:
@@ -1061,6 +933,8 @@ public final class Communication {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        key_ = 0;
+
         category_ = 0;
 
         stubCase_ = 0;
@@ -1091,29 +965,26 @@ public final class Communication {
       @java.lang.Override
       public dev.yanshouwang.camerax.communication.Communication.Message buildPartial() {
         dev.yanshouwang.camerax.communication.Communication.Message result = new dev.yanshouwang.camerax.communication.Communication.Message(this);
+        result.key_ = key_;
         result.category_ = category_;
-        if (stubCase_ == 2) {
+        if (stubCase_ == 3) {
           if (bindArgsBuilder_ == null) {
             result.stub_ = stub_;
           } else {
             result.stub_ = bindArgsBuilder_.build();
           }
         }
-        if (stubCase_ == 3) {
-          if (unbindArgsBuilder_ == null) {
-            result.stub_ = stub_;
-          } else {
-            result.stub_ = unbindArgsBuilder_.build();
-          }
-        }
         if (stubCase_ == 4) {
-          if (torchArgsBuilder_ == null) {
+          if (textureInfoBuilder_ == null) {
             result.stub_ = stub_;
           } else {
-            result.stub_ = torchArgsBuilder_.build();
+            result.stub_ = textureInfoBuilder_.build();
           }
         }
         if (stubCase_ == 5) {
+          result.stub_ = stub_;
+        }
+        if (stubCase_ == 6) {
           result.stub_ = stub_;
         }
         result.stubCase_ = stubCase_;
@@ -1165,24 +1036,27 @@ public final class Communication {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.Message other) {
         if (other == dev.yanshouwang.camerax.communication.Communication.Message.getDefaultInstance()) return this;
+        if (other.getKey() != 0) {
+          setKey(other.getKey());
+        }
         if (other.category_ != 0) {
           setCategoryValue(other.getCategoryValue());
         }
         switch (other.getStubCase()) {
-          case BINDARGS: {
+          case BIND_ARGS: {
             mergeBindArgs(other.getBindArgs());
             break;
           }
-          case UNBINDARGS: {
-            mergeUnbindArgs(other.getUnbindArgs());
+          case TEXTURE_INFO: {
+            mergeTextureInfo(other.getTextureInfo());
             break;
           }
-          case TORCHARGS: {
-            mergeTorchArgs(other.getTorchArgs());
+          case TORCH_STATE: {
+            setTorchState(other.getTorchState());
             break;
           }
-          case ROTATION: {
-            setRotationValue(other.getRotationValue());
+          case ANALYSIS: {
+            setAnalysis(other.getAnalysis());
             break;
           }
           case STUB_NOT_SET: {
@@ -1233,16 +1107,47 @@ public final class Communication {
       }
 
 
+      private int key_ ;
+      /**
+       * <code>int32 key = 1;</code>
+       * @return The key.
+       */
+      @java.lang.Override
+      public int getKey() {
+        return key_;
+      }
+      /**
+       * <code>int32 key = 1;</code>
+       * @param value The key to set.
+       * @return This builder for chaining.
+       */
+      public Builder setKey(int value) {
+        
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 key = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearKey() {
+        
+        key_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int category_ = 0;
       /**
-       * <code>.communication.MessageCategory category = 1;</code>
+       * <code>.communication.MessageCategory category = 2;</code>
        * @return The enum numeric value on the wire for category.
        */
       @java.lang.Override public int getCategoryValue() {
         return category_;
       }
       /**
-       * <code>.communication.MessageCategory category = 1;</code>
+       * <code>.communication.MessageCategory category = 2;</code>
        * @param value The enum numeric value on the wire for category to set.
        * @return This builder for chaining.
        */
@@ -1253,7 +1158,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.MessageCategory category = 1;</code>
+       * <code>.communication.MessageCategory category = 2;</code>
        * @return The category.
        */
       @java.lang.Override
@@ -1263,7 +1168,7 @@ public final class Communication {
         return result == null ? dev.yanshouwang.camerax.communication.Communication.MessageCategory.UNRECOGNIZED : result;
       }
       /**
-       * <code>.communication.MessageCategory category = 1;</code>
+       * <code>.communication.MessageCategory category = 2;</code>
        * @param value The category to set.
        * @return This builder for chaining.
        */
@@ -1277,7 +1182,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.MessageCategory category = 1;</code>
+       * <code>.communication.MessageCategory category = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearCategory() {
@@ -1290,33 +1195,33 @@ public final class Communication {
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.communication.Communication.BindArgs, dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder, dev.yanshouwang.camerax.communication.Communication.BindArgsOrBuilder> bindArgsBuilder_;
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        * @return Whether the bindArgs field is set.
        */
       @java.lang.Override
       public boolean hasBindArgs() {
-        return stubCase_ == 2;
+        return stubCase_ == 3;
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        * @return The bindArgs.
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.communication.Communication.BindArgs getBindArgs() {
         if (bindArgsBuilder_ == null) {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             return (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_;
           }
           return dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
         } else {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             return bindArgsBuilder_.getMessage();
           }
           return dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
         }
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       public Builder setBindArgs(dev.yanshouwang.camerax.communication.Communication.BindArgs value) {
         if (bindArgsBuilder_ == null) {
@@ -1328,11 +1233,11 @@ public final class Communication {
         } else {
           bindArgsBuilder_.setMessage(value);
         }
-        stubCase_ = 2;
+        stubCase_ = 3;
         return this;
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       public Builder setBindArgs(
           dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder builderForValue) {
@@ -1342,15 +1247,15 @@ public final class Communication {
         } else {
           bindArgsBuilder_.setMessage(builderForValue.build());
         }
-        stubCase_ = 2;
+        stubCase_ = 3;
         return this;
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       public Builder mergeBindArgs(dev.yanshouwang.camerax.communication.Communication.BindArgs value) {
         if (bindArgsBuilder_ == null) {
-          if (stubCase_ == 2 &&
+          if (stubCase_ == 3 &&
               stub_ != dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance()) {
             stub_ = dev.yanshouwang.camerax.communication.Communication.BindArgs.newBuilder((dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_)
                 .mergeFrom(value).buildPartial();
@@ -1359,26 +1264,26 @@ public final class Communication {
           }
           onChanged();
         } else {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             bindArgsBuilder_.mergeFrom(value);
           }
           bindArgsBuilder_.setMessage(value);
         }
-        stubCase_ = 2;
+        stubCase_ = 3;
         return this;
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       public Builder clearBindArgs() {
         if (bindArgsBuilder_ == null) {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             stubCase_ = 0;
             stub_ = null;
             onChanged();
           }
         } else {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             stubCase_ = 0;
             stub_ = null;
           }
@@ -1387,33 +1292,33 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       public dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder getBindArgsBuilder() {
         return getBindArgsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.communication.Communication.BindArgsOrBuilder getBindArgsOrBuilder() {
-        if ((stubCase_ == 2) && (bindArgsBuilder_ != null)) {
+        if ((stubCase_ == 3) && (bindArgsBuilder_ != null)) {
           return bindArgsBuilder_.getMessageOrBuilder();
         } else {
-          if (stubCase_ == 2) {
+          if (stubCase_ == 3) {
             return (dev.yanshouwang.camerax.communication.Communication.BindArgs) stub_;
           }
           return dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
         }
       }
       /**
-       * <code>.communication.BindArgs bindArgs = 2;</code>
+       * <code>.communication.BindArgs bind_args = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.communication.Communication.BindArgs, dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder, dev.yanshouwang.camerax.communication.Communication.BindArgsOrBuilder> 
           getBindArgsFieldBuilder() {
         if (bindArgsBuilder_ == null) {
-          if (!(stubCase_ == 2)) {
+          if (!(stubCase_ == 3)) {
             stub_ = dev.yanshouwang.camerax.communication.Communication.BindArgs.getDefaultInstance();
           }
           bindArgsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -1423,218 +1328,77 @@ public final class Communication {
                   isClean());
           stub_ = null;
         }
-        stubCase_ = 2;
+        stubCase_ = 3;
         onChanged();;
         return bindArgsBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.UnbindArgs, dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder, dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder> unbindArgsBuilder_;
+          dev.yanshouwang.camerax.communication.Communication.TextureInfo, dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder, dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder> textureInfoBuilder_;
       /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       * @return Whether the unbindArgs field is set.
+       * <code>.communication.TextureInfo texture_info = 4;</code>
+       * @return Whether the textureInfo field is set.
        */
       @java.lang.Override
-      public boolean hasUnbindArgs() {
-        return stubCase_ == 3;
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       * @return The unbindArgs.
-       */
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgs getUnbindArgs() {
-        if (unbindArgsBuilder_ == null) {
-          if (stubCase_ == 3) {
-            return (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_;
-          }
-          return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-        } else {
-          if (stubCase_ == 3) {
-            return unbindArgsBuilder_.getMessage();
-          }
-          return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      public Builder setUnbindArgs(dev.yanshouwang.camerax.communication.Communication.UnbindArgs value) {
-        if (unbindArgsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          stub_ = value;
-          onChanged();
-        } else {
-          unbindArgsBuilder_.setMessage(value);
-        }
-        stubCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      public Builder setUnbindArgs(
-          dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder builderForValue) {
-        if (unbindArgsBuilder_ == null) {
-          stub_ = builderForValue.build();
-          onChanged();
-        } else {
-          unbindArgsBuilder_.setMessage(builderForValue.build());
-        }
-        stubCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      public Builder mergeUnbindArgs(dev.yanshouwang.camerax.communication.Communication.UnbindArgs value) {
-        if (unbindArgsBuilder_ == null) {
-          if (stubCase_ == 3 &&
-              stub_ != dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance()) {
-            stub_ = dev.yanshouwang.camerax.communication.Communication.UnbindArgs.newBuilder((dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            stub_ = value;
-          }
-          onChanged();
-        } else {
-          if (stubCase_ == 3) {
-            unbindArgsBuilder_.mergeFrom(value);
-          }
-          unbindArgsBuilder_.setMessage(value);
-        }
-        stubCase_ = 3;
-        return this;
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      public Builder clearUnbindArgs() {
-        if (unbindArgsBuilder_ == null) {
-          if (stubCase_ == 3) {
-            stubCase_ = 0;
-            stub_ = null;
-            onChanged();
-          }
-        } else {
-          if (stubCase_ == 3) {
-            stubCase_ = 0;
-            stub_ = null;
-          }
-          unbindArgsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder getUnbindArgsBuilder() {
-        return getUnbindArgsFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder getUnbindArgsOrBuilder() {
-        if ((stubCase_ == 3) && (unbindArgsBuilder_ != null)) {
-          return unbindArgsBuilder_.getMessageOrBuilder();
-        } else {
-          if (stubCase_ == 3) {
-            return (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_;
-          }
-          return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>.communication.UnbindArgs unbindArgs = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.UnbindArgs, dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder, dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder> 
-          getUnbindArgsFieldBuilder() {
-        if (unbindArgsBuilder_ == null) {
-          if (!(stubCase_ == 3)) {
-            stub_ = dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-          }
-          unbindArgsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              dev.yanshouwang.camerax.communication.Communication.UnbindArgs, dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder, dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder>(
-                  (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) stub_,
-                  getParentForChildren(),
-                  isClean());
-          stub_ = null;
-        }
-        stubCase_ = 3;
-        onChanged();;
-        return unbindArgsBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.TorchArgs, dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder, dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder> torchArgsBuilder_;
-      /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
-       * @return Whether the torchArgs field is set.
-       */
-      @java.lang.Override
-      public boolean hasTorchArgs() {
+      public boolean hasTextureInfo() {
         return stubCase_ == 4;
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
-       * @return The torchArgs.
+       * <code>.communication.TextureInfo texture_info = 4;</code>
+       * @return The textureInfo.
        */
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgs getTorchArgs() {
-        if (torchArgsBuilder_ == null) {
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfo getTextureInfo() {
+        if (textureInfoBuilder_ == null) {
           if (stubCase_ == 4) {
-            return (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_;
+            return (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_;
           }
-          return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+          return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
         } else {
           if (stubCase_ == 4) {
-            return torchArgsBuilder_.getMessage();
+            return textureInfoBuilder_.getMessage();
           }
-          return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+          return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
         }
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
-      public Builder setTorchArgs(dev.yanshouwang.camerax.communication.Communication.TorchArgs value) {
-        if (torchArgsBuilder_ == null) {
+      public Builder setTextureInfo(dev.yanshouwang.camerax.communication.Communication.TextureInfo value) {
+        if (textureInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           stub_ = value;
           onChanged();
         } else {
-          torchArgsBuilder_.setMessage(value);
+          textureInfoBuilder_.setMessage(value);
         }
         stubCase_ = 4;
         return this;
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
-      public Builder setTorchArgs(
-          dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder builderForValue) {
-        if (torchArgsBuilder_ == null) {
+      public Builder setTextureInfo(
+          dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder builderForValue) {
+        if (textureInfoBuilder_ == null) {
           stub_ = builderForValue.build();
           onChanged();
         } else {
-          torchArgsBuilder_.setMessage(builderForValue.build());
+          textureInfoBuilder_.setMessage(builderForValue.build());
         }
         stubCase_ = 4;
         return this;
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
-      public Builder mergeTorchArgs(dev.yanshouwang.camerax.communication.Communication.TorchArgs value) {
-        if (torchArgsBuilder_ == null) {
+      public Builder mergeTextureInfo(dev.yanshouwang.camerax.communication.Communication.TextureInfo value) {
+        if (textureInfoBuilder_ == null) {
           if (stubCase_ == 4 &&
-              stub_ != dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance()) {
-            stub_ = dev.yanshouwang.camerax.communication.Communication.TorchArgs.newBuilder((dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_)
+              stub_ != dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance()) {
+            stub_ = dev.yanshouwang.camerax.communication.Communication.TextureInfo.newBuilder((dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_)
                 .mergeFrom(value).buildPartial();
           } else {
             stub_ = value;
@@ -1642,18 +1406,18 @@ public final class Communication {
           onChanged();
         } else {
           if (stubCase_ == 4) {
-            torchArgsBuilder_.mergeFrom(value);
+            textureInfoBuilder_.mergeFrom(value);
           }
-          torchArgsBuilder_.setMessage(value);
+          textureInfoBuilder_.setMessage(value);
         }
         stubCase_ = 4;
         return this;
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
-      public Builder clearTorchArgs() {
-        if (torchArgsBuilder_ == null) {
+      public Builder clearTextureInfo() {
+        if (textureInfoBuilder_ == null) {
           if (stubCase_ == 4) {
             stubCase_ = 0;
             stub_ = null;
@@ -1664,116 +1428,130 @@ public final class Communication {
             stubCase_ = 0;
             stub_ = null;
           }
-          torchArgsBuilder_.clear();
+          textureInfoBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder getTorchArgsBuilder() {
-        return getTorchArgsFieldBuilder().getBuilder();
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder getTextureInfoBuilder() {
+        return getTextureInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder getTorchArgsOrBuilder() {
-        if ((stubCase_ == 4) && (torchArgsBuilder_ != null)) {
-          return torchArgsBuilder_.getMessageOrBuilder();
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder getTextureInfoOrBuilder() {
+        if ((stubCase_ == 4) && (textureInfoBuilder_ != null)) {
+          return textureInfoBuilder_.getMessageOrBuilder();
         } else {
           if (stubCase_ == 4) {
-            return (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_;
+            return (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_;
           }
-          return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+          return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
         }
       }
       /**
-       * <code>.communication.TorchArgs torchArgs = 4;</code>
+       * <code>.communication.TextureInfo texture_info = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.TorchArgs, dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder, dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder> 
-          getTorchArgsFieldBuilder() {
-        if (torchArgsBuilder_ == null) {
+          dev.yanshouwang.camerax.communication.Communication.TextureInfo, dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder, dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder> 
+          getTextureInfoFieldBuilder() {
+        if (textureInfoBuilder_ == null) {
           if (!(stubCase_ == 4)) {
-            stub_ = dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
+            stub_ = dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
           }
-          torchArgsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              dev.yanshouwang.camerax.communication.Communication.TorchArgs, dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder, dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder>(
-                  (dev.yanshouwang.camerax.communication.Communication.TorchArgs) stub_,
+          textureInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.communication.Communication.TextureInfo, dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder, dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder>(
+                  (dev.yanshouwang.camerax.communication.Communication.TextureInfo) stub_,
                   getParentForChildren(),
                   isClean());
           stub_ = null;
         }
         stubCase_ = 4;
         onChanged();;
-        return torchArgsBuilder_;
+        return textureInfoBuilder_;
       }
 
       /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
-       * @return Whether the rotation field is set.
+       * <code>bool torch_state = 5;</code>
+       * @return Whether the torchState field is set.
        */
-      @java.lang.Override
-      public boolean hasRotation() {
+      public boolean hasTorchState() {
         return stubCase_ == 5;
       }
       /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
-       * @return The enum numeric value on the wire for rotation.
+       * <code>bool torch_state = 5;</code>
+       * @return The torchState.
        */
-      @java.lang.Override
-      public int getRotationValue() {
+      public boolean getTorchState() {
         if (stubCase_ == 5) {
-          return ((java.lang.Integer) stub_).intValue();
+          return (java.lang.Boolean) stub_;
         }
-        return 0;
+        return false;
       }
       /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
-       * @param value The enum numeric value on the wire for rotation to set.
+       * <code>bool torch_state = 5;</code>
+       * @param value The torchState to set.
        * @return This builder for chaining.
        */
-      public Builder setRotationValue(int value) {
+      public Builder setTorchState(boolean value) {
         stubCase_ = 5;
         stub_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
-       * @return The rotation.
-       */
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.DisplayRotation getRotation() {
-        if (stubCase_ == 5) {
-          @SuppressWarnings("deprecation")
-          dev.yanshouwang.camerax.communication.Communication.DisplayRotation result = dev.yanshouwang.camerax.communication.Communication.DisplayRotation.valueOf(
-              (java.lang.Integer) stub_);
-          return result == null ? dev.yanshouwang.camerax.communication.Communication.DisplayRotation.UNRECOGNIZED : result;
-        }
-        return dev.yanshouwang.camerax.communication.Communication.DisplayRotation.ROTATION_0;
-      }
-      /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
-       * @param value The rotation to set.
+       * <code>bool torch_state = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder setRotation(dev.yanshouwang.camerax.communication.Communication.DisplayRotation value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public Builder clearTorchState() {
+        if (stubCase_ == 5) {
+          stubCase_ = 0;
+          stub_ = null;
+          onChanged();
         }
-        stubCase_ = 5;
-        stub_ = value.getNumber();
+        return this;
+      }
+
+      /**
+       * <code>bytes analysis = 6;</code>
+       * @return Whether the analysis field is set.
+       */
+      public boolean hasAnalysis() {
+        return stubCase_ == 6;
+      }
+      /**
+       * <code>bytes analysis = 6;</code>
+       * @return The analysis.
+       */
+      public com.google.protobuf.ByteString getAnalysis() {
+        if (stubCase_ == 6) {
+          return (com.google.protobuf.ByteString) stub_;
+        }
+        return com.google.protobuf.ByteString.EMPTY;
+      }
+      /**
+       * <code>bytes analysis = 6;</code>
+       * @param value The analysis to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAnalysis(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  stubCase_ = 6;
+        stub_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>.communication.DisplayRotation rotation = 5;</code>
+       * <code>bytes analysis = 6;</code>
        * @return This builder for chaining.
        */
-      public Builder clearRotation() {
-        if (stubCase_ == 5) {
+      public Builder clearAnalysis() {
+        if (stubCase_ == 6) {
           stubCase_ = 0;
           stub_ = null;
           onChanged();
@@ -1838,17 +1616,17 @@ public final class Communication {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      * @return Whether the selector field is set.
      */
     boolean hasSelector();
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      * @return The selector.
      */
     dev.yanshouwang.camerax.communication.Communication.CameraSelector getSelector();
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      */
     dev.yanshouwang.camerax.communication.Communication.CameraSelectorOrBuilder getSelectorOrBuilder();
   }
@@ -1897,7 +1675,7 @@ public final class Communication {
             case 0:
               done = true;
               break;
-            case 10: {
+            case 18: {
               dev.yanshouwang.camerax.communication.Communication.CameraSelector.Builder subBuilder = null;
               if (selector_ != null) {
                 subBuilder = selector_.toBuilder();
@@ -1942,10 +1720,10 @@ public final class Communication {
               dev.yanshouwang.camerax.communication.Communication.BindArgs.class, dev.yanshouwang.camerax.communication.Communication.BindArgs.Builder.class);
     }
 
-    public static final int SELECTOR_FIELD_NUMBER = 1;
+    public static final int SELECTOR_FIELD_NUMBER = 2;
     private dev.yanshouwang.camerax.communication.Communication.CameraSelector selector_;
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      * @return Whether the selector field is set.
      */
     @java.lang.Override
@@ -1953,7 +1731,7 @@ public final class Communication {
       return selector_ != null;
     }
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      * @return The selector.
      */
     @java.lang.Override
@@ -1961,7 +1739,7 @@ public final class Communication {
       return selector_ == null ? dev.yanshouwang.camerax.communication.Communication.CameraSelector.getDefaultInstance() : selector_;
     }
     /**
-     * <code>.communication.CameraSelector selector = 1;</code>
+     * <code>.communication.CameraSelector selector = 2;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.communication.Communication.CameraSelectorOrBuilder getSelectorOrBuilder() {
@@ -1983,7 +1761,7 @@ public final class Communication {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (selector_ != null) {
-        output.writeMessage(1, getSelector());
+        output.writeMessage(2, getSelector());
       }
       unknownFields.writeTo(output);
     }
@@ -1996,7 +1774,7 @@ public final class Communication {
       size = 0;
       if (selector_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getSelector());
+          .computeMessageSize(2, getSelector());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2287,14 +2065,14 @@ public final class Communication {
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.communication.Communication.CameraSelector, dev.yanshouwang.camerax.communication.Communication.CameraSelector.Builder, dev.yanshouwang.camerax.communication.Communication.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        * @return Whether the selector field is set.
        */
       public boolean hasSelector() {
         return selectorBuilder_ != null || selector_ != null;
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        * @return The selector.
        */
       public dev.yanshouwang.camerax.communication.Communication.CameraSelector getSelector() {
@@ -2305,7 +2083,7 @@ public final class Communication {
         }
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public Builder setSelector(dev.yanshouwang.camerax.communication.Communication.CameraSelector value) {
         if (selectorBuilder_ == null) {
@@ -2321,7 +2099,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public Builder setSelector(
           dev.yanshouwang.camerax.communication.Communication.CameraSelector.Builder builderForValue) {
@@ -2335,7 +2113,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public Builder mergeSelector(dev.yanshouwang.camerax.communication.Communication.CameraSelector value) {
         if (selectorBuilder_ == null) {
@@ -2353,7 +2131,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public Builder clearSelector() {
         if (selectorBuilder_ == null) {
@@ -2367,7 +2145,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public dev.yanshouwang.camerax.communication.Communication.CameraSelector.Builder getSelectorBuilder() {
         
@@ -2375,7 +2153,7 @@ public final class Communication {
         return getSelectorFieldBuilder().getBuilder();
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       public dev.yanshouwang.camerax.communication.Communication.CameraSelectorOrBuilder getSelectorOrBuilder() {
         if (selectorBuilder_ != null) {
@@ -2386,7 +2164,7 @@ public final class Communication {
         }
       }
       /**
-       * <code>.communication.CameraSelector selector = 1;</code>
+       * <code>.communication.CameraSelector selector = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.communication.Communication.CameraSelector, dev.yanshouwang.camerax.communication.Communication.CameraSelector.Builder, dev.yanshouwang.camerax.communication.Communication.CameraSelectorOrBuilder> 
@@ -2979,2106 +2757,36 @@ public final class Communication {
 
   }
 
-  public interface CameraBindingOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:communication.CameraBinding)
+  public interface CameraInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:communication.CameraInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    java.lang.String getKey();
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    com.google.protobuf.ByteString
-        getKeyBytes();
-
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     * @return Whether the cameraArgs field is set.
-     */
-    boolean hasCameraArgs();
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     * @return The cameraArgs.
-     */
-    dev.yanshouwang.camerax.communication.Communication.CameraArgs getCameraArgs();
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     */
-    dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder getCameraArgsOrBuilder();
-
-    /**
-     * <code>bool torchState = 3;</code>
-     * @return The torchState.
-     */
-    boolean getTorchState();
-  }
-  /**
-   * Protobuf type {@code communication.CameraBinding}
-   */
-  public static final class CameraBinding extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:communication.CameraBinding)
-      CameraBindingOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use CameraBinding.newBuilder() to construct.
-    private CameraBinding(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CameraBinding() {
-      key_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new CameraBinding();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private CameraBinding(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              key_ = s;
-              break;
-            }
-            case 18: {
-              dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder subBuilder = null;
-              if (cameraArgs_ != null) {
-                subBuilder = cameraArgs_.toBuilder();
-              }
-              cameraArgs_ = input.readMessage(dev.yanshouwang.camerax.communication.Communication.CameraArgs.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(cameraArgs_);
-                cameraArgs_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 24: {
-
-              torchState_ = input.readBool();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraBinding_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraBinding_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.communication.Communication.CameraBinding.class, dev.yanshouwang.camerax.communication.Communication.CameraBinding.Builder.class);
-    }
-
-    public static final int KEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object key_;
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public java.lang.String getKey() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        key_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyBytes() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        key_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CAMERAARGS_FIELD_NUMBER = 2;
-    private dev.yanshouwang.camerax.communication.Communication.CameraArgs cameraArgs_;
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     * @return Whether the cameraArgs field is set.
-     */
-    @java.lang.Override
-    public boolean hasCameraArgs() {
-      return cameraArgs_ != null;
-    }
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     * @return The cameraArgs.
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraArgs getCameraArgs() {
-      return cameraArgs_ == null ? dev.yanshouwang.camerax.communication.Communication.CameraArgs.getDefaultInstance() : cameraArgs_;
-    }
-    /**
-     * <code>.communication.CameraArgs cameraArgs = 2;</code>
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder getCameraArgsOrBuilder() {
-      return getCameraArgs();
-    }
-
-    public static final int TORCHSTATE_FIELD_NUMBER = 3;
-    private boolean torchState_;
-    /**
-     * <code>bool torchState = 3;</code>
-     * @return The torchState.
-     */
-    @java.lang.Override
-    public boolean getTorchState() {
-      return torchState_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
-      }
-      if (cameraArgs_ != null) {
-        output.writeMessage(2, getCameraArgs());
-      }
-      if (torchState_ != false) {
-        output.writeBool(3, torchState_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      if (cameraArgs_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getCameraArgs());
-      }
-      if (torchState_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, torchState_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.CameraBinding)) {
-        return super.equals(obj);
-      }
-      dev.yanshouwang.camerax.communication.Communication.CameraBinding other = (dev.yanshouwang.camerax.communication.Communication.CameraBinding) obj;
-
-      if (!getKey()
-          .equals(other.getKey())) return false;
-      if (hasCameraArgs() != other.hasCameraArgs()) return false;
-      if (hasCameraArgs()) {
-        if (!getCameraArgs()
-            .equals(other.getCameraArgs())) return false;
-      }
-      if (getTorchState()
-          != other.getTorchState()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + KEY_FIELD_NUMBER;
-      hash = (53 * hash) + getKey().hashCode();
-      if (hasCameraArgs()) {
-        hash = (37 * hash) + CAMERAARGS_FIELD_NUMBER;
-        hash = (53 * hash) + getCameraArgs().hashCode();
-      }
-      hash = (37 * hash) + TORCHSTATE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getTorchState());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.CameraBinding prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code communication.CameraBinding}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:communication.CameraBinding)
-        dev.yanshouwang.camerax.communication.Communication.CameraBindingOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraBinding_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraBinding_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.communication.Communication.CameraBinding.class, dev.yanshouwang.camerax.communication.Communication.CameraBinding.Builder.class);
-      }
-
-      // Construct using dev.yanshouwang.camerax.communication.Communication.CameraBinding.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        key_ = "";
-
-        if (cameraArgsBuilder_ == null) {
-          cameraArgs_ = null;
-        } else {
-          cameraArgs_ = null;
-          cameraArgsBuilder_ = null;
-        }
-        torchState_ = false;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraBinding_descriptor;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraBinding getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.communication.Communication.CameraBinding.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraBinding build() {
-        dev.yanshouwang.camerax.communication.Communication.CameraBinding result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraBinding buildPartial() {
-        dev.yanshouwang.camerax.communication.Communication.CameraBinding result = new dev.yanshouwang.camerax.communication.Communication.CameraBinding(this);
-        result.key_ = key_;
-        if (cameraArgsBuilder_ == null) {
-          result.cameraArgs_ = cameraArgs_;
-        } else {
-          result.cameraArgs_ = cameraArgsBuilder_.build();
-        }
-        result.torchState_ = torchState_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.communication.Communication.CameraBinding) {
-          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.CameraBinding)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.CameraBinding other) {
-        if (other == dev.yanshouwang.camerax.communication.Communication.CameraBinding.getDefaultInstance()) return this;
-        if (!other.getKey().isEmpty()) {
-          key_ = other.key_;
-          onChanged();
-        }
-        if (other.hasCameraArgs()) {
-          mergeCameraArgs(other.getCameraArgs());
-        }
-        if (other.getTorchState() != false) {
-          setTorchState(other.getTorchState());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        dev.yanshouwang.camerax.communication.Communication.CameraBinding parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.CameraBinding) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object key_ = "";
-      /**
-       * <code>string key = 1;</code>
-       * @return The key.
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          key_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return The bytes for key.
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKey() {
-        
-        key_ = getDefaultInstance().getKey();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The bytes for key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        key_ = value;
-        onChanged();
-        return this;
-      }
-
-      private dev.yanshouwang.camerax.communication.Communication.CameraArgs cameraArgs_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.CameraArgs, dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder, dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder> cameraArgsBuilder_;
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       * @return Whether the cameraArgs field is set.
-       */
-      public boolean hasCameraArgs() {
-        return cameraArgsBuilder_ != null || cameraArgs_ != null;
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       * @return The cameraArgs.
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgs getCameraArgs() {
-        if (cameraArgsBuilder_ == null) {
-          return cameraArgs_ == null ? dev.yanshouwang.camerax.communication.Communication.CameraArgs.getDefaultInstance() : cameraArgs_;
-        } else {
-          return cameraArgsBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public Builder setCameraArgs(dev.yanshouwang.camerax.communication.Communication.CameraArgs value) {
-        if (cameraArgsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          cameraArgs_ = value;
-          onChanged();
-        } else {
-          cameraArgsBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public Builder setCameraArgs(
-          dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder builderForValue) {
-        if (cameraArgsBuilder_ == null) {
-          cameraArgs_ = builderForValue.build();
-          onChanged();
-        } else {
-          cameraArgsBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public Builder mergeCameraArgs(dev.yanshouwang.camerax.communication.Communication.CameraArgs value) {
-        if (cameraArgsBuilder_ == null) {
-          if (cameraArgs_ != null) {
-            cameraArgs_ =
-              dev.yanshouwang.camerax.communication.Communication.CameraArgs.newBuilder(cameraArgs_).mergeFrom(value).buildPartial();
-          } else {
-            cameraArgs_ = value;
-          }
-          onChanged();
-        } else {
-          cameraArgsBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public Builder clearCameraArgs() {
-        if (cameraArgsBuilder_ == null) {
-          cameraArgs_ = null;
-          onChanged();
-        } else {
-          cameraArgs_ = null;
-          cameraArgsBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder getCameraArgsBuilder() {
-        
-        onChanged();
-        return getCameraArgsFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder getCameraArgsOrBuilder() {
-        if (cameraArgsBuilder_ != null) {
-          return cameraArgsBuilder_.getMessageOrBuilder();
-        } else {
-          return cameraArgs_ == null ?
-              dev.yanshouwang.camerax.communication.Communication.CameraArgs.getDefaultInstance() : cameraArgs_;
-        }
-      }
-      /**
-       * <code>.communication.CameraArgs cameraArgs = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.CameraArgs, dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder, dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder> 
-          getCameraArgsFieldBuilder() {
-        if (cameraArgsBuilder_ == null) {
-          cameraArgsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              dev.yanshouwang.camerax.communication.Communication.CameraArgs, dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder, dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder>(
-                  getCameraArgs(),
-                  getParentForChildren(),
-                  isClean());
-          cameraArgs_ = null;
-        }
-        return cameraArgsBuilder_;
-      }
-
-      private boolean torchState_ ;
-      /**
-       * <code>bool torchState = 3;</code>
-       * @return The torchState.
-       */
-      @java.lang.Override
-      public boolean getTorchState() {
-        return torchState_;
-      }
-      /**
-       * <code>bool torchState = 3;</code>
-       * @param value The torchState to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTorchState(boolean value) {
-        
-        torchState_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool torchState = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTorchState() {
-        
-        torchState_ = false;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:communication.CameraBinding)
-    }
-
-    // @@protoc_insertion_point(class_scope:communication.CameraBinding)
-    private static final dev.yanshouwang.camerax.communication.Communication.CameraBinding DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.CameraBinding();
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.CameraBinding getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CameraBinding>
-        PARSER = new com.google.protobuf.AbstractParser<CameraBinding>() {
-      @java.lang.Override
-      public CameraBinding parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CameraBinding(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<CameraBinding> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CameraBinding> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraBinding getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UnbindArgsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:communication.UnbindArgs)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    java.lang.String getKey();
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    com.google.protobuf.ByteString
-        getKeyBytes();
-  }
-  /**
-   * Protobuf type {@code communication.UnbindArgs}
-   */
-  public static final class UnbindArgs extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:communication.UnbindArgs)
-      UnbindArgsOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UnbindArgs.newBuilder() to construct.
-    private UnbindArgs(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UnbindArgs() {
-      key_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new UnbindArgs();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UnbindArgs(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              key_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_UnbindArgs_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_UnbindArgs_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.communication.Communication.UnbindArgs.class, dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder.class);
-    }
-
-    public static final int KEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object key_;
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public java.lang.String getKey() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        key_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyBytes() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        key_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.UnbindArgs)) {
-        return super.equals(obj);
-      }
-      dev.yanshouwang.camerax.communication.Communication.UnbindArgs other = (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) obj;
-
-      if (!getKey()
-          .equals(other.getKey())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + KEY_FIELD_NUMBER;
-      hash = (53 * hash) + getKey().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.UnbindArgs prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code communication.UnbindArgs}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:communication.UnbindArgs)
-        dev.yanshouwang.camerax.communication.Communication.UnbindArgsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_UnbindArgs_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_UnbindArgs_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.communication.Communication.UnbindArgs.class, dev.yanshouwang.camerax.communication.Communication.UnbindArgs.Builder.class);
-      }
-
-      // Construct using dev.yanshouwang.camerax.communication.Communication.UnbindArgs.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        key_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_UnbindArgs_descriptor;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgs getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgs build() {
-        dev.yanshouwang.camerax.communication.Communication.UnbindArgs result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.UnbindArgs buildPartial() {
-        dev.yanshouwang.camerax.communication.Communication.UnbindArgs result = new dev.yanshouwang.camerax.communication.Communication.UnbindArgs(this);
-        result.key_ = key_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.communication.Communication.UnbindArgs) {
-          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.UnbindArgs)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.UnbindArgs other) {
-        if (other == dev.yanshouwang.camerax.communication.Communication.UnbindArgs.getDefaultInstance()) return this;
-        if (!other.getKey().isEmpty()) {
-          key_ = other.key_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        dev.yanshouwang.camerax.communication.Communication.UnbindArgs parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.UnbindArgs) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object key_ = "";
-      /**
-       * <code>string key = 1;</code>
-       * @return The key.
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          key_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return The bytes for key.
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKey() {
-        
-        key_ = getDefaultInstance().getKey();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The bytes for key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:communication.UnbindArgs)
-    }
-
-    // @@protoc_insertion_point(class_scope:communication.UnbindArgs)
-    private static final dev.yanshouwang.camerax.communication.Communication.UnbindArgs DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.UnbindArgs();
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.UnbindArgs getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<UnbindArgs>
-        PARSER = new com.google.protobuf.AbstractParser<UnbindArgs>() {
-      @java.lang.Override
-      public UnbindArgs parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UnbindArgs(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UnbindArgs> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UnbindArgs> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.UnbindArgs getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface TorchArgsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:communication.TorchArgs)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    java.lang.String getKey();
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    com.google.protobuf.ByteString
-        getKeyBytes();
-
-    /**
-     * <code>bool state = 2;</code>
-     * @return The state.
-     */
-    boolean getState();
-  }
-  /**
-   * Protobuf type {@code communication.TorchArgs}
-   */
-  public static final class TorchArgs extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:communication.TorchArgs)
-      TorchArgsOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use TorchArgs.newBuilder() to construct.
-    private TorchArgs(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private TorchArgs() {
-      key_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new TorchArgs();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private TorchArgs(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              key_ = s;
-              break;
-            }
-            case 16: {
-
-              state_ = input.readBool();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TorchArgs_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TorchArgs_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.communication.Communication.TorchArgs.class, dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder.class);
-    }
-
-    public static final int KEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object key_;
-    /**
-     * <code>string key = 1;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public java.lang.String getKey() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        key_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string key = 1;</code>
-     * @return The bytes for key.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getKeyBytes() {
-      java.lang.Object ref = key_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        key_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int STATE_FIELD_NUMBER = 2;
-    private boolean state_;
-    /**
-     * <code>bool state = 2;</code>
-     * @return The state.
-     */
-    @java.lang.Override
-    public boolean getState() {
-      return state_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
-      }
-      if (state_ != false) {
-        output.writeBool(2, state_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
-      }
-      if (state_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, state_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.TorchArgs)) {
-        return super.equals(obj);
-      }
-      dev.yanshouwang.camerax.communication.Communication.TorchArgs other = (dev.yanshouwang.camerax.communication.Communication.TorchArgs) obj;
-
-      if (!getKey()
-          .equals(other.getKey())) return false;
-      if (getState()
-          != other.getState()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + KEY_FIELD_NUMBER;
-      hash = (53 * hash) + getKey().hashCode();
-      hash = (37 * hash) + STATE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getState());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.TorchArgs prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code communication.TorchArgs}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:communication.TorchArgs)
-        dev.yanshouwang.camerax.communication.Communication.TorchArgsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TorchArgs_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TorchArgs_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.communication.Communication.TorchArgs.class, dev.yanshouwang.camerax.communication.Communication.TorchArgs.Builder.class);
-      }
-
-      // Construct using dev.yanshouwang.camerax.communication.Communication.TorchArgs.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        key_ = "";
-
-        state_ = false;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TorchArgs_descriptor;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgs getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgs build() {
-        dev.yanshouwang.camerax.communication.Communication.TorchArgs result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.TorchArgs buildPartial() {
-        dev.yanshouwang.camerax.communication.Communication.TorchArgs result = new dev.yanshouwang.camerax.communication.Communication.TorchArgs(this);
-        result.key_ = key_;
-        result.state_ = state_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.communication.Communication.TorchArgs) {
-          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.TorchArgs)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.TorchArgs other) {
-        if (other == dev.yanshouwang.camerax.communication.Communication.TorchArgs.getDefaultInstance()) return this;
-        if (!other.getKey().isEmpty()) {
-          key_ = other.key_;
-          onChanged();
-        }
-        if (other.getState() != false) {
-          setState(other.getState());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        dev.yanshouwang.camerax.communication.Communication.TorchArgs parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.TorchArgs) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object key_ = "";
-      /**
-       * <code>string key = 1;</code>
-       * @return The key.
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          key_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return The bytes for key.
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKey(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKey() {
-        
-        key_ = getDefaultInstance().getKey();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string key = 1;</code>
-       * @param value The bytes for key to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        key_ = value;
-        onChanged();
-        return this;
-      }
-
-      private boolean state_ ;
-      /**
-       * <code>bool state = 2;</code>
-       * @return The state.
-       */
-      @java.lang.Override
-      public boolean getState() {
-        return state_;
-      }
-      /**
-       * <code>bool state = 2;</code>
-       * @param value The state to set.
-       * @return This builder for chaining.
-       */
-      public Builder setState(boolean value) {
-        
-        state_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool state = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearState() {
-        
-        state_ = false;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:communication.TorchArgs)
-    }
-
-    // @@protoc_insertion_point(class_scope:communication.TorchArgs)
-    private static final dev.yanshouwang.camerax.communication.Communication.TorchArgs DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.TorchArgs();
-    }
-
-    public static dev.yanshouwang.camerax.communication.Communication.TorchArgs getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<TorchArgs>
-        PARSER = new com.google.protobuf.AbstractParser<TorchArgs>() {
-      @java.lang.Override
-      public TorchArgs parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TorchArgs(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<TorchArgs> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TorchArgs> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.TorchArgs getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface CameraArgsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:communication.CameraArgs)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 textureId = 1;</code>
-     * @return The textureId.
-     */
-    int getTextureId();
-
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     * @return Whether the size field is set.
-     */
-    boolean hasSize();
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     * @return The size.
-     */
-    dev.yanshouwang.camerax.communication.Communication.CameraSize getSize();
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     */
-    dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder getSizeOrBuilder();
-
-    /**
-     * <code>bool hasTorch = 3;</code>
+     * <code>bool has_torch = 1;</code>
      * @return The hasTorch.
      */
     boolean getHasTorch();
   }
   /**
-   * Protobuf type {@code communication.CameraArgs}
+   * Protobuf type {@code communication.CameraInfo}
    */
-  public static final class CameraArgs extends
+  public static final class CameraInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:communication.CameraArgs)
-      CameraArgsOrBuilder {
+      // @@protoc_insertion_point(message_implements:communication.CameraInfo)
+      CameraInfoOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CameraArgs.newBuilder() to construct.
-    private CameraArgs(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use CameraInfo.newBuilder() to construct.
+    private CameraInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CameraArgs() {
+    private CameraInfo() {
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CameraArgs();
+      return new CameraInfo();
     }
 
     @java.lang.Override
@@ -5086,7 +2794,7 @@ public final class Communication {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private CameraArgs(
+    private CameraInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5105,24 +2813,6 @@ public final class Communication {
               done = true;
               break;
             case 8: {
-
-              textureId_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder subBuilder = null;
-              if (size_ != null) {
-                subBuilder = size_.toBuilder();
-              }
-              size_ = input.readMessage(dev.yanshouwang.camerax.communication.Communication.CameraSize.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(size_);
-                size_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 24: {
 
               hasTorch_ = input.readBool();
               break;
@@ -5148,58 +2838,21 @@ public final class Communication {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraArgs_descriptor;
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraArgs_fieldAccessorTable
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.communication.Communication.CameraArgs.class, dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder.class);
+              dev.yanshouwang.camerax.communication.Communication.CameraInfo.class, dev.yanshouwang.camerax.communication.Communication.CameraInfo.Builder.class);
     }
 
-    public static final int TEXTUREID_FIELD_NUMBER = 1;
-    private int textureId_;
-    /**
-     * <code>int32 textureId = 1;</code>
-     * @return The textureId.
-     */
-    @java.lang.Override
-    public int getTextureId() {
-      return textureId_;
-    }
-
-    public static final int SIZE_FIELD_NUMBER = 2;
-    private dev.yanshouwang.camerax.communication.Communication.CameraSize size_;
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     * @return Whether the size field is set.
-     */
-    @java.lang.Override
-    public boolean hasSize() {
-      return size_ != null;
-    }
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     * @return The size.
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraSize getSize() {
-      return size_ == null ? dev.yanshouwang.camerax.communication.Communication.CameraSize.getDefaultInstance() : size_;
-    }
-    /**
-     * <code>.communication.CameraSize size = 2;</code>
-     */
-    @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder getSizeOrBuilder() {
-      return getSize();
-    }
-
-    public static final int HASTORCH_FIELD_NUMBER = 3;
+    public static final int HAS_TORCH_FIELD_NUMBER = 1;
     private boolean hasTorch_;
     /**
-     * <code>bool hasTorch = 3;</code>
+     * <code>bool has_torch = 1;</code>
      * @return The hasTorch.
      */
     @java.lang.Override
@@ -5221,14 +2874,8 @@ public final class Communication {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (textureId_ != 0) {
-        output.writeInt32(1, textureId_);
-      }
-      if (size_ != null) {
-        output.writeMessage(2, getSize());
-      }
       if (hasTorch_ != false) {
-        output.writeBool(3, hasTorch_);
+        output.writeBool(1, hasTorch_);
       }
       unknownFields.writeTo(output);
     }
@@ -5239,17 +2886,9 @@ public final class Communication {
       if (size != -1) return size;
 
       size = 0;
-      if (textureId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, textureId_);
-      }
-      if (size_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getSize());
-      }
       if (hasTorch_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, hasTorch_);
+          .computeBoolSize(1, hasTorch_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5261,18 +2900,11 @@ public final class Communication {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.CameraArgs)) {
+      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.CameraInfo)) {
         return super.equals(obj);
       }
-      dev.yanshouwang.camerax.communication.Communication.CameraArgs other = (dev.yanshouwang.camerax.communication.Communication.CameraArgs) obj;
+      dev.yanshouwang.camerax.communication.Communication.CameraInfo other = (dev.yanshouwang.camerax.communication.Communication.CameraInfo) obj;
 
-      if (getTextureId()
-          != other.getTextureId()) return false;
-      if (hasSize() != other.hasSize()) return false;
-      if (hasSize()) {
-        if (!getSize()
-            .equals(other.getSize())) return false;
-      }
       if (getHasTorch()
           != other.getHasTorch()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -5286,13 +2918,7 @@ public final class Communication {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
-      hash = (53 * hash) + getTextureId();
-      if (hasSize()) {
-        hash = (37 * hash) + SIZE_FIELD_NUMBER;
-        hash = (53 * hash) + getSize().hashCode();
-      }
-      hash = (37 * hash) + HASTORCH_FIELD_NUMBER;
+      hash = (37 * hash) + HAS_TORCH_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getHasTorch());
       hash = (29 * hash) + unknownFields.hashCode();
@@ -5300,69 +2926,69 @@ public final class Communication {
       return hash;
     }
 
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(byte[] data)
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseDelimitedFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseDelimitedFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5375,7 +3001,7 @@ public final class Communication {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.CameraArgs prototype) {
+    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.CameraInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -5391,26 +3017,26 @@ public final class Communication {
       return builder;
     }
     /**
-     * Protobuf type {@code communication.CameraArgs}
+     * Protobuf type {@code communication.CameraInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:communication.CameraArgs)
-        dev.yanshouwang.camerax.communication.Communication.CameraArgsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:communication.CameraInfo)
+        dev.yanshouwang.camerax.communication.Communication.CameraInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraArgs_descriptor;
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraArgs_fieldAccessorTable
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.communication.Communication.CameraArgs.class, dev.yanshouwang.camerax.communication.Communication.CameraArgs.Builder.class);
+                dev.yanshouwang.camerax.communication.Communication.CameraInfo.class, dev.yanshouwang.camerax.communication.Communication.CameraInfo.Builder.class);
       }
 
-      // Construct using dev.yanshouwang.camerax.communication.Communication.CameraArgs.newBuilder()
+      // Construct using dev.yanshouwang.camerax.communication.Communication.CameraInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -5428,14 +3054,6 @@ public final class Communication {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        textureId_ = 0;
-
-        if (sizeBuilder_ == null) {
-          size_ = null;
-        } else {
-          size_ = null;
-          sizeBuilder_ = null;
-        }
         hasTorch_ = false;
 
         return this;
@@ -5444,17 +3062,17 @@ public final class Communication {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraArgs_descriptor;
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraInfo_descriptor;
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgs getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.communication.Communication.CameraArgs.getDefaultInstance();
+      public dev.yanshouwang.camerax.communication.Communication.CameraInfo getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.communication.Communication.CameraInfo.getDefaultInstance();
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgs build() {
-        dev.yanshouwang.camerax.communication.Communication.CameraArgs result = buildPartial();
+      public dev.yanshouwang.camerax.communication.Communication.CameraInfo build() {
+        dev.yanshouwang.camerax.communication.Communication.CameraInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5462,14 +3080,8 @@ public final class Communication {
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraArgs buildPartial() {
-        dev.yanshouwang.camerax.communication.Communication.CameraArgs result = new dev.yanshouwang.camerax.communication.Communication.CameraArgs(this);
-        result.textureId_ = textureId_;
-        if (sizeBuilder_ == null) {
-          result.size_ = size_;
-        } else {
-          result.size_ = sizeBuilder_.build();
-        }
+      public dev.yanshouwang.camerax.communication.Communication.CameraInfo buildPartial() {
+        dev.yanshouwang.camerax.communication.Communication.CameraInfo result = new dev.yanshouwang.camerax.communication.Communication.CameraInfo(this);
         result.hasTorch_ = hasTorch_;
         onBuilt();
         return result;
@@ -5509,22 +3121,16 @@ public final class Communication {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.communication.Communication.CameraArgs) {
-          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.CameraArgs)other);
+        if (other instanceof dev.yanshouwang.camerax.communication.Communication.CameraInfo) {
+          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.CameraInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.CameraArgs other) {
-        if (other == dev.yanshouwang.camerax.communication.Communication.CameraArgs.getDefaultInstance()) return this;
-        if (other.getTextureId() != 0) {
-          setTextureId(other.getTextureId());
-        }
-        if (other.hasSize()) {
-          mergeSize(other.getSize());
-        }
+      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.CameraInfo other) {
+        if (other == dev.yanshouwang.camerax.communication.Communication.CameraInfo.getDefaultInstance()) return this;
         if (other.getHasTorch() != false) {
           setHasTorch(other.getHasTorch());
         }
@@ -5543,11 +3149,11 @@ public final class Communication {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        dev.yanshouwang.camerax.communication.Communication.CameraArgs parsedMessage = null;
+        dev.yanshouwang.camerax.communication.Communication.CameraInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.CameraArgs) e.getUnfinishedMessage();
+          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.CameraInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -5557,159 +3163,9 @@ public final class Communication {
         return this;
       }
 
-      private int textureId_ ;
-      /**
-       * <code>int32 textureId = 1;</code>
-       * @return The textureId.
-       */
-      @java.lang.Override
-      public int getTextureId() {
-        return textureId_;
-      }
-      /**
-       * <code>int32 textureId = 1;</code>
-       * @param value The textureId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTextureId(int value) {
-        
-        textureId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 textureId = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTextureId() {
-        
-        textureId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private dev.yanshouwang.camerax.communication.Communication.CameraSize size_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.CameraSize, dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder, dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder> sizeBuilder_;
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       * @return Whether the size field is set.
-       */
-      public boolean hasSize() {
-        return sizeBuilder_ != null || size_ != null;
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       * @return The size.
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraSize getSize() {
-        if (sizeBuilder_ == null) {
-          return size_ == null ? dev.yanshouwang.camerax.communication.Communication.CameraSize.getDefaultInstance() : size_;
-        } else {
-          return sizeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public Builder setSize(dev.yanshouwang.camerax.communication.Communication.CameraSize value) {
-        if (sizeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          size_ = value;
-          onChanged();
-        } else {
-          sizeBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public Builder setSize(
-          dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder builderForValue) {
-        if (sizeBuilder_ == null) {
-          size_ = builderForValue.build();
-          onChanged();
-        } else {
-          sizeBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public Builder mergeSize(dev.yanshouwang.camerax.communication.Communication.CameraSize value) {
-        if (sizeBuilder_ == null) {
-          if (size_ != null) {
-            size_ =
-              dev.yanshouwang.camerax.communication.Communication.CameraSize.newBuilder(size_).mergeFrom(value).buildPartial();
-          } else {
-            size_ = value;
-          }
-          onChanged();
-        } else {
-          sizeBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public Builder clearSize() {
-        if (sizeBuilder_ == null) {
-          size_ = null;
-          onChanged();
-        } else {
-          size_ = null;
-          sizeBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder getSizeBuilder() {
-        
-        onChanged();
-        return getSizeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      public dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder getSizeOrBuilder() {
-        if (sizeBuilder_ != null) {
-          return sizeBuilder_.getMessageOrBuilder();
-        } else {
-          return size_ == null ?
-              dev.yanshouwang.camerax.communication.Communication.CameraSize.getDefaultInstance() : size_;
-        }
-      }
-      /**
-       * <code>.communication.CameraSize size = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          dev.yanshouwang.camerax.communication.Communication.CameraSize, dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder, dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder> 
-          getSizeFieldBuilder() {
-        if (sizeBuilder_ == null) {
-          sizeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              dev.yanshouwang.camerax.communication.Communication.CameraSize, dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder, dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder>(
-                  getSize(),
-                  getParentForChildren(),
-                  isClean());
-          size_ = null;
-        }
-        return sizeBuilder_;
-      }
-
       private boolean hasTorch_ ;
       /**
-       * <code>bool hasTorch = 3;</code>
+       * <code>bool has_torch = 1;</code>
        * @return The hasTorch.
        */
       @java.lang.Override
@@ -5717,7 +3173,7 @@ public final class Communication {
         return hasTorch_;
       }
       /**
-       * <code>bool hasTorch = 3;</code>
+       * <code>bool has_torch = 1;</code>
        * @param value The hasTorch to set.
        * @return This builder for chaining.
        */
@@ -5728,7 +3184,7 @@ public final class Communication {
         return this;
       }
       /**
-       * <code>bool hasTorch = 3;</code>
+       * <code>bool has_torch = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearHasTorch() {
@@ -5750,48 +3206,809 @@ public final class Communication {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:communication.CameraArgs)
+      // @@protoc_insertion_point(builder_scope:communication.CameraInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:communication.CameraArgs)
-    private static final dev.yanshouwang.camerax.communication.Communication.CameraArgs DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:communication.CameraInfo)
+    private static final dev.yanshouwang.camerax.communication.Communication.CameraInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.CameraArgs();
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.CameraInfo();
     }
 
-    public static dev.yanshouwang.camerax.communication.Communication.CameraArgs getDefaultInstance() {
+    public static dev.yanshouwang.camerax.communication.Communication.CameraInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CameraArgs>
-        PARSER = new com.google.protobuf.AbstractParser<CameraArgs>() {
+    private static final com.google.protobuf.Parser<CameraInfo>
+        PARSER = new com.google.protobuf.AbstractParser<CameraInfo>() {
       @java.lang.Override
-      public CameraArgs parsePartialFrom(
+      public CameraInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CameraArgs(input, extensionRegistry);
+        return new CameraInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<CameraArgs> parser() {
+    public static com.google.protobuf.Parser<CameraInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CameraArgs> getParserForType() {
+    public com.google.protobuf.Parser<CameraInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraArgs getDefaultInstanceForType() {
+    public dev.yanshouwang.camerax.communication.Communication.CameraInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface CameraSizeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:communication.CameraSize)
+  public interface TextureInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:communication.TextureInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 id = 1;</code>
+     * @return The id.
+     */
+    int getId();
+
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     * @return Whether the size field is set.
+     */
+    boolean hasSize();
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     * @return The size.
+     */
+    dev.yanshouwang.camerax.communication.Communication.TextureSize getSize();
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     */
+    dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder getSizeOrBuilder();
+
+    /**
+     * <code>int32 quarterTurns = 3;</code>
+     * @return The quarterTurns.
+     */
+    int getQuarterTurns();
+  }
+  /**
+   * Protobuf type {@code communication.TextureInfo}
+   */
+  public static final class TextureInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:communication.TextureInfo)
+      TextureInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TextureInfo.newBuilder() to construct.
+    private TextureInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TextureInfo() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TextureInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TextureInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              id_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder subBuilder = null;
+              if (size_ != null) {
+                subBuilder = size_.toBuilder();
+              }
+              size_ = input.readMessage(dev.yanshouwang.camerax.communication.Communication.TextureSize.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(size_);
+                size_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 24: {
+
+              quarterTurns_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              dev.yanshouwang.camerax.communication.Communication.TextureInfo.class, dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
+    /**
+     * <code>int32 id = 1;</code>
+     * @return The id.
+     */
+    @java.lang.Override
+    public int getId() {
+      return id_;
+    }
+
+    public static final int SIZE_FIELD_NUMBER = 2;
+    private dev.yanshouwang.camerax.communication.Communication.TextureSize size_;
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     * @return Whether the size field is set.
+     */
+    @java.lang.Override
+    public boolean hasSize() {
+      return size_ != null;
+    }
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     * @return The size.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.communication.Communication.TextureSize getSize() {
+      return size_ == null ? dev.yanshouwang.camerax.communication.Communication.TextureSize.getDefaultInstance() : size_;
+    }
+    /**
+     * <code>.communication.TextureSize size = 2;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder getSizeOrBuilder() {
+      return getSize();
+    }
+
+    public static final int QUARTERTURNS_FIELD_NUMBER = 3;
+    private int quarterTurns_;
+    /**
+     * <code>int32 quarterTurns = 3;</code>
+     * @return The quarterTurns.
+     */
+    @java.lang.Override
+    public int getQuarterTurns() {
+      return quarterTurns_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0) {
+        output.writeInt32(1, id_);
+      }
+      if (size_ != null) {
+        output.writeMessage(2, getSize());
+      }
+      if (quarterTurns_ != 0) {
+        output.writeInt32(3, quarterTurns_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, id_);
+      }
+      if (size_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getSize());
+      }
+      if (quarterTurns_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, quarterTurns_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.TextureInfo)) {
+        return super.equals(obj);
+      }
+      dev.yanshouwang.camerax.communication.Communication.TextureInfo other = (dev.yanshouwang.camerax.communication.Communication.TextureInfo) obj;
+
+      if (getId()
+          != other.getId()) return false;
+      if (hasSize() != other.hasSize()) return false;
+      if (hasSize()) {
+        if (!getSize()
+            .equals(other.getSize())) return false;
+      }
+      if (getQuarterTurns()
+          != other.getQuarterTurns()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      if (hasSize()) {
+        hash = (37 * hash) + SIZE_FIELD_NUMBER;
+        hash = (53 * hash) + getSize().hashCode();
+      }
+      hash = (37 * hash) + QUARTERTURNS_FIELD_NUMBER;
+      hash = (53 * hash) + getQuarterTurns();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.TextureInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code communication.TextureInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:communication.TextureInfo)
+        dev.yanshouwang.camerax.communication.Communication.TextureInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                dev.yanshouwang.camerax.communication.Communication.TextureInfo.class, dev.yanshouwang.camerax.communication.Communication.TextureInfo.Builder.class);
+      }
+
+      // Construct using dev.yanshouwang.camerax.communication.Communication.TextureInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        id_ = 0;
+
+        if (sizeBuilder_ == null) {
+          size_ = null;
+        } else {
+          size_ = null;
+          sizeBuilder_ = null;
+        }
+        quarterTurns_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfo getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfo build() {
+        dev.yanshouwang.camerax.communication.Communication.TextureInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.communication.Communication.TextureInfo buildPartial() {
+        dev.yanshouwang.camerax.communication.Communication.TextureInfo result = new dev.yanshouwang.camerax.communication.Communication.TextureInfo(this);
+        result.id_ = id_;
+        if (sizeBuilder_ == null) {
+          result.size_ = size_;
+        } else {
+          result.size_ = sizeBuilder_.build();
+        }
+        result.quarterTurns_ = quarterTurns_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof dev.yanshouwang.camerax.communication.Communication.TextureInfo) {
+          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.TextureInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.TextureInfo other) {
+        if (other == dev.yanshouwang.camerax.communication.Communication.TextureInfo.getDefaultInstance()) return this;
+        if (other.getId() != 0) {
+          setId(other.getId());
+        }
+        if (other.hasSize()) {
+          mergeSize(other.getSize());
+        }
+        if (other.getQuarterTurns() != 0) {
+          setQuarterTurns(other.getQuarterTurns());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        dev.yanshouwang.camerax.communication.Communication.TextureInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.TextureInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int id_ ;
+      /**
+       * <code>int32 id = 1;</code>
+       * @return The id.
+       */
+      @java.lang.Override
+      public int getId() {
+        return id_;
+      }
+      /**
+       * <code>int32 id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
+       */
+      public Builder setId(int value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 id = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearId() {
+        
+        id_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private dev.yanshouwang.camerax.communication.Communication.TextureSize size_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.communication.Communication.TextureSize, dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder, dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder> sizeBuilder_;
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       * @return Whether the size field is set.
+       */
+      public boolean hasSize() {
+        return sizeBuilder_ != null || size_ != null;
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       * @return The size.
+       */
+      public dev.yanshouwang.camerax.communication.Communication.TextureSize getSize() {
+        if (sizeBuilder_ == null) {
+          return size_ == null ? dev.yanshouwang.camerax.communication.Communication.TextureSize.getDefaultInstance() : size_;
+        } else {
+          return sizeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public Builder setSize(dev.yanshouwang.camerax.communication.Communication.TextureSize value) {
+        if (sizeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          size_ = value;
+          onChanged();
+        } else {
+          sizeBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public Builder setSize(
+          dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder builderForValue) {
+        if (sizeBuilder_ == null) {
+          size_ = builderForValue.build();
+          onChanged();
+        } else {
+          sizeBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public Builder mergeSize(dev.yanshouwang.camerax.communication.Communication.TextureSize value) {
+        if (sizeBuilder_ == null) {
+          if (size_ != null) {
+            size_ =
+              dev.yanshouwang.camerax.communication.Communication.TextureSize.newBuilder(size_).mergeFrom(value).buildPartial();
+          } else {
+            size_ = value;
+          }
+          onChanged();
+        } else {
+          sizeBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public Builder clearSize() {
+        if (sizeBuilder_ == null) {
+          size_ = null;
+          onChanged();
+        } else {
+          size_ = null;
+          sizeBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder getSizeBuilder() {
+        
+        onChanged();
+        return getSizeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      public dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder getSizeOrBuilder() {
+        if (sizeBuilder_ != null) {
+          return sizeBuilder_.getMessageOrBuilder();
+        } else {
+          return size_ == null ?
+              dev.yanshouwang.camerax.communication.Communication.TextureSize.getDefaultInstance() : size_;
+        }
+      }
+      /**
+       * <code>.communication.TextureSize size = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.communication.Communication.TextureSize, dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder, dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder> 
+          getSizeFieldBuilder() {
+        if (sizeBuilder_ == null) {
+          sizeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.communication.Communication.TextureSize, dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder, dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder>(
+                  getSize(),
+                  getParentForChildren(),
+                  isClean());
+          size_ = null;
+        }
+        return sizeBuilder_;
+      }
+
+      private int quarterTurns_ ;
+      /**
+       * <code>int32 quarterTurns = 3;</code>
+       * @return The quarterTurns.
+       */
+      @java.lang.Override
+      public int getQuarterTurns() {
+        return quarterTurns_;
+      }
+      /**
+       * <code>int32 quarterTurns = 3;</code>
+       * @param value The quarterTurns to set.
+       * @return This builder for chaining.
+       */
+      public Builder setQuarterTurns(int value) {
+        
+        quarterTurns_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 quarterTurns = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearQuarterTurns() {
+        
+        quarterTurns_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:communication.TextureInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:communication.TextureInfo)
+    private static final dev.yanshouwang.camerax.communication.Communication.TextureInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.TextureInfo();
+    }
+
+    public static dev.yanshouwang.camerax.communication.Communication.TextureInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TextureInfo>
+        PARSER = new com.google.protobuf.AbstractParser<TextureInfo>() {
+      @java.lang.Override
+      public TextureInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TextureInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TextureInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TextureInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public dev.yanshouwang.camerax.communication.Communication.TextureInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface TextureSizeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:communication.TextureSize)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -5807,25 +4024,25 @@ public final class Communication {
     int getHeight();
   }
   /**
-   * Protobuf type {@code communication.CameraSize}
+   * Protobuf type {@code communication.TextureSize}
    */
-  public static final class CameraSize extends
+  public static final class TextureSize extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:communication.CameraSize)
-      CameraSizeOrBuilder {
+      // @@protoc_insertion_point(message_implements:communication.TextureSize)
+      TextureSizeOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CameraSize.newBuilder() to construct.
-    private CameraSize(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use TextureSize.newBuilder() to construct.
+    private TextureSize(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CameraSize() {
+    private TextureSize() {
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CameraSize();
+      return new TextureSize();
     }
 
     @java.lang.Override
@@ -5833,7 +4050,7 @@ public final class Communication {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private CameraSize(
+    private TextureSize(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5882,15 +4099,15 @@ public final class Communication {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraSize_descriptor;
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureSize_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraSize_fieldAccessorTable
+      return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureSize_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.communication.Communication.CameraSize.class, dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder.class);
+              dev.yanshouwang.camerax.communication.Communication.TextureSize.class, dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder.class);
     }
 
     public static final int WIDTH_FIELD_NUMBER = 1;
@@ -5962,10 +4179,10 @@ public final class Communication {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.CameraSize)) {
+      if (!(obj instanceof dev.yanshouwang.camerax.communication.Communication.TextureSize)) {
         return super.equals(obj);
       }
-      dev.yanshouwang.camerax.communication.Communication.CameraSize other = (dev.yanshouwang.camerax.communication.Communication.CameraSize) obj;
+      dev.yanshouwang.camerax.communication.Communication.TextureSize other = (dev.yanshouwang.camerax.communication.Communication.TextureSize) obj;
 
       if (getWidth()
           != other.getWidth()) return false;
@@ -5991,69 +4208,69 @@ public final class Communication {
       return hash;
     }
 
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(byte[] data)
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseDelimitedFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseDelimitedFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize parseFrom(
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6066,7 +4283,7 @@ public final class Communication {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.CameraSize prototype) {
+    public static Builder newBuilder(dev.yanshouwang.camerax.communication.Communication.TextureSize prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -6082,26 +4299,26 @@ public final class Communication {
       return builder;
     }
     /**
-     * Protobuf type {@code communication.CameraSize}
+     * Protobuf type {@code communication.TextureSize}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:communication.CameraSize)
-        dev.yanshouwang.camerax.communication.Communication.CameraSizeOrBuilder {
+        // @@protoc_insertion_point(builder_implements:communication.TextureSize)
+        dev.yanshouwang.camerax.communication.Communication.TextureSizeOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraSize_descriptor;
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureSize_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraSize_fieldAccessorTable
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureSize_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.communication.Communication.CameraSize.class, dev.yanshouwang.camerax.communication.Communication.CameraSize.Builder.class);
+                dev.yanshouwang.camerax.communication.Communication.TextureSize.class, dev.yanshouwang.camerax.communication.Communication.TextureSize.Builder.class);
       }
 
-      // Construct using dev.yanshouwang.camerax.communication.Communication.CameraSize.newBuilder()
+      // Construct using dev.yanshouwang.camerax.communication.Communication.TextureSize.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6129,17 +4346,17 @@ public final class Communication {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_CameraSize_descriptor;
+        return dev.yanshouwang.camerax.communication.Communication.internal_static_communication_TextureSize_descriptor;
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraSize getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.communication.Communication.CameraSize.getDefaultInstance();
+      public dev.yanshouwang.camerax.communication.Communication.TextureSize getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.communication.Communication.TextureSize.getDefaultInstance();
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraSize build() {
-        dev.yanshouwang.camerax.communication.Communication.CameraSize result = buildPartial();
+      public dev.yanshouwang.camerax.communication.Communication.TextureSize build() {
+        dev.yanshouwang.camerax.communication.Communication.TextureSize result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6147,8 +4364,8 @@ public final class Communication {
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.communication.Communication.CameraSize buildPartial() {
-        dev.yanshouwang.camerax.communication.Communication.CameraSize result = new dev.yanshouwang.camerax.communication.Communication.CameraSize(this);
+      public dev.yanshouwang.camerax.communication.Communication.TextureSize buildPartial() {
+        dev.yanshouwang.camerax.communication.Communication.TextureSize result = new dev.yanshouwang.camerax.communication.Communication.TextureSize(this);
         result.width_ = width_;
         result.height_ = height_;
         onBuilt();
@@ -6189,16 +4406,16 @@ public final class Communication {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.communication.Communication.CameraSize) {
-          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.CameraSize)other);
+        if (other instanceof dev.yanshouwang.camerax.communication.Communication.TextureSize) {
+          return mergeFrom((dev.yanshouwang.camerax.communication.Communication.TextureSize)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.CameraSize other) {
-        if (other == dev.yanshouwang.camerax.communication.Communication.CameraSize.getDefaultInstance()) return this;
+      public Builder mergeFrom(dev.yanshouwang.camerax.communication.Communication.TextureSize other) {
+        if (other == dev.yanshouwang.camerax.communication.Communication.TextureSize.getDefaultInstance()) return this;
         if (other.getWidth() != 0) {
           setWidth(other.getWidth());
         }
@@ -6220,11 +4437,11 @@ public final class Communication {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        dev.yanshouwang.camerax.communication.Communication.CameraSize parsedMessage = null;
+        dev.yanshouwang.camerax.communication.Communication.TextureSize parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.CameraSize) e.getUnfinishedMessage();
+          parsedMessage = (dev.yanshouwang.camerax.communication.Communication.TextureSize) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -6308,41 +4525,41 @@ public final class Communication {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:communication.CameraSize)
+      // @@protoc_insertion_point(builder_scope:communication.TextureSize)
     }
 
-    // @@protoc_insertion_point(class_scope:communication.CameraSize)
-    private static final dev.yanshouwang.camerax.communication.Communication.CameraSize DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:communication.TextureSize)
+    private static final dev.yanshouwang.camerax.communication.Communication.TextureSize DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.CameraSize();
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.communication.Communication.TextureSize();
     }
 
-    public static dev.yanshouwang.camerax.communication.Communication.CameraSize getDefaultInstance() {
+    public static dev.yanshouwang.camerax.communication.Communication.TextureSize getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CameraSize>
-        PARSER = new com.google.protobuf.AbstractParser<CameraSize>() {
+    private static final com.google.protobuf.Parser<TextureSize>
+        PARSER = new com.google.protobuf.AbstractParser<TextureSize>() {
       @java.lang.Override
-      public CameraSize parsePartialFrom(
+      public TextureSize parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CameraSize(input, extensionRegistry);
+        return new TextureSize(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<CameraSize> parser() {
+    public static com.google.protobuf.Parser<TextureSize> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CameraSize> getParserForType() {
+    public com.google.protobuf.Parser<TextureSize> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.communication.Communication.CameraSize getDefaultInstanceForType() {
+    public dev.yanshouwang.camerax.communication.Communication.TextureSize getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6364,30 +4581,20 @@ public final class Communication {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_communication_CameraSelector_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_communication_CameraBinding_descriptor;
+    internal_static_communication_CameraInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_communication_CameraBinding_fieldAccessorTable;
+      internal_static_communication_CameraInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_communication_UnbindArgs_descriptor;
+    internal_static_communication_TextureInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_communication_UnbindArgs_fieldAccessorTable;
+      internal_static_communication_TextureInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_communication_TorchArgs_descriptor;
+    internal_static_communication_TextureSize_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_communication_TorchArgs_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_communication_CameraArgs_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_communication_CameraArgs_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_communication_CameraSize_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_communication_CameraSize_fieldAccessorTable;
+      internal_static_communication_TextureSize_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6397,34 +4604,26 @@ public final class Communication {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023communication.proto\022\rcommunication\"\204\002\n" +
-      "\007Message\0220\n\010category\030\001 \001(\0162\036.communicati" +
-      "on.MessageCategory\022+\n\010bindArgs\030\002 \001(\0132\027.c" +
-      "ommunication.BindArgsH\000\022/\n\nunbindArgs\030\003 " +
-      "\001(\0132\031.communication.UnbindArgsH\000\022-\n\ttorc" +
-      "hArgs\030\004 \001(\0132\030.communication.TorchArgsH\000\022" +
-      "2\n\010rotation\030\005 \001(\0162\036.communication.Displa" +
-      "yRotationH\000B\006\n\004stub\";\n\010BindArgs\022/\n\010selec" +
-      "tor\030\001 \001(\0132\035.communication.CameraSelector" +
-      "\"=\n\016CameraSelector\022+\n\006facing\030\001 \001(\0162\033.com" +
-      "munication.CameraFacing\"_\n\rCameraBinding" +
-      "\022\013\n\003key\030\001 \001(\t\022-\n\ncameraArgs\030\002 \001(\0132\031.comm" +
-      "unication.CameraArgs\022\022\n\ntorchState\030\003 \001(\010" +
-      "\"\031\n\nUnbindArgs\022\013\n\003key\030\001 \001(\t\"\'\n\tTorchArgs" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005state\030\002 \001(\010\"Z\n\nCameraAr" +
-      "gs\022\021\n\ttextureId\030\001 \001(\005\022\'\n\004size\030\002 \001(\0132\031.co" +
-      "mmunication.CameraSize\022\020\n\010hasTorch\030\003 \001(\010" +
-      "\"+\n\nCameraSize\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030" +
-      "\002 \001(\005*\320\001\n\017MessageCategory\022\032\n\026CAMERA_CONT" +
-      "ROLLER_BIND\020\000\022\034\n\030CAMERA_CONTROLLER_UNBIN" +
-      "D\020\001\022\033\n\027CAMERA_CONTROLLER_TORCH\020\002\022\027\n\023CAME" +
-      "RA_ARGS_CHANGED\020\003\022\027\n\023TORCH_STATE_CHANGED" +
-      "\020\004\022\027\n\023DEVICE_GET_ROTATION\020\005\022\033\n\027DEVICE_RO" +
-      "TATION_CHANGED\020\006*#\n\014CameraFacing\022\t\n\005FRON" +
-      "T\020\000\022\010\n\004BACK\020\001*V\n\017DisplayRotation\022\016\n\nROTA" +
-      "TION_0\020\000\022\017\n\013ROTATION_90\020\001\022\020\n\014ROTATION_18" +
-      "0\020\002\022\020\n\014ROTATION_270\020\003B\'\n%dev.yanshouwang" +
-      ".camerax.communicationb\006proto3"
+      "\n\023communication.proto\022\rcommunication\"\335\001\n" +
+      "\007Message\022\013\n\003key\030\001 \001(\005\0220\n\010category\030\002 \001(\0162" +
+      "\036.communication.MessageCategory\022,\n\tbind_" +
+      "args\030\003 \001(\0132\027.communication.BindArgsH\000\0222\n" +
+      "\014texture_info\030\004 \001(\0132\032.communication.Text" +
+      "ureInfoH\000\022\025\n\013torch_state\030\005 \001(\010H\000\022\022\n\010anal" +
+      "ysis\030\006 \001(\014H\000B\006\n\004stub\";\n\010BindArgs\022/\n\010sele" +
+      "ctor\030\002 \001(\0132\035.communication.CameraSelecto" +
+      "r\"=\n\016CameraSelector\022+\n\006facing\030\001 \001(\0162\033.co" +
+      "mmunication.CameraFacing\"\037\n\nCameraInfo\022\021" +
+      "\n\thas_torch\030\001 \001(\010\"Y\n\013TextureInfo\022\n\n\002id\030\001" +
+      " \001(\005\022(\n\004size\030\002 \001(\0132\032.communication.Textu" +
+      "reSize\022\024\n\014quarterTurns\030\003 \001(\005\",\n\013TextureS" +
+      "ize\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001(\005*\201\001\n\017M" +
+      "essageCategory\022\010\n\004BIND\020\000\022\n\n\006UNBIND\020\001\022\020\n\014" +
+      "TEXTURE_INFO\020\002\022\026\n\022TEXTURE_INFO_EVENT\020\003\022\t" +
+      "\n\005TORCH\020\004\022\017\n\013TORCH_EVENT\020\005\022\022\n\016ANALYSIS_E" +
+      "VENT\020\006*#\n\014CameraFacing\022\t\n\005FRONT\020\000\022\010\n\004BAC" +
+      "K\020\001B\'\n%dev.yanshouwang.camerax.communica" +
+      "tionb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6435,7 +4634,7 @@ public final class Communication {
     internal_static_communication_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_communication_Message_descriptor,
-        new java.lang.String[] { "Category", "BindArgs", "UnbindArgs", "TorchArgs", "Rotation", "Stub", });
+        new java.lang.String[] { "Key", "Category", "BindArgs", "TextureInfo", "TorchState", "Analysis", "Stub", });
     internal_static_communication_BindArgs_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_communication_BindArgs_fieldAccessorTable = new
@@ -6448,35 +4647,23 @@ public final class Communication {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_communication_CameraSelector_descriptor,
         new java.lang.String[] { "Facing", });
-    internal_static_communication_CameraBinding_descriptor =
+    internal_static_communication_CameraInfo_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_communication_CameraBinding_fieldAccessorTable = new
+    internal_static_communication_CameraInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_communication_CameraBinding_descriptor,
-        new java.lang.String[] { "Key", "CameraArgs", "TorchState", });
-    internal_static_communication_UnbindArgs_descriptor =
+        internal_static_communication_CameraInfo_descriptor,
+        new java.lang.String[] { "HasTorch", });
+    internal_static_communication_TextureInfo_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_communication_UnbindArgs_fieldAccessorTable = new
+    internal_static_communication_TextureInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_communication_UnbindArgs_descriptor,
-        new java.lang.String[] { "Key", });
-    internal_static_communication_TorchArgs_descriptor =
+        internal_static_communication_TextureInfo_descriptor,
+        new java.lang.String[] { "Id", "Size", "QuarterTurns", });
+    internal_static_communication_TextureSize_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_communication_TorchArgs_fieldAccessorTable = new
+    internal_static_communication_TextureSize_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_communication_TorchArgs_descriptor,
-        new java.lang.String[] { "Key", "State", });
-    internal_static_communication_CameraArgs_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_communication_CameraArgs_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_communication_CameraArgs_descriptor,
-        new java.lang.String[] { "TextureId", "Size", "HasTorch", });
-    internal_static_communication_CameraSize_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_communication_CameraSize_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_communication_CameraSize_descriptor,
+        internal_static_communication_TextureSize_descriptor,
         new java.lang.String[] { "Width", "Height", });
   }
 

@@ -23,9 +23,9 @@ object UnbindArgsKt {
     internal fun _build(): dev.yanshouwang.camerax.communication.Communication.UnbindArgs = _builder.build()
 
     /**
-     * <code>string key = 1;</code>
+     * <code>int32 key = 1;</code>
      */
-    var key: kotlin.String
+    var key: kotlin.Int
       @JvmName("getKey")
       get() = _builder.getKey()
       @JvmName("setKey")
@@ -33,7 +33,7 @@ object UnbindArgsKt {
         _builder.setKey(value)
       }
     /**
-     * <code>string key = 1;</code>
+     * <code>int32 key = 1;</code>
      */
     fun clearKey() {
       _builder.clearKey()

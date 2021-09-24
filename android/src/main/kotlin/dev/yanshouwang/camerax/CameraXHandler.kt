@@ -135,7 +135,11 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
                 "height" to height
             ) else mapOf("width" to height, "height" to width)
             val answer =
-                mapOf("textureId" to textureId, "size" to size, "torchable" to camera!!.hasTorch)
+                mapOf(
+                    "textureId" to textureId,
+                    "size" to size,
+                    "torchable" to camera!!.cameraInfo.hasFlashUnit()
+                )
             result.success(answer)
         }, executor)
     }

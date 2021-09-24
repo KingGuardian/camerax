@@ -1,76 +1,66 @@
 part of camerax;
 
 abstract class CameraController {
-  ValueListenable<CameraArgs?> get cameraArgs;
-  ValueListenable<bool?> get torchState;
+  Stream<bool> get torchState;
+  Stream<Uint8List> get analysis;
 
-  Future<void> bind();
-  Future<void> unbind();
+  Future<CameraInfo> bind();
   Future<void> torch(bool state);
+  // Future<void> capture();
+  Future<void> unbind();
 
   factory CameraController(CameraSelector selector) =>
       _CameraController(selector);
 }
 
 class _CameraController implements CameraController {
-  _CameraController(this.selector)
-      : cameraArgs = ValueNotifier(null),
-        torchState = ValueNotifier(null);
+  _CameraController(this.selector);
 
   final CameraSelector selector;
-  @override
-  final ValueNotifier<CameraArgs?> cameraArgs;
-  @override
-  final ValueNotifier<bool?> torchState;
-
-  late StreamSubscription<bool> torchStateSubscription;
-
-  late String key;
 
   @override
-  Future<void> bind() async {
-    final message = comm.Message(
-      category: comm.MessageCategory.CAMERA_CONTROLLER_BIND,
+  Stream<bool> get torchState => stream
+      .where((message) =>
+          message.key == hashCode &&
+          message.category == comm.MessageCategory.TORCH_EVENT)
+      .map((message) => message.torchState);
+
+  @override
+  Stream<Uint8List> get analysis => stream
+      .where((message) =>
+          message.key == hashCode &&
+          message.category == comm.MessageCategory.ANALYSIS_EVENT)
+      .map((message) => message.analysis as Uint8List);
+
+  @override
+  Future<CameraInfo> bind() async {
+    final arguments = comm.Message(
+      key: hashCode,
+      category: comm.MessageCategory.BIND,
       bindArgs: comm.BindArgs(selector: selector.mirror),
     ).writeToBuffer();
-    final binding = await method
-        .invokeMethod<Uint8List>('', message)
-        .then((binaries) => comm.CameraBinding.fromBuffer(binaries!));
-    // 绑定参数赋值
-    key = binding.key;
-    cameraArgs.value = binding.cameraArgs.mirror;
-    torchState.value = binding.torchState;
-    // 开始监听闪光灯状态变化
-    torchStateSubscription = stream
-        .where((event) =>
-            event.category == comm.MessageCategory.TORCH_STATE_CHANGED &&
-            event.torchArgs.key == key)
-        .map((torchArgs) => torchArgs.torchArgs.state)
-        .listen((state) => torchState.value = state);
-  }
-
-  @override
-  Future<void> unbind() async {
-    // 结束监听闪光灯状态变化
-    await torchStateSubscription.cancel();
-    final message = comm.Message(
-      category: comm.MessageCategory.CAMERA_CONTROLLER_UNBIND,
-      unbindArgs: comm.UnbindArgs(key: key),
-    ).writeToBuffer();
-    await method.invokeMethod<void>('', message);
-    torchState.dispose();
-    cameraArgs.dispose();
+    final info = await method
+        .invokeMethod<Uint8List>('', arguments)
+        .then((binaries) => comm.CameraInfo.fromBuffer(binaries!).mirror);
+    return info;
   }
 
   @override
   Future<void> torch(bool state) async {
-    final message = comm.Message(
-      category: comm.MessageCategory.CAMERA_CONTROLLER_TORCH,
-      torchArgs: comm.TorchArgs(
-        key: key,
-        state: state,
-      ),
+    final arguments = comm.Message(
+      key: hashCode,
+      category: comm.MessageCategory.TORCH,
+      torchState: state,
     ).writeToBuffer();
-    await method.invokeMethod('', message);
+    await method.invokeMethod('', arguments);
+  }
+
+  @override
+  Future<void> unbind() async {
+    final arguments = comm.Message(
+      key: hashCode,
+      category: comm.MessageCategory.UNBIND,
+    ).writeToBuffer();
+    await method.invokeMethod<void>('', arguments);
   }
 }
