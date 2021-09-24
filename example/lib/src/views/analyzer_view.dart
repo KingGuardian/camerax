@@ -1,4 +1,5 @@
 import 'package:camerax/camerax.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 
@@ -66,8 +67,8 @@ class _AnalyzerViewState extends State<AnalyzerView>
           Container(
             alignment: Alignment.bottomCenter,
             margin: EdgeInsets.only(bottom: 80.0),
-            child: ValueListenableBuilder(
-              valueListenable: cameraController.torchState,
+            child: StreamBuilder(
+              stream: cameraController.torchState,
               builder: buildTorchState,
             ),
           ),
@@ -76,9 +77,11 @@ class _AnalyzerViewState extends State<AnalyzerView>
     );
   }
 
-  Widget buildTorchState(BuildContext context, bool? state, Widget? child) {
-    final color = (state != null && state) ? Colors.white : Colors.grey;
-    final action = state == null ? null : () => torch(!state);
+  Widget buildTorchState(BuildContext context, AsyncSnapshot<bool> snapshot) {
+    final torchState = snapshot.data;
+    final color =
+        (torchState != null && torchState) ? Colors.white : Colors.grey;
+    final action = torchState == null ? null : () => torch(!torchState);
     return IconButton(
       icon: Icon(Icons.bolt, color: color),
       iconSize: 32.0,

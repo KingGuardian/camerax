@@ -6,27 +6,14 @@ extension on CameraSelector {
       );
 }
 
-extension on DeviceOrientation {
-  int get quarterTurns {
-    switch (this) {
-      case DeviceOrientation.portraitUp:
-        return 0;
-      case DeviceOrientation.landscapeRight:
-        return 3;
-      case DeviceOrientation.portraitDown:
-        return 2;
-      case DeviceOrientation.landscapeLeft:
-        return 1;
-      default:
-        throw ArgumentError();
-    }
-  }
+extension on comm.CameraInfo {
+  CameraInfo get mirror => CameraInfo(hasTorch);
 }
 
-extension on comm.CameraArgs {
-  CameraArgs get mirror => CameraArgs(textureId, size.mirror);
+extension on comm.TextureInfo {
+  TextureInfo get mirror => TextureInfo(id, size.mirror, quarterTurns);
 }
 
-extension on comm.CameraSize {
-  CameraSize get mirror => CameraSize(width, height);
+extension on comm.TextureSize {
+  TextureSize get mirror => TextureSize(width, height);
 }
