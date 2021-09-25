@@ -50,33 +50,39 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     private var quarterTurns: Int? = null
-
     private val quarterTurnsObserver by lazy {
         object : Thread() {
             override fun run() {
                 super.run()
-                val interval = 100L
+                val millis = 100L
                 while (true) {
                     val activity = bindingOfActivity?.activity ?: break
                     val quarterTurns = activity.quarterTurns
                     if (this@CameraXPlugin.quarterTurns != quarterTurns) {
                         this@CameraXPlugin.quarterTurns = quarterTurns
                         // 设备方向变化
-                        for (keeper in keepers) {
-                            val key = keeper.key
-                            val textureEntry = keeper.value.textureEntry
+                        for (bindingEntry in bindings) {
+                            val key = bindingEntry.key
+                            val binding = bindingEntry.value
+                            val id = binding.textureEntry.id().toInt()
+                            val size = binding.size
+                            val builderForSize = Communication.TextureSize.newBuilder()
+                                .setWidth(size.width)
+                                .setHeight(size.height)
                             val builderForTextureInfo = Communication.TextureInfo.newBuilder()
-                                .setId(textureEntry.id())
+                                .setId(id)
+                                .setSize(builderForSize)
+                                .setQuarterTurns(quarterTurns)
                             val message = Communication.Message.newBuilder()
                                 .setCategory(TEXTURE_INFO_EVENT)
-                                .setKey()
+                                .setKey(key)
                                 .setTextureInfo(builderForTextureInfo)
                                 .build()
                                 .toByteArray()
                             handler.post { events?.success(message) }
                         }
                     }
-                    sleep(interval)
+                    sleep(millis)
                 }
             }
         }
@@ -100,6 +106,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         }
     }
 
+    private val bindings by lazy { mutableMapOf<Int, CameraBinding>() }
+
     private fun bind(key: Int, bindArgs: Communication.BindArgs, result: MethodChannel.Result) {
         val bindingOfFlutter = this.bindingOfFlutter
         val bindingOfActivity = this.bindingOfActivity
@@ -122,10 +130,13 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             BACK -> CameraSelector.DEFAULT_BACK_CAMERA
                             Communication.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
                         }
+                        var bindUseCases: List<UseCase>? = null
+                        var bindCamera: Camera? = null
                         val surfaceProvider = Preview.SurfaceProvider { request ->
-                            val keeper = keepers[key]!!
-                            val camera = keeper.camera
-                            val textureEntry = keeper.textureEntry
+                            val camera = bindCamera!!
+                            val useCases = bindUseCases!!
+                            val textureEntry =
+                                bindingOfFlutter.textureRegistry.createSurfaceTexture()
                             val texture = textureEntry.surfaceTexture()
                             val width = request.resolution.width
                             val height = request.resolution.height
@@ -139,7 +150,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                 .toByteArray()
                             result.success(cameraInfo)
                             // TEXTURE_INFO_EVENT
-                            val textureId = textureEntry.id().toInt()
+                            val id = textureEntry.id().toInt()
                             val sensorDegrees = camera.cameraInfo.sensorRotationDegrees
                             val size =
                                 if (sensorDegrees % 180 == 0) Size(width, height)
@@ -148,42 +159,40 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                 .setWidth(size.width)
                                 .setHeight(size.height)
                             val builderForTextureInfo = Communication.TextureInfo.newBuilder()
-                                .setId(textureId)
+                                .setId(id)
                                 .setSize(builderForSize)
                                 .setQuarterTurns(quarterTurns!!)
-                            val message = Communication.Message.newBuilder()
+                            val textureInfoMessage = Communication.Message.newBuilder()
                                 .setKey(key)
                                 .setCategory(TEXTURE_INFO_EVENT)
                                 .setTextureInfo(builderForTextureInfo)
                                 .build()
                                 .toByteArray()
-                            events?.success(message)
+                            events?.success(textureInfoMessage)
+                            // TORCH_EVENT
+                            val owner = activity as LifecycleOwner
+                            val observer = Observer<Int> { data ->
+                                val torchState = data == TorchState.ON
+                                val torchMessage = Communication.Message.newBuilder()
+                                    .setKey(key)
+                                    .setTorchState(torchState)
+                                    .build()
+                                    .toByteArray()
+                                events?.success(torchMessage)
+                            }
+                            camera.cameraInfo.torchState.observe(owner, observer)
+                            // 保持 textureEntry 的引用，防止被 GC 回收
+                            bindings[key] = CameraBinding(camera, useCases, textureEntry, size)
                         }
                         val preview = Preview.Builder()
                             .build()
                             .apply { setSurfaceProvider(surfaceProvider) }
-                        val camera = cameraProvider.bindToLifecycle(
+                        bindCamera = cameraProvider.bindToLifecycle(
                             lifecycleOwner,
                             cameraSelector,
                             preview
                         )
-                        // TORCH_EVENT
-                        val owner = activity as LifecycleOwner
-                        val observer = Observer<Int> { data ->
-                            val torchState = data == TorchState.ON
-                            val message = Communication.Message.newBuilder()
-                                .setKey(key)
-                                .setTorchState(torchState)
-                                .build()
-                                .toByteArray()
-                            events?.success(message)
-                        }
-                        camera.cameraInfo.torchState.observe(owner, observer)
-                        val useCases = listOf<UseCase>(preview)
-                        val textureRegistry = bindingOfFlutter.textureRegistry
-                        val textureEntry = textureRegistry.createSurfaceTexture()
-                        // 保持 textureEntry 的引用，防止被 GC 回收
-                        keepers[key] = CameraKeeper(camera, useCases, textureEntry)
+                        bindUseCases = listOf<UseCase>(preview)
                     } catch (e: Exception) {
                         result.error(e)
                     }
@@ -225,7 +234,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
             val mainExecutor = ContextCompat.getMainExecutor(context)
             val listener = Runnable {
                 val cameraProvider = cameraProviderFuture.get()
-                val keeper = keepers.remove(key)!!
+                val keeper = bindings.remove(key)!!
                 val useCases = keeper.useCases.toTypedArray()
                 cameraProvider.unbind(*useCases)
             }
@@ -234,11 +243,32 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     private fun textureInfo(key: Int, result: MethodChannel.Result) {
-
+        val binding = bindings[key]
+        if (binding == null) {
+            result.success(null)
+        } else {
+            val id = binding.textureEntry.id().toInt()
+            val size = binding.size
+            val builderForSize = Communication.TextureSize.newBuilder()
+                .setWidth(size.width)
+                .setHeight(size.height)
+            val quarterTurns = this.quarterTurns!!
+            val builderForTextureInfo = Communication.TextureInfo.newBuilder()
+                .setId(id)
+                .setSize(builderForSize)
+                .setQuarterTurns(quarterTurns)
+            val message = Communication.Message.newBuilder()
+                .setCategory(TEXTURE_INFO_EVENT)
+                .setKey(key)
+                .setTextureInfo(builderForTextureInfo)
+                .build()
+                .toByteArray()
+            result.success(message)
+        }
     }
 
     private fun torch(key: Int, state: Boolean, result: MethodChannel.Result) {
-        val camera = keepers[key]!!.camera
+        val camera = bindings[key]!!.camera
         camera.cameraControl.enableTorch(state)
         result.success()
     }
@@ -273,8 +303,6 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         }
     }
 
-    private val keepers by lazy { mutableMapOf<Int, CameraKeeper>() }
-
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         bindingOfFlutter = binding
     }
@@ -301,11 +329,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onDetachedFromActivity() {
-        for (keeper in keepers.values) {
+        for (keeper in bindings.values) {
             val owner = bindingOfActivity!!.activity as LifecycleOwner
             keeper.camera.cameraInfo.torchState.removeObservers(owner)
         }
-        keepers.clear()
+        bindings.clear()
         method.setMethodCallHandler(null)
         event.setStreamHandler(null)
         bindingOfActivity!!.removeRequestPermissionsResultListener(requestPermissionsResultListener)

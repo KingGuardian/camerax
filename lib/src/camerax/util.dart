@@ -17,3 +17,8 @@ extension on comm.TextureInfo {
 extension on comm.TextureSize {
   TextureSize get mirror => TextureSize(width, height);
 }
+
+extension on Uint8List {
+  CameraInfo get cameraInfo => comm.CameraInfo.fromBuffer(this).mirror;
+  TextureInfo get textureInfo => comm.TextureInfo.fromBuffer(this).mirror;
+}

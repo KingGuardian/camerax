@@ -28,10 +28,10 @@ class _CameraViewState extends State<CameraView> {
     final arguments = comm.Message(
       key: hashCode,
       category: comm.MessageCategory.TEXTURE_INFO,
-    );
+    ).writeToBuffer();
     textureInfo.value = await method
         .invokeMethod<Uint8List>('', arguments)
-        .then((binaries) => comm.TextureInfo.fromBuffer(binaries!).mirror);
+        .then((binaries) => binaries?.textureInfo);
     textureInfoSubscription = stream
         .where((message) =>
             message.key == widget.controller.hashCode &&

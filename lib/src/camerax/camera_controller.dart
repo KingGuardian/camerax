@@ -41,7 +41,7 @@ class _CameraController implements CameraController {
     ).writeToBuffer();
     final info = await method
         .invokeMethod<Uint8List>('', arguments)
-        .then((binaries) => comm.CameraInfo.fromBuffer(binaries!).mirror);
+        .then((binaries) => binaries!.cameraInfo);
     return info;
   }
 
