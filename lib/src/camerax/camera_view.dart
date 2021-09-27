@@ -4,9 +4,11 @@ class CameraView extends StatefulWidget {
   CameraView({
     Key? key,
     required this.controller,
+    this.fit = BoxFit.cover,
   }) : super(key: key);
 
   final CameraController controller;
+  final BoxFit fit;
 
   @override
   _CameraViewState createState() => _CameraViewState();
@@ -24,20 +26,18 @@ class _CameraViewState extends State<CameraView> {
   }
 
   void setup() async {
-    // 监听方向
-    final arguments = comm.Message(
-      key: hashCode,
-      category: comm.MessageCategory.TEXTURE_INFO,
-    ).writeToBuffer();
-    textureInfo.value = await method
-        .invokeMethod<Uint8List>('', arguments)
-        .then((binaries) => binaries?.textureInfo);
     textureInfoSubscription = stream
         .where((message) =>
             message.key == widget.controller.hashCode &&
             message.category == comm.MessageCategory.TEXTURE_INFO_EVENT)
         .map((message) => message.textureInfo.mirror)
         .listen((textureInfo) => this.textureInfo.value = textureInfo);
+    // 监听方向
+    final arguments = comm.Message(
+      key: hashCode,
+      category: comm.MessageCategory.TEXTURE_INFO,
+    ).writeToBuffer();
+    await method.invokeMethod<void>('', arguments);
   }
 
   @override
@@ -63,7 +63,7 @@ class _CameraViewState extends State<CameraView> {
           constraints: BoxConstraints.expand(),
           color: Color.fromARGB(255, 0, 0, 0),
           child: FittedBox(
-            fit: BoxFit.contain,
+            fit: widget.fit,
             clipBehavior: Clip.hardEdge,
             child: SizedBox(
               width: width,
