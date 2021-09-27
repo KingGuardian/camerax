@@ -175,6 +175,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                 val torchState = data == TorchState.ON
                                 val torchMessage = Communication.Message.newBuilder()
                                     .setKey(key)
+                                    .setCategory(TORCH_EVENT)
                                     .setTorchState(torchState)
                                     .build()
                                     .toByteArray()
@@ -244,9 +245,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 
     private fun textureInfo(key: Int, result: MethodChannel.Result) {
         val binding = bindings[key]
-        if (binding == null) {
-            result.success(null)
-        } else {
+        if (binding != null) {
             val id = binding.textureEntry.id().toInt()
             val size = binding.size
             val builderForSize = Communication.TextureSize.newBuilder()
@@ -263,8 +262,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 .setTextureInfo(builderForTextureInfo)
                 .build()
                 .toByteArray()
-            result.success(message)
+            events?.success(message)
         }
+        result.success()
     }
 
     private fun torch(key: Int, state: Boolean, result: MethodChannel.Result) {
