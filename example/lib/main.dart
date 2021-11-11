@@ -1,27 +1,46 @@
+import 'dart:async';
+import 'dart:developer' as developer;
+
 import 'package:camerax_example/views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() async {
+void main() {
+  runZonedGuarded(onStartup, onCrashed);
+}
+
+void onStartup() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(MyApp());
+  final orientations = [DeviceOrientation.portraitUp];
+  await SystemChrome.setPreferredOrientations(orientations);
+  final style = SystemUiOverlayStyle.light.copyWith(
+    statusBarColor: Colors.transparent,
+  );
+  SystemChrome.setSystemUIOverlayStyle(style);
+  const app = MyApp();
+  runApp(app);
+}
+
+void onCrashed(Object error, StackTrace stack) {
+  final message = '$error\n$stack';
+  developer.log(message);
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final style = SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.transparent,
-    );
-    SystemChrome.setSystemUIOverlayStyle(style);
     return MaterialApp(
-      theme: ThemeData.light().copyWith(platform: TargetPlatform.iOS),
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+        platform: TargetPlatform.iOS,
+      ),
       routes: {
-        'home': (context) => HomeView(),
-        'analyze': (context) => AnalyzerView(),
-        'display': (context) => DisplayView(),
+        'home': (context) => const HomeView(),
+        'scanner': (context) => const ScannerView(),
+        'analysis': (context) => const AnalysisView(),
       },
       initialRoute: 'home',
     );

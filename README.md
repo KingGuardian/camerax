@@ -6,17 +6,11 @@ A camera plugin for flutter, which use CameraX on Android, native API on iOS, su
 
 ## Features
 
-- [x] CameraView widget.
-- [x] Control the torch.
-- [ ] Access to a text stream.
-- [ ] Access to a face stream.
-- [ ] Access to a pose stream.
-- [x] Access to a barcode stream.
-- [ ] Access to image labels stream.
-- [ ] Access to a object detection and tracking stream.
-- [ ] Access to a digital ink recoginition stream.
-- [ ] Access to custom models stream.
-- [ ] Detect barcode from an image.
+- [x] A CameraView widget adapt with any oritation.
+- [x] An image stream for analysis.
+- [x] Control the torch state.
+- [x] Cootrol the zoom value.
+- [ ] Control the focus mode.
 - [ ] Photo capture ability.
 - [ ] Video record ability.
 
