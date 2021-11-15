@@ -12,8 +12,8 @@ void main() {
 
 void onStartup() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final orientations = [DeviceOrientation.portraitUp];
-  await SystemChrome.setPreferredOrientations(orientations);
+  // final orientations = [DeviceOrientation.portraitUp];
+  // await SystemChrome.setPreferredOrientations(orientations);
   final style = SystemUiOverlayStyle.light.copyWith(
     statusBarColor: Colors.transparent,
   );
