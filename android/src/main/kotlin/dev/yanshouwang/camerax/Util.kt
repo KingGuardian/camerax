@@ -8,7 +8,7 @@ import androidx.annotation.IntDef
 import androidx.camera.core.ImageProxy
 import dev.yanshouwang.camerax.message.Messages
 import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugin.common.MethodChannel.Result
 import java.lang.IllegalArgumentException
 import java.nio.ByteBuffer
 
@@ -21,14 +21,14 @@ val MethodCall.command: Messages.Command
         return Messages.Command.parseFrom(data)
     }
 
-fun MethodChannel.Result.success() = success(null)
+fun Result.success() = success(null)
 
-fun MethodChannel.Result.error(e: Exception) {
+fun Result.error(e: Exception) {
     val errorCode = e.localizedMessage ?: e.stackTrace.toString()
     error(errorCode)
 }
 
-fun MethodChannel.Result.error(errorCode: String) {
+fun Result.error(errorCode: String) {
     error(errorCode, null, null)
 }
 
@@ -166,7 +166,7 @@ fun rotate90(nv21: ByteArray, width: Int, height: Int): ByteArray {
         }
     }
     // 旋转 U, V 色度分量
-    i = width * height * 3 / 2 - 1;
+    i = width * height * 3 / 2 - 1
     var x = width - 1
     while (x > 0) {
         for (y in 0 until height / 2) {
@@ -211,7 +211,7 @@ fun rotate270(nv21: ByteArray, width: Int, height: Int): ByteArray {
         }
     }
     // 旋转 U, V 色度分量
-    i = width * height;
+    i = width * height
     var x = width - 1
     while (x > 0) {
         for (y in 0 until height / 2) {
