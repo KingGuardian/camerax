@@ -6,6 +6,19 @@
 //
 import AVFoundation
 
+typealias Command = Messages_Command
+typealias CommandCategory = Messages_CommandCategory
+typealias OpenArguments = Messages_OpenArguments
+typealias CameraSelector = Messages_CameraSelector
+typealias CameraFacing = Messages_CameraFacing
+typealias CameraValue = Messages_CameraValue
+typealias TextureValue = Messages_TextureValue
+typealias TorchValue = Messages_TorchValue
+typealias ZoomValue = Messages_ZoomValue
+typealias ImageProxy = Messages_ImageProxy
+typealias Event = Messages_Event
+typealias EventCategory = Messages_EventCategory
+
 extension CVBuffer {
     var image: UIImage {
         let ciImage = CIImage(cvPixelBuffer: self)

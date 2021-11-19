@@ -2,41 +2,30 @@ import AVFoundation
 import Flutter
 import Messages
 
-let NAMESPACE = "yanshouwang.dev/camerax"
-
-typealias Command = Messages_Command
-typealias CommandCategory = Messages_CommandCategory
-typealias OpenArguments = Messages_OpenArguments
-typealias CameraSelector = Messages_CameraSelector
-typealias CameraFacing = Messages_CameraFacing
-typealias CameraValue = Messages_CameraValue
-typealias TextureValue = Messages_TextureValue
-typealias TorchValue = Messages_TorchValue
-typealias ZoomValue = Messages_ZoomValue
-typealias ImageProxy = Messages_ImageProxy
-typealias Event = Messages_Event
-typealias EventCategory = Messages_EventCategory
-
 public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterTexture, AVCaptureVideoDataOutputSampleBufferDelegate {
-    public static func register(with registrar: FlutterPluginRegistrar) {
-        let instance = SwiftCameraXPlugin(registrar)
-        let binaryMessenger = registrar.messenger()
-        let methodChannel = FlutterMethodChannel(name: "\(NAMESPACE)/method", binaryMessenger: binaryMessenger)
-        let eventChannel = FlutterEventChannel(name: "\(NAMESPACE)/event", binaryMessenger: binaryMessenger)
-        registrar.addMethodCallDelegate(instance, channel: methodChannel)
-        eventChannel.setStreamHandler(instance)
-    }
+    static let namespace = "yanshouwang.dev/camerax"
     
-    let textureRegistry: FlutterTextureRegistry
-    var eventSink: FlutterEventSink!
+    private let textureRegistry: FlutterTextureRegistry
+    private var eventSink: FlutterEventSink?
     var textureId: Int64!
     var captureSession: AVCaptureSession!
     var device: AVCaptureDevice!
     var latestBuffer: CVImageBuffer!
     
+    lazy var controllers = [String: CameraController]()
+    
     init(_ registrar: FlutterPluginRegistrar) {
         textureRegistry = registrar.textures()
         super.init()
+    }
+    
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        let instance = SwiftCameraXPlugin(registrar)
+        let binaryMessenger = registrar.messenger()
+        let methodChannel = FlutterMethodChannel(name: "\(namespace)/method", binaryMessenger: binaryMessenger)
+        let eventChannel = FlutterEventChannel(name: "\(namespace)/event", binaryMessenger: binaryMessenger)
+        registrar.addMethodCallDelegate(instance, channel: methodChannel)
+        eventChannel.setStreamHandler(instance)
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -68,6 +57,10 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
     }
     
     func open(_ openArguments: OpenArguments, _ result: @escaping FlutterResult) {
+        let controller = CameraController(textureRegistry, openArguments)
+        controller.open()
+        controllers[controller.key] = controller
+        
         textureId = textureRegistry.register(self)
         captureSession = AVCaptureSession()
         let position = openArguments.selector.facing == .back ? AVCaptureDevice.Position.back : .front
@@ -147,7 +140,7 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
     }
     
     public func copyPixelBuffer() -> Unmanaged<CVPixelBuffer>? {
-        if latestBuffer == nil {
+        guard latestBuffer != nil else {
             return nil
         }
         return Unmanaged<CVPixelBuffer>.passRetained(latestBuffer)
