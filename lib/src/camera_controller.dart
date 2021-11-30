@@ -3,23 +3,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 
-import 'camera_facing.dart';
 import 'camera_selector.dart';
 import 'camera_value.dart';
 import 'channels.dart';
 import 'messages.dart' as messages;
-
-abstract class Controller extends ValueNotifier<CameraValue?> {
-  Controller() : super(null);
-
-  CameraSelector get selector;
-  Stream<ImageProxy> get images;
-
-  Future<void> open();
-  Future<void> close();
-  Future<void> torch(bool state);
-  Future<void> zoom(double value);
-}
 
 class CameraController extends ValueNotifier<CameraValue?> {
   final CameraSelector selector;
@@ -141,88 +128,6 @@ class CameraController extends ValueNotifier<CameraValue?> {
   void _throwWhenDisposed(String name) {
     if (_disposed) {
       throw Exception('$name was called on a disposed CameraController.');
-    }
-  }
-}
-
-class TextureValue {
-  final int id;
-  final int width;
-  final int height;
-  final int quarterTurns;
-
-  TextureValue._(
-    this.id,
-    this.width,
-    this.height,
-    this.quarterTurns,
-  );
-
-  TextureValue _copyWith({int? quarterTurns}) {
-    quarterTurns ??= this.quarterTurns;
-    return TextureValue._(
-      id,
-      width,
-      height,
-      quarterTurns,
-    );
-  }
-}
-
-class TorchValue {
-  final bool available;
-  final bool state;
-
-  TorchValue._(this.available, this.state);
-
-  TorchValue _copyWith({bool? state}) {
-    state ??= this.state;
-    return TorchValue._(available, state);
-  }
-}
-
-class ZoomValue {
-  double minimum;
-  double maximum;
-  double value;
-
-  ZoomValue._(this.minimum, this.maximum, this.value);
-
-  ZoomValue _copyWith({double? value}) {
-    value ??= this.value;
-    return ZoomValue._(minimum, maximum, value);
-  }
-}
-
-class ImageProxy {
-  final String _key;
-  final Uint8List data;
-  final int width;
-  final int height;
-
-  ImageProxy._(this._key, this.data, this.width, this.height);
-
-  Future<void> close() async {
-    final command = messages.Command(
-      key: _key,
-      category: messages.CommandCategory.CLOSE_IMAGE_PROXY,
-    ).writeToBuffer();
-    await method.invokeMethod<void>('', command);
-  }
-}
-
-extension on CameraSelector {
-  messages.CameraSelector get message =>
-      messages.CameraSelector(facing: facing.message);
-}
-
-extension on CameraFacing {
-  messages.CameraFacing get message {
-    switch (this) {
-      case CameraFacing.back:
-        return messages.CameraFacing.BACK;
-      case CameraFacing.front:
-        return messages.CameraFacing.FRONT;
     }
   }
 }
