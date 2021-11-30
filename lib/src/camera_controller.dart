@@ -3,9 +3,23 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 
+import 'camera_facing.dart';
 import 'camera_selector.dart';
+import 'camera_value.dart';
 import 'channels.dart';
 import 'messages.dart' as messages;
+
+abstract class Controller extends ValueNotifier<CameraValue?> {
+  Controller() : super(null);
+
+  CameraSelector get selector;
+  Stream<ImageProxy> get images;
+
+  Future<void> open();
+  Future<void> close();
+  Future<void> torch(bool state);
+  Future<void> zoom(double value);
+}
 
 class CameraController extends ValueNotifier<CameraValue?> {
   final CameraSelector selector;
@@ -128,36 +142,6 @@ class CameraController extends ValueNotifier<CameraValue?> {
     if (_disposed) {
       throw Exception('$name was called on a disposed CameraController.');
     }
-  }
-}
-
-class CameraValue {
-  final String _key;
-  final TextureValue textureValue;
-  final TorchValue torchValue;
-  final ZoomValue zoomValue;
-
-  CameraValue._(
-    this._key,
-    this.textureValue,
-    this.torchValue,
-    this.zoomValue,
-  );
-
-  CameraValue _copyWith({
-    TextureValue? textureValue,
-    TorchValue? torchValue,
-    ZoomValue? zoomValue,
-  }) {
-    textureValue ??= this.textureValue;
-    torchValue ??= this.torchValue;
-    zoomValue ??= this.zoomValue;
-    return CameraValue._(
-      _key,
-      textureValue,
-      torchValue,
-      zoomValue,
-    );
   }
 }
 
