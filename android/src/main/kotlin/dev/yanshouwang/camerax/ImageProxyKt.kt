@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun imageProxy(block: dev.yanshouwang.camerax.ImageProxyKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.ImageProxy =
+public inline fun imageProxy(block: dev.yanshouwang.camerax.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.ImageProxy =
   dev.yanshouwang.camerax.ImageProxyKt.Dsl._create(dev.yanshouwang.camerax.Messages.ImageProxy.newBuilder()).apply { block() }._build()
-object ImageProxyKt {
+public object ImageProxyKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.ImageProxy.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.ImageProxy.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.ImageProxy.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object ImageProxyKt {
     /**
      * <code>string uuid = 1;</code>
      */
-    var uuid: kotlin.String
+    public var uuid: kotlin.String
       @JvmName("getUuid")
       get() = _builder.getUuid()
       @JvmName("setUuid")
@@ -35,14 +35,14 @@ object ImageProxyKt {
     /**
      * <code>string uuid = 1;</code>
      */
-    fun clearUuid() {
+    public fun clearUuid() {
       _builder.clearUuid()
     }
 
     /**
      * <code>bytes data = 2;</code>
      */
-    var data: com.google.protobuf.ByteString
+    public var data: com.google.protobuf.ByteString
       @JvmName("getData")
       get() = _builder.getData()
       @JvmName("setData")
@@ -52,14 +52,14 @@ object ImageProxyKt {
     /**
      * <code>bytes data = 2;</code>
      */
-    fun clearData() {
+    public fun clearData() {
       _builder.clearData()
     }
 
     /**
      * <code>int32 width = 3;</code>
      */
-    var width: kotlin.Int
+    public var width: kotlin.Int
       @JvmName("getWidth")
       get() = _builder.getWidth()
       @JvmName("setWidth")
@@ -69,14 +69,14 @@ object ImageProxyKt {
     /**
      * <code>int32 width = 3;</code>
      */
-    fun clearWidth() {
+    public fun clearWidth() {
       _builder.clearWidth()
     }
 
     /**
      * <code>int32 height = 4;</code>
      */
-    var height: kotlin.Int
+    public var height: kotlin.Int
       @JvmName("getHeight")
       get() = _builder.getHeight()
       @JvmName("setHeight")
@@ -86,11 +86,11 @@ object ImageProxyKt {
     /**
      * <code>int32 height = 4;</code>
      */
-    fun clearHeight() {
+    public fun clearHeight() {
       _builder.clearHeight()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.ImageProxyKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.ImageProxy =
+public inline fun dev.yanshouwang.camerax.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.ImageProxy =
   dev.yanshouwang.camerax.ImageProxyKt.Dsl._create(this.toBuilder()).apply { block() }._build()

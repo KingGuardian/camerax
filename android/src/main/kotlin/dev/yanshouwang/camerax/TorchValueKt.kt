@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun torchValue(block: dev.yanshouwang.camerax.TorchValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.TorchValue =
+public inline fun torchValue(block: dev.yanshouwang.camerax.TorchValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.TorchValue =
   dev.yanshouwang.camerax.TorchValueKt.Dsl._create(dev.yanshouwang.camerax.Messages.TorchValue.newBuilder()).apply { block() }._build()
-object TorchValueKt {
+public object TorchValueKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.TorchValue.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.TorchValue.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.TorchValue.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object TorchValueKt {
     /**
      * <code>bool available = 1;</code>
      */
-    var available: kotlin.Boolean
+    public var available: kotlin.Boolean
       @JvmName("getAvailable")
       get() = _builder.getAvailable()
       @JvmName("setAvailable")
@@ -35,14 +35,14 @@ object TorchValueKt {
     /**
      * <code>bool available = 1;</code>
      */
-    fun clearAvailable() {
+    public fun clearAvailable() {
       _builder.clearAvailable()
     }
 
     /**
      * <code>bool state = 2;</code>
      */
-    var state: kotlin.Boolean
+    public var state: kotlin.Boolean
       @JvmName("getState")
       get() = _builder.getState()
       @JvmName("setState")
@@ -52,11 +52,11 @@ object TorchValueKt {
     /**
      * <code>bool state = 2;</code>
      */
-    fun clearState() {
+    public fun clearState() {
       _builder.clearState()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.TorchValue.copy(block: dev.yanshouwang.camerax.TorchValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.TorchValue =
+public inline fun dev.yanshouwang.camerax.Messages.TorchValue.copy(block: dev.yanshouwang.camerax.TorchValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.TorchValue =
   dev.yanshouwang.camerax.TorchValueKt.Dsl._create(this.toBuilder()).apply { block() }._build()

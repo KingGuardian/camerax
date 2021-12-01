@@ -15,7 +15,7 @@ export 'messages.pbenum.dart';
 
 class MethodArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MethodArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..e<MethodCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MethodCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN, valueOf: MethodCategory.valueOf, enumValues: MethodCategory.values)
+    ..e<MethodCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN, valueOf: MethodCategory.valueOf, enumValues: MethodCategory.values)
     ..aOM<CameraSelector>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selector', subBuilder: CameraSelector.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchState')

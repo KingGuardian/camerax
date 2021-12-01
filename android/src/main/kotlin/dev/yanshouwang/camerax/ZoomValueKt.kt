@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun zoomValue(block: dev.yanshouwang.camerax.ZoomValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.ZoomValue =
+public inline fun zoomValue(block: dev.yanshouwang.camerax.ZoomValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.ZoomValue =
   dev.yanshouwang.camerax.ZoomValueKt.Dsl._create(dev.yanshouwang.camerax.Messages.ZoomValue.newBuilder()).apply { block() }._build()
-object ZoomValueKt {
+public object ZoomValueKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.ZoomValue.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.ZoomValue.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.ZoomValue.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object ZoomValueKt {
     /**
      * <code>double minimum = 1;</code>
      */
-    var minimum: kotlin.Double
+    public var minimum: kotlin.Double
       @JvmName("getMinimum")
       get() = _builder.getMinimum()
       @JvmName("setMinimum")
@@ -35,14 +35,14 @@ object ZoomValueKt {
     /**
      * <code>double minimum = 1;</code>
      */
-    fun clearMinimum() {
+    public fun clearMinimum() {
       _builder.clearMinimum()
     }
 
     /**
      * <code>double maximum = 2;</code>
      */
-    var maximum: kotlin.Double
+    public var maximum: kotlin.Double
       @JvmName("getMaximum")
       get() = _builder.getMaximum()
       @JvmName("setMaximum")
@@ -52,14 +52,14 @@ object ZoomValueKt {
     /**
      * <code>double maximum = 2;</code>
      */
-    fun clearMaximum() {
+    public fun clearMaximum() {
       _builder.clearMaximum()
     }
 
     /**
      * <code>double value = 3;</code>
      */
-    var value: kotlin.Double
+    public var value: kotlin.Double
       @JvmName("getValue")
       get() = _builder.getValue()
       @JvmName("setValue")
@@ -69,11 +69,11 @@ object ZoomValueKt {
     /**
      * <code>double value = 3;</code>
      */
-    fun clearValue() {
+    public fun clearValue() {
       _builder.clearValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.ZoomValue.copy(block: dev.yanshouwang.camerax.ZoomValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.ZoomValue =
+public inline fun dev.yanshouwang.camerax.Messages.ZoomValue.copy(block: dev.yanshouwang.camerax.ZoomValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.ZoomValue =
   dev.yanshouwang.camerax.ZoomValueKt.Dsl._create(this.toBuilder()).apply { block() }._build()

@@ -15,11 +15,6 @@ import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.google.protobuf.ByteString
-import dev.yanshouwang.camerax.message.*
-import dev.yanshouwang.camerax.message.Messages.*
-import dev.yanshouwang.camerax.message.Messages.CameraFacing.*
-import dev.yanshouwang.camerax.message.Messages.CommandCategory.*
-import dev.yanshouwang.camerax.message.Messages.EventCategory.*
 import io.flutter.BuildConfig
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
@@ -84,7 +79,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                 this@CameraXPlugin.quarterTurns = quarterTurns
                 // 设备方向变化
                 val event = event {
-                    this.category = QUARTER_TURNS_CHANGED
+                    this.category = Messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS
                     this.quarterTurns = quarterTurns
                 }.toByteArray()
                 activity.runOnUiThread { eventSink?.success(event) }
@@ -120,14 +115,31 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        val command = call.command
-        when (command.category!!) {
-            OPEN -> open(command.openArguments, result)
-            CLOSE -> close(command.key, result)
-            TORCH -> torch(command.key, command.torchState, result)
-            ZOOM -> zoom(command.key, command.zoomValue, result)
-            CLOSE_IMAGE_PROXY -> closeImageProxy(command.key, result)
-            CommandCategory.UNRECOGNIZED -> result.notImplemented()
+        val methodArguments = call.methodArguments
+        when (methodArguments.category!!) {
+            Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN -> open(
+                methodArguments.selector,
+                result
+            )
+            Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE -> close(
+                methodArguments.uuid,
+                result
+            )
+            Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH -> torch(
+                methodArguments.uuid,
+                methodArguments.torchState,
+                result
+            )
+            Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM -> zoom(
+                methodArguments.uuid,
+                methodArguments.zoomValue,
+                result
+            )
+            Messages.MethodCategory.METHOD_CATEGORY_IMAGE_PROXY_CLOSE -> closeImageProxy(
+                methodArguments.uuid,
+                result
+            )
+            Messages.MethodCategory.UNRECOGNIZED -> result.notImplemented()
         }
     }
 
@@ -157,7 +169,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
         }
     }
 
-    private fun open(openArguments: OpenArguments, result: Result) {
+    private fun open(selector: Messages.CameraSelector, result: Result) {
         val activity = this.activityPluginBinding?.activity
         if (activity == null) result.error("Activity has been detached.")
         else {
@@ -169,10 +181,10 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                     try {
                         val cameraProvider = future.get()
                         val lifecycleOwner = activity as LifecycleOwner
-                        val cameraSelector = when (openArguments.selector.facing!!) {
-                            BACK -> CameraSelector.DEFAULT_BACK_CAMERA
-                            FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
-                            CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
+                        val cameraSelector = when (selector.facing!!) {
+                            Messages.CameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
+                            Messages.CameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+                            Messages.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
                         }
                         val preview = Preview.Builder()
                             .setTargetRotation(Surface.ROTATION_0)
@@ -204,8 +216,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                             val owner = activity as LifecycleOwner
                             val torchStateObserver = Observer<Int> { state ->
                                 val event = event {
-                                    this.key = nativeCamera.key
-                                    this.category = TORCH_STATE_CHANGED
+                                    this.uuid = nativeCamera.uuid
+                                    this.category =
+                                        Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE
                                     this.torchState = state == TorchState.ON
                                 }.toByteArray()
                                 eventSink?.success(event)
@@ -213,8 +226,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                             camera.cameraInfo.torchState.observe(owner, torchStateObserver)
                             val zoomStateObserver = Observer<ZoomState> { state ->
                                 val event = event {
-                                    this.key = nativeCamera.key
-                                    this.category = ZOOM_VALUE_CHANGED
+                                    this.uuid = nativeCamera.uuid
+                                    this.category =
+                                        Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE
                                     this.zoomValue = state.zoomRatio.toDouble()
                                 }.toByteArray()
                                 eventSink?.success(event)
@@ -223,10 +237,10 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
 
                             // 保持 textureEntry 的引用，防止被 GC 回收
                             nativeCamera.textureEntry = textureEntry
-                            nativeCameras[nativeCamera.key] = nativeCamera
+                            nativeCameras[nativeCamera.uuid] = nativeCamera
 
                             val cameraValue = cameraValue {
-                                this.key = nativeCamera.key
+                                this.uuid = nativeCamera.uuid
                                 val cameraInfo = camera.cameraInfo
                                 this.textureValue = textureValue {
                                     val degrees = cameraInfo.sensorRotationDegrees
@@ -259,12 +273,13 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                                 error("Assertion failed.")
                             }
                             val nativeImageProxy = NativeImageProxy(image)
-                            nativeImageProxies[nativeImageProxy.key] = nativeImageProxy
+                            nativeImageProxies[nativeImageProxy.uuid] = nativeImageProxy
                             val event = event {
-                                this.key = nativeCamera.key
-                                this.category = IMAGE_PROXY_RECEIVED
-                                this.image = imageProxy {
-                                    this.key = nativeImageProxy.key
+                                this.uuid = nativeCamera.uuid
+                                this.category =
+                                    Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY
+                                this.imageProxy = imageProxy {
+                                    this.uuid = nativeImageProxy.uuid
                                     val rotationDegrees = when (activity.rotation) {
                                         Surface.ROTATION_0 -> 0
                                         Surface.ROTATION_90 -> 270

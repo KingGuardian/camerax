@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun cameraValue(block: dev.yanshouwang.camerax.CameraValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.CameraValue =
+public inline fun cameraValue(block: dev.yanshouwang.camerax.CameraValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.CameraValue =
   dev.yanshouwang.camerax.CameraValueKt.Dsl._create(dev.yanshouwang.camerax.Messages.CameraValue.newBuilder()).apply { block() }._build()
-object CameraValueKt {
+public object CameraValueKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.CameraValue.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.CameraValue.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.CameraValue.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object CameraValueKt {
     /**
      * <code>string uuid = 1;</code>
      */
-    var uuid: kotlin.String
+    public var uuid: kotlin.String
       @JvmName("getUuid")
       get() = _builder.getUuid()
       @JvmName("setUuid")
@@ -35,14 +35,14 @@ object CameraValueKt {
     /**
      * <code>string uuid = 1;</code>
      */
-    fun clearUuid() {
+    public fun clearUuid() {
       _builder.clearUuid()
     }
 
     /**
      * <code>.messages.TextureValue texture_value = 2;</code>
      */
-    var textureValue: dev.yanshouwang.camerax.Messages.TextureValue
+    public var textureValue: dev.yanshouwang.camerax.Messages.TextureValue
       @JvmName("getTextureValue")
       get() = _builder.getTextureValue()
       @JvmName("setTextureValue")
@@ -52,21 +52,21 @@ object CameraValueKt {
     /**
      * <code>.messages.TextureValue texture_value = 2;</code>
      */
-    fun clearTextureValue() {
+    public fun clearTextureValue() {
       _builder.clearTextureValue()
     }
     /**
      * <code>.messages.TextureValue texture_value = 2;</code>
      * @return Whether the textureValue field is set.
      */
-    fun hasTextureValue(): kotlin.Boolean {
+    public fun hasTextureValue(): kotlin.Boolean {
       return _builder.hasTextureValue()
     }
 
     /**
      * <code>.messages.TorchValue torch_value = 3;</code>
      */
-    var torchValue: dev.yanshouwang.camerax.Messages.TorchValue
+    public var torchValue: dev.yanshouwang.camerax.Messages.TorchValue
       @JvmName("getTorchValue")
       get() = _builder.getTorchValue()
       @JvmName("setTorchValue")
@@ -76,21 +76,21 @@ object CameraValueKt {
     /**
      * <code>.messages.TorchValue torch_value = 3;</code>
      */
-    fun clearTorchValue() {
+    public fun clearTorchValue() {
       _builder.clearTorchValue()
     }
     /**
      * <code>.messages.TorchValue torch_value = 3;</code>
      * @return Whether the torchValue field is set.
      */
-    fun hasTorchValue(): kotlin.Boolean {
+    public fun hasTorchValue(): kotlin.Boolean {
       return _builder.hasTorchValue()
     }
 
     /**
      * <code>.messages.ZoomValue zoom_value = 4;</code>
      */
-    var zoomValue: dev.yanshouwang.camerax.Messages.ZoomValue
+    public var zoomValue: dev.yanshouwang.camerax.Messages.ZoomValue
       @JvmName("getZoomValue")
       get() = _builder.getZoomValue()
       @JvmName("setZoomValue")
@@ -100,18 +100,18 @@ object CameraValueKt {
     /**
      * <code>.messages.ZoomValue zoom_value = 4;</code>
      */
-    fun clearZoomValue() {
+    public fun clearZoomValue() {
       _builder.clearZoomValue()
     }
     /**
      * <code>.messages.ZoomValue zoom_value = 4;</code>
      * @return Whether the zoomValue field is set.
      */
-    fun hasZoomValue(): kotlin.Boolean {
+    public fun hasZoomValue(): kotlin.Boolean {
       return _builder.hasZoomValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.CameraValue.copy(block: dev.yanshouwang.camerax.CameraValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.CameraValue =
+public inline fun dev.yanshouwang.camerax.Messages.CameraValue.copy(block: dev.yanshouwang.camerax.CameraValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.CameraValue =
   dev.yanshouwang.camerax.CameraValueKt.Dsl._create(this.toBuilder()).apply { block() }._build()

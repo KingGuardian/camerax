@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun event(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.Event =
+public inline fun event(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Event =
   dev.yanshouwang.camerax.EventKt.Dsl._create(dev.yanshouwang.camerax.Messages.Event.newBuilder()).apply { block() }._build()
-object EventKt {
+public object EventKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.Event.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.Event.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.Event.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object EventKt {
     /**
      * <code>.messages.EventCategory category = 1;</code>
      */
-    var category: dev.yanshouwang.camerax.Messages.EventCategory
+    public var category: dev.yanshouwang.camerax.Messages.EventCategory
       @JvmName("getCategory")
       get() = _builder.getCategory()
       @JvmName("setCategory")
@@ -35,14 +35,14 @@ object EventKt {
     /**
      * <code>.messages.EventCategory category = 1;</code>
      */
-    fun clearCategory() {
+    public fun clearCategory() {
       _builder.clearCategory()
     }
 
     /**
      * <code>int32 quarter_turns = 2;</code>
      */
-    var quarterTurns: kotlin.Int
+    public var quarterTurns: kotlin.Int
       @JvmName("getQuarterTurns")
       get() = _builder.getQuarterTurns()
       @JvmName("setQuarterTurns")
@@ -52,14 +52,14 @@ object EventKt {
     /**
      * <code>int32 quarter_turns = 2;</code>
      */
-    fun clearQuarterTurns() {
+    public fun clearQuarterTurns() {
       _builder.clearQuarterTurns()
     }
 
     /**
      * <code>string uuid = 3;</code>
      */
-    var uuid: kotlin.String
+    public var uuid: kotlin.String
       @JvmName("getUuid")
       get() = _builder.getUuid()
       @JvmName("setUuid")
@@ -69,14 +69,14 @@ object EventKt {
     /**
      * <code>string uuid = 3;</code>
      */
-    fun clearUuid() {
+    public fun clearUuid() {
       _builder.clearUuid()
     }
 
     /**
      * <code>bool torch_state = 4;</code>
      */
-    var torchState: kotlin.Boolean
+    public var torchState: kotlin.Boolean
       @JvmName("getTorchState")
       get() = _builder.getTorchState()
       @JvmName("setTorchState")
@@ -86,14 +86,14 @@ object EventKt {
     /**
      * <code>bool torch_state = 4;</code>
      */
-    fun clearTorchState() {
+    public fun clearTorchState() {
       _builder.clearTorchState()
     }
 
     /**
      * <code>double zoom_value = 5;</code>
      */
-    var zoomValue: kotlin.Double
+    public var zoomValue: kotlin.Double
       @JvmName("getZoomValue")
       get() = _builder.getZoomValue()
       @JvmName("setZoomValue")
@@ -103,14 +103,14 @@ object EventKt {
     /**
      * <code>double zoom_value = 5;</code>
      */
-    fun clearZoomValue() {
+    public fun clearZoomValue() {
       _builder.clearZoomValue()
     }
 
     /**
      * <code>.messages.ImageProxy image_proxy = 6;</code>
      */
-    var imageProxy: dev.yanshouwang.camerax.Messages.ImageProxy
+    public var imageProxy: dev.yanshouwang.camerax.Messages.ImageProxy
       @JvmName("getImageProxy")
       get() = _builder.getImageProxy()
       @JvmName("setImageProxy")
@@ -120,18 +120,18 @@ object EventKt {
     /**
      * <code>.messages.ImageProxy image_proxy = 6;</code>
      */
-    fun clearImageProxy() {
+    public fun clearImageProxy() {
       _builder.clearImageProxy()
     }
     /**
      * <code>.messages.ImageProxy image_proxy = 6;</code>
      * @return Whether the imageProxy field is set.
      */
-    fun hasImageProxy(): kotlin.Boolean {
+    public fun hasImageProxy(): kotlin.Boolean {
       return _builder.hasImageProxy()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.Event.copy(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.Event =
+public inline fun dev.yanshouwang.camerax.Messages.Event.copy(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Event =
   dev.yanshouwang.camerax.EventKt.Dsl._create(this.toBuilder()).apply { block() }._build()

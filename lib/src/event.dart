@@ -15,7 +15,7 @@ class Event {
   double get zoomValue => event.zoomValue;
   ImageProxy get imageProxy => event.imageProxy.$imageProxy;
 
-  Event(this.event);
+  const Event(this.event);
 
   factory Event.fromProtobuf(Uint8List protobuf) {
     return messages.Event.fromBuffer(protobuf).$event;

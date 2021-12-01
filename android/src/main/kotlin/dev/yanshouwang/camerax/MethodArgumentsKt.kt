@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun methodArguments(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
+public inline fun methodArguments(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
   dev.yanshouwang.camerax.MethodArgumentsKt.Dsl._create(dev.yanshouwang.camerax.Messages.MethodArguments.newBuilder()).apply { block() }._build()
-object MethodArgumentsKt {
+public object MethodArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.MethodArguments.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.MethodArguments.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.MethodArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object MethodArgumentsKt {
     /**
      * <code>.messages.MethodCategory category = 1;</code>
      */
-    var category: dev.yanshouwang.camerax.Messages.MethodCategory
+    public var category: dev.yanshouwang.camerax.Messages.MethodCategory
       @JvmName("getCategory")
       get() = _builder.getCategory()
       @JvmName("setCategory")
@@ -35,14 +35,14 @@ object MethodArgumentsKt {
     /**
      * <code>.messages.MethodCategory category = 1;</code>
      */
-    fun clearCategory() {
+    public fun clearCategory() {
       _builder.clearCategory()
     }
 
     /**
      * <code>.messages.CameraSelector selector = 2;</code>
      */
-    var selector: dev.yanshouwang.camerax.Messages.CameraSelector
+    public var selector: dev.yanshouwang.camerax.Messages.CameraSelector
       @JvmName("getSelector")
       get() = _builder.getSelector()
       @JvmName("setSelector")
@@ -52,21 +52,21 @@ object MethodArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 2;</code>
      */
-    fun clearSelector() {
+    public fun clearSelector() {
       _builder.clearSelector()
     }
     /**
      * <code>.messages.CameraSelector selector = 2;</code>
      * @return Whether the selector field is set.
      */
-    fun hasSelector(): kotlin.Boolean {
+    public fun hasSelector(): kotlin.Boolean {
       return _builder.hasSelector()
     }
 
     /**
      * <code>string uuid = 3;</code>
      */
-    var uuid: kotlin.String
+    public var uuid: kotlin.String
       @JvmName("getUuid")
       get() = _builder.getUuid()
       @JvmName("setUuid")
@@ -76,14 +76,14 @@ object MethodArgumentsKt {
     /**
      * <code>string uuid = 3;</code>
      */
-    fun clearUuid() {
+    public fun clearUuid() {
       _builder.clearUuid()
     }
 
     /**
      * <code>bool torch_state = 4;</code>
      */
-    var torchState: kotlin.Boolean
+    public var torchState: kotlin.Boolean
       @JvmName("getTorchState")
       get() = _builder.getTorchState()
       @JvmName("setTorchState")
@@ -93,14 +93,14 @@ object MethodArgumentsKt {
     /**
      * <code>bool torch_state = 4;</code>
      */
-    fun clearTorchState() {
+    public fun clearTorchState() {
       _builder.clearTorchState()
     }
 
     /**
      * <code>double zoom_value = 5;</code>
      */
-    var zoomValue: kotlin.Double
+    public var zoomValue: kotlin.Double
       @JvmName("getZoomValue")
       get() = _builder.getZoomValue()
       @JvmName("setZoomValue")
@@ -110,11 +110,11 @@ object MethodArgumentsKt {
     /**
      * <code>double zoom_value = 5;</code>
      */
-    fun clearZoomValue() {
+    public fun clearZoomValue() {
       _builder.clearZoomValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.MethodArguments.copy(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
+public inline fun dev.yanshouwang.camerax.Messages.MethodArguments.copy(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
   dev.yanshouwang.camerax.MethodArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()

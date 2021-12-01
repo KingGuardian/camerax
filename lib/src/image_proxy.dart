@@ -22,6 +22,6 @@ class ImageProxy {
       category: MethodCategory.imageProxyClose,
       uuid: uuid,
     ).toProtobuf();
-    await method.invokeMethod<void>('', arguments);
+    await methodChannel.invokeMethod<void>('', arguments);
   }
 }

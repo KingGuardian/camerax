@@ -20,48 +20,48 @@ public final class Messages {
   public enum MethodCategory
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN(0),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN(0),
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE(1),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE(1),
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH(2),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH(2),
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM(3),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM(3),
     /**
-     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
+     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
      */
-    COMMAND_CATEGORY_IMAGE_PROXY_CLOSE(4),
+    METHOD_CATEGORY_IMAGE_PROXY_CLOSE(4),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN_VALUE = 0;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN_VALUE = 0;
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE_VALUE = 1;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE_VALUE = 1;
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH_VALUE = 2;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH_VALUE = 2;
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 3;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 3;
     /**
-     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
+     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
      */
-    public static final int COMMAND_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 4;
+    public static final int METHOD_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 4;
 
 
     public final int getNumber() {
@@ -88,11 +88,11 @@ public final class Messages {
      */
     public static MethodCategory forNumber(int value) {
       switch (value) {
-        case 0: return COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN;
-        case 1: return COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE;
-        case 2: return COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH;
-        case 3: return COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM;
-        case 4: return COMMAND_CATEGORY_IMAGE_PROXY_CLOSE;
+        case 0: return METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN;
+        case 1: return METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE;
+        case 2: return METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH;
+        case 3: return METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM;
+        case 4: return METHOD_CATEGORY_IMAGE_PROXY_CLOSE;
         default: return null;
       }
     }
@@ -670,19 +670,19 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
+      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
         output.writeEnum(1, category_);
       }
       if (selector_ != null) {
         output.writeMessage(2, getSelector());
       }
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, uuid_);
       }
       if (torchState_ != false) {
         output.writeBool(4, torchState_);
       }
-      if (zoomValue_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(zoomValue_) != 0) {
         output.writeDouble(5, zoomValue_);
       }
       unknownFields.writeTo(output);
@@ -694,7 +694,7 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
+      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, category_);
       }
@@ -702,14 +702,14 @@ public final class Messages {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getSelector());
       }
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, uuid_);
       }
       if (torchState_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, torchState_);
       }
-      if (zoomValue_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(zoomValue_) != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(5, zoomValue_);
       }
@@ -2243,7 +2243,7 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uuid_);
       }
       if (textureValue_ != null) {
@@ -2264,7 +2264,7 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uuid_);
       }
       if (textureValue_ != null) {
@@ -4525,13 +4525,13 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (minimum_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(minimum_) != 0) {
         output.writeDouble(1, minimum_);
       }
-      if (maximum_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(maximum_) != 0) {
         output.writeDouble(2, maximum_);
       }
-      if (value_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
         output.writeDouble(3, value_);
       }
       unknownFields.writeTo(output);
@@ -4543,15 +4543,15 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (minimum_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(minimum_) != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(1, minimum_);
       }
-      if (maximum_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(maximum_) != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(2, maximum_);
       }
-      if (value_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(3, value_);
       }
@@ -5313,13 +5313,13 @@ public final class Messages {
       if (quarterTurns_ != 0) {
         output.writeInt32(2, quarterTurns_);
       }
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, uuid_);
       }
       if (torchState_ != false) {
         output.writeBool(4, torchState_);
       }
-      if (zoomValue_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(zoomValue_) != 0) {
         output.writeDouble(5, zoomValue_);
       }
       if (imageProxy_ != null) {
@@ -5342,14 +5342,14 @@ public final class Messages {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, quarterTurns_);
       }
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, uuid_);
       }
       if (torchState_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, torchState_);
       }
-      if (zoomValue_ != 0D) {
+      if (java.lang.Double.doubleToRawLongBits(zoomValue_) != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(5, zoomValue_);
       }
@@ -6308,7 +6308,7 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uuid_);
       }
       if (!data_.isEmpty()) {
@@ -6329,7 +6329,7 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!getUuidBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uuid_);
       }
       if (!data_.isEmpty()) {
@@ -6941,20 +6941,20 @@ public final class Messages {
       "value\030\005 \001(\001\022)\n\013image_proxy\030\006 \001(\0132\024.messa" +
       "ges.ImageProxy\"G\n\nImageProxy\022\014\n\004uuid\030\001 \001" +
       "(\t\022\014\n\004data\030\002 \001(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006heigh" +
-      "t\030\004 \001(\005*\356\001\n\016MethodCategory\022+\n\'COMMAND_CA" +
-      "TEGORY_CAMERA_CONTROLLER_OPEN\020\000\022,\n(COMMA" +
-      "ND_CATEGORY_CAMERA_CONTROLLER_CLOSE\020\001\022,\n" +
-      "(COMMAND_CATEGORY_CAMERA_CONTROLLER_TORC" +
-      "H\020\002\022+\n\'COMMAND_CATEGORY_CAMERA_CONTROLLE" +
-      "R_ZOOM\020\003\022&\n\"COMMAND_CATEGORY_IMAGE_PROXY" +
-      "_CLOSE\020\004*?\n\014CameraFacing\022\026\n\022CAMERA_FACIN" +
-      "G_BACK\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n\rEv" +
-      "entCategory\022 \n\034EVENT_CATEGORY_QUARTER_TU" +
-      "RNS\020\000\0220\n,EVENT_CATEGORY_CAMERA_CONTROLLE" +
-      "R_TORCH_STATE\020\001\022/\n+EVENT_CATEGORY_CAMERA" +
-      "_CONTROLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CATEGO" +
-      "RY_CAMERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n\027de" +
-      "v.yanshouwang.cameraxb\006proto3"
+      "t\030\004 \001(\005*\351\001\n\016MethodCategory\022*\n&METHOD_CAT" +
+      "EGORY_CAMERA_CONTROLLER_OPEN\020\000\022+\n\'METHOD" +
+      "_CATEGORY_CAMERA_CONTROLLER_CLOSE\020\001\022+\n\'M" +
+      "ETHOD_CATEGORY_CAMERA_CONTROLLER_TORCH\020\002" +
+      "\022*\n&METHOD_CATEGORY_CAMERA_CONTROLLER_ZO" +
+      "OM\020\003\022%\n!METHOD_CATEGORY_IMAGE_PROXY_CLOS" +
+      "E\020\004*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BAC" +
+      "K\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n\rEventCa" +
+      "tegory\022 \n\034EVENT_CATEGORY_QUARTER_TURNS\020\000" +
+      "\0220\n,EVENT_CATEGORY_CAMERA_CONTROLLER_TOR" +
+      "CH_STATE\020\001\022/\n+EVENT_CATEGORY_CAMERA_CONT" +
+      "ROLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CATEGORY_CA" +
+      "MERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n\027dev.yan" +
+      "shouwang.cameraxb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

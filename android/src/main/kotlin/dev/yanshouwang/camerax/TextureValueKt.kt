@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-inline fun textureValue(block: dev.yanshouwang.camerax.TextureValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.TextureValue =
+public inline fun textureValue(block: dev.yanshouwang.camerax.TextureValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.TextureValue =
   dev.yanshouwang.camerax.TextureValueKt.Dsl._create(dev.yanshouwang.camerax.Messages.TextureValue.newBuilder()).apply { block() }._build()
-object TextureValueKt {
+public object TextureValueKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  class Dsl private constructor(
-    @kotlin.jvm.JvmField private val _builder: dev.yanshouwang.camerax.Messages.TextureValue.Builder
+  public class Dsl private constructor(
+    private val _builder: dev.yanshouwang.camerax.Messages.TextureValue.Builder
   ) {
-    companion object {
+    public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.Messages.TextureValue.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ object TextureValueKt {
     /**
      * <code>int32 id = 1;</code>
      */
-    var id: kotlin.Int
+    public var id: kotlin.Int
       @JvmName("getId")
       get() = _builder.getId()
       @JvmName("setId")
@@ -35,14 +35,14 @@ object TextureValueKt {
     /**
      * <code>int32 id = 1;</code>
      */
-    fun clearId() {
+    public fun clearId() {
       _builder.clearId()
     }
 
     /**
      * <code>int32 width = 2;</code>
      */
-    var width: kotlin.Int
+    public var width: kotlin.Int
       @JvmName("getWidth")
       get() = _builder.getWidth()
       @JvmName("setWidth")
@@ -52,14 +52,14 @@ object TextureValueKt {
     /**
      * <code>int32 width = 2;</code>
      */
-    fun clearWidth() {
+    public fun clearWidth() {
       _builder.clearWidth()
     }
 
     /**
      * <code>int32 height = 3;</code>
      */
-    var height: kotlin.Int
+    public var height: kotlin.Int
       @JvmName("getHeight")
       get() = _builder.getHeight()
       @JvmName("setHeight")
@@ -69,14 +69,14 @@ object TextureValueKt {
     /**
      * <code>int32 height = 3;</code>
      */
-    fun clearHeight() {
+    public fun clearHeight() {
       _builder.clearHeight()
     }
 
     /**
      * <code>int32 quarter_turns = 4;</code>
      */
-    var quarterTurns: kotlin.Int
+    public var quarterTurns: kotlin.Int
       @JvmName("getQuarterTurns")
       get() = _builder.getQuarterTurns()
       @JvmName("setQuarterTurns")
@@ -86,11 +86,11 @@ object TextureValueKt {
     /**
      * <code>int32 quarter_turns = 4;</code>
      */
-    fun clearQuarterTurns() {
+    public fun clearQuarterTurns() {
       _builder.clearQuarterTurns()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.Messages.TextureValue.copy(block: dev.yanshouwang.camerax.TextureValueKt.Dsl.() -> Unit): dev.yanshouwang.camerax.Messages.TextureValue =
+public inline fun dev.yanshouwang.camerax.Messages.TextureValue.copy(block: dev.yanshouwang.camerax.TextureValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.TextureValue =
   dev.yanshouwang.camerax.TextureValueKt.Dsl._create(this.toBuilder()).apply { block() }._build()

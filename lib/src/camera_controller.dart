@@ -14,46 +14,30 @@ import 'method_category.dart';
 class CameraController extends ValueNotifier<CameraValue?> {
   final CameraSelector selector;
 
-  late StreamSubscription<int> _quarterTurnsSubscription;
-  late StreamSubscription<bool> _torchStateSubscription;
-  late StreamSubscription<double> _zoomValueSubscription;
-
-  bool _disposed = false;
-  FutureOr<bool>? _opened;
+  late StreamSubscription<int> _quarterTurnsStreamSubscription;
+  late StreamSubscription<bool> _torchStateStreamSubscription;
+  late StreamSubscription<double> _zoomValueStreamSubscription;
 
   CameraController({
     this.selector = CameraSelector.back,
-  }) : super(null);
-
-  Stream<ImageProxy> get imagePorxy {
-    return stream
-        .where((event) =>
-            event.category == EventCategory.cameraControllerImageProxy)
-        .map((event) => event.imageProxy);
+  }) : super(null) {
+    subsrcibe();
   }
 
-  Future<void> open() async {
-    _opened = true;
-    final methodArguments = MethodArguments(
-      category: MethodCategory.cameraControllerOpen,
-      selector: selector,
-    ).toProtobuf();
-    value = await method
-        .invokeMethod<Uint8List>('', methodArguments)
-        .then((protobuf) => CameraValue.fromProtobuf(protobuf!));
+  void subsrcibe() {
     // 监听屏幕旋转
-    _quarterTurnsSubscription = stream
+    _quarterTurnsStreamSubscription = eventStream
         .where((event) => event.category == EventCategory.quarterTurns)
         .map((event) => event.quarterTurns)
         .listen((quarterTurns) {
-      value = value!.copyWith(
+      value = value?.copyWith(
         textureValue: value!.textureValue.copyWith(
           quarterTurns: quarterTurns,
         ),
       );
     });
     // 监听闪光灯状态
-    _torchStateSubscription = stream
+    _torchStateStreamSubscription = eventStream
         .where((event) =>
             event.category == EventCategory.cameraControllerTorchState &&
             event.uuid == value?.uuid)
@@ -66,7 +50,7 @@ class CameraController extends ValueNotifier<CameraValue?> {
       );
     });
     // 监听相机焦距
-    _zoomValueSubscription = stream
+    _zoomValueStreamSubscription = eventStream
         .where((event) =>
             event.category == EventCategory.cameraControllerZoomValue &&
             event.uuid == value?.uuid)
@@ -80,47 +64,73 @@ class CameraController extends ValueNotifier<CameraValue?> {
     });
   }
 
+  Stream<ImageProxy> get imageStream {
+    return eventStream
+        .where((event) =>
+            event.category == EventCategory.cameraControllerImageProxy)
+        .map((event) => event.imageProxy);
+  }
+
+  Future<void> open() async {
+    _throwAfterDisposed('open');
+    final openArguments = MethodArguments(
+      category: MethodCategory.cameraControllerOpen,
+      selector: selector,
+    ).toProtobuf();
+    value = await methodChannel
+        .invokeMethod<Uint8List>('', openArguments)
+        .then((protobuf) => CameraValue.fromProtobuf(protobuf!));
+  }
+
   Future<void> close() async {
-    _opened = null;
-    // 停止监听焦距
-    await _zoomValueSubscription.cancel();
-    // 停止监听闪光灯状态
-    await _torchStateSubscription.cancel();
-    // 停止监听屏幕旋转
-    await _quarterTurnsSubscription.cancel();
+    _throwAfterDisposed('close');
     final methodArguments = MethodArguments(
       uuid: value!.uuid,
       category: MethodCategory.cameraControllerClose,
     ).toProtobuf();
-    await method.invokeMethod<void>('', methodArguments);
+    await methodChannel.invokeMethod<void>('', methodArguments);
     value = null;
   }
 
   Future<void> torch(bool state) async {
+    _throwAfterDisposed('torch');
     final methodArguments = MethodArguments(
       uuid: value!.uuid,
       category: MethodCategory.cameraControllerTorch,
       torchState: state,
     ).toProtobuf();
-    await method.invokeMethod<void>('', methodArguments);
+    await methodChannel.invokeMethod<void>('', methodArguments);
   }
 
   Future<void> zoom(double value) async {
+    _throwAfterDisposed('zoom');
     final command = MethodArguments(
       uuid: this.value!.uuid,
       category: MethodCategory.cameraControllerZoom,
       zoomValue: value,
     ).toProtobuf();
-    await method.invokeMethod<void>('', command);
+    await methodChannel.invokeMethod<void>('', command);
   }
 
+  bool _disposed = false;
   @override
   void dispose() async {
-    _disposed = true;
-    if (_opened != null) {
-      await _opened;
-      await close();
-    }
+    _throwAfterDisposed('dispose');
+    // 关闭相机
+    if (value != null) await close();
+    // 停止监听焦距
+    await _zoomValueStreamSubscription.cancel();
+    // 停止监听闪光灯状态
+    await _torchStateStreamSubscription.cancel();
+    // 停止监听屏幕旋转
+    await _quarterTurnsStreamSubscription.cancel();
     super.dispose();
+    _disposed = true;
+  }
+
+  void _throwAfterDisposed(String functionName) {
+    if (_disposed) {
+      throw Exception('$functionName was called on a disposed $runtimeType.');
+    }
   }
 }
