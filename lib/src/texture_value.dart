@@ -4,16 +4,16 @@ class TextureValue {
   final int height;
   final int quarterTurns;
 
-  TextureValue._(
+  const TextureValue(
     this.id,
     this.width,
     this.height,
     this.quarterTurns,
   );
 
-  TextureValue _copyWith({int? quarterTurns}) {
+  TextureValue copyWith({int? quarterTurns}) {
     quarterTurns ??= this.quarterTurns;
-    return TextureValue._(
+    return TextureValue(
       id,
       width,
       height,

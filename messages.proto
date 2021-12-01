@@ -1,39 +1,35 @@
 syntax = "proto3";
 package messages;
 
-option java_package = "dev.yanshouwang.camerax.message";
+option java_package = "dev.yanshouwang.camerax";
 
-message Command {
-  string key = 1;
-  CommandCategory category = 2;
-  oneof stub {
-    OpenArguments open_arguments = 3;
-    bool torch_state = 4;
-    double zoom_value = 5;
-  }
+message MethodArguments {
+  MethodCategory category = 1;
+  CameraSelector selector = 2;
+  string uuid = 3;
+  bool torch_state = 4;
+  double zoom_value = 5;
 }
 
-message Event {
-  string key = 1;
-  EventCategory category = 2;
-  oneof stub {
-    int32 quarterTurns = 3;
-    bool torch_state = 4;
-    double zoom_value = 5;
-    ImageProxy image = 6;
-  }
-}
-
-message OpenArguments {
-  CameraSelector selector = 1;
+enum MethodCategory {
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;
+  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 4;
 }
 
 message CameraSelector {
   CameraFacing facing = 1;
 }
 
+enum CameraFacing {
+  CAMERA_FACING_BACK = 0;
+  CAMERA_FACING_FRONT = 1;
+}
+
 message CameraValue {
-  string key = 1;
+  string uuid = 1;
   TextureValue texture_value = 2;
   TorchValue torch_value = 3;
   ZoomValue zoom_value = 4;
@@ -43,7 +39,7 @@ message TextureValue {
   int32 id = 1;
   int32 width = 2;
   int32 height = 3;
-  int32 quarterTurns = 4;
+  int32 quarter_turns = 4;
 }
 
 message TorchValue {
@@ -57,29 +53,25 @@ message ZoomValue {
   double value = 3;
 }
 
-message ImageProxy {
-  string key = 1;
-  bytes data = 2;
-  int32 width = 3;
-  int32 height = 4;
-}
-
-enum CommandCategory {
-  OPEN = 0;
-  CLOSE = 1;
-  TORCH = 2;
-  ZOOM = 3;
-  CLOSE_IMAGE_PROXY = 4;
+message Event {
+  EventCategory category = 1;
+  int32 quarter_turns = 2;
+  string uuid = 3;
+  bool torch_state = 4;
+  double zoom_value = 5;
+  ImageProxy image_proxy = 6;
 }
 
 enum EventCategory {
-  QUARTER_TURNS_CHANGED = 0;
-  TORCH_STATE_CHANGED = 1;
-  ZOOM_VALUE_CHANGED = 2;
-  IMAGE_PROXY_RECEIVED = 3;
+  EVENT_CATEGORY_QUARTER_TURNS = 0;
+  EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE = 1;
+  EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 2;
+  EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY = 3;
 }
 
-enum CameraFacing {
-  BACK = 0;
-  FRONT = 1;
+message ImageProxy {
+  string uuid = 1;
+  bytes data = 2;
+  int32 width = 3;
+  int32 height = 4;
 }

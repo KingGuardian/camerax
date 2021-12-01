@@ -6,7 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'camera_selector.dart';
 import 'camera_value.dart';
 import 'channels.dart';
-import 'messages.dart' as messages;
+import 'event_category.dart';
+import 'image_proxy.dart';
+import 'method_arguments.dart';
+import 'method_category.dart';
 
 class CameraController extends ValueNotifier<CameraValue?> {
   final CameraSelector selector;
@@ -22,140 +25,102 @@ class CameraController extends ValueNotifier<CameraValue?> {
     this.selector = CameraSelector.back,
   }) : super(null);
 
-  Stream<ImageProxy> get images {
-    _throwWhenDisposed('images');
+  Stream<ImageProxy> get imagePorxy {
     return stream
         .where((event) =>
-            event.key == value?._key &&
-            event.category == messages.EventCategory.IMAGE_PROXY_RECEIVED)
-        .map((event) => event.image.mirror);
+            event.category == EventCategory.cameraControllerImageProxy)
+        .map((event) => event.imageProxy);
   }
 
   Future<void> open() async {
-    _throwWhenDisposed('open');
     _opened = true;
-    final command = messages.Command(
-      category: messages.CommandCategory.OPEN,
-      openArguments: messages.OpenArguments(
-        selector: selector.message,
-      ),
-    ).writeToBuffer();
-    value = await method.invokeMethod<Uint8List>('', command).then(
-        (byteArray) => messages.CameraValue.fromBuffer(byteArray!).mirror);
-    // 开始状态监听
+    final methodArguments = MethodArguments(
+      category: MethodCategory.cameraControllerOpen,
+      selector: selector,
+    ).toProtobuf();
+    value = await method
+        .invokeMethod<Uint8List>('', methodArguments)
+        .then((protobuf) => CameraValue.fromProtobuf(protobuf!));
+    // 监听屏幕旋转
     _quarterTurnsSubscription = stream
-        .where((event) =>
-            event.category == messages.EventCategory.QUARTER_TURNS_CHANGED)
+        .where((event) => event.category == EventCategory.quarterTurns)
         .map((event) => event.quarterTurns)
         .listen((quarterTurns) {
-      final textureValue =
-          value!.textureValue._copyWith(quarterTurns: quarterTurns);
-      value = value!._copyWith(textureValue: textureValue);
+      value = value!.copyWith(
+        textureValue: value!.textureValue.copyWith(
+          quarterTurns: quarterTurns,
+        ),
+      );
     });
+    // 监听闪光灯状态
     _torchStateSubscription = stream
         .where((event) =>
-            event.key == value?._key &&
-            event.category == messages.EventCategory.TORCH_STATE_CHANGED)
+            event.category == EventCategory.cameraControllerTorchState &&
+            event.uuid == value?.uuid)
         .map((event) => event.torchState)
-        .listen((state) {
-      final torchValue = value!.torchValue._copyWith(state: state);
-      value = value!._copyWith(torchValue: torchValue);
+        .listen((trochState) {
+      value = value!.copyWith(
+        torchValue: value!.torchValue.copyWith(
+          state: trochState,
+        ),
+      );
     });
+    // 监听相机焦距
     _zoomValueSubscription = stream
         .where((event) =>
-            event.key == value?._key &&
-            event.category == messages.EventCategory.ZOOM_VALUE_CHANGED)
+            event.category == EventCategory.cameraControllerZoomValue &&
+            event.uuid == value?.uuid)
         .map((event) => event.zoomValue)
-        .listen((value) {
-      final zoomValue = this.value!.zoomValue._copyWith(value: value);
-      this.value = this.value!._copyWith(zoomValue: zoomValue);
+        .listen((zoomValue) {
+      value = value!.copyWith(
+        zoomValue: value!.zoomValue.copyWith(
+          value: zoomValue,
+        ),
+      );
     });
   }
 
   Future<void> close() async {
-    _throwWhenDisposedOrClosed('close');
     _opened = null;
-    // 停止状态监听
+    // 停止监听焦距
     await _zoomValueSubscription.cancel();
+    // 停止监听闪光灯状态
     await _torchStateSubscription.cancel();
+    // 停止监听屏幕旋转
     await _quarterTurnsSubscription.cancel();
-    final command = messages.Command(
-      key: value!._key,
-      category: messages.CommandCategory.CLOSE,
-    ).writeToBuffer();
-    await method.invokeMethod<void>('', command);
+    final methodArguments = MethodArguments(
+      uuid: value!.uuid,
+      category: MethodCategory.cameraControllerClose,
+    ).toProtobuf();
+    await method.invokeMethod<void>('', methodArguments);
     value = null;
   }
 
   Future<void> torch(bool state) async {
-    _throwWhenDisposedOrClosed('torch');
-    final command = messages.Command(
-      key: value!._key,
-      category: messages.CommandCategory.TORCH,
+    final methodArguments = MethodArguments(
+      uuid: value!.uuid,
+      category: MethodCategory.cameraControllerTorch,
       torchState: state,
-    ).writeToBuffer();
-    await method.invokeMethod<void>('', command);
+    ).toProtobuf();
+    await method.invokeMethod<void>('', methodArguments);
   }
 
   Future<void> zoom(double value) async {
-    _throwWhenDisposedOrClosed('zoom');
-    final command = messages.Command(
-      key: this.value!._key,
-      category: messages.CommandCategory.ZOOM,
+    final command = MethodArguments(
+      uuid: this.value!.uuid,
+      category: MethodCategory.cameraControllerZoom,
       zoomValue: value,
-    ).writeToBuffer();
+    ).toProtobuf();
     await method.invokeMethod<void>('', command);
   }
 
   @override
   void dispose() async {
-    _throwWhenDisposed('dispose');
     _disposed = true;
     if (_opened != null) {
       await _opened;
       await close();
     }
     super.dispose();
-  }
-
-  void _throwWhenDisposedOrClosed(String name) {
-    _throwWhenDisposed(name);
-    if (value == null) {
-      throw Exception('$name was called on a closed CameraController.');
-    }
-  }
-
-  void _throwWhenDisposed(String name) {
-    if (_disposed) {
-      throw Exception('$name was called on a disposed CameraController.');
-    }
-  }
-}
-
-extension on messages.CameraValue {
-  CameraValue get mirror => CameraValue._(
-        key,
-        textureValue.mirror,
-        torchValue.mirror,
-        zoomValue.mirror,
-      );
-}
-
-extension on messages.TextureValue {
-  TextureValue get mirror => TextureValue._(id, width, height, quarterTurns);
-}
-
-extension on messages.TorchValue {
-  TorchValue get mirror => TorchValue._(available, state);
-}
-
-extension on messages.ZoomValue {
-  ZoomValue get mirror => ZoomValue._(minimum, maximum, value);
-}
-
-extension on messages.ImageProxy {
-  ImageProxy get mirror {
-    final data = Uint8List.fromList(this.data);
-    return ImageProxy._(key, data, width, height);
   }
 }

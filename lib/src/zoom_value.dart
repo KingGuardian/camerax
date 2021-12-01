@@ -1,12 +1,12 @@
 class ZoomValue {
-  double minimum;
-  double maximum;
-  double value;
+  final double minimum;
+  final double maximum;
+  final double value;
 
-  ZoomValue._(this.minimum, this.maximum, this.value);
+  const ZoomValue(this.minimum, this.maximum, this.value);
 
-  ZoomValue _copyWith({double? value}) {
+  ZoomValue copyWith({double? value}) {
     value ??= this.value;
-    return ZoomValue._(minimum, maximum, value);
+    return ZoomValue(minimum, maximum, value);
   }
 }

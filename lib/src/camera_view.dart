@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
+import 'camera_value.dart';
 
 class CameraView extends StatelessWidget {
   final CameraController controller;
