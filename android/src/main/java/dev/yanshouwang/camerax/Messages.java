@@ -20,48 +20,64 @@ public final class Messages {
   public enum MethodCategory
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;</code>
      */
-    METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN(0),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE(0),
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;</code>
      */
-    METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE(1),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN(1),
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;</code>
      */
-    METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH(2),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE(2),
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;</code>
      */
-    METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM(3),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH(3),
     /**
-     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;</code>
      */
-    METHOD_CATEGORY_IMAGE_PROXY_CLOSE(4),
+    METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM(4),
+    /**
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 5;</code>
+     */
+    METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE(5),
+    /**
+     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 6;</code>
+     */
+    METHOD_CATEGORY_IMAGE_PROXY_CLOSE(6),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;</code>
      */
-    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN_VALUE = 0;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE_VALUE = 0;
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;</code>
      */
-    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE_VALUE = 1;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN_VALUE = 1;
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;</code>
      */
-    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH_VALUE = 2;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE_VALUE = 2;
     /**
-     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;</code>
      */
-    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 3;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH_VALUE = 3;
     /**
-     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 4;</code>
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;</code>
      */
-    public static final int METHOD_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 4;
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 4;
+    /**
+     * <code>METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 5;</code>
+     */
+    public static final int METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE_VALUE = 5;
+    /**
+     * <code>METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 6;</code>
+     */
+    public static final int METHOD_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 6;
 
 
     public final int getNumber() {
@@ -88,11 +104,13 @@ public final class Messages {
      */
     public static MethodCategory forNumber(int value) {
       switch (value) {
-        case 0: return METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN;
-        case 1: return METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE;
-        case 2: return METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH;
-        case 3: return METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM;
-        case 4: return METHOD_CATEGORY_IMAGE_PROXY_CLOSE;
+        case 0: return METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE;
+        case 1: return METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN;
+        case 2: return METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE;
+        case 3: return METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH;
+        case 4: return METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM;
+        case 5: return METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE;
+        case 6: return METHOD_CATEGORY_IMAGE_PROXY_CLOSE;
         default: return null;
       }
     }
@@ -670,7 +688,7 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
+      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE.getNumber()) {
         output.writeEnum(1, category_);
       }
       if (selector_ != null) {
@@ -694,7 +712,7 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN.getNumber()) {
+      if (category_ != dev.yanshouwang.camerax.Messages.MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, category_);
       }
@@ -1934,59 +1952,47 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string uuid = 1;</code>
-     * @return The uuid.
-     */
-    java.lang.String getUuid();
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
-     */
-    com.google.protobuf.ByteString
-        getUuidBytes();
-
-    /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      * @return Whether the textureValue field is set.
      */
     boolean hasTextureValue();
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      * @return The textureValue.
      */
     dev.yanshouwang.camerax.Messages.TextureValue getTextureValue();
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      */
     dev.yanshouwang.camerax.Messages.TextureValueOrBuilder getTextureValueOrBuilder();
 
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      * @return Whether the torchValue field is set.
      */
     boolean hasTorchValue();
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      * @return The torchValue.
      */
     dev.yanshouwang.camerax.Messages.TorchValue getTorchValue();
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      */
     dev.yanshouwang.camerax.Messages.TorchValueOrBuilder getTorchValueOrBuilder();
 
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      * @return Whether the zoomValue field is set.
      */
     boolean hasZoomValue();
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      * @return The zoomValue.
      */
     dev.yanshouwang.camerax.Messages.ZoomValue getZoomValue();
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      */
     dev.yanshouwang.camerax.Messages.ZoomValueOrBuilder getZoomValueOrBuilder();
   }
@@ -2003,7 +2009,6 @@ public final class Messages {
       super(builder);
     }
     private CameraValue() {
-      uuid_ = "";
     }
 
     @java.lang.Override
@@ -2037,12 +2042,6 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              uuid_ = s;
-              break;
-            }
-            case 18: {
               dev.yanshouwang.camerax.Messages.TextureValue.Builder subBuilder = null;
               if (textureValue_ != null) {
                 subBuilder = textureValue_.toBuilder();
@@ -2055,7 +2054,7 @@ public final class Messages {
 
               break;
             }
-            case 26: {
+            case 18: {
               dev.yanshouwang.camerax.Messages.TorchValue.Builder subBuilder = null;
               if (torchValue_ != null) {
                 subBuilder = torchValue_.toBuilder();
@@ -2068,7 +2067,7 @@ public final class Messages {
 
               break;
             }
-            case 34: {
+            case 26: {
               dev.yanshouwang.camerax.Messages.ZoomValue.Builder subBuilder = null;
               if (zoomValue_ != null) {
                 subBuilder = zoomValue_.toBuilder();
@@ -2113,48 +2112,10 @@ public final class Messages {
               dev.yanshouwang.camerax.Messages.CameraValue.class, dev.yanshouwang.camerax.Messages.CameraValue.Builder.class);
     }
 
-    public static final int UUID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object uuid_;
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The uuid.
-     */
-    @java.lang.Override
-    public java.lang.String getUuid() {
-      java.lang.Object ref = uuid_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        uuid_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string uuid = 1;</code>
-     * @return The bytes for uuid.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getUuidBytes() {
-      java.lang.Object ref = uuid_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        uuid_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TEXTURE_VALUE_FIELD_NUMBER = 2;
+    public static final int TEXTURE_VALUE_FIELD_NUMBER = 1;
     private dev.yanshouwang.camerax.Messages.TextureValue textureValue_;
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      * @return Whether the textureValue field is set.
      */
     @java.lang.Override
@@ -2162,7 +2123,7 @@ public final class Messages {
       return textureValue_ != null;
     }
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      * @return The textureValue.
      */
     @java.lang.Override
@@ -2170,17 +2131,17 @@ public final class Messages {
       return textureValue_ == null ? dev.yanshouwang.camerax.Messages.TextureValue.getDefaultInstance() : textureValue_;
     }
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.Messages.TextureValueOrBuilder getTextureValueOrBuilder() {
       return getTextureValue();
     }
 
-    public static final int TORCH_VALUE_FIELD_NUMBER = 3;
+    public static final int TORCH_VALUE_FIELD_NUMBER = 2;
     private dev.yanshouwang.camerax.Messages.TorchValue torchValue_;
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      * @return Whether the torchValue field is set.
      */
     @java.lang.Override
@@ -2188,7 +2149,7 @@ public final class Messages {
       return torchValue_ != null;
     }
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      * @return The torchValue.
      */
     @java.lang.Override
@@ -2196,17 +2157,17 @@ public final class Messages {
       return torchValue_ == null ? dev.yanshouwang.camerax.Messages.TorchValue.getDefaultInstance() : torchValue_;
     }
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.Messages.TorchValueOrBuilder getTorchValueOrBuilder() {
       return getTorchValue();
     }
 
-    public static final int ZOOM_VALUE_FIELD_NUMBER = 4;
+    public static final int ZOOM_VALUE_FIELD_NUMBER = 3;
     private dev.yanshouwang.camerax.Messages.ZoomValue zoomValue_;
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      * @return Whether the zoomValue field is set.
      */
     @java.lang.Override
@@ -2214,7 +2175,7 @@ public final class Messages {
       return zoomValue_ != null;
     }
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      * @return The zoomValue.
      */
     @java.lang.Override
@@ -2222,7 +2183,7 @@ public final class Messages {
       return zoomValue_ == null ? dev.yanshouwang.camerax.Messages.ZoomValue.getDefaultInstance() : zoomValue_;
     }
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.Messages.ZoomValueOrBuilder getZoomValueOrBuilder() {
@@ -2243,17 +2204,14 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uuid_);
-      }
       if (textureValue_ != null) {
-        output.writeMessage(2, getTextureValue());
+        output.writeMessage(1, getTextureValue());
       }
       if (torchValue_ != null) {
-        output.writeMessage(3, getTorchValue());
+        output.writeMessage(2, getTorchValue());
       }
       if (zoomValue_ != null) {
-        output.writeMessage(4, getZoomValue());
+        output.writeMessage(3, getZoomValue());
       }
       unknownFields.writeTo(output);
     }
@@ -2264,20 +2222,17 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uuid_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uuid_);
-      }
       if (textureValue_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getTextureValue());
+          .computeMessageSize(1, getTextureValue());
       }
       if (torchValue_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getTorchValue());
+          .computeMessageSize(2, getTorchValue());
       }
       if (zoomValue_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getZoomValue());
+          .computeMessageSize(3, getZoomValue());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2294,8 +2249,6 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.Messages.CameraValue other = (dev.yanshouwang.camerax.Messages.CameraValue) obj;
 
-      if (!getUuid()
-          .equals(other.getUuid())) return false;
       if (hasTextureValue() != other.hasTextureValue()) return false;
       if (hasTextureValue()) {
         if (!getTextureValue()
@@ -2322,8 +2275,6 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + UUID_FIELD_NUMBER;
-      hash = (53 * hash) + getUuid().hashCode();
       if (hasTextureValue()) {
         hash = (37 * hash) + TEXTURE_VALUE_FIELD_NUMBER;
         hash = (53 * hash) + getTextureValue().hashCode();
@@ -2469,8 +2420,6 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        uuid_ = "";
-
         if (textureValueBuilder_ == null) {
           textureValue_ = null;
         } else {
@@ -2515,7 +2464,6 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.Messages.CameraValue buildPartial() {
         dev.yanshouwang.camerax.Messages.CameraValue result = new dev.yanshouwang.camerax.Messages.CameraValue(this);
-        result.uuid_ = uuid_;
         if (textureValueBuilder_ == null) {
           result.textureValue_ = textureValue_;
         } else {
@@ -2579,10 +2527,6 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.Messages.CameraValue other) {
         if (other == dev.yanshouwang.camerax.Messages.CameraValue.getDefaultInstance()) return this;
-        if (!other.getUuid().isEmpty()) {
-          uuid_ = other.uuid_;
-          onChanged();
-        }
         if (other.hasTextureValue()) {
           mergeTextureValue(other.getTextureValue());
         }
@@ -2621,94 +2565,18 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object uuid_ = "";
-      /**
-       * <code>string uuid = 1;</code>
-       * @return The uuid.
-       */
-      public java.lang.String getUuid() {
-        java.lang.Object ref = uuid_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          uuid_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @return The bytes for uuid.
-       */
-      public com.google.protobuf.ByteString
-          getUuidBytes() {
-        java.lang.Object ref = uuid_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          uuid_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @param value The uuid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUuid(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        uuid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearUuid() {
-        
-        uuid_ = getDefaultInstance().getUuid();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string uuid = 1;</code>
-       * @param value The bytes for uuid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUuidBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        uuid_ = value;
-        onChanged();
-        return this;
-      }
-
       private dev.yanshouwang.camerax.Messages.TextureValue textureValue_;
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.TextureValue, dev.yanshouwang.camerax.Messages.TextureValue.Builder, dev.yanshouwang.camerax.Messages.TextureValueOrBuilder> textureValueBuilder_;
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        * @return Whether the textureValue field is set.
        */
       public boolean hasTextureValue() {
         return textureValueBuilder_ != null || textureValue_ != null;
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        * @return The textureValue.
        */
       public dev.yanshouwang.camerax.Messages.TextureValue getTextureValue() {
@@ -2719,7 +2587,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public Builder setTextureValue(dev.yanshouwang.camerax.Messages.TextureValue value) {
         if (textureValueBuilder_ == null) {
@@ -2735,7 +2603,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public Builder setTextureValue(
           dev.yanshouwang.camerax.Messages.TextureValue.Builder builderForValue) {
@@ -2749,7 +2617,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public Builder mergeTextureValue(dev.yanshouwang.camerax.Messages.TextureValue value) {
         if (textureValueBuilder_ == null) {
@@ -2767,7 +2635,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public Builder clearTextureValue() {
         if (textureValueBuilder_ == null) {
@@ -2781,7 +2649,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public dev.yanshouwang.camerax.Messages.TextureValue.Builder getTextureValueBuilder() {
         
@@ -2789,7 +2657,7 @@ public final class Messages {
         return getTextureValueFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       public dev.yanshouwang.camerax.Messages.TextureValueOrBuilder getTextureValueOrBuilder() {
         if (textureValueBuilder_ != null) {
@@ -2800,7 +2668,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.TextureValue texture_value = 2;</code>
+       * <code>.messages.TextureValue texture_value = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.TextureValue, dev.yanshouwang.camerax.Messages.TextureValue.Builder, dev.yanshouwang.camerax.Messages.TextureValueOrBuilder> 
@@ -2820,14 +2688,14 @@ public final class Messages {
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.TorchValue, dev.yanshouwang.camerax.Messages.TorchValue.Builder, dev.yanshouwang.camerax.Messages.TorchValueOrBuilder> torchValueBuilder_;
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        * @return Whether the torchValue field is set.
        */
       public boolean hasTorchValue() {
         return torchValueBuilder_ != null || torchValue_ != null;
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        * @return The torchValue.
        */
       public dev.yanshouwang.camerax.Messages.TorchValue getTorchValue() {
@@ -2838,7 +2706,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public Builder setTorchValue(dev.yanshouwang.camerax.Messages.TorchValue value) {
         if (torchValueBuilder_ == null) {
@@ -2854,7 +2722,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public Builder setTorchValue(
           dev.yanshouwang.camerax.Messages.TorchValue.Builder builderForValue) {
@@ -2868,7 +2736,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public Builder mergeTorchValue(dev.yanshouwang.camerax.Messages.TorchValue value) {
         if (torchValueBuilder_ == null) {
@@ -2886,7 +2754,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public Builder clearTorchValue() {
         if (torchValueBuilder_ == null) {
@@ -2900,7 +2768,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public dev.yanshouwang.camerax.Messages.TorchValue.Builder getTorchValueBuilder() {
         
@@ -2908,7 +2776,7 @@ public final class Messages {
         return getTorchValueFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       public dev.yanshouwang.camerax.Messages.TorchValueOrBuilder getTorchValueOrBuilder() {
         if (torchValueBuilder_ != null) {
@@ -2919,7 +2787,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.TorchValue torch_value = 3;</code>
+       * <code>.messages.TorchValue torch_value = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.TorchValue, dev.yanshouwang.camerax.Messages.TorchValue.Builder, dev.yanshouwang.camerax.Messages.TorchValueOrBuilder> 
@@ -2939,14 +2807,14 @@ public final class Messages {
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.ZoomValue, dev.yanshouwang.camerax.Messages.ZoomValue.Builder, dev.yanshouwang.camerax.Messages.ZoomValueOrBuilder> zoomValueBuilder_;
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        * @return Whether the zoomValue field is set.
        */
       public boolean hasZoomValue() {
         return zoomValueBuilder_ != null || zoomValue_ != null;
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        * @return The zoomValue.
        */
       public dev.yanshouwang.camerax.Messages.ZoomValue getZoomValue() {
@@ -2957,7 +2825,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public Builder setZoomValue(dev.yanshouwang.camerax.Messages.ZoomValue value) {
         if (zoomValueBuilder_ == null) {
@@ -2973,7 +2841,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public Builder setZoomValue(
           dev.yanshouwang.camerax.Messages.ZoomValue.Builder builderForValue) {
@@ -2987,7 +2855,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public Builder mergeZoomValue(dev.yanshouwang.camerax.Messages.ZoomValue value) {
         if (zoomValueBuilder_ == null) {
@@ -3005,7 +2873,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public Builder clearZoomValue() {
         if (zoomValueBuilder_ == null) {
@@ -3019,7 +2887,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public dev.yanshouwang.camerax.Messages.ZoomValue.Builder getZoomValueBuilder() {
         
@@ -3027,7 +2895,7 @@ public final class Messages {
         return getZoomValueFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       public dev.yanshouwang.camerax.Messages.ZoomValueOrBuilder getZoomValueOrBuilder() {
         if (zoomValueBuilder_ != null) {
@@ -3038,7 +2906,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.ZoomValue zoom_value = 4;</code>
+       * <code>.messages.ZoomValue zoom_value = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.Messages.ZoomValue, dev.yanshouwang.camerax.Messages.ZoomValue.Builder, dev.yanshouwang.camerax.Messages.ZoomValueOrBuilder> 
@@ -6926,35 +6794,37 @@ public final class Messages {
       "CameraSelector\022\014\n\004uuid\030\003 \001(\t\022\023\n\013torch_st" +
       "ate\030\004 \001(\010\022\022\n\nzoom_value\030\005 \001(\001\"8\n\016CameraS" +
       "elector\022&\n\006facing\030\001 \001(\0162\026.messages.Camer" +
-      "aFacing\"\236\001\n\013CameraValue\022\014\n\004uuid\030\001 \001(\t\022-\n" +
-      "\rtexture_value\030\002 \001(\0132\026.messages.TextureV" +
-      "alue\022)\n\013torch_value\030\003 \001(\0132\024.messages.Tor" +
-      "chValue\022\'\n\nzoom_value\030\004 \001(\0132\023.messages.Z" +
-      "oomValue\"P\n\014TextureValue\022\n\n\002id\030\001 \001(\005\022\r\n\005" +
-      "width\030\002 \001(\005\022\016\n\006height\030\003 \001(\005\022\025\n\rquarter_t" +
-      "urns\030\004 \001(\005\".\n\nTorchValue\022\021\n\tavailable\030\001 " +
-      "\001(\010\022\r\n\005state\030\002 \001(\010\"<\n\tZoomValue\022\017\n\007minim" +
-      "um\030\001 \001(\001\022\017\n\007maximum\030\002 \001(\001\022\r\n\005value\030\003 \001(\001" +
-      "\"\253\001\n\005Event\022)\n\010category\030\001 \001(\0162\027.messages." +
-      "EventCategory\022\025\n\rquarter_turns\030\002 \001(\005\022\014\n\004" +
-      "uuid\030\003 \001(\t\022\023\n\013torch_state\030\004 \001(\010\022\022\n\nzoom_" +
-      "value\030\005 \001(\001\022)\n\013image_proxy\030\006 \001(\0132\024.messa" +
-      "ges.ImageProxy\"G\n\nImageProxy\022\014\n\004uuid\030\001 \001" +
-      "(\t\022\014\n\004data\030\002 \001(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006heigh" +
-      "t\030\004 \001(\005*\351\001\n\016MethodCategory\022*\n&METHOD_CAT" +
-      "EGORY_CAMERA_CONTROLLER_OPEN\020\000\022+\n\'METHOD" +
-      "_CATEGORY_CAMERA_CONTROLLER_CLOSE\020\001\022+\n\'M" +
-      "ETHOD_CATEGORY_CAMERA_CONTROLLER_TORCH\020\002" +
-      "\022*\n&METHOD_CATEGORY_CAMERA_CONTROLLER_ZO" +
-      "OM\020\003\022%\n!METHOD_CATEGORY_IMAGE_PROXY_CLOS" +
-      "E\020\004*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BAC" +
-      "K\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n\rEventCa" +
-      "tegory\022 \n\034EVENT_CATEGORY_QUARTER_TURNS\020\000" +
-      "\0220\n,EVENT_CATEGORY_CAMERA_CONTROLLER_TOR" +
-      "CH_STATE\020\001\022/\n+EVENT_CATEGORY_CAMERA_CONT" +
-      "ROLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CATEGORY_CA" +
-      "MERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n\027dev.yan" +
-      "shouwang.cameraxb\006proto3"
+      "aFacing\"\220\001\n\013CameraValue\022-\n\rtexture_value" +
+      "\030\001 \001(\0132\026.messages.TextureValue\022)\n\013torch_" +
+      "value\030\002 \001(\0132\024.messages.TorchValue\022\'\n\nzoo" +
+      "m_value\030\003 \001(\0132\023.messages.ZoomValue\"P\n\014Te" +
+      "xtureValue\022\n\n\002id\030\001 \001(\005\022\r\n\005width\030\002 \001(\005\022\016\n" +
+      "\006height\030\003 \001(\005\022\025\n\rquarter_turns\030\004 \001(\005\".\n\n" +
+      "TorchValue\022\021\n\tavailable\030\001 \001(\010\022\r\n\005state\030\002" +
+      " \001(\010\"<\n\tZoomValue\022\017\n\007minimum\030\001 \001(\001\022\017\n\007ma" +
+      "ximum\030\002 \001(\001\022\r\n\005value\030\003 \001(\001\"\253\001\n\005Event\022)\n\010" +
+      "category\030\001 \001(\0162\027.messages.EventCategory\022" +
+      "\025\n\rquarter_turns\030\002 \001(\005\022\014\n\004uuid\030\003 \001(\t\022\023\n\013" +
+      "torch_state\030\004 \001(\010\022\022\n\nzoom_value\030\005 \001(\001\022)\n" +
+      "\013image_proxy\030\006 \001(\0132\024.messages.ImageProxy" +
+      "\"G\n\nImageProxy\022\014\n\004uuid\030\001 \001(\t\022\014\n\004data\030\002 \001" +
+      "(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005*\306\002\n\016Me" +
+      "thodCategory\022,\n(METHOD_CATEGORY_CAMERA_C" +
+      "ONTROLLER_CREATE\020\000\022*\n&METHOD_CATEGORY_CA" +
+      "MERA_CONTROLLER_OPEN\020\001\022+\n\'METHOD_CATEGOR" +
+      "Y_CAMERA_CONTROLLER_CLOSE\020\002\022+\n\'METHOD_CA" +
+      "TEGORY_CAMERA_CONTROLLER_TORCH\020\003\022*\n&METH" +
+      "OD_CATEGORY_CAMERA_CONTROLLER_ZOOM\020\004\022-\n)" +
+      "METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOS" +
+      "E\020\005\022%\n!METHOD_CATEGORY_IMAGE_PROXY_CLOSE" +
+      "\020\006*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BACK" +
+      "\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n\rEventCat" +
+      "egory\022 \n\034EVENT_CATEGORY_QUARTER_TURNS\020\000\022" +
+      "0\n,EVENT_CATEGORY_CAMERA_CONTROLLER_TORC" +
+      "H_STATE\020\001\022/\n+EVENT_CATEGORY_CAMERA_CONTR" +
+      "OLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CATEGORY_CAM" +
+      "ERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n\027dev.yans" +
+      "houwang.cameraxb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6977,7 +6847,7 @@ public final class Messages {
     internal_static_messages_CameraValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraValue_descriptor,
-        new java.lang.String[] { "Uuid", "TextureValue", "TorchValue", "ZoomValue", });
+        new java.lang.String[] { "TextureValue", "TorchValue", "ZoomValue", });
     internal_static_messages_TextureValue_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_messages_TextureValue_fieldAccessorTable = new

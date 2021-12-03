@@ -15,7 +15,7 @@ export 'messages.pbenum.dart';
 
 class MethodArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MethodArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..e<MethodCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN, valueOf: MethodCategory.valueOf, enumValues: MethodCategory.values)
+    ..e<MethodCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE, valueOf: MethodCategory.valueOf, enumValues: MethodCategory.values)
     ..aOM<CameraSelector>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selector', subBuilder: CameraSelector.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchState')
@@ -167,24 +167,19 @@ class CameraSelector extends $pb.GeneratedMessage {
 
 class CameraValue extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraValue', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
-    ..aOM<TextureValue>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureValue', subBuilder: TextureValue.create)
-    ..aOM<TorchValue>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchValue', subBuilder: TorchValue.create)
-    ..aOM<ZoomValue>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'zoomValue', subBuilder: ZoomValue.create)
+    ..aOM<TextureValue>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureValue', subBuilder: TextureValue.create)
+    ..aOM<TorchValue>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchValue', subBuilder: TorchValue.create)
+    ..aOM<ZoomValue>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'zoomValue', subBuilder: ZoomValue.create)
     ..hasRequiredFields = false
   ;
 
   CameraValue._() : super();
   factory CameraValue({
-    $core.String? uuid,
     TextureValue? textureValue,
     TorchValue? torchValue,
     ZoomValue? zoomValue,
   }) {
     final _result = create();
-    if (uuid != null) {
-      _result.uuid = uuid;
-    }
     if (textureValue != null) {
       _result.textureValue = textureValue;
     }
@@ -218,46 +213,37 @@ class CameraValue extends $pb.GeneratedMessage {
   static CameraValue? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get uuid => $_getSZ(0);
+  TextureValue get textureValue => $_getN(0);
   @$pb.TagNumber(1)
-  set uuid($core.String v) { $_setString(0, v); }
+  set textureValue(TextureValue v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUuid() => $_has(0);
+  $core.bool hasTextureValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUuid() => clearField(1);
+  void clearTextureValue() => clearField(1);
+  @$pb.TagNumber(1)
+  TextureValue ensureTextureValue() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  TextureValue get textureValue => $_getN(1);
+  TorchValue get torchValue => $_getN(1);
   @$pb.TagNumber(2)
-  set textureValue(TextureValue v) { setField(2, v); }
+  set torchValue(TorchValue v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasTextureValue() => $_has(1);
+  $core.bool hasTorchValue() => $_has(1);
   @$pb.TagNumber(2)
-  void clearTextureValue() => clearField(2);
+  void clearTorchValue() => clearField(2);
   @$pb.TagNumber(2)
-  TextureValue ensureTextureValue() => $_ensure(1);
+  TorchValue ensureTorchValue() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  TorchValue get torchValue => $_getN(2);
+  ZoomValue get zoomValue => $_getN(2);
   @$pb.TagNumber(3)
-  set torchValue(TorchValue v) { setField(3, v); }
+  set zoomValue(ZoomValue v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTorchValue() => $_has(2);
+  $core.bool hasZoomValue() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTorchValue() => clearField(3);
+  void clearZoomValue() => clearField(3);
   @$pb.TagNumber(3)
-  TorchValue ensureTorchValue() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  ZoomValue get zoomValue => $_getN(3);
-  @$pb.TagNumber(4)
-  set zoomValue(ZoomValue v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasZoomValue() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearZoomValue() => clearField(4);
-  @$pb.TagNumber(4)
-  ZoomValue ensureZoomValue() => $_ensure(3);
+  ZoomValue ensureZoomValue() => $_ensure(2);
 }
 
 class TextureValue extends $pb.GeneratedMessage {

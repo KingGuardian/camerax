@@ -12,16 +12,18 @@ import 'dart:typed_data' as $typed_data;
 const MethodCategory$json = const {
   '1': 'MethodCategory',
   '2': const [
-    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN', '2': 0},
-    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE', '2': 1},
-    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH', '2': 2},
-    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM', '2': 3},
-    const {'1': 'METHOD_CATEGORY_IMAGE_PROXY_CLOSE', '2': 4},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE', '2': 0},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN', '2': 1},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE', '2': 2},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH', '2': 3},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM', '2': 4},
+    const {'1': 'METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE', '2': 5},
+    const {'1': 'METHOD_CATEGORY_IMAGE_PROXY_CLOSE', '2': 6},
   ],
 };
 
 /// Descriptor for `MethodCategory`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List methodCategoryDescriptor = $convert.base64Decode('Cg5NZXRob2RDYXRlZ29yeRIqCiZNRVRIT0RfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfT1BFThAAEisKJ01FVEhPRF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9DTE9TRRABEisKJ01FVEhPRF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9UT1JDSBACEioKJk1FVEhPRF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9aT09NEAMSJQohTUVUSE9EX0NBVEVHT1JZX0lNQUdFX1BST1hZX0NMT1NFEAQ=');
+final $typed_data.Uint8List methodCategoryDescriptor = $convert.base64Decode('Cg5NZXRob2RDYXRlZ29yeRIsCihNRVRIT0RfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfQ1JFQVRFEAASKgomTUVUSE9EX0NBVEVHT1JZX0NBTUVSQV9DT05UUk9MTEVSX09QRU4QARIrCidNRVRIT0RfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfQ0xPU0UQAhIrCidNRVRIT0RfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfVE9SQ0gQAxIqCiZNRVRIT0RfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfWk9PTRAEEi0KKU1FVEhPRF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9ESVNQT1NFEAUSJQohTUVUSE9EX0NBVEVHT1JZX0lNQUdFX1BST1hZX0NMT1NFEAY=');
 @$core.Deprecated('Use cameraFacingDescriptor instead')
 const CameraFacing$json = const {
   '1': 'CameraFacing',
@@ -74,15 +76,14 @@ final $typed_data.Uint8List cameraSelectorDescriptor = $convert.base64Decode('Cg
 const CameraValue$json = const {
   '1': 'CameraValue',
   '2': const [
-    const {'1': 'uuid', '3': 1, '4': 1, '5': 9, '10': 'uuid'},
-    const {'1': 'texture_value', '3': 2, '4': 1, '5': 11, '6': '.messages.TextureValue', '10': 'textureValue'},
-    const {'1': 'torch_value', '3': 3, '4': 1, '5': 11, '6': '.messages.TorchValue', '10': 'torchValue'},
-    const {'1': 'zoom_value', '3': 4, '4': 1, '5': 11, '6': '.messages.ZoomValue', '10': 'zoomValue'},
+    const {'1': 'texture_value', '3': 1, '4': 1, '5': 11, '6': '.messages.TextureValue', '10': 'textureValue'},
+    const {'1': 'torch_value', '3': 2, '4': 1, '5': 11, '6': '.messages.TorchValue', '10': 'torchValue'},
+    const {'1': 'zoom_value', '3': 3, '4': 1, '5': 11, '6': '.messages.ZoomValue', '10': 'zoomValue'},
   ],
 };
 
 /// Descriptor for `CameraValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraValueDescriptor = $convert.base64Decode('CgtDYW1lcmFWYWx1ZRISCgR1dWlkGAEgASgJUgR1dWlkEjsKDXRleHR1cmVfdmFsdWUYAiABKAsyFi5tZXNzYWdlcy5UZXh0dXJlVmFsdWVSDHRleHR1cmVWYWx1ZRI1Cgt0b3JjaF92YWx1ZRgDIAEoCzIULm1lc3NhZ2VzLlRvcmNoVmFsdWVSCnRvcmNoVmFsdWUSMgoKem9vbV92YWx1ZRgEIAEoCzITLm1lc3NhZ2VzLlpvb21WYWx1ZVIJem9vbVZhbHVl');
+final $typed_data.Uint8List cameraValueDescriptor = $convert.base64Decode('CgtDYW1lcmFWYWx1ZRI7Cg10ZXh0dXJlX3ZhbHVlGAEgASgLMhYubWVzc2FnZXMuVGV4dHVyZVZhbHVlUgx0ZXh0dXJlVmFsdWUSNQoLdG9yY2hfdmFsdWUYAiABKAsyFC5tZXNzYWdlcy5Ub3JjaFZhbHVlUgp0b3JjaFZhbHVlEjIKCnpvb21fdmFsdWUYAyABKAsyEy5tZXNzYWdlcy5ab29tVmFsdWVSCXpvb21WYWx1ZQ==');
 @$core.Deprecated('Use textureValueDescriptor instead')
 const TextureValue$json = const {
   '1': 'TextureValue',

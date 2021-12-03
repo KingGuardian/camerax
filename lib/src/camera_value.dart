@@ -7,13 +7,11 @@ import 'util.dart';
 import 'zoom_value.dart';
 
 class CameraValue {
-  final String uuid;
   final TextureValue textureValue;
   final TorchValue torchValue;
   final ZoomValue zoomValue;
 
   const CameraValue(
-    this.uuid,
     this.textureValue,
     this.torchValue,
     this.zoomValue,
@@ -32,7 +30,6 @@ class CameraValue {
     torchValue ??= this.torchValue;
     zoomValue ??= this.zoomValue;
     return CameraValue(
-      uuid,
       textureValue,
       torchValue,
       zoomValue,

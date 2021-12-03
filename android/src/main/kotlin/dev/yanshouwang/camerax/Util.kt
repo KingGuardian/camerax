@@ -3,9 +3,12 @@ package dev.yanshouwang.camerax
 import android.app.Activity
 import android.graphics.ImageFormat
 import android.os.Build
+import android.util.Size
 import android.view.Surface
 import androidx.annotation.IntDef
+import androidx.camera.core.CameraInfo
 import androidx.camera.core.ImageProxy
+import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
 import java.lang.IllegalArgumentException
@@ -23,12 +26,18 @@ val MethodCall.methodArguments: Messages.MethodArguments
 fun Result.success() = success(null)
 
 fun Result.error(e: Exception) {
-    val errorCode = e.localizedMessage ?: e.stackTrace.toString()
-    error(errorCode)
+    val errorCode = e.TAG
+    val errorMessage = e.localizedMessage
+    val errorDetails = e.stackTraceToString()
+    error(errorCode, errorMessage, errorDetails)
 }
 
-fun Result.error(errorCode: String) {
-    error(errorCode, null, null)
+fun Result.error(errorCode: String, errorMessage: String) {
+    error(errorCode, errorMessage, null)
+}
+
+fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
+    error(errorCode, errorMessage, null)
 }
 
 @IntDef(value = [Surface.ROTATION_0, Surface.ROTATION_90, Surface.ROTATION_180, Surface.ROTATION_270])
@@ -122,16 +131,16 @@ val ImageProxy.bytes: ByteArray
             val rawBytes = ByteArray(plane.rowStride)
             // Size of each row in bytes
             val rowLength =
-                    if (pixelStride == 1 && stride == 1) width
-                    // Take into account that the stride may include data from pixels other than this
-                    // particular plane and row, and that could be between pixels and not after every
-                    // pixel:
-                    //
-                    // |---- Pixel stride ----|                    Row ends here --> |
-                    // | Pixel 1 | Other Data | Pixel 2 | Other Data | ... | Pixel N |
-                    //
-                    // We need to get (N-1) * (pixel stride bytes) per row + 1 byte for the last pixel
-                    else (width - 1) * pixelStride + 1
+                if (pixelStride == 1 && stride == 1) width
+                // Take into account that the stride may include data from pixels other than this
+                // particular plane and row, and that could be between pixels and not after every
+                // pixel:
+                //
+                // |---- Pixel stride ----|                    Row ends here --> |
+                // | Pixel 1 | Other Data | Pixel 2 | Other Data | ... | Pixel N |
+                //
+                // We need to get (N-1) * (pixel stride bytes) per row + 1 byte for the last pixel
+                else (width - 1) * pixelStride + 1
             for (row in 0 until height) {
                 // Move buffer position to the beginning of this row
                 val newPosition = (row + crop.top) * rowStride + crop.left * pixelStride

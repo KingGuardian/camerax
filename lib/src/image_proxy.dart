@@ -18,10 +18,10 @@ class ImageProxy {
   );
 
   Future<void> close() async {
-    final arguments = MethodArguments(
+    final closeArguments = MethodArguments(
       category: MethodCategory.imageProxyClose,
       uuid: uuid,
-    ).toProtobuf();
-    await methodChannel.invokeMethod<void>('', arguments);
+    );
+    await methodChannel.invokeByMethodArguments<void>(closeArguments);
   }
 }

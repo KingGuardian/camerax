@@ -23,24 +23,7 @@ public object CameraValueKt {
     internal fun _build(): dev.yanshouwang.camerax.Messages.CameraValue = _builder.build()
 
     /**
-     * <code>string uuid = 1;</code>
-     */
-    public var uuid: kotlin.String
-      @JvmName("getUuid")
-      get() = _builder.getUuid()
-      @JvmName("setUuid")
-      set(value) {
-        _builder.setUuid(value)
-      }
-    /**
-     * <code>string uuid = 1;</code>
-     */
-    public fun clearUuid() {
-      _builder.clearUuid()
-    }
-
-    /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      */
     public var textureValue: dev.yanshouwang.camerax.Messages.TextureValue
       @JvmName("getTextureValue")
@@ -50,13 +33,13 @@ public object CameraValueKt {
         _builder.setTextureValue(value)
       }
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      */
     public fun clearTextureValue() {
       _builder.clearTextureValue()
     }
     /**
-     * <code>.messages.TextureValue texture_value = 2;</code>
+     * <code>.messages.TextureValue texture_value = 1;</code>
      * @return Whether the textureValue field is set.
      */
     public fun hasTextureValue(): kotlin.Boolean {
@@ -64,7 +47,7 @@ public object CameraValueKt {
     }
 
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      */
     public var torchValue: dev.yanshouwang.camerax.Messages.TorchValue
       @JvmName("getTorchValue")
@@ -74,13 +57,13 @@ public object CameraValueKt {
         _builder.setTorchValue(value)
       }
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      */
     public fun clearTorchValue() {
       _builder.clearTorchValue()
     }
     /**
-     * <code>.messages.TorchValue torch_value = 3;</code>
+     * <code>.messages.TorchValue torch_value = 2;</code>
      * @return Whether the torchValue field is set.
      */
     public fun hasTorchValue(): kotlin.Boolean {
@@ -88,7 +71,7 @@ public object CameraValueKt {
     }
 
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      */
     public var zoomValue: dev.yanshouwang.camerax.Messages.ZoomValue
       @JvmName("getZoomValue")
@@ -98,13 +81,13 @@ public object CameraValueKt {
         _builder.setZoomValue(value)
       }
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      */
     public fun clearZoomValue() {
       _builder.clearZoomValue()
     }
     /**
-     * <code>.messages.ZoomValue zoom_value = 4;</code>
+     * <code>.messages.ZoomValue zoom_value = 3;</code>
      * @return Whether the zoomValue field is set.
      */
     public fun hasZoomValue(): kotlin.Boolean {

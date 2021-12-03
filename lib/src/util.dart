@@ -55,7 +55,6 @@ extension CameraFacingX1 on messages.CameraFacing {
 extension CameraValueX on messages.CameraValue {
   CameraValue get $cameraValue {
     return CameraValue(
-      uuid,
       textureValue.$textureValue,
       torchValue.$torchValue,
       zoomValue.$zoomValue,

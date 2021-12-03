@@ -10,17 +10,21 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class MethodCategory extends $pb.ProtobufEnum {
-  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = MethodCategory._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN');
-  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = MethodCategory._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE');
-  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = MethodCategory._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH');
-  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = MethodCategory._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM');
-  static const MethodCategory METHOD_CATEGORY_IMAGE_PROXY_CLOSE = MethodCategory._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_IMAGE_PROXY_CLOSE');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE = MethodCategory._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = MethodCategory._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = MethodCategory._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = MethodCategory._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = MethodCategory._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM');
+  static const MethodCategory METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE = MethodCategory._(5, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE');
+  static const MethodCategory METHOD_CATEGORY_IMAGE_PROXY_CLOSE = MethodCategory._(6, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'METHOD_CATEGORY_IMAGE_PROXY_CLOSE');
 
   static const $core.List<MethodCategory> values = <MethodCategory> [
+    METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE,
     METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN,
     METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE,
     METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH,
     METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM,
+    METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE,
     METHOD_CATEGORY_IMAGE_PROXY_CLOSE,
   ];
 

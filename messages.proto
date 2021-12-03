@@ -12,11 +12,13 @@ message MethodArguments {
 }
 
 enum MethodCategory {
-  METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 0;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 1;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 2;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 3;
-  METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 4;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;
+  METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 5;
+  METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 6;
 }
 
 message CameraSelector {
@@ -29,10 +31,9 @@ enum CameraFacing {
 }
 
 message CameraValue {
-  string uuid = 1;
-  TextureValue texture_value = 2;
-  TorchValue torch_value = 3;
-  ZoomValue zoom_value = 4;
+  TextureValue texture_value = 1;
+  TorchValue torch_value = 2;
+  ZoomValue zoom_value = 3;
 }
 
 message TextureValue {

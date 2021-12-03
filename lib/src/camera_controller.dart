@@ -17,14 +17,26 @@ class CameraController extends ValueNotifier<CameraValue?> {
   late StreamSubscription<int> _quarterTurnsStreamSubscription;
   late StreamSubscription<bool> _torchStateStreamSubscription;
   late StreamSubscription<double> _zoomValueStreamSubscription;
+  late String _uuid;
 
   CameraController({
     this.selector = CameraSelector.back,
   }) : super(null) {
-    subsrcibe();
+    _create();
+    _subsrcibe();
   }
 
-  void subsrcibe() {
+  void _create() async {
+    final createArguments = MethodArguments(
+      category: MethodCategory.cameraControllerCreate,
+      selector: selector,
+    );
+    _uuid = await methodChannel
+        .invokeByMethodArguments<String>(createArguments)
+        .then((uuid) => uuid!);
+  }
+
+  void _subsrcibe() {
     // 监听屏幕旋转
     _quarterTurnsStreamSubscription = eventStream
         .where((event) => event.category == EventCategory.quarterTurns)
@@ -40,7 +52,7 @@ class CameraController extends ValueNotifier<CameraValue?> {
     _torchStateStreamSubscription = eventStream
         .where((event) =>
             event.category == EventCategory.cameraControllerTorchState &&
-            event.uuid == value?.uuid)
+            event.uuid == _uuid)
         .map((event) => event.torchState)
         .listen((trochState) {
       value = value!.copyWith(
@@ -53,7 +65,7 @@ class CameraController extends ValueNotifier<CameraValue?> {
     _zoomValueStreamSubscription = eventStream
         .where((event) =>
             event.category == EventCategory.cameraControllerZoomValue &&
-            event.uuid == value?.uuid)
+            event.uuid == _uuid)
         .map((event) => event.zoomValue)
         .listen((zoomValue) {
       value = value!.copyWith(
@@ -62,6 +74,15 @@ class CameraController extends ValueNotifier<CameraValue?> {
         ),
       );
     });
+  }
+
+  void _unsubsrcibe() async {
+    // 停止监听焦距
+    await _zoomValueStreamSubscription.cancel();
+    // 停止监听闪光灯状态
+    await _torchStateStreamSubscription.cancel();
+    // 停止监听屏幕旋转
+    await _quarterTurnsStreamSubscription.cancel();
   }
 
   Stream<ImageProxy> get imageStream {
@@ -75,41 +96,41 @@ class CameraController extends ValueNotifier<CameraValue?> {
     _throwAfterDisposed('open');
     final openArguments = MethodArguments(
       category: MethodCategory.cameraControllerOpen,
-      selector: selector,
-    ).toProtobuf();
+      uuid: _uuid,
+    );
     value = await methodChannel
-        .invokeMethod<Uint8List>('', openArguments)
-        .then((protobuf) => CameraValue.fromProtobuf(protobuf!));
+        .invokeByMethodArguments<Uint8List>(openArguments)
+        .then((protoBuffer) => CameraValue.fromProtobuf(protoBuffer!));
   }
 
   Future<void> close() async {
     _throwAfterDisposed('close');
-    final methodArguments = MethodArguments(
-      uuid: value!.uuid,
+    final closeArguments = MethodArguments(
+      uuid: _uuid,
       category: MethodCategory.cameraControllerClose,
-    ).toProtobuf();
-    await methodChannel.invokeMethod<void>('', methodArguments);
+    );
+    await methodChannel.invokeByMethodArguments<void>(closeArguments);
     value = null;
   }
 
   Future<void> torch(bool state) async {
     _throwAfterDisposed('torch');
-    final methodArguments = MethodArguments(
-      uuid: value!.uuid,
+    final torchArguments = MethodArguments(
+      uuid: _uuid,
       category: MethodCategory.cameraControllerTorch,
       torchState: state,
-    ).toProtobuf();
-    await methodChannel.invokeMethod<void>('', methodArguments);
+    );
+    await methodChannel.invokeByMethodArguments<void>(torchArguments);
   }
 
   Future<void> zoom(double value) async {
     _throwAfterDisposed('zoom');
-    final command = MethodArguments(
-      uuid: this.value!.uuid,
+    final zoomArguments = MethodArguments(
+      uuid: _uuid,
       category: MethodCategory.cameraControllerZoom,
       zoomValue: value,
-    ).toProtobuf();
-    await methodChannel.invokeMethod<void>('', command);
+    );
+    await methodChannel.invokeByMethodArguments<void>(zoomArguments);
   }
 
   bool _disposed = false;
@@ -117,13 +138,12 @@ class CameraController extends ValueNotifier<CameraValue?> {
   void dispose() async {
     _throwAfterDisposed('dispose');
     // 关闭相机
-    if (value != null) await close();
-    // 停止监听焦距
-    await _zoomValueStreamSubscription.cancel();
-    // 停止监听闪光灯状态
-    await _torchStateStreamSubscription.cancel();
-    // 停止监听屏幕旋转
-    await _quarterTurnsStreamSubscription.cancel();
+    final disposeArguments = MethodArguments(
+      uuid: _uuid,
+      category: MethodCategory.cameraControllerDispose,
+    );
+    await methodChannel.invokeByMethodArguments<void>(disposeArguments);
+    _unsubsrcibe();
     super.dispose();
     _disposed = true;
   }

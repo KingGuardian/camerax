@@ -93,7 +93,7 @@ class _ScannerViewState extends State<ScannerView>
                   iconSize: 32.0,
                   onPressed: torchAvailable
                       ? () async {
-                          await cameraController.torch(torchState);
+                          await cameraController.torch(!torchState);
                         }
                       : null,
                 );
@@ -108,7 +108,7 @@ class _ScannerViewState extends State<ScannerView>
   @override
   void dispose() {
     animationConrtroller.dispose();
-    cameraController.close();
+    cameraController.dispose();
     super.dispose();
   }
 }
