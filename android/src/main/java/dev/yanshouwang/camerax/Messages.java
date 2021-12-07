@@ -4866,8 +4866,8 @@ public final class Messages {
 
   }
 
-  public interface EventOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:messages.Event)
+  public interface EventArgumentsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:messages.EventArguments)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -4927,18 +4927,18 @@ public final class Messages {
     dev.yanshouwang.camerax.Messages.ImageProxyOrBuilder getImageProxyOrBuilder();
   }
   /**
-   * Protobuf type {@code messages.Event}
+   * Protobuf type {@code messages.EventArguments}
    */
-  public static final class Event extends
+  public static final class EventArguments extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:messages.Event)
-      EventOrBuilder {
+      // @@protoc_insertion_point(message_implements:messages.EventArguments)
+      EventArgumentsOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Event.newBuilder() to construct.
-    private Event(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use EventArguments.newBuilder() to construct.
+    private EventArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Event() {
+    private EventArguments() {
       category_ = 0;
       uuid_ = "";
     }
@@ -4947,7 +4947,7 @@ public final class Messages {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new Event();
+      return new EventArguments();
     }
 
     @java.lang.Override
@@ -4955,7 +4955,7 @@ public final class Messages {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Event(
+    private EventArguments(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5034,15 +5034,15 @@ public final class Messages {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.Messages.internal_static_messages_Event_descriptor;
+      return dev.yanshouwang.camerax.Messages.internal_static_messages_EventArguments_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.Messages.internal_static_messages_Event_fieldAccessorTable
+      return dev.yanshouwang.camerax.Messages.internal_static_messages_EventArguments_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.Messages.Event.class, dev.yanshouwang.camerax.Messages.Event.Builder.class);
+              dev.yanshouwang.camerax.Messages.EventArguments.class, dev.yanshouwang.camerax.Messages.EventArguments.Builder.class);
     }
 
     public static final int CATEGORY_FIELD_NUMBER = 1;
@@ -5235,10 +5235,10 @@ public final class Messages {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof dev.yanshouwang.camerax.Messages.Event)) {
+      if (!(obj instanceof dev.yanshouwang.camerax.Messages.EventArguments)) {
         return super.equals(obj);
       }
-      dev.yanshouwang.camerax.Messages.Event other = (dev.yanshouwang.camerax.Messages.Event) obj;
+      dev.yanshouwang.camerax.Messages.EventArguments other = (dev.yanshouwang.camerax.Messages.EventArguments) obj;
 
       if (category_ != other.category_) return false;
       if (getQuarterTurns()
@@ -5287,69 +5287,69 @@ public final class Messages {
       return hash;
     }
 
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(byte[] data)
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseDelimitedFrom(java.io.InputStream input)
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseDelimitedFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static dev.yanshouwang.camerax.Messages.Event parseFrom(
+    public static dev.yanshouwang.camerax.Messages.EventArguments parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5362,7 +5362,7 @@ public final class Messages {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(dev.yanshouwang.camerax.Messages.Event prototype) {
+    public static Builder newBuilder(dev.yanshouwang.camerax.Messages.EventArguments prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -5378,26 +5378,26 @@ public final class Messages {
       return builder;
     }
     /**
-     * Protobuf type {@code messages.Event}
+     * Protobuf type {@code messages.EventArguments}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:messages.Event)
-        dev.yanshouwang.camerax.Messages.EventOrBuilder {
+        // @@protoc_insertion_point(builder_implements:messages.EventArguments)
+        dev.yanshouwang.camerax.Messages.EventArgumentsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return dev.yanshouwang.camerax.Messages.internal_static_messages_Event_descriptor;
+        return dev.yanshouwang.camerax.Messages.internal_static_messages_EventArguments_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return dev.yanshouwang.camerax.Messages.internal_static_messages_Event_fieldAccessorTable
+        return dev.yanshouwang.camerax.Messages.internal_static_messages_EventArguments_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                dev.yanshouwang.camerax.Messages.Event.class, dev.yanshouwang.camerax.Messages.Event.Builder.class);
+                dev.yanshouwang.camerax.Messages.EventArguments.class, dev.yanshouwang.camerax.Messages.EventArguments.Builder.class);
       }
 
-      // Construct using dev.yanshouwang.camerax.Messages.Event.newBuilder()
+      // Construct using dev.yanshouwang.camerax.Messages.EventArguments.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -5437,17 +5437,17 @@ public final class Messages {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return dev.yanshouwang.camerax.Messages.internal_static_messages_Event_descriptor;
+        return dev.yanshouwang.camerax.Messages.internal_static_messages_EventArguments_descriptor;
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.Messages.Event getDefaultInstanceForType() {
-        return dev.yanshouwang.camerax.Messages.Event.getDefaultInstance();
+      public dev.yanshouwang.camerax.Messages.EventArguments getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.Messages.EventArguments.getDefaultInstance();
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.Messages.Event build() {
-        dev.yanshouwang.camerax.Messages.Event result = buildPartial();
+      public dev.yanshouwang.camerax.Messages.EventArguments build() {
+        dev.yanshouwang.camerax.Messages.EventArguments result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5455,8 +5455,8 @@ public final class Messages {
       }
 
       @java.lang.Override
-      public dev.yanshouwang.camerax.Messages.Event buildPartial() {
-        dev.yanshouwang.camerax.Messages.Event result = new dev.yanshouwang.camerax.Messages.Event(this);
+      public dev.yanshouwang.camerax.Messages.EventArguments buildPartial() {
+        dev.yanshouwang.camerax.Messages.EventArguments result = new dev.yanshouwang.camerax.Messages.EventArguments(this);
         result.category_ = category_;
         result.quarterTurns_ = quarterTurns_;
         result.uuid_ = uuid_;
@@ -5505,16 +5505,16 @@ public final class Messages {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof dev.yanshouwang.camerax.Messages.Event) {
-          return mergeFrom((dev.yanshouwang.camerax.Messages.Event)other);
+        if (other instanceof dev.yanshouwang.camerax.Messages.EventArguments) {
+          return mergeFrom((dev.yanshouwang.camerax.Messages.EventArguments)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(dev.yanshouwang.camerax.Messages.Event other) {
-        if (other == dev.yanshouwang.camerax.Messages.Event.getDefaultInstance()) return this;
+      public Builder mergeFrom(dev.yanshouwang.camerax.Messages.EventArguments other) {
+        if (other == dev.yanshouwang.camerax.Messages.EventArguments.getDefaultInstance()) return this;
         if (other.category_ != 0) {
           setCategoryValue(other.getCategoryValue());
         }
@@ -5549,11 +5549,11 @@ public final class Messages {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        dev.yanshouwang.camerax.Messages.Event parsedMessage = null;
+        dev.yanshouwang.camerax.Messages.EventArguments parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (dev.yanshouwang.camerax.Messages.Event) e.getUnfinishedMessage();
+          parsedMessage = (dev.yanshouwang.camerax.Messages.EventArguments) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -5917,41 +5917,41 @@ public final class Messages {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:messages.Event)
+      // @@protoc_insertion_point(builder_scope:messages.EventArguments)
     }
 
-    // @@protoc_insertion_point(class_scope:messages.Event)
-    private static final dev.yanshouwang.camerax.Messages.Event DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:messages.EventArguments)
+    private static final dev.yanshouwang.camerax.Messages.EventArguments DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.Messages.Event();
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.Messages.EventArguments();
     }
 
-    public static dev.yanshouwang.camerax.Messages.Event getDefaultInstance() {
+    public static dev.yanshouwang.camerax.Messages.EventArguments getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Event>
-        PARSER = new com.google.protobuf.AbstractParser<Event>() {
+    private static final com.google.protobuf.Parser<EventArguments>
+        PARSER = new com.google.protobuf.AbstractParser<EventArguments>() {
       @java.lang.Override
-      public Event parsePartialFrom(
+      public EventArguments parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Event(input, extensionRegistry);
+        return new EventArguments(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<Event> parser() {
+    public static com.google.protobuf.Parser<EventArguments> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Event> getParserForType() {
+    public com.google.protobuf.Parser<EventArguments> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.Messages.Event getDefaultInstanceForType() {
+    public dev.yanshouwang.camerax.Messages.EventArguments getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6770,10 +6770,10 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_ZoomValue_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_Event_descriptor;
+    internal_static_messages_EventArguments_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_Event_fieldAccessorTable;
+      internal_static_messages_EventArguments_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_ImageProxy_descriptor;
   private static final 
@@ -6802,29 +6802,29 @@ public final class Messages {
       "\006height\030\003 \001(\005\022\025\n\rquarter_turns\030\004 \001(\005\".\n\n" +
       "TorchValue\022\021\n\tavailable\030\001 \001(\010\022\r\n\005state\030\002" +
       " \001(\010\"<\n\tZoomValue\022\017\n\007minimum\030\001 \001(\001\022\017\n\007ma" +
-      "ximum\030\002 \001(\001\022\r\n\005value\030\003 \001(\001\"\253\001\n\005Event\022)\n\010" +
-      "category\030\001 \001(\0162\027.messages.EventCategory\022" +
-      "\025\n\rquarter_turns\030\002 \001(\005\022\014\n\004uuid\030\003 \001(\t\022\023\n\013" +
-      "torch_state\030\004 \001(\010\022\022\n\nzoom_value\030\005 \001(\001\022)\n" +
-      "\013image_proxy\030\006 \001(\0132\024.messages.ImageProxy" +
-      "\"G\n\nImageProxy\022\014\n\004uuid\030\001 \001(\t\022\014\n\004data\030\002 \001" +
-      "(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005*\306\002\n\016Me" +
-      "thodCategory\022,\n(METHOD_CATEGORY_CAMERA_C" +
-      "ONTROLLER_CREATE\020\000\022*\n&METHOD_CATEGORY_CA" +
-      "MERA_CONTROLLER_OPEN\020\001\022+\n\'METHOD_CATEGOR" +
-      "Y_CAMERA_CONTROLLER_CLOSE\020\002\022+\n\'METHOD_CA" +
-      "TEGORY_CAMERA_CONTROLLER_TORCH\020\003\022*\n&METH" +
-      "OD_CATEGORY_CAMERA_CONTROLLER_ZOOM\020\004\022-\n)" +
-      "METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOS" +
-      "E\020\005\022%\n!METHOD_CATEGORY_IMAGE_PROXY_CLOSE" +
-      "\020\006*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BACK" +
-      "\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n\rEventCat" +
-      "egory\022 \n\034EVENT_CATEGORY_QUARTER_TURNS\020\000\022" +
-      "0\n,EVENT_CATEGORY_CAMERA_CONTROLLER_TORC" +
-      "H_STATE\020\001\022/\n+EVENT_CATEGORY_CAMERA_CONTR" +
-      "OLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CATEGORY_CAM" +
-      "ERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n\027dev.yans" +
-      "houwang.cameraxb\006proto3"
+      "ximum\030\002 \001(\001\022\r\n\005value\030\003 \001(\001\"\264\001\n\016EventArgu" +
+      "ments\022)\n\010category\030\001 \001(\0162\027.messages.Event" +
+      "Category\022\025\n\rquarter_turns\030\002 \001(\005\022\014\n\004uuid\030" +
+      "\003 \001(\t\022\023\n\013torch_state\030\004 \001(\010\022\022\n\nzoom_value" +
+      "\030\005 \001(\001\022)\n\013image_proxy\030\006 \001(\0132\024.messages.I" +
+      "mageProxy\"G\n\nImageProxy\022\014\n\004uuid\030\001 \001(\t\022\014\n" +
+      "\004data\030\002 \001(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001" +
+      "(\005*\306\002\n\016MethodCategory\022,\n(METHOD_CATEGORY" +
+      "_CAMERA_CONTROLLER_CREATE\020\000\022*\n&METHOD_CA" +
+      "TEGORY_CAMERA_CONTROLLER_OPEN\020\001\022+\n\'METHO" +
+      "D_CATEGORY_CAMERA_CONTROLLER_CLOSE\020\002\022+\n\'" +
+      "METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH\020" +
+      "\003\022*\n&METHOD_CATEGORY_CAMERA_CONTROLLER_Z" +
+      "OOM\020\004\022-\n)METHOD_CATEGORY_CAMERA_CONTROLL" +
+      "ER_DISPOSE\020\005\022%\n!METHOD_CATEGORY_IMAGE_PR" +
+      "OXY_CLOSE\020\006*?\n\014CameraFacing\022\026\n\022CAMERA_FA" +
+      "CING_BACK\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001*\306\001\n" +
+      "\rEventCategory\022 \n\034EVENT_CATEGORY_QUARTER" +
+      "_TURNS\020\000\0220\n,EVENT_CATEGORY_CAMERA_CONTRO" +
+      "LLER_TORCH_STATE\020\001\022/\n+EVENT_CATEGORY_CAM" +
+      "ERA_CONTROLLER_ZOOM_VALUE\020\002\0220\n,EVENT_CAT" +
+      "EGORY_CAMERA_CONTROLLER_IMAGE_PROXY\020\003B\031\n" +
+      "\027dev.yanshouwang.cameraxb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6866,11 +6866,11 @@ public final class Messages {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ZoomValue_descriptor,
         new java.lang.String[] { "Minimum", "Maximum", "Value", });
-    internal_static_messages_Event_descriptor =
+    internal_static_messages_EventArguments_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_messages_Event_fieldAccessorTable = new
+    internal_static_messages_EventArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_Event_descriptor,
+        internal_static_messages_EventArguments_descriptor,
         new java.lang.String[] { "Category", "QuarterTurns", "Uuid", "TorchState", "ZoomValue", "ImageProxy", });
     internal_static_messages_ImageProxy_descriptor =
       getDescriptor().getMessageTypes().get(7);

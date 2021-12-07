@@ -120,9 +120,9 @@ const ZoomValue$json = const {
 
 /// Descriptor for `ZoomValue`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List zoomValueDescriptor = $convert.base64Decode('Cglab29tVmFsdWUSGAoHbWluaW11bRgBIAEoAVIHbWluaW11bRIYCgdtYXhpbXVtGAIgASgBUgdtYXhpbXVtEhQKBXZhbHVlGAMgASgBUgV2YWx1ZQ==');
-@$core.Deprecated('Use eventDescriptor instead')
-const Event$json = const {
-  '1': 'Event',
+@$core.Deprecated('Use eventArgumentsDescriptor instead')
+const EventArguments$json = const {
+  '1': 'EventArguments',
   '2': const [
     const {'1': 'category', '3': 1, '4': 1, '5': 14, '6': '.messages.EventCategory', '10': 'category'},
     const {'1': 'quarter_turns', '3': 2, '4': 1, '5': 5, '10': 'quarterTurns'},
@@ -133,8 +133,8 @@ const Event$json = const {
   ],
 };
 
-/// Descriptor for `Event`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List eventDescriptor = $convert.base64Decode('CgVFdmVudBIzCghjYXRlZ29yeRgBIAEoDjIXLm1lc3NhZ2VzLkV2ZW50Q2F0ZWdvcnlSCGNhdGVnb3J5EiMKDXF1YXJ0ZXJfdHVybnMYAiABKAVSDHF1YXJ0ZXJUdXJucxISCgR1dWlkGAMgASgJUgR1dWlkEh8KC3RvcmNoX3N0YXRlGAQgASgIUgp0b3JjaFN0YXRlEh0KCnpvb21fdmFsdWUYBSABKAFSCXpvb21WYWx1ZRI1CgtpbWFnZV9wcm94eRgGIAEoCzIULm1lc3NhZ2VzLkltYWdlUHJveHlSCmltYWdlUHJveHk=');
+/// Descriptor for `EventArguments`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List eventArgumentsDescriptor = $convert.base64Decode('Cg5FdmVudEFyZ3VtZW50cxIzCghjYXRlZ29yeRgBIAEoDjIXLm1lc3NhZ2VzLkV2ZW50Q2F0ZWdvcnlSCGNhdGVnb3J5EiMKDXF1YXJ0ZXJfdHVybnMYAiABKAVSDHF1YXJ0ZXJUdXJucxISCgR1dWlkGAMgASgJUgR1dWlkEh8KC3RvcmNoX3N0YXRlGAQgASgIUgp0b3JjaFN0YXRlEh0KCnpvb21fdmFsdWUYBSABKAFSCXpvb21WYWx1ZRI1CgtpbWFnZV9wcm94eRgGIAEoCzIULm1lc3NhZ2VzLkltYWdlUHJveHlSCmltYWdlUHJveHk=');
 @$core.Deprecated('Use imageProxyDescriptor instead')
 const ImageProxy$json = const {
   '1': 'ImageProxy',

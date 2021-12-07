@@ -1,14 +1,9 @@
 import 'camera_facing.dart';
+import 'camera_implementation.dart';
 
-class CameraSelector {
-  final CameraFacing facing;
+abstract class CameraSelector {
+  CameraFacing get facing;
 
-  const CameraSelector({required this.facing});
-
-  static const CameraSelector back = CameraSelector(
-    facing: CameraFacing.back,
-  );
-  static const CameraSelector front = CameraSelector(
-    facing: CameraFacing.front,
-  );
+  static const CameraSelector back = $CameraSelector(CameraFacing.back);
+  static const CameraSelector front = $CameraSelector(CameraFacing.front);
 }

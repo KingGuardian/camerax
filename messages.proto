@@ -54,7 +54,7 @@ message ZoomValue {
   double value = 3;
 }
 
-message Event {
+message EventArguments {
   EventCategory category = 1;
   int32 quarter_turns = 2;
   string uuid = 3;

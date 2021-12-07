@@ -1,3 +1,5 @@
+import 'package:camerax/camerax.dart';
+import 'package:camerax_example/main.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -37,7 +39,12 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        onPressed: () => Navigator.of(context).pushNamed('scanner'),
+        onPressed: () async {
+          final cameraController = myAppKey.currentState!.cameraController;
+          await cameraController.open();
+          await Navigator.of(context).pushNamed('scanner');
+          await cameraController.close();
+        },
         child: const Icon(
           Icons.camera,
           color: Colors.white,

@@ -6,8 +6,9 @@ import android.content.pm.PackageManager
 import android.graphics.ImageFormat
 import android.view.Surface
 import androidx.annotation.NonNull
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.TorchState
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -17,13 +18,14 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.EventChannel
-import io.flutter.plugin.common.EventChannel.*
+import io.flutter.plugin.common.EventChannel.EventSink
+import io.flutter.plugin.common.EventChannel.StreamHandler
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.*
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler
+import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
 import io.flutter.view.TextureRegistry
-import java.util.concurrent.Executors
 
 /** CameraXPlugin */
 class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHandler,
@@ -44,11 +46,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
 
     private val quarterTurnsObserver by lazy {
         QuarterTurnsObserver { quarterTurns ->
-            val event = event {
+            val eventArguments = eventArguments {
                 this.category = Messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS
                 this.quarterTurns = quarterTurns
             }.toByteArray()
-            invokeOnMainThread { eventSink?.success(event) }
+            invokeOnMainThread { eventSink?.success(eventArguments) }
         }
     }
 
@@ -147,12 +149,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
     }
 
     private fun create(selector: Messages.CameraSelector, result: Result) {
-        val selector1 = when (selector.facing!!) {
-            Messages.CameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
-            Messages.CameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
-            Messages.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
-        }
-        val cameraController = CameraController(activity, selector1, textureRegistry)
+        val cameraController = CameraController(activity, selector.cameraxSelector, textureRegistry)
         val indexedCameraController = IndexedCameraController(cameraController)
         indexedCameraControllers[indexedCameraController.uuid] = indexedCameraController
         result.success(indexedCameraController.uuid)
@@ -161,35 +158,15 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
     private fun open(uuid: String, result: Result) {
         val runnable = Runnable {
             val cameraController = indexedCameraControllers[uuid]!!.value
-            cameraController.open { textureId, resolution ->
-                val owner = activity as LifecycleOwner
-                cameraController.cameraInfo.torchState.observe(owner, { torchState ->
-                    val event = event {
-                        this.uuid = uuid
-                        this.category =
-                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE
-                        this.torchState = torchState == TorchState.ON
-                    }.toByteArray()
-                    eventSink?.success(event)
-                })
-                cameraController.cameraInfo.zoomState.observe(owner, { zoomState ->
-                    val event = event {
-                        this.uuid = uuid
-                        this.category =
-                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE
-                        this.zoomValue = zoomState.zoomRatio.toDouble()
-                    }.toByteArray()
-                    eventSink?.success(event)
-                })
-                val executor = Executors.newSingleThreadExecutor()
-                cameraController.setAnalyzer(executor, { imageProxy ->
+            val analyzer = object : ImageAnalysis.Analyzer {
+                override fun analyze(imageProxy: ImageProxy) {
                     if (imageProxy.format != ImageFormat.YUV_420_888) {
                         val errorMessage = "Unsupported image format: ${imageProxy.format}"
                         eventSink?.error(TAG, errorMessage)
                     }
                     val indexedImageProxy = IndexedImageProxy(imageProxy)
                     indexedImageProxies[indexedImageProxy.uuid] = indexedImageProxy
-                    val event = event {
+                    val eventArguments = eventArguments {
                         this.uuid = indexedImageProxy.uuid
                         this.category =
                             Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY
@@ -244,8 +221,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                             this.height = imageHeight
                         }
                     }.toByteArray()
-                    invokeOnMainThread { eventSink?.success(event) }
-                })
+                    invokeOnMainThread { eventSink?.success(eventArguments) }
+                }
+            }
+            cameraController.open(analyzer) { textureId, resolution ->
+                val owner = activity as LifecycleOwner
                 val cameraInfo = cameraController.cameraInfo
                 val cameraValue = cameraValue {
                     this.textureValue = textureValue {
@@ -271,6 +251,24 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
                     }
                 }.toByteArray()
                 result.success(cameraValue)
+                cameraController.cameraInfo.torchState.observe(owner, { torchState ->
+                    val eventArguments = eventArguments {
+                        this.uuid = uuid
+                        this.category =
+                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE
+                        this.torchState = torchState == TorchState.ON
+                    }.toByteArray()
+                    eventSink?.success(eventArguments)
+                })
+                cameraController.cameraInfo.zoomState.observe(owner, { zoomState ->
+                    val eventArguments = eventArguments {
+                        this.uuid = uuid
+                        this.category =
+                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE
+                        this.zoomValue = zoomState.zoomRatio.toDouble()
+                    }.toByteArray()
+                    eventSink?.success(eventArguments)
+                })
             }
         }
         val permissions = arrayOf(Manifest.permission.CAMERA)
@@ -296,6 +294,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
 
     private fun close(uuid: String, result: Result) {
         val cameraController = indexedCameraControllers[uuid]!!.value
+        val owner = activity as LifecycleOwner
+        cameraController.cameraInfo.torchState.removeObservers(owner)
+        cameraController.cameraInfo.zoomState.removeObservers(owner)
         cameraController.close { result.success() }
     }
 
@@ -314,7 +315,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, StreamHan
 
     private fun dispose(uuid: String, result: Result) {
         val cameraController = indexedCameraControllers.remove(uuid)!!.value
-        cameraController.dispose { result.success() }
+        cameraController.dispose()
+        result.success()
     }
 
     private fun closeImageProxy(key: String, result: Result) {

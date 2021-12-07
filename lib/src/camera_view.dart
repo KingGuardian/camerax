@@ -18,7 +18,7 @@ class CameraView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<CameraValue?>(
-      valueListenable: controller,
+      valueListenable: controller.value,
       builder: (context, cameraValue, child) {
         if (cameraValue == null) {
           return Container(

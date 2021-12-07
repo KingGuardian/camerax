@@ -7,12 +7,15 @@ import android.util.Size
 import android.view.Surface
 import androidx.annotation.IntDef
 import androidx.camera.core.CameraInfo
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
 import java.lang.IllegalArgumentException
 import java.nio.ByteBuffer
+import java.util.concurrent.Executors
 
 val Any.TAG: String
     get() = this::class.java.simpleName
@@ -44,7 +47,6 @@ fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
 annotation class Rotation
 
-
 @Suppress("DEPRECATION")
 @Rotation
 val Activity.rotation: Int
@@ -59,6 +61,15 @@ val Activity.quarterTurns: Int
             Surface.ROTATION_180 -> 2
             Surface.ROTATION_270 -> 1
             else -> throw IllegalArgumentException()
+        }
+    }
+
+val Messages.CameraSelector.cameraxSelector: CameraSelector
+    get() {
+        return when (facing!!) {
+            Messages.CameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
+            Messages.CameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+            Messages.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
         }
     }
 
@@ -162,6 +173,11 @@ val ImageProxy.bytes: ByteArray
         }
         return bytes
     }
+
+fun ImageAnalysis.setAnalyzer(analyzer: ImageAnalysis.Analyzer) {
+    val executor = Executors.newSingleThreadExecutor()
+    setAnalyzer(executor, analyzer)
+}
 
 fun rotate90(nv21: ByteArray, width: Int, height: Int): ByteArray {
     val yuv = ByteArray(width * height * 3 / 2)

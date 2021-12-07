@@ -1,27 +1,9 @@
 import 'dart:typed_data';
 
-import 'channels.dart';
-import 'method_arguments.dart';
-import 'method_category.dart';
+abstract class ImageProxy {
+  Uint8List get data;
+  int get width;
+  int get height;
 
-class ImageProxy {
-  final String uuid;
-  final Uint8List data;
-  final int width;
-  final int height;
-
-  const ImageProxy(
-    this.uuid,
-    this.data,
-    this.width,
-    this.height,
-  );
-
-  Future<void> close() async {
-    final closeArguments = MethodArguments(
-      category: MethodCategory.imageProxyClose,
-      uuid: uuid,
-    );
-    await methodChannel.invokeByMethodArguments<void>(closeArguments);
-  }
+  Future<void> close();
 }

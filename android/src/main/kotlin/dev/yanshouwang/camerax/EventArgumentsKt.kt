@@ -4,23 +4,23 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-public inline fun event(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Event =
-  dev.yanshouwang.camerax.EventKt.Dsl._create(dev.yanshouwang.camerax.Messages.Event.newBuilder()).apply { block() }._build()
-public object EventKt {
+public inline fun eventArguments(block: dev.yanshouwang.camerax.EventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.EventArguments =
+  dev.yanshouwang.camerax.EventArgumentsKt.Dsl._create(dev.yanshouwang.camerax.Messages.EventArguments.newBuilder()).apply { block() }._build()
+public object EventArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   public class Dsl private constructor(
-    private val _builder: dev.yanshouwang.camerax.Messages.Event.Builder
+    private val _builder: dev.yanshouwang.camerax.Messages.EventArguments.Builder
   ) {
     public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: dev.yanshouwang.camerax.Messages.Event.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: dev.yanshouwang.camerax.Messages.EventArguments.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): dev.yanshouwang.camerax.Messages.Event = _builder.build()
+    internal fun _build(): dev.yanshouwang.camerax.Messages.EventArguments = _builder.build()
 
     /**
      * <code>.messages.EventCategory category = 1;</code>
@@ -133,5 +133,5 @@ public object EventKt {
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.Messages.Event.copy(block: dev.yanshouwang.camerax.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Event =
-  dev.yanshouwang.camerax.EventKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+public inline fun dev.yanshouwang.camerax.Messages.EventArguments.copy(block: dev.yanshouwang.camerax.EventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.EventArguments =
+  dev.yanshouwang.camerax.EventArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()

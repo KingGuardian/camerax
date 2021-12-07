@@ -1,11 +1,4 @@
-class TorchValue {
-  final bool available;
-  final bool state;
-
-  const TorchValue(this.available, this.state);
-
-  TorchValue copyWith({bool? state}) {
-    state ??= this.state;
-    return TorchValue(available, state);
-  }
+abstract class TorchValue {
+  bool get available;
+  bool get state;
 }

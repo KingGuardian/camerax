@@ -471,8 +471,8 @@ class ZoomValue extends $pb.GeneratedMessage {
   void clearValue() => clearField(3);
 }
 
-class Event extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Event', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+class EventArguments extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EventArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..e<EventCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: EventCategory.EVENT_CATEGORY_QUARTER_TURNS, valueOf: EventCategory.valueOf, enumValues: EventCategory.values)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quarterTurns', $pb.PbFieldType.O3)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
@@ -482,8 +482,8 @@ class Event extends $pb.GeneratedMessage {
     ..hasRequiredFields = false
   ;
 
-  Event._() : super();
-  factory Event({
+  EventArguments._() : super();
+  factory EventArguments({
     EventCategory? category,
     $core.int? quarterTurns,
     $core.String? uuid,
@@ -512,26 +512,26 @@ class Event extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory Event.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Event.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory EventArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Event clone() => Event()..mergeFromMessage(this);
+  EventArguments clone() => EventArguments()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Event copyWith(void Function(Event) updates) => super.copyWith((message) => updates(message as Event)) as Event; // ignore: deprecated_member_use
+  EventArguments copyWith(void Function(EventArguments) updates) => super.copyWith((message) => updates(message as EventArguments)) as EventArguments; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Event create() => Event._();
-  Event createEmptyInstance() => create();
-  static $pb.PbList<Event> createRepeated() => $pb.PbList<Event>();
+  static EventArguments create() => EventArguments._();
+  EventArguments createEmptyInstance() => create();
+  static $pb.PbList<EventArguments> createRepeated() => $pb.PbList<EventArguments>();
   @$core.pragma('dart2js:noInline')
-  static Event getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Event>(create);
-  static Event? _defaultInstance;
+  static EventArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventArguments>(create);
+  static EventArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
   EventCategory get category => $_getN(0);

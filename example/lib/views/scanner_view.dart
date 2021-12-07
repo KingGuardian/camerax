@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:camerax/camerax.dart';
+import 'package:camerax_example/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +13,8 @@ class ScannerView extends StatefulWidget {
   _ScannerViewState createState() => _ScannerViewState();
 }
 
+Completer<void> disposed = Completer()..complete();
+
 class _ScannerViewState extends State<ScannerView>
     with SingleTickerProviderStateMixin {
   late CameraController cameraController;
@@ -18,8 +24,9 @@ class _ScannerViewState extends State<ScannerView>
 
   @override
   void initState() {
+    log('-------------------- INIT_STATE -------------------');
     super.initState();
-    cameraController = CameraController();
+    cameraController = myAppKey.currentState!.cameraController;
     animationConrtroller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -28,7 +35,6 @@ class _ScannerViewState extends State<ScannerView>
   }
 
   Future<void> setup() async {
-    await cameraController.open();
     animationConrtroller.repeat();
     // try {
     //   final barcode = await cameraController.barcodes.first;
@@ -82,7 +88,7 @@ class _ScannerViewState extends State<ScannerView>
             margin: const EdgeInsets.only(bottom: 80.0),
             alignment: Alignment.bottomCenter,
             child: ValueListenableBuilder<CameraValue?>(
-              valueListenable: cameraController,
+              valueListenable: cameraController.value,
               builder: (context, cameraValue, child) {
                 final torchAvailable =
                     cameraValue?.torchValue.available ?? false;
@@ -107,8 +113,8 @@ class _ScannerViewState extends State<ScannerView>
 
   @override
   void dispose() {
+    log('-------------------- DISPOSE -------------------');
     animationConrtroller.dispose();
-    cameraController.dispose();
     super.dispose();
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
+import 'package:camerax/camerax.dart';
 import 'package:camerax_example/views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ void main() {
   runZonedGuarded(onStartup, onCrashed);
 }
 
+final myAppKey = GlobalKey<MyAppState>();
+
 void onStartup() async {
   WidgetsFlutterBinding.ensureInitialized();
   // final orientations = [DeviceOrientation.portraitUp];
@@ -18,7 +21,9 @@ void onStartup() async {
     statusBarColor: Colors.transparent,
   );
   SystemChrome.setSystemUIOverlayStyle(style);
-  const app = MyApp();
+  final app = MyApp(
+    key: myAppKey,
+  );
   runApp(app);
 }
 
@@ -27,8 +32,23 @@ void onCrashed(Object error, StackTrace stack) {
   developer.log(message);
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  late CameraController cameraController;
+
+  @override
+  void initState() {
+    super.initState();
+    cameraController = CameraController(
+      selector: CameraSelector.back,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,5 +64,11 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: 'home',
     );
+  }
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
   }
 }
