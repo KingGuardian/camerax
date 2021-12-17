@@ -9,8 +9,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import io.flutter.view.TextureRegistry
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 
 class CameraController(
     private val activity: Activity,
@@ -26,7 +24,6 @@ class CameraController(
         analyzer: ImageAnalysis.Analyzer,
         onOpened: (textureId: Int, resolution: Size) -> Unit
     ) {
-        Log.d(TAG, "open: ")
         val instance = ProcessCameraProvider.getInstance(activity)
         val executor = ContextCompat.getMainExecutor(activity)
         instance.addListener({
@@ -56,7 +53,6 @@ class CameraController(
     }
 
     fun close(onClosed: () -> Unit) {
-        Log.d(TAG, "close: ")
         val instance = ProcessCameraProvider.getInstance(activity)
         val executor = ContextCompat.getMainExecutor(activity)
         instance.addListener({
@@ -74,8 +70,43 @@ class CameraController(
         camera.cameraControl.setZoomRatio(ratio)
     }
 
+    fun focusAutomatically() {
+        camera.cameraControl.cancelFocusAndMetering()
+    }
+
+    fun focusManually(width: Float, height: Float, x: Float, y: Float) {
+        // 转到相机方向需要的角度（逆时针）
+        val rotationDegrees =
+            (cameraInfo.sensorRotationDegrees - activity.rotationDegrees + 360) % 360
+        val point =
+            when (rotationDegrees) {
+                0 -> {
+                    SurfaceOrientedMeteringPointFactory(width, height)
+                        .createPoint(x, y)
+                }
+                90 -> {
+                    SurfaceOrientedMeteringPointFactory(height, width)
+                        .createPoint(y, width - x)
+                }
+                180 -> {
+                    SurfaceOrientedMeteringPointFactory(width, height)
+                        .createPoint(width - x, height - y)
+                }
+                270 -> {
+                    SurfaceOrientedMeteringPointFactory(height, width)
+                        .createPoint(height - y, x)
+                }
+                else -> {
+                    throw NotImplementedError()
+                }
+            }
+        val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
+            .disableAutoCancel()
+            .build()
+        camera.cameraControl.startFocusAndMetering(action)
+    }
+
     fun dispose() {
-        Log.d(TAG, "dispose: ")
         textureEntry.release()
     }
 }

@@ -3,22 +3,26 @@ package messages;
 
 option java_package = "dev.yanshouwang.camerax";
 
-message MethodArguments {
-  MethodCategory category = 1;
+message Command {
+  CommandCategory category = 1;
   CameraSelector selector = 2;
   string uuid = 3;
   bool torch_state = 4;
   double zoom_value = 5;
+  Size size = 6;
+  Offset offset = 7;
 }
 
-enum MethodCategory {
-  METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;
-  METHOD_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 5;
-  METHOD_CATEGORY_IMAGE_PROXY_CLOSE = 6;
+enum CommandCategory {
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 5;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 6;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 7;
+  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;
 }
 
 message CameraSelector {
@@ -54,7 +58,17 @@ message ZoomValue {
   double value = 3;
 }
 
-message EventArguments {
+message Size {
+  double width = 1;
+  double height = 2;
+}
+
+message Offset {
+  double x = 1;
+  double y = 2;
+}
+
+message Event {
   EventCategory category = 1;
   int32 quarter_turns = 2;
   string uuid = 3;

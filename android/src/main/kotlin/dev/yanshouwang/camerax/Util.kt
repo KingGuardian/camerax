@@ -20,13 +20,17 @@ import java.util.concurrent.Executors
 val Any.TAG: String
     get() = this::class.java.simpleName
 
-val MethodCall.methodArguments: Messages.MethodArguments
+val MethodCall.command: Messages.Command
     get() {
         val data = arguments<ByteArray>()
-        return Messages.MethodArguments.parseFrom(data)
+        return Messages.Command.parseFrom(data)
     }
 
 fun Result.success() = success(null)
+
+fun Result.error(errorCode: String, errorMessage: String) {
+    error(errorCode, errorMessage, null)
+}
 
 fun Result.error(e: Exception) {
     val errorCode = e.TAG
@@ -35,12 +39,15 @@ fun Result.error(e: Exception) {
     error(errorCode, errorMessage, errorDetails)
 }
 
-fun Result.error(errorCode: String, errorMessage: String) {
+fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
     error(errorCode, errorMessage, null)
 }
 
-fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
-    error(errorCode, errorMessage, null)
+fun EventChannel.EventSink.error(e: Exception) {
+    val errorCode = e.TAG
+    val errorMessage = e.localizedMessage
+    val errorDetails = e.stackTraceToString()
+    error(errorCode, errorMessage, errorDetails)
 }
 
 @IntDef(value = [Surface.ROTATION_0, Surface.ROTATION_90, Surface.ROTATION_180, Surface.ROTATION_270])
@@ -52,6 +59,17 @@ annotation class Rotation
 val Activity.rotation: Int
     get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) display!!.rotation
     else windowManager.defaultDisplay.rotation
+
+val Activity.rotationDegrees: Int
+    get() {
+        return when (rotation) {
+            Surface.ROTATION_0 -> 0
+            Surface.ROTATION_90 -> 90
+            Surface.ROTATION_180 -> 180
+            Surface.ROTATION_270 -> 270
+            else -> throw IllegalArgumentException()
+        }
+    }
 
 val Activity.quarterTurns: Int
     get() {

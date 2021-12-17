@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:camerax/camerax.dart';
 import 'package:camerax_example/main.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ScannerView extends StatefulWidget {
@@ -21,6 +20,7 @@ class _ScannerViewState extends State<ScannerView>
   late AnimationController animationConrtroller;
   late Animation<double> offsetAnimation;
   late Animation<double> opacityAnimation;
+  late StreamSubscription<ImageProxy> imageProxySubscription;
 
   @override
   void initState() {
@@ -31,7 +31,13 @@ class _ScannerViewState extends State<ScannerView>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+    subscribe();
     setup();
+  }
+
+  void subscribe() {
+    imageProxySubscription =
+        cameraController.imageProxy.listen((imageProxy) {});
   }
 
   Future<void> setup() async {
@@ -60,11 +66,14 @@ class _ScannerViewState extends State<ScannerView>
         fit: StackFit.expand,
         children: [
           // 相机
-          CameraView(controller: cameraController),
+          CameraView(
+            controller: cameraController,
+            focusMode: FocusMode.auto,
+          ),
           // 扫描线
           AnimatedBuilder(
             animation: animationConrtroller,
-            builder: (context, childe) {
+            builder: (context, child) {
               return Opacity(
                 opacity: opacityAnimation.value,
                 child: CustomPaint(
@@ -88,7 +97,7 @@ class _ScannerViewState extends State<ScannerView>
             margin: const EdgeInsets.only(bottom: 80.0),
             alignment: Alignment.bottomCenter,
             child: ValueListenableBuilder<CameraValue?>(
-              valueListenable: cameraController.value,
+              valueListenable: cameraController.valueListenable,
               builder: (context, cameraValue, child) {
                 final torchAvailable =
                     cameraValue?.torchValue.available ?? false;
@@ -114,6 +123,7 @@ class _ScannerViewState extends State<ScannerView>
   @override
   void dispose() {
     log('-------------------- DISPOSE -------------------');
+    imageProxySubscription.cancel();
     animationConrtroller.dispose();
     super.dispose();
   }
@@ -160,4 +170,7 @@ class LinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+
+  @override
+  bool? hitTest(Offset position) => false;
 }

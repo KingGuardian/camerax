@@ -13,23 +13,27 @@ import 'messages.pbenum.dart';
 
 export 'messages.pbenum.dart';
 
-class MethodArguments extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MethodArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..e<MethodCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: MethodCategory.METHOD_CATEGORY_CAMERA_CONTROLLER_CREATE, valueOf: MethodCategory.valueOf, enumValues: MethodCategory.values)
+class Command extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Command', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..e<CommandCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CREATE, valueOf: CommandCategory.valueOf, enumValues: CommandCategory.values)
     ..aOM<CameraSelector>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'selector', subBuilder: CameraSelector.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'torchState')
     ..a<$core.double>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'zoomValue', $pb.PbFieldType.OD)
+    ..aOM<Size>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: Size.create)
+    ..aOM<Offset>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offset', subBuilder: Offset.create)
     ..hasRequiredFields = false
   ;
 
-  MethodArguments._() : super();
-  factory MethodArguments({
-    MethodCategory? category,
+  Command._() : super();
+  factory Command({
+    CommandCategory? category,
     CameraSelector? selector,
     $core.String? uuid,
     $core.bool? torchState,
     $core.double? zoomValue,
+    Size? size,
+    Offset? offset,
   }) {
     final _result = create();
     if (category != null) {
@@ -47,33 +51,39 @@ class MethodArguments extends $pb.GeneratedMessage {
     if (zoomValue != null) {
       _result.zoomValue = zoomValue;
     }
+    if (size != null) {
+      _result.size = size;
+    }
+    if (offset != null) {
+      _result.offset = offset;
+    }
     return _result;
   }
-  factory MethodArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MethodArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Command.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Command.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MethodArguments clone() => MethodArguments()..mergeFromMessage(this);
+  Command clone() => Command()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MethodArguments copyWith(void Function(MethodArguments) updates) => super.copyWith((message) => updates(message as MethodArguments)) as MethodArguments; // ignore: deprecated_member_use
+  Command copyWith(void Function(Command) updates) => super.copyWith((message) => updates(message as Command)) as Command; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static MethodArguments create() => MethodArguments._();
-  MethodArguments createEmptyInstance() => create();
-  static $pb.PbList<MethodArguments> createRepeated() => $pb.PbList<MethodArguments>();
+  static Command create() => Command._();
+  Command createEmptyInstance() => create();
+  static $pb.PbList<Command> createRepeated() => $pb.PbList<Command>();
   @$core.pragma('dart2js:noInline')
-  static MethodArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MethodArguments>(create);
-  static MethodArguments? _defaultInstance;
+  static Command getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Command>(create);
+  static Command? _defaultInstance;
 
   @$pb.TagNumber(1)
-  MethodCategory get category => $_getN(0);
+  CommandCategory get category => $_getN(0);
   @$pb.TagNumber(1)
-  set category(MethodCategory v) { setField(1, v); }
+  set category(CommandCategory v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCategory() => $_has(0);
   @$pb.TagNumber(1)
@@ -116,6 +126,28 @@ class MethodArguments extends $pb.GeneratedMessage {
   $core.bool hasZoomValue() => $_has(4);
   @$pb.TagNumber(5)
   void clearZoomValue() => clearField(5);
+
+  @$pb.TagNumber(6)
+  Size get size => $_getN(5);
+  @$pb.TagNumber(6)
+  set size(Size v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasSize() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSize() => clearField(6);
+  @$pb.TagNumber(6)
+  Size ensureSize() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  Offset get offset => $_getN(6);
+  @$pb.TagNumber(7)
+  set offset(Offset v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasOffset() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearOffset() => clearField(7);
+  @$pb.TagNumber(7)
+  Offset ensureOffset() => $_ensure(6);
 }
 
 class CameraSelector extends $pb.GeneratedMessage {
@@ -471,8 +503,130 @@ class ZoomValue extends $pb.GeneratedMessage {
   void clearValue() => clearField(3);
 }
 
-class EventArguments extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'EventArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+class Size extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Size', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..a<$core.double>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'height', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  Size._() : super();
+  factory Size({
+    $core.double? width,
+    $core.double? height,
+  }) {
+    final _result = create();
+    if (width != null) {
+      _result.width = width;
+    }
+    if (height != null) {
+      _result.height = height;
+    }
+    return _result;
+  }
+  factory Size.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Size.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Size clone() => Size()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Size copyWith(void Function(Size) updates) => super.copyWith((message) => updates(message as Size)) as Size; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Size create() => Size._();
+  Size createEmptyInstance() => create();
+  static $pb.PbList<Size> createRepeated() => $pb.PbList<Size>();
+  @$core.pragma('dart2js:noInline')
+  static Size getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Size>(create);
+  static Size? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get width => $_getN(0);
+  @$pb.TagNumber(1)
+  set width($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasWidth() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearWidth() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get height => $_getN(1);
+  @$pb.TagNumber(2)
+  set height($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasHeight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHeight() => clearField(2);
+}
+
+class Offset extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Offset', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..a<$core.double>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'x', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'y', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  Offset._() : super();
+  factory Offset({
+    $core.double? x,
+    $core.double? y,
+  }) {
+    final _result = create();
+    if (x != null) {
+      _result.x = x;
+    }
+    if (y != null) {
+      _result.y = y;
+    }
+    return _result;
+  }
+  factory Offset.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Offset.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Offset clone() => Offset()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Offset copyWith(void Function(Offset) updates) => super.copyWith((message) => updates(message as Offset)) as Offset; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Offset create() => Offset._();
+  Offset createEmptyInstance() => create();
+  static $pb.PbList<Offset> createRepeated() => $pb.PbList<Offset>();
+  @$core.pragma('dart2js:noInline')
+  static Offset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Offset>(create);
+  static Offset? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.double get x => $_getN(0);
+  @$pb.TagNumber(1)
+  set x($core.double v) { $_setDouble(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasX() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearX() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get y => $_getN(1);
+  @$pb.TagNumber(2)
+  set y($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasY() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearY() => clearField(2);
+}
+
+class Event extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Event', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..e<EventCategory>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'category', $pb.PbFieldType.OE, defaultOrMaker: EventCategory.EVENT_CATEGORY_QUARTER_TURNS, valueOf: EventCategory.valueOf, enumValues: EventCategory.values)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quarterTurns', $pb.PbFieldType.O3)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uuid')
@@ -482,8 +636,8 @@ class EventArguments extends $pb.GeneratedMessage {
     ..hasRequiredFields = false
   ;
 
-  EventArguments._() : super();
-  factory EventArguments({
+  Event._() : super();
+  factory Event({
     EventCategory? category,
     $core.int? quarterTurns,
     $core.String? uuid,
@@ -512,26 +666,26 @@ class EventArguments extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory EventArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EventArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Event.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Event.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EventArguments clone() => EventArguments()..mergeFromMessage(this);
+  Event clone() => Event()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EventArguments copyWith(void Function(EventArguments) updates) => super.copyWith((message) => updates(message as EventArguments)) as EventArguments; // ignore: deprecated_member_use
+  Event copyWith(void Function(Event) updates) => super.copyWith((message) => updates(message as Event)) as Event; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static EventArguments create() => EventArguments._();
-  EventArguments createEmptyInstance() => create();
-  static $pb.PbList<EventArguments> createRepeated() => $pb.PbList<EventArguments>();
+  static Event create() => Event._();
+  Event createEmptyInstance() => create();
+  static $pb.PbList<Event> createRepeated() => $pb.PbList<Event>();
   @$core.pragma('dart2js:noInline')
-  static EventArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventArguments>(create);
-  static EventArguments? _defaultInstance;
+  static Event getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Event>(create);
+  static Event? _defaultInstance;
 
   @$pb.TagNumber(1)
   EventCategory get category => $_getN(0);

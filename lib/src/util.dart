@@ -6,26 +6,27 @@ import 'package:flutter/services.dart';
 import 'messages.pb.dart' as messages;
 
 const namespace = 'yanshouwang.dev/camerax';
-const method = MethodChannel('$namespace/method');
-const event = EventChannel('$namespace/event');
+const methodChannel = MethodChannel('$namespace/method');
+const eventChannel = EventChannel('$namespace/event');
 
-final stream = event
+final event = eventChannel
     .receiveBroadcastStream()
     .cast<Uint8List>()
-    .map((data) => messages.EventArguments.fromBuffer(data));
+    .map((byteArray) => messages.Event.fromBuffer(byteArray));
 
 extension MethodChannelX on MethodChannel {
-  Future<T?> invokeByMethodArguments<T>(
-    messages.MethodArguments methodArguments,
-  ) {
-    final arguments = methodArguments.writeToBuffer();
+  Future<T?> invokeCommand<T>(messages.Command command) {
+    final arguments = command.writeToBuffer();
     return invokeMethod<T>('', arguments);
   }
 
-  Future<List<T>?> invokeListByMethodArguments<T>(
-    messages.MethodArguments methodArguments,
-  ) {
-    final arguments = methodArguments.writeToBuffer();
+  Future<List<T>?> invokeListCommand<T>(messages.Command command) {
+    final arguments = command.writeToBuffer();
     return invokeListMethod<T>('', arguments);
+  }
+
+  Future<Map<K, V>?> invokeMapCommand<K, V>(messages.Command command) {
+    final arguments = command.writeToBuffer();
+    return invokeMapMethod<K, V>('', arguments);
   }
 }

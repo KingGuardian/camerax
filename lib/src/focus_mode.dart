@@ -1,0 +1,4 @@
+enum FocusMode {
+  auto,
+  manual,
+}

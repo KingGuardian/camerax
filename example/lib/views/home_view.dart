@@ -1,4 +1,3 @@
-import 'package:camerax/camerax.dart';
 import 'package:camerax_example/main.dart';
 import 'package:flutter/material.dart';
 

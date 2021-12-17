@@ -4,28 +4,28 @@
 package dev.yanshouwang.camerax;
 
 @kotlin.jvm.JvmSynthetic
-public inline fun methodArguments(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
-  dev.yanshouwang.camerax.MethodArgumentsKt.Dsl._create(dev.yanshouwang.camerax.Messages.MethodArguments.newBuilder()).apply { block() }._build()
-public object MethodArgumentsKt {
+public inline fun command(block: dev.yanshouwang.camerax.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Command =
+  dev.yanshouwang.camerax.CommandKt.Dsl._create(dev.yanshouwang.camerax.Messages.Command.newBuilder()).apply { block() }._build()
+public object CommandKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   public class Dsl private constructor(
-    private val _builder: dev.yanshouwang.camerax.Messages.MethodArguments.Builder
+    private val _builder: dev.yanshouwang.camerax.Messages.Command.Builder
   ) {
     public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: dev.yanshouwang.camerax.Messages.MethodArguments.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: dev.yanshouwang.camerax.Messages.Command.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): dev.yanshouwang.camerax.Messages.MethodArguments = _builder.build()
+    internal fun _build(): dev.yanshouwang.camerax.Messages.Command = _builder.build()
 
     /**
-     * <code>.messages.MethodCategory category = 1;</code>
+     * <code>.messages.CommandCategory category = 1;</code>
      */
-    public var category: dev.yanshouwang.camerax.Messages.MethodCategory
+    public var category: dev.yanshouwang.camerax.Messages.CommandCategory
       @JvmName("getCategory")
       get() = _builder.getCategory()
       @JvmName("setCategory")
@@ -33,7 +33,7 @@ public object MethodArgumentsKt {
         _builder.setCategory(value)
       }
     /**
-     * <code>.messages.MethodCategory category = 1;</code>
+     * <code>.messages.CommandCategory category = 1;</code>
      */
     public fun clearCategory() {
       _builder.clearCategory()
@@ -113,8 +113,56 @@ public object MethodArgumentsKt {
     public fun clearZoomValue() {
       _builder.clearZoomValue()
     }
+
+    /**
+     * <code>.messages.Size size = 6;</code>
+     */
+    public var size: dev.yanshouwang.camerax.Messages.Size
+      @JvmName("getSize")
+      get() = _builder.getSize()
+      @JvmName("setSize")
+      set(value) {
+        _builder.setSize(value)
+      }
+    /**
+     * <code>.messages.Size size = 6;</code>
+     */
+    public fun clearSize() {
+      _builder.clearSize()
+    }
+    /**
+     * <code>.messages.Size size = 6;</code>
+     * @return Whether the size field is set.
+     */
+    public fun hasSize(): kotlin.Boolean {
+      return _builder.hasSize()
+    }
+
+    /**
+     * <code>.messages.Offset offset = 7;</code>
+     */
+    public var offset: dev.yanshouwang.camerax.Messages.Offset
+      @JvmName("getOffset")
+      get() = _builder.getOffset()
+      @JvmName("setOffset")
+      set(value) {
+        _builder.setOffset(value)
+      }
+    /**
+     * <code>.messages.Offset offset = 7;</code>
+     */
+    public fun clearOffset() {
+      _builder.clearOffset()
+    }
+    /**
+     * <code>.messages.Offset offset = 7;</code>
+     * @return Whether the offset field is set.
+     */
+    public fun hasOffset(): kotlin.Boolean {
+      return _builder.hasOffset()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.Messages.MethodArguments.copy(block: dev.yanshouwang.camerax.MethodArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.MethodArguments =
-  dev.yanshouwang.camerax.MethodArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+public inline fun dev.yanshouwang.camerax.Messages.Command.copy(block: dev.yanshouwang.camerax.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.Messages.Command =
+  dev.yanshouwang.camerax.CommandKt.Dsl._create(this.toBuilder()).apply { block() }._build()
