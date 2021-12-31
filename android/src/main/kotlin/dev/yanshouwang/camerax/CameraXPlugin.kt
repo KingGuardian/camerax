@@ -35,8 +35,6 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     private lateinit var textureRegistry: TextureRegistry
     private lateinit var binding: ActivityPluginBinding
 
-    val activity get() = binding.activity
-
     private var eventSink: EventSink? = null
 
     private val methodCallHandler by lazy {
@@ -70,9 +68,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 Messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE -> {
                     closeImageProxy(command, result)
                 }
-                Messages.CommandCategory.UNRECOGNIZED -> {
-                    result.notImplemented()
-                }
+                Messages.CommandCategory.UNRECOGNIZED -> result.notImplemented()
             }
         }
     }
@@ -127,9 +123,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         EventChannel(messenger, "$NAMESPACE/event").setStreamHandler(streamHandler)
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPluginBinding) {
-
-    }
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPluginBinding) {}
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         this.binding = binding
@@ -364,6 +358,6 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     private fun invokeOnMainThread(action: Runnable) {
-        activity.runOnUiThread(action)
+        binding.activity.runOnUiThread(action)
     }
 }

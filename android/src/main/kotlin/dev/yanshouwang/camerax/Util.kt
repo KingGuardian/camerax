@@ -3,17 +3,13 @@ package dev.yanshouwang.camerax
 import android.app.Activity
 import android.graphics.ImageFormat
 import android.os.Build
-import android.util.Size
 import android.view.Surface
-import androidx.annotation.IntDef
-import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import io.flutter.plugin.common.EventChannel
+import io.flutter.plugin.common.EventChannel.EventSink
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
-import java.lang.IllegalArgumentException
 import java.nio.ByteBuffer
 import java.util.concurrent.Executors
 
@@ -39,23 +35,18 @@ fun Result.error(e: Exception) {
     error(errorCode, errorMessage, errorDetails)
 }
 
-fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
+fun EventSink.error(errorCode: String, errorMessage: String) {
     error(errorCode, errorMessage, null)
 }
 
-fun EventChannel.EventSink.error(e: Exception) {
+fun EventSink.error(e: Exception) {
     val errorCode = e.TAG
     val errorMessage = e.localizedMessage
     val errorDetails = e.stackTraceToString()
     error(errorCode, errorMessage, errorDetails)
 }
 
-@IntDef(value = [Surface.ROTATION_0, Surface.ROTATION_90, Surface.ROTATION_180, Surface.ROTATION_270])
-@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-annotation class Rotation
-
 @Suppress("DEPRECATION")
-@Rotation
 val Activity.rotation: Int
     get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) display!!.rotation
     else windowManager.defaultDisplay.rotation
