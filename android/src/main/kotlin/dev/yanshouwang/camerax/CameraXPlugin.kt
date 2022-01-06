@@ -1,13 +1,15 @@
 package dev.yanshouwang.camerax
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
+import android.os.Build
+import android.util.Log
 import android.view.Surface
 import androidx.annotation.NonNull
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.TorchState
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -19,11 +21,13 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 import io.flutter.plugin.common.EventChannel.StreamHandler
+import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
 import io.flutter.view.TextureRegistry
+import java.nio.ByteBuffer
+import java.util.concurrent.Executors
 
 /** CameraXPlugin */
 class CameraXPlugin : FlutterPlugin, ActivityAware {
@@ -41,32 +45,316 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         MethodCallHandler { call, result ->
             val command = call.command
             when (command.category!!) {
-                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CREATE -> {
-                    createCameraController(command, result)
+                Messages.CommandCategory.COMMAND_CATEGORY_GET_QUARTER_TURNS -> {
+                    val reply = reply {
+                        this.getQuarterTurnsArguments = getQuarterTurnsReplyArguments {
+                            this.quarterTurns = quarterTurnsObserver.quarterTurns
+                        }
+                    }.toByteArray()
+                    result.success(reply)
                 }
-                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN -> {
-                    openCameraController(command, result)
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND -> {
+                    val arguments = command.cameraControllerBindArguments
+                    val id = arguments.id
+                    val selector = arguments.selector.cameraxSelector
+                    val activity = binding.activity
+                    val runnable = Runnable {
+                        val future = ProcessCameraProvider.getInstance(activity)
+                        val mainExecutor = ContextCompat.getMainExecutor(activity)
+                        future.addListener({
+                            try {
+                                val provider = future.get()
+                                val lifecycleOwner = activity as LifecycleOwner
+                                val textureEntry = textureRegistry.createSurfaceTexture()
+                                val preview = Preview.Builder()
+                                    .setTargetRotation(Surface.ROTATION_0)
+                                    .build()
+                                val imageAnalysis = ImageAnalysis.Builder()
+                                    .setTargetRotation(Surface.ROTATION_0)
+                                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                    .build()
+                                val camera =
+                                    provider.bindToLifecycle(
+                                        lifecycleOwner,
+                                        selector,
+                                        preview,
+                                        imageAnalysis
+                                    )
+                                val controller =
+                                    CameraController(camera, textureEntry, preview, imageAnalysis)
+                                preview.setSurfaceProvider { request ->
+                                    val texture = textureEntry.surfaceTexture()
+                                    val resolution = request.resolution
+                                    texture.setDefaultBufferSize(
+                                        resolution.width,
+                                        resolution.height
+                                    )
+                                    val surface = Surface(texture)
+                                    request.provideSurface(surface, mainExecutor, { })
+                                    controllers[id] = controller
+                                    val reply = reply {
+                                        this.cameraControllerBindArguments =
+                                            cameraControllerBindReplyArguments {
+                                                this.cameraValue = cameraValue {
+                                                    this.textureId = textureEntry.id().toInt()
+                                                    val cameraInfo = camera.cameraInfo
+                                                    if (cameraInfo.sensorRotationDegrees % 180 == 0) {
+                                                        this.textureWidth = resolution.width
+                                                        this.textureHeight = resolution.height
+                                                    } else {
+                                                        this.textureWidth = resolution.height
+                                                        this.textureHeight = resolution.width
+                                                    }
+                                                    this.torchAvailable =
+                                                        cameraInfo.hasFlashUnit()
+                                                    val zoomState = cameraInfo.zoomState.value!!
+                                                    this.zoomMinimum =
+                                                        zoomState.minZoomRatio.toDouble()
+                                                    this.zoomMaximum =
+                                                        zoomState.maxZoomRatio.toDouble()
+                                                }
+                                            }
+                                    }.toByteArray()
+                                    result.success(reply)
+                                }
+                                val imageAnalysisExecutor = Executors.newSingleThreadExecutor()
+                                imageAnalysis.setAnalyzer(imageAnalysisExecutor) { imageProxy ->
+                                    if (imageProxy.format != ImageFormat.YUV_420_888) {
+                                        val errorMessage =
+                                            "The image proxy's format is unsupported: ${imageProxy.format}"
+                                        eventSink?.error(TAG, errorMessage)
+                                    }
+                                    val imageProxyId = imageProxy.hashCode().toString()
+                                    val imageProxies = controller.imageProxies
+                                    imageProxies[imageProxyId] = imageProxy
+                                    val event = event {
+                                        this.category =
+                                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED
+                                        this.cameraControllerImageProxiedArguments =
+                                            cameraControllerImageProxiedEventArguments {
+                                                this.id = id
+                                                this.imageProxy = imageProxy {
+                                                    this.id = imageProxyId
+                                                    val imageBytes: ByteArray
+                                                    val imageWidth: Int
+                                                    val imageHeight: Int
+                                                    val rotationDegrees =
+                                                        (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees + 360) % 360
+                                                    Log.d(
+                                                        TAG,
+                                                        "The image proxy's rotation degrees is: $rotationDegrees"
+                                                    )
+                                                    when (rotationDegrees) {
+                                                        0 -> {
+                                                            imageBytes = imageProxy.bytes
+                                                            imageWidth = imageProxy.width
+                                                            imageHeight = imageProxy.height
+                                                        }
+                                                        90 -> {
+                                                            imageBytes = rotate90(
+                                                                imageProxy.bytes,
+                                                                imageProxy.width,
+                                                                imageProxy.height
+                                                            )
+                                                            imageWidth = imageProxy.height
+                                                            imageHeight = imageProxy.width
+                                                        }
+                                                        180 -> {
+                                                            imageBytes = rotate180(
+                                                                imageProxy.bytes,
+                                                                imageProxy.width,
+                                                                imageProxy.height
+                                                            )
+                                                            imageWidth = imageProxy.width
+                                                            imageHeight = imageProxy.height
+                                                        }
+                                                        270 -> {
+                                                            imageBytes = rotate270(
+                                                                imageProxy.bytes,
+                                                                imageProxy.width,
+                                                                imageProxy.height
+                                                            )
+                                                            imageWidth = imageProxy.height
+                                                            imageHeight = imageProxy.width
+                                                        }
+                                                        else -> {
+                                                            throw NotImplementedError()
+                                                        }
+                                                    }
+                                                    this.data = ByteString.copyFrom(imageBytes)
+                                                    this.width = imageWidth
+                                                    this.height = imageHeight
+                                                }
+                                            }
+                                    }.toByteArray()
+                                    invokeOnMainThread { eventSink?.success(event) }
+                                }
+                            } catch (e: Exception) {
+                                result.error(e)
+                            }
+                        }, mainExecutor)
+                    }
+                    val permissions = arrayOf(Manifest.permission.CAMERA)
+                    val permissionsGranted = permissions.all { permission ->
+                        ContextCompat.checkSelfPermission(
+                            activity,
+                            permission
+                        ) == PackageManager.PERMISSION_GRANTED
+                    }
+                    if (permissionsGranted) {
+                        runnable.run()
+                    } else {
+                        requestPermissionResultListeners.add { granted ->
+                            if (granted) {
+                                runnable.run()
+                            } else {
+                                result.error(TAG, "Permissions was denied by user.")
+                            }
+                        }
+                        ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE)
+                    }
                 }
-                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE -> {
-                    closeCameraController(command, result)
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND -> {
+                    val arguments = command.cameraControllerUnbindArguments
+                    val id = arguments.id
+                    val activity = binding.activity
+                    val future = ProcessCameraProvider.getInstance(activity)
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    future.addListener({
+                        try {
+                            val provider = future.get()
+                            val controller = controllers.remove(id)!!
+                            val preview = controller.preview
+                            val imageAnalysis = controller.imageAnalysis
+                            provider.unbind(preview, imageAnalysis)
+                            val textureEntry = controller.textureEntry
+                            textureEntry.release()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH -> {
-                    torchCameraController(command, result)
+                    val arguments = command.cameraControllerTorchArguments
+                    val id = arguments.id
+                    val state = arguments.state
+                    val controller = controllers[id]!!
+                    val camera = controller.camera
+                    val future = camera.cameraControl.enableTorch(state)
+                    val activity = binding.activity
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    future.addListener({
+                        try {
+                            future.get()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM -> {
-                    zoomCameraController(command, result)
+                    val arguments = command.cameraControllerZoomArguments
+                    val id = arguments.id
+                    val ratio = arguments.value.toFloat()
+                    val controller = controllers[id]!!
+                    val camera = controller.camera
+                    val future = camera.cameraControl.setZoomRatio(ratio)
+                    val activity = binding.activity
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    future.addListener({
+                        try {
+                            future.get()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY -> {
-                    focusAutomaticallyCameraController(command, result)
+                    val arguments = command.cameraControllerFocusAutomaticallyArguments
+                    val id = arguments.id
+                    val controller = controllers[id]!!
+                    val camera = controller.camera
+                    val future = camera.cameraControl.cancelFocusAndMetering()
+                    val activity = binding.activity
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    future.addListener({
+                        try {
+                            future.get()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY -> {
-                    focusManuallyCameraController(command, result)
-                }
-                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_DISPOSE -> {
-                    disposeCameraController(command, result)
+                    val arguments = command.cameraControllerFocusManuallyArguments
+                    val id = arguments.id
+                    val width = arguments.width.toFloat()
+                    val height = arguments.height.toFloat()
+                    val x = arguments.x.toFloat()
+                    val y = arguments.y.toFloat()
+                    val controller = controllers[id]!!
+                    val camera = controller.camera
+                    val cameraInfo = camera.cameraInfo
+                    val activity = binding.activity
+                    // 转到相机方向需要的角度（逆时针）
+                    val rotationDegrees =
+                        (cameraInfo.sensorRotationDegrees - activity.rotationDegrees + 360) % 360
+                    Log.d(TAG, "The camera's rotation degrees is: $rotationDegrees")
+                    val point = when (rotationDegrees) {
+                        0 -> {
+                            SurfaceOrientedMeteringPointFactory(width, height).createPoint(x, y)
+                        }
+                        90 -> {
+                            SurfaceOrientedMeteringPointFactory(height, width).createPoint(
+                                y,
+                                width - x
+                            )
+                        }
+                        180 -> {
+                            SurfaceOrientedMeteringPointFactory(
+                                width,
+                                height
+                            ).createPoint(width - x, height - y)
+                        }
+                        270 -> {
+                            SurfaceOrientedMeteringPointFactory(
+                                height,
+                                width
+                            ).createPoint(height - y, x)
+                        }
+                        else -> {
+                            throw NotImplementedError()
+                        }
+                    }
+                    val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
+                        .disableAutoCancel()
+                        .build()
+                    val future = camera.cameraControl.startFocusAndMetering(action)
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    future.addListener({
+                        try {
+                            future.get()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE -> {
-                    closeImageProxy(command, result)
+                    val arguments = command.imageProxyCloseArguments
+                    val controllerId = arguments.controllerId
+                    val id = arguments.id
+                    val controller = controllers[controllerId]
+                    // 相机关闭后会释放 ImageProxy 实例
+                    if (controller != null) {
+                        val imageProxies = controller.imageProxies
+                        val imageProxy = imageProxies.remove(id)!!
+                        imageProxy.close()
+                    }
+                    result.success()
                 }
                 Messages.CommandCategory.UNRECOGNIZED -> result.notImplemented()
             }
@@ -85,6 +373,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         }
     }
 
+    private val requestPermissionResultListeners by lazy { mutableListOf<(granted: Boolean) -> Unit>() }
     private val requestPermissionResultListener by lazy {
         RequestPermissionsResultListener { requestCode, _, grantResults ->
             return@RequestPermissionsResultListener if (requestCode != REQUEST_CODE) false
@@ -101,20 +390,18 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         }
     }
 
-    private val requestPermissionResultListeners by lazy { mutableListOf<(granted: Boolean) -> Unit>() }
-
     private val quarterTurnsObserver by lazy {
         QuarterTurnsObserver { quarterTurns ->
             val event = event {
-                this.category = Messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS
-                this.quarterTurns = quarterTurns
+                this.quarterTurnsChangedArguments = quarterTurnsChangedEventArguments {
+                    this.quarterTurns = quarterTurns
+                }
             }.toByteArray()
             invokeOnMainThread { eventSink?.success(event) }
         }
     }
 
-    private val indexedCameraControllers by lazy { mutableMapOf<String, IndexedCameraController>() }
-    private val indexedImageProxies by lazy { mutableMapOf<String, IndexedImageProxy>() }
+    private val controllers by lazy { mutableMapOf<String, CameraController>() }
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPluginBinding) {
         textureRegistry = binding.textureRegistry
@@ -132,232 +419,268 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onDetachedFromActivity() {
-        for (indexedImageProxy in indexedImageProxies.values) {
-            val imageProxy = indexedImageProxy.value
-            imageProxy.close()
-        }
-        indexedImageProxies.clear()
-        for (indexedCameraController in indexedCameraControllers.values) {
-            val cameraController = indexedCameraController.value
-            cameraController.dispose()
-        }
-        indexedCameraControllers.clear()
+        val activity = binding.activity
+        val future = ProcessCameraProvider.getInstance(activity)
+        val mainExecutor = ContextCompat.getMainExecutor(activity)
+        future.addListener({
+            try {
+                val provider = future.get()
+                provider.unbindAll()
+                for (controller in controllers.values) {
+                    val textureEntry = controller.textureEntry
+                    textureEntry.release()
+                }
+                controllers.clear()
+            } catch (e: Exception) {
+                Log.e(TAG, "Clear failed: ${e.message}", e)
+            }
+        }, mainExecutor)
         quarterTurnsObserver.cancel()
         binding.removeRequestPermissionsResultListener(requestPermissionResultListener)
-    }
-
-    override fun onDetachedFromActivityForConfigChanges() {
-        onDetachedFromActivity()
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         onAttachedToActivity(binding)
     }
 
-    private fun createCameraController(command: Messages.Command, result: Result) {
-        val selector = command.selector.cameraxSelector
-        val cameraController = CameraController(activity, selector, textureRegistry)
-        val indexedCameraController = IndexedCameraController(cameraController)
-        indexedCameraControllers[indexedCameraController.uuid] = indexedCameraController
-        result.success(indexedCameraController.uuid)
-    }
-
-    private fun openCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val runnable = Runnable {
-            val cameraController = indexedCameraControllers[uuid]!!.value
-            val analyzer = object : ImageAnalysis.Analyzer {
-                override fun analyze(imageProxy: ImageProxy) {
-                    if (imageProxy.format != ImageFormat.YUV_420_888) {
-                        val errorMessage = "Unsupported image format: ${imageProxy.format}"
-                        eventSink?.error(TAG, errorMessage)
-                    }
-                    val indexedImageProxy = IndexedImageProxy(imageProxy)
-                    indexedImageProxies[indexedImageProxy.uuid] = indexedImageProxy
-                    val event = event {
-                        this.category =
-                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY
-                        this.uuid = uuid
-                        this.imageProxy = imageProxy {
-                            this.uuid = indexedImageProxy.uuid
-                            val imageBytes: ByteArray
-                            val imageWidth: Int
-                            val imageHeight: Int
-                            val rotationDegrees =
-                                (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees + 360) % 360
-                            when (rotationDegrees) {
-                                0 -> {
-                                    imageBytes = imageProxy.bytes
-                                    imageWidth = imageProxy.width
-                                    imageHeight = imageProxy.height
-                                }
-                                90 -> {
-                                    imageBytes = rotate90(
-                                        imageProxy.bytes,
-                                        imageProxy.width,
-                                        imageProxy.height
-                                    )
-                                    imageWidth = imageProxy.height
-                                    imageHeight = imageProxy.width
-                                }
-                                180 -> {
-                                    imageBytes = rotate180(
-                                        imageProxy.bytes,
-                                        imageProxy.width,
-                                        imageProxy.height
-                                    )
-                                    imageWidth = imageProxy.width
-                                    imageHeight = imageProxy.height
-                                }
-                                270 -> {
-                                    imageBytes = rotate270(
-                                        imageProxy.bytes,
-                                        imageProxy.width,
-                                        imageProxy.height
-                                    )
-                                    imageWidth = imageProxy.height
-                                    imageHeight = imageProxy.width
-                                }
-                                else -> {
-                                    throw NotImplementedError()
-                                }
-                            }
-                            this.data = ByteString.copyFrom(imageBytes)
-                            this.width = imageWidth
-                            this.height = imageHeight
-                        }
-                    }.toByteArray()
-                    invokeOnMainThread { eventSink?.success(event) }
-                }
-            }
-            cameraController.open(analyzer) { textureId, resolution ->
-                val owner = activity as LifecycleOwner
-                val cameraInfo = cameraController.cameraInfo
-                val cameraValue = cameraValue {
-                    this.textureValue = textureValue {
-                        this.id = textureId
-                        if (cameraInfo.sensorRotationDegrees % 180 == 0) {
-                            this.width = resolution.width
-                            this.height = resolution.height
-                        } else {
-                            this.width = resolution.height
-                            this.height = resolution.width
-                        }
-                        this.quarterTurns = quarterTurnsObserver.quarterTurns
-                    }
-                    this.torchValue = torchValue {
-                        this.available = cameraInfo.hasFlashUnit()
-                        this.state = cameraInfo.torchState.value == TorchState.ON
-                    }
-                    this.zoomValue = zoomValue {
-                        val zoomState = cameraInfo.zoomState.value!!
-                        this.minimum = zoomState.minZoomRatio.toDouble()
-                        this.maximum = zoomState.maxZoomRatio.toDouble()
-                        this.value = zoomState.zoomRatio.toDouble()
-                    }
-                }.toByteArray()
-                result.success(cameraValue)
-                cameraController.cameraInfo.torchState.observe(owner, { torchState ->
-                    val event = event {
-                        this.category =
-                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE
-                        this.uuid = uuid
-                        this.torchState = torchState == TorchState.ON
-                    }.toByteArray()
-                    eventSink?.success(event)
-                })
-                cameraController.cameraInfo.zoomState.observe(owner, { zoomState ->
-                    val event = event {
-                        this.category =
-                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE
-                        this.uuid = uuid
-                        this.zoomValue = zoomState.zoomRatio.toDouble()
-                    }.toByteArray()
-                    eventSink?.success(event)
-                })
-            }
-        }
-        val permissions = arrayOf(Manifest.permission.CAMERA)
-        val permissionsGranted = permissions.all { permission ->
-            ContextCompat.checkSelfPermission(
-                activity,
-                permission
-            ) == PackageManager.PERMISSION_GRANTED
-        }
-        if (permissionsGranted) {
-            runnable.run()
-        } else {
-            requestPermissionResultListeners.add { granted ->
-                if (granted) {
-                    runnable.run()
-                } else {
-                    result.error(TAG, "Permissions was denied by user.")
-                }
-            }
-            ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE)
-        }
-    }
-
-    private fun closeCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val cameraController = indexedCameraControllers[uuid]!!.value
-        val owner = activity as LifecycleOwner
-        cameraController.cameraInfo.torchState.removeObservers(owner)
-        cameraController.cameraInfo.zoomState.removeObservers(owner)
-        cameraController.close { result.success() }
-    }
-
-    private fun torchCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val state = command.torchState
-        val cameraController = indexedCameraControllers[uuid]!!.value
-        cameraController.torch(state)
-        result.success()
-    }
-
-    private fun zoomCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val ratio = command.zoomValue.toFloat()
-        val cameraController = indexedCameraControllers[uuid]!!.value
-        cameraController.zoom(ratio)
-        result.success()
-    }
-
-    private fun focusAutomaticallyCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val cameraController = indexedCameraControllers[uuid]!!.value
-        cameraController.focusAutomatically()
-        result.success()
-    }
-
-    private fun focusManuallyCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val size = command.size
-        val offset = command.offset
-        val cameraController = indexedCameraControllers[uuid]!!.value
-        val width = size.width.toFloat()
-        val height = size.height.toFloat()
-        val x = offset.x.toFloat()
-        val y = offset.y.toFloat()
-        cameraController.focusManually(width, height, x, y)
-        result.success()
-    }
-
-    private fun disposeCameraController(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val cameraController = indexedCameraControllers.remove(uuid)!!.value
-        cameraController.dispose()
-        result.success()
-    }
-
-    private fun closeImageProxy(command: Messages.Command, result: Result) {
-        val uuid = command.uuid
-        val imageProxy = indexedImageProxies.remove(uuid)!!.value
-        imageProxy.close()
-        result.success()
+    override fun onDetachedFromActivityForConfigChanges() {
+        onDetachedFromActivity()
     }
 
     private fun invokeOnMainThread(action: Runnable) {
         binding.activity.runOnUiThread(action)
     }
+}
+
+val Any.TAG: String
+    get() = this::class.java.simpleName
+
+val MethodCall.command: Messages.Command
+    get() {
+        val data = arguments<ByteArray>()
+        return Messages.Command.parseFrom(data)
+    }
+
+fun MethodChannel.Result.success() = success(null)
+
+fun MethodChannel.Result.error(errorCode: String, errorMessage: String) {
+    error(errorCode, errorMessage, null)
+}
+
+fun MethodChannel.Result.error(e: Exception) {
+    val errorCode = e.TAG
+    val errorMessage = e.localizedMessage
+    val errorDetails = e.stackTraceToString()
+    error(errorCode, errorMessage, errorDetails)
+}
+
+fun EventSink.error(errorCode: String, errorMessage: String) {
+    error(errorCode, errorMessage, null)
+}
+
+@Suppress("DEPRECATION")
+val Activity.rotation: Int
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) display!!.rotation
+    else windowManager.defaultDisplay.rotation
+
+val Activity.rotationDegrees: Int
+    get() {
+        return when (rotation) {
+            Surface.ROTATION_0 -> 0
+            Surface.ROTATION_90 -> 90
+            Surface.ROTATION_180 -> 180
+            Surface.ROTATION_270 -> 270
+            else -> throw IllegalArgumentException()
+        }
+    }
+
+val Activity.quarterTurns: Int
+    get() {
+        return when (rotation) {
+            Surface.ROTATION_0 -> 0
+            Surface.ROTATION_90 -> 3
+            Surface.ROTATION_180 -> 2
+            Surface.ROTATION_270 -> 1
+            else -> throw IllegalArgumentException()
+        }
+    }
+
+val Messages.CameraSelector.cameraxSelector: CameraSelector
+    get() {
+        return when (facing!!) {
+            Messages.CameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
+            Messages.CameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+            Messages.CameraFacing.UNRECOGNIZED -> throw NotImplementedError()
+        }
+    }
+
+val ImageProxy.bytes: ByteArray
+    get() {
+        val crop = this.cropRect
+        val cropWidth = crop.width()
+        val cropHeight = crop.height()
+        val pixelSize = cropWidth * cropHeight
+        val bitsPerPixel = ImageFormat.getBitsPerPixel(ImageFormat.YUV_420_888)
+        val byteBuffer = ByteBuffer.allocateDirect(pixelSize * bitsPerPixel / 8)
+        byteBuffer.rewind()
+        val bytes = byteBuffer.array()
+        planes.forEachIndexed { index, plane ->
+            val width: Int
+            val height: Int
+            // How many values are read in input for each output value written
+            // Only the Y plane has a value for every pixel, U and V have half the resolution i.e.
+            //
+            // Y Plane            U Plane    V Plane
+            // ===============    =======    =======
+            // Y Y Y Y Y Y Y Y    U U U U    V V V V
+            // Y Y Y Y Y Y Y Y    U U U U    V V V V
+            // Y Y Y Y Y Y Y Y    U U U U    V V V V
+            // Y Y Y Y Y Y Y Y    U U U U    V V V V
+            // Y Y Y Y Y Y Y Y
+            // Y Y Y Y Y Y Y Y
+            // Y Y Y Y Y Y Y Y
+            val stride: Int
+            // The index in the output buffer the next value will be written at
+            // For Y it's zero, for U and V we start at the end of Y and interleave them i.e.
+            //
+            // First chunk        Second chunk
+            // ===============    ===============
+            // Y Y Y Y Y Y Y Y    V U V U V U V U
+            // Y Y Y Y Y Y Y Y    V U V U V U V U
+            // Y Y Y Y Y Y Y Y    V U V U V U V U
+            // Y Y Y Y Y Y Y Y    V U V U V U V U
+            // Y Y Y Y Y Y Y Y
+            // Y Y Y Y Y Y Y Y
+            // Y Y Y Y Y Y Y Y
+            var offset: Int
+            when (index) {
+                0 -> {
+                    width = cropWidth
+                    height = cropHeight
+                    stride = 1
+                    offset = 0
+                }
+                1 -> {
+                    width = cropWidth / 2
+                    height = cropHeight / 2
+                    stride = 2
+                    // For NV21 format, U is in odd-numbered indices
+                    offset = pixelSize + 1
+                }
+                2 -> {
+                    width = cropWidth / 2
+                    height = cropHeight / 2
+                    stride = 2
+                    // For NV21 format, V is in even-numbered indices
+                    offset = pixelSize
+                }
+                else -> return@forEachIndexed
+            }
+            val buffer = plane.buffer
+            val rowStride = plane.rowStride
+            val pixelStride = plane.pixelStride
+            // Intermediate buffer used to store the bytes of each row
+            val rawBytes = ByteArray(plane.rowStride)
+            // Size of each row in bytes
+            val rowLength =
+                if (pixelStride == 1 && stride == 1) width
+                // Take into account that the stride may include data from pixels other than this
+                // particular plane and row, and that could be between pixels and not after every
+                // pixel:
+                //
+                // |---- Pixel stride ----|                    Row ends here --> |
+                // | Pixel 1 | Other Data | Pixel 2 | Other Data | ... | Pixel N |
+                //
+                // We need to get (N-1) * (pixel stride bytes) per row + 1 byte for the last pixel
+                else (width - 1) * pixelStride + 1
+            for (row in 0 until height) {
+                // Move buffer position to the beginning of this row
+                val newPosition = (row + crop.top) * rowStride + crop.left * pixelStride
+                buffer.position(newPosition)
+                if (pixelStride == 1 && stride == 1) {
+                    // When there is a single stride value for pixel and output, we can just copy
+                    // the entire row in a single step
+                    buffer.get(bytes, offset, rowLength)
+                    offset += rowLength
+                } else {
+                    // When either pixel or output have a stride > 1 we must copy pixel by pixel
+                    buffer.get(rawBytes, 0, rowLength)
+                    for (column in 0 until width) {
+                        bytes[offset] = rawBytes[column * pixelStride]
+                        offset += stride
+                    }
+                }
+            }
+        }
+        return bytes
+    }
+
+fun rotate90(nv21: ByteArray, width: Int, height: Int): ByteArray {
+    val yuv = ByteArray(width * height * 3 / 2)
+    // 旋转 Y 亮度分量
+    var i = 0
+    for (x in 0 until width) {
+        for (y in height - 1 downTo 0) {
+            yuv[i] = nv21[y * width + x]
+            i++
+        }
+    }
+    // 旋转 U, V 色度分量
+    i = width * height * 3 / 2 - 1
+    var x = width - 1
+    while (x > 0) {
+        for (y in 0 until height / 2) {
+            yuv[i] = nv21[width * height + y * width + x]
+            i--
+            yuv[i] = nv21[width * height + y * width + (x - 1)]
+            i--
+        }
+        x -= 2
+    }
+    return yuv
+}
+
+fun rotate180(nv21: ByteArray, width: Int, height: Int): ByteArray {
+    val yuv = ByteArray(width * height * 3 / 2)
+    // 旋转 Y 亮度分量
+    var count = 0
+    var i = width * height - 1
+    while (i >= 0) {
+        yuv[count] = nv21[i]
+        count++
+        i--
+    }
+    // 旋转 U, V 色度分量
+    i = width * height * 3 / 2 - 1
+    while (i >= width * height) {
+        yuv[count++] = nv21[i - 1]
+        yuv[count++] = nv21[i]
+        i -= 2
+    }
+    return yuv
+}
+
+fun rotate270(nv21: ByteArray, width: Int, height: Int): ByteArray {
+    val yuv = ByteArray(width * height * 3 / 2)
+    // 旋转 Y 亮度分量
+    var i = 0
+    for (x in width - 1 downTo 0) {
+        for (y in 0 until width) {
+            yuv[i] = nv21[y * width + x]
+            i++
+        }
+    }
+    // 旋转 U, V 色度分量
+    i = width * height
+    var x = width - 1
+    while (x > 0) {
+        for (y in 0 until height / 2) {
+            yuv[i] = nv21[width * height + y * width + (x - 1)]
+            i++
+            yuv[i] = nv21[width * height + y * width + x]
+            i++
+        }
+        x -= 2
+    }
+    return yuv
 }

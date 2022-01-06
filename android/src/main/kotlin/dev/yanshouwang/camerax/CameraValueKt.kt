@@ -23,75 +23,105 @@ public object CameraValueKt {
     internal fun _build(): dev.yanshouwang.camerax.Messages.CameraValue = _builder.build()
 
     /**
-     * <code>.messages.TextureValue texture_value = 1;</code>
+     * <code>int32 texture_id = 1;</code>
      */
-    public var textureValue: dev.yanshouwang.camerax.Messages.TextureValue
-      @JvmName("getTextureValue")
-      get() = _builder.getTextureValue()
-      @JvmName("setTextureValue")
+    public var textureId: kotlin.Int
+      @JvmName("getTextureId")
+      get() = _builder.getTextureId()
+      @JvmName("setTextureId")
       set(value) {
-        _builder.setTextureValue(value)
+        _builder.setTextureId(value)
       }
     /**
-     * <code>.messages.TextureValue texture_value = 1;</code>
+     * <code>int32 texture_id = 1;</code>
      */
-    public fun clearTextureValue() {
-      _builder.clearTextureValue()
-    }
-    /**
-     * <code>.messages.TextureValue texture_value = 1;</code>
-     * @return Whether the textureValue field is set.
-     */
-    public fun hasTextureValue(): kotlin.Boolean {
-      return _builder.hasTextureValue()
+    public fun clearTextureId() {
+      _builder.clearTextureId()
     }
 
     /**
-     * <code>.messages.TorchValue torch_value = 2;</code>
+     * <code>int32 texture_width = 2;</code>
      */
-    public var torchValue: dev.yanshouwang.camerax.Messages.TorchValue
-      @JvmName("getTorchValue")
-      get() = _builder.getTorchValue()
-      @JvmName("setTorchValue")
+    public var textureWidth: kotlin.Int
+      @JvmName("getTextureWidth")
+      get() = _builder.getTextureWidth()
+      @JvmName("setTextureWidth")
       set(value) {
-        _builder.setTorchValue(value)
+        _builder.setTextureWidth(value)
       }
     /**
-     * <code>.messages.TorchValue torch_value = 2;</code>
+     * <code>int32 texture_width = 2;</code>
      */
-    public fun clearTorchValue() {
-      _builder.clearTorchValue()
-    }
-    /**
-     * <code>.messages.TorchValue torch_value = 2;</code>
-     * @return Whether the torchValue field is set.
-     */
-    public fun hasTorchValue(): kotlin.Boolean {
-      return _builder.hasTorchValue()
+    public fun clearTextureWidth() {
+      _builder.clearTextureWidth()
     }
 
     /**
-     * <code>.messages.ZoomValue zoom_value = 3;</code>
+     * <code>int32 texture_height = 3;</code>
      */
-    public var zoomValue: dev.yanshouwang.camerax.Messages.ZoomValue
-      @JvmName("getZoomValue")
-      get() = _builder.getZoomValue()
-      @JvmName("setZoomValue")
+    public var textureHeight: kotlin.Int
+      @JvmName("getTextureHeight")
+      get() = _builder.getTextureHeight()
+      @JvmName("setTextureHeight")
       set(value) {
-        _builder.setZoomValue(value)
+        _builder.setTextureHeight(value)
       }
     /**
-     * <code>.messages.ZoomValue zoom_value = 3;</code>
+     * <code>int32 texture_height = 3;</code>
      */
-    public fun clearZoomValue() {
-      _builder.clearZoomValue()
+    public fun clearTextureHeight() {
+      _builder.clearTextureHeight()
     }
+
     /**
-     * <code>.messages.ZoomValue zoom_value = 3;</code>
-     * @return Whether the zoomValue field is set.
+     * <code>bool torch_available = 4;</code>
      */
-    public fun hasZoomValue(): kotlin.Boolean {
-      return _builder.hasZoomValue()
+    public var torchAvailable: kotlin.Boolean
+      @JvmName("getTorchAvailable")
+      get() = _builder.getTorchAvailable()
+      @JvmName("setTorchAvailable")
+      set(value) {
+        _builder.setTorchAvailable(value)
+      }
+    /**
+     * <code>bool torch_available = 4;</code>
+     */
+    public fun clearTorchAvailable() {
+      _builder.clearTorchAvailable()
+    }
+
+    /**
+     * <code>double zoom_minimum = 5;</code>
+     */
+    public var zoomMinimum: kotlin.Double
+      @JvmName("getZoomMinimum")
+      get() = _builder.getZoomMinimum()
+      @JvmName("setZoomMinimum")
+      set(value) {
+        _builder.setZoomMinimum(value)
+      }
+    /**
+     * <code>double zoom_minimum = 5;</code>
+     */
+    public fun clearZoomMinimum() {
+      _builder.clearZoomMinimum()
+    }
+
+    /**
+     * <code>double zoom_maximum = 6;</code>
+     */
+    public var zoomMaximum: kotlin.Double
+      @JvmName("getZoomMaximum")
+      get() = _builder.getZoomMaximum()
+      @JvmName("setZoomMaximum")
+      set(value) {
+        _builder.setZoomMaximum(value)
+      }
+    /**
+     * <code>double zoom_maximum = 6;</code>
+     */
+    public fun clearZoomMaximum() {
+      _builder.clearZoomMaximum()
     }
   }
 }

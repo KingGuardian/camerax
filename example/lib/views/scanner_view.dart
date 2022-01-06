@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:camerax/camerax.dart';
 import 'package:camerax_example/main.dart';
+import 'package:camerax_example/models.dart';
 import 'package:flutter/material.dart';
 
 class ScannerView extends StatefulWidget {
@@ -16,32 +16,26 @@ Completer<void> disposed = Completer()..complete();
 
 class _ScannerViewState extends State<ScannerView>
     with SingleTickerProviderStateMixin {
-  late CameraController cameraController;
+  late ValueNotifier<TorchState> torchStateNotifier;
   late AnimationController animationConrtroller;
   late Animation<double> offsetAnimation;
   late Animation<double> opacityAnimation;
-  late StreamSubscription<ImageProxy> imageProxySubscription;
+  late StreamSubscription<ImageProxy> imageProxiedSubscription;
 
   @override
   void initState() {
-    log('-------------------- INIT_STATE -------------------');
     super.initState();
-    cameraController = myAppKey.currentState!.cameraController;
+    torchStateNotifier = ValueNotifier(TorchState.torchedOff);
     animationConrtroller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    subscribe();
-    setup();
-  }
-
-  void subscribe() {
-    imageProxySubscription =
-        cameraController.imageProxy.listen((imageProxy) {});
-  }
-
-  Future<void> setup() async {
+    imageProxiedSubscription = cameraController.imageProxied.listen(analyze);
     animationConrtroller.repeat();
+    initAsync();
+  }
+
+  Future<void> initAsync() async {
     // try {
     //   final barcode = await cameraController.barcodes.first;
     //   display(barcode);
@@ -50,12 +44,16 @@ class _ScannerViewState extends State<ScannerView>
     // }
   }
 
+  void analyze(ImageProxy imageProxy) {}
+
   // void display(Barcode barcode) {
   //   Navigator.of(context).popAndPushNamed('display', arguments: barcode);
   // }
 
   @override
   Widget build(BuildContext context) {
+    final cameraValue =
+        ModalRoute.of(context)!.settings.arguments as CameraValue;
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation = CurvedAnimation(
       parent: animationConrtroller,
@@ -67,8 +65,37 @@ class _ScannerViewState extends State<ScannerView>
         children: [
           // 相机
           CameraView(
-            controller: cameraController,
-            focusMode: FocusMode.auto,
+            cameraValue: cameraValue,
+          ),
+          // 闪光灯
+          Container(
+            margin: const EdgeInsets.only(bottom: 80.0),
+            alignment: Alignment.bottomCenter,
+            child: ValueListenableBuilder<TorchState>(
+              valueListenable: torchStateNotifier,
+              builder: (context, torchState, child) {
+                final torchAvailable = cameraValue.torchAvailable;
+                final color = torchState == TorchState.torchedOn
+                    ? Colors.white
+                    : Colors.grey;
+                return IconButton(
+                  icon: Icon(Icons.bolt, color: color),
+                  iconSize: 32.0,
+                  onPressed: torchAvailable && torchState != TorchState.torching
+                      ? () async {
+                          torchStateNotifier.value = TorchState.torching;
+                          if (torchState == TorchState.torchedOff) {
+                            await cameraController.torch(true);
+                            torchStateNotifier.value = TorchState.torchedOn;
+                          } else {
+                            await cameraController.torch(false);
+                            torchStateNotifier.value = TorchState.torchedOff;
+                          }
+                        }
+                      : null,
+                );
+              },
+            ),
           ),
           // 扫描线
           AnimatedBuilder(
@@ -92,29 +119,6 @@ class _ScannerViewState extends State<ScannerView>
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
-          // 闪光灯
-          Container(
-            margin: const EdgeInsets.only(bottom: 80.0),
-            alignment: Alignment.bottomCenter,
-            child: ValueListenableBuilder<CameraValue?>(
-              valueListenable: cameraController.valueListenable,
-              builder: (context, cameraValue, child) {
-                final torchAvailable =
-                    cameraValue?.torchValue.available ?? false;
-                final torchState = cameraValue?.torchValue.state ?? false;
-                final color = torchState ? Colors.white : Colors.grey;
-                return IconButton(
-                  icon: Icon(Icons.bolt, color: color),
-                  iconSize: 32.0,
-                  onPressed: torchAvailable
-                      ? () async {
-                          await cameraController.torch(!torchState);
-                        }
-                      : null,
-                );
-              },
-            ),
-          ),
         ],
       ),
     );
@@ -122,8 +126,7 @@ class _ScannerViewState extends State<ScannerView>
 
   @override
   void dispose() {
-    log('-------------------- DISPOSE -------------------');
-    imageProxySubscription.cancel();
+    imageProxiedSubscription.cancel();
     animationConrtroller.dispose();
     super.dispose();
   }

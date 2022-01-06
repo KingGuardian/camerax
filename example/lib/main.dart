@@ -6,11 +6,11 @@ import 'package:camerax_example/views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+final cameraController = CameraController(CameraSelector.back);
+
 void main() {
   runZonedGuarded(onStartup, onCrashed);
 }
-
-final myAppKey = GlobalKey<MyAppState>();
 
 void onStartup() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +20,7 @@ void onStartup() async {
     statusBarColor: Colors.transparent,
   );
   SystemChrome.setSystemUIOverlayStyle(style);
-  final app = MyApp(
-    key: myAppKey,
-  );
+  const app = MyApp();
   runApp(app);
 }
 
@@ -31,23 +29,8 @@ void onCrashed(Object error, StackTrace stack) {
   developer.log(message);
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => MyAppState();
-}
-
-class MyAppState extends State<MyApp> {
-  late CameraController cameraController;
-
-  @override
-  void initState() {
-    super.initState();
-    cameraController = CameraController(
-      selector: CameraSelector.back,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +46,5 @@ class MyAppState extends State<MyApp> {
       },
       initialRoute: 'home',
     );
-  }
-
-  @override
-  void dispose() {
-    cameraController.dispose();
-    super.dispose();
   }
 }

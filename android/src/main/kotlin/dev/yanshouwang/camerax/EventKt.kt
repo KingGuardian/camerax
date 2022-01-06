@@ -40,95 +40,58 @@ public object EventKt {
     }
 
     /**
-     * <code>int32 quarter_turns = 2;</code>
+     * <code>.messages.QuarterTurnsChangedEventArguments quarter_turns_changed_arguments = 2;</code>
      */
-    public var quarterTurns: kotlin.Int
-      @JvmName("getQuarterTurns")
-      get() = _builder.getQuarterTurns()
-      @JvmName("setQuarterTurns")
+    public var quarterTurnsChangedArguments: dev.yanshouwang.camerax.Messages.QuarterTurnsChangedEventArguments
+      @JvmName("getQuarterTurnsChangedArguments")
+      get() = _builder.getQuarterTurnsChangedArguments()
+      @JvmName("setQuarterTurnsChangedArguments")
       set(value) {
-        _builder.setQuarterTurns(value)
+        _builder.setQuarterTurnsChangedArguments(value)
       }
     /**
-     * <code>int32 quarter_turns = 2;</code>
+     * <code>.messages.QuarterTurnsChangedEventArguments quarter_turns_changed_arguments = 2;</code>
      */
-    public fun clearQuarterTurns() {
-      _builder.clearQuarterTurns()
+    public fun clearQuarterTurnsChangedArguments() {
+      _builder.clearQuarterTurnsChangedArguments()
+    }
+    /**
+     * <code>.messages.QuarterTurnsChangedEventArguments quarter_turns_changed_arguments = 2;</code>
+     * @return Whether the quarterTurnsChangedArguments field is set.
+     */
+    public fun hasQuarterTurnsChangedArguments(): kotlin.Boolean {
+      return _builder.hasQuarterTurnsChangedArguments()
     }
 
     /**
-     * <code>string uuid = 3;</code>
+     * <code>.messages.CameraControllerImageProxiedEventArguments camera_controller_image_proxied_arguments = 3;</code>
      */
-    public var uuid: kotlin.String
-      @JvmName("getUuid")
-      get() = _builder.getUuid()
-      @JvmName("setUuid")
+    public var cameraControllerImageProxiedArguments: dev.yanshouwang.camerax.Messages.CameraControllerImageProxiedEventArguments
+      @JvmName("getCameraControllerImageProxiedArguments")
+      get() = _builder.getCameraControllerImageProxiedArguments()
+      @JvmName("setCameraControllerImageProxiedArguments")
       set(value) {
-        _builder.setUuid(value)
+        _builder.setCameraControllerImageProxiedArguments(value)
       }
     /**
-     * <code>string uuid = 3;</code>
+     * <code>.messages.CameraControllerImageProxiedEventArguments camera_controller_image_proxied_arguments = 3;</code>
      */
-    public fun clearUuid() {
-      _builder.clearUuid()
+    public fun clearCameraControllerImageProxiedArguments() {
+      _builder.clearCameraControllerImageProxiedArguments()
     }
+    /**
+     * <code>.messages.CameraControllerImageProxiedEventArguments camera_controller_image_proxied_arguments = 3;</code>
+     * @return Whether the cameraControllerImageProxiedArguments field is set.
+     */
+    public fun hasCameraControllerImageProxiedArguments(): kotlin.Boolean {
+      return _builder.hasCameraControllerImageProxiedArguments()
+    }
+    public val argumentsCase: dev.yanshouwang.camerax.Messages.Event.ArgumentsCase
+      @JvmName("getArgumentsCase")
+      get() = _builder.getArgumentsCase()
 
-    /**
-     * <code>bool torch_state = 4;</code>
-     */
-    public var torchState: kotlin.Boolean
-      @JvmName("getTorchState")
-      get() = _builder.getTorchState()
-      @JvmName("setTorchState")
-      set(value) {
-        _builder.setTorchState(value)
-      }
-    /**
-     * <code>bool torch_state = 4;</code>
-     */
-    public fun clearTorchState() {
-      _builder.clearTorchState()
-    }
-
-    /**
-     * <code>double zoom_value = 5;</code>
-     */
-    public var zoomValue: kotlin.Double
-      @JvmName("getZoomValue")
-      get() = _builder.getZoomValue()
-      @JvmName("setZoomValue")
-      set(value) {
-        _builder.setZoomValue(value)
-      }
-    /**
-     * <code>double zoom_value = 5;</code>
-     */
-    public fun clearZoomValue() {
-      _builder.clearZoomValue()
-    }
-
-    /**
-     * <code>.messages.ImageProxy image_proxy = 6;</code>
-     */
-    public var imageProxy: dev.yanshouwang.camerax.Messages.ImageProxy
-      @JvmName("getImageProxy")
-      get() = _builder.getImageProxy()
-      @JvmName("setImageProxy")
-      set(value) {
-        _builder.setImageProxy(value)
-      }
-    /**
-     * <code>.messages.ImageProxy image_proxy = 6;</code>
-     */
-    public fun clearImageProxy() {
-      _builder.clearImageProxy()
-    }
-    /**
-     * <code>.messages.ImageProxy image_proxy = 6;</code>
-     * @return Whether the imageProxy field is set.
-     */
-    public fun hasImageProxy(): kotlin.Boolean {
-      return _builder.hasImageProxy()
+    public fun clearArguments() {
+      _builder.clearArguments()
     }
   }
 }

@@ -5,24 +5,99 @@ option java_package = "dev.yanshouwang.camerax";
 
 message Command {
   CommandCategory category = 1;
-  CameraSelector selector = 2;
-  string uuid = 3;
-  bool torch_state = 4;
-  double zoom_value = 5;
-  Size size = 6;
-  Offset offset = 7;
+  oneof arguments {
+    CameraControllerBindCommandArguments camera_controller_bind_arguments = 2;
+    CameraControllerUnbindCommandArguments camera_controller_unbind_arguments = 3;
+    CameraControllerTorchCommandArguments camera_controller_torch_arguments = 4;
+    CameraControllerZoomCommandArguments camera_controller_zoom_arguments = 5;
+    CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;
+    CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;
+    ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;
+  }
 }
 
 enum CommandCategory {
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_CREATE = 0;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN = 1;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE = 2;
+  COMMAND_CATEGORY_GET_QUARTER_TURNS = 0;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND = 1;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND = 2;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 5;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 6;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_DISPOSE = 7;
-  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;
+  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 7;
+}
+
+message CameraControllerBindCommandArguments {
+  string id = 1;
+  CameraSelector selector = 2;
+}
+
+message CameraControllerUnbindCommandArguments {
+  string id = 1;
+}
+
+message CameraControllerTorchCommandArguments {
+  string id = 1;
+  bool state = 2;
+}
+
+message CameraControllerZoomCommandArguments {
+  string id = 1;
+  double value = 2;
+}
+
+message CameraControllerFocusAutomaticallyCommandArguments {
+  string id = 1;
+}
+
+message CameraControllerFocusManuallyCommandArguments {
+  string id = 1;
+  double width = 2;
+  double height = 3;
+  double x = 4;
+  double y = 5;
+}
+
+message ImageProxyCloseCommandArguments {
+  string controller_id = 1;
+  string id = 2;
+}
+
+message Reply {
+  oneof arguments {
+    GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;
+    CameraControllerBindReplyArguments camera_controller_bind_arguments = 2;
+  }
+}
+
+message GetQuarterTurnsReplyArguments {
+  int32 quarter_turns = 1;
+}
+
+message CameraControllerBindReplyArguments {
+  CameraValue camera_value = 1;
+}
+
+message Event {
+  EventCategory category = 1;
+  oneof arguments {
+    QuarterTurnsChangedEventArguments quarter_turns_changed_arguments = 2;
+    CameraControllerImageProxiedEventArguments camera_controller_image_proxied_arguments = 3;
+  }
+}
+
+enum EventCategory {
+  EVENT_CATEGORY_QUARTER_TURNS_CHANGED = 0;
+  EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED = 1;
+}
+
+message QuarterTurnsChangedEventArguments {
+  int32 quarter_turns = 1;
+}
+
+message CameraControllerImageProxiedEventArguments {
+  string id = 1;
+  ImageProxy image_proxy = 2;
 }
 
 message CameraSelector {
@@ -35,57 +110,16 @@ enum CameraFacing {
 }
 
 message CameraValue {
-  TextureValue texture_value = 1;
-  TorchValue torch_value = 2;
-  ZoomValue zoom_value = 3;
-}
-
-message TextureValue {
-  int32 id = 1;
-  int32 width = 2;
-  int32 height = 3;
-  int32 quarter_turns = 4;
-}
-
-message TorchValue {
-  bool available = 1;
-  bool state = 2;
-}
-
-message ZoomValue {
-  double minimum = 1;
-  double maximum = 2;
-  double value = 3;
-}
-
-message Size {
-  double width = 1;
-  double height = 2;
-}
-
-message Offset {
-  double x = 1;
-  double y = 2;
-}
-
-message Event {
-  EventCategory category = 1;
-  int32 quarter_turns = 2;
-  string uuid = 3;
-  bool torch_state = 4;
-  double zoom_value = 5;
-  ImageProxy image_proxy = 6;
-}
-
-enum EventCategory {
-  EVENT_CATEGORY_QUARTER_TURNS = 0;
-  EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE = 1;
-  EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 2;
-  EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY = 3;
+  int32 texture_id = 1;
+  int32 texture_width = 2;
+  int32 texture_height = 3;
+  bool torch_available = 4;
+  double zoom_minimum = 5;
+  double zoom_maximum = 6;
 }
 
 message ImageProxy {
-  string uuid = 1;
+  string id = 1;
   bytes data = 2;
   int32 width = 3;
   int32 height = 4;

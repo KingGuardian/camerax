@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 
 import 'camera_implementation.dart';
 import 'camera_selector.dart';
@@ -9,18 +6,15 @@ import 'camera_value.dart';
 import 'image_proxy.dart';
 
 abstract class CameraController {
-  ValueListenable<CameraValue?> get valueListenable;
-
-  factory CameraController({required CameraSelector selector}) =>
+  factory CameraController(CameraSelector selector) =>
       $CameraController(selector);
 
-  Stream<ImageProxy> get imageProxy;
+  Stream<ImageProxy> get imageProxied;
 
-  Future<void> open();
-  Future<void> close();
+  Future<CameraValue> bind();
+  Future<void> unbind();
   Future<void> torch(bool state);
   Future<void> zoom(double value);
   Future<void> focusAutomatically();
-  Future<void> focusManually(Size size, Offset offset);
-  void dispose();
+  Future<void> focusManually(double width, double height, double x, double y);
 }

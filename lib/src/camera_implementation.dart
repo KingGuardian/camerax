@@ -1,213 +1,119 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:flutter/widgets.dart';
-
-import 'focus_mode.dart';
-import 'messages.pb.dart' as messages;
-
 import 'camera_controller.dart';
 import 'camera_facing.dart';
 import 'camera_selector.dart';
 import 'camera_value.dart';
+import 'channels.dart';
 import 'image_proxy.dart';
-import 'texture_value.dart';
-import 'torch_value.dart';
-import 'util.dart';
-import 'zoom_value.dart';
+import 'messages.dart' as messages;
 
 class $CameraController implements CameraController {
   final CameraSelector selector;
-  // Here we use a completer to call methods after created.
-  final Completer<void> created;
+
+  String get id => '$hashCode';
+
+  $CameraController(this.selector);
+
   @override
-  final ValueNotifier<$CameraValue?> valueListenable;
-
-  late StreamSubscription<int> quarterTurnsSubscription;
-  late StreamSubscription<bool> torchStateSubscription;
-  late StreamSubscription<double> zoomValueSubscription;
-
-  String? uuid;
-
-  $CameraController(this.selector)
-      : created = Completer(),
-        valueListenable = ValueNotifier(null) {
-    subsrcibe();
-    create();
-  }
-
-  void subsrcibe() async {
-    // 监听屏幕旋转
-    quarterTurnsSubscription = event
-        .where((event) =>
-            event.category ==
-            messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS)
-        .map((event) => event.quarterTurns)
-        .listen((quarterTurns) {
-      valueListenable.value = valueListenable.value?.copyWith(
-        textureValue: valueListenable.value!.textureValue.copyWith(
-          quarterTurns: quarterTurns,
-        ),
-      );
-    });
-    // 监听闪光灯状态
-    torchStateSubscription = event
+  Stream<ImageProxy> get imageProxied {
+    return eventStream
         .where((event) =>
             event.category ==
                 messages.EventCategory
-                    .EVENT_CATEGORY_CAMERA_CONTROLLER_TORCH_STATE &&
-            event.uuid == uuid)
-        .map((event) => event.torchState)
-        .listen((trochState) {
-      valueListenable.value = valueListenable.value?.copyWith(
-        torchValue: valueListenable.value!.torchValue.copyWith(
-          state: trochState,
+                    .EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED &&
+            event.cameraControllerImageProxiedArguments.id == id)
+        .map((notification) => $ImageProxy.fromMessage(
+            id, notification.cameraControllerImageProxiedArguments.imageProxy));
+  }
+
+  @override
+  Future<CameraValue> bind() {
+    final command = messages.Command(
+      category:
+          messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND,
+      cameraControllerBindArguments:
+          messages.CameraControllerBindCommandArguments(
+        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
         ),
-      );
-    });
-    // 监听相机焦距
-    zoomValueSubscription = event
-        .where((event) =>
-            event.category ==
-                messages.EventCategory
-                    .EVENT_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE &&
-            event.uuid == uuid)
-        .map((event) => event.zoomValue)
-        .listen((zoomValue) {
-      valueListenable.value = valueListenable.value?.copyWith(
-        zoomValue: valueListenable.value!.zoomValue.copyWith(
-          value: zoomValue,
-        ),
-      );
-    });
+      ),
+    );
+    return methodChannel.invokeCommand(command).then((reply) => $CameraValue
+        .fromMessage(reply!.cameraControllerBindArguments.cameraValue));
   }
 
-  void unsubsrcibe() async {
-    // 停止监听焦距
-    await zoomValueSubscription.cancel();
-    // 停止监听闪光灯状态
-    await torchStateSubscription.cancel();
-    // 停止监听屏幕旋转
-    await quarterTurnsSubscription.cancel();
-  }
-
-  void create() async {
+  @override
+  Future<void> unbind() {
     final command = messages.Command(
       category:
-          messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CREATE,
-      selector: selector.toMessage(),
+          messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND,
+      cameraControllerUnbindArguments:
+          messages.CameraControllerUnbindCommandArguments(
+        id: id,
+      ),
     );
-    try {
-      uuid = await methodChannel
-          .invokeCommand<String>(command)
-          .then((uuid) => uuid!);
-      created.complete();
-    } catch (e) {
-      created.completeError(e);
-    }
+    return methodChannel.invokeCommand(command);
   }
 
   @override
-  Stream<ImageProxy> get imageProxy {
-    return event
-        .where((event) =>
-            event.category ==
-                messages.EventCategory
-                    .EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXY &&
-            event.uuid == uuid)
-        .map((event) => $ImageProxy.fromMessage(event.imageProxy));
-  }
-
-  @override
-  Future<void> open() async {
-    await created.future;
-    final command = messages.Command(
-      category:
-          messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_OPEN,
-      uuid: uuid,
-    );
-    valueListenable.value = await methodChannel
-        .invokeCommand<Uint8List>(command)
-        .then((protoBuffer) => $CameraValue.fromProtobuf(protoBuffer!));
-  }
-
-  @override
-  Future<void> close() async {
-    await created.future;
-    final command = messages.Command(
-      category:
-          messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CLOSE,
-      uuid: uuid,
-    );
-    await methodChannel.invokeCommand<void>(command);
-    valueListenable.value = null;
-  }
-
-  @override
-  Future<void> torch(bool state) async {
-    await created.future;
+  Future<void> torch(bool state) {
     final command = messages.Command(
       category:
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH,
-      uuid: uuid,
-      torchState: state,
+      cameraControllerTorchArguments:
+          messages.CameraControllerTorchCommandArguments(
+        id: id,
+        state: state,
+      ),
     );
-    await methodChannel.invokeCommand<void>(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
-  Future<void> zoom(double value) async {
-    await created.future;
+  Future<void> zoom(double value) {
     final command = messages.Command(
       category:
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM,
-      uuid: uuid,
-      zoomValue: value,
+      cameraControllerZoomArguments:
+          messages.CameraControllerZoomCommandArguments(
+        id: id,
+        value: value,
+      ),
     );
-    await methodChannel.invokeCommand<void>(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
-  Future<void> focusAutomatically() async {
-    await created.future;
+  Future<void> focusAutomatically() {
     final command = messages.Command(
       category: messages.CommandCategory
           .COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY,
-      uuid: uuid,
+      cameraControllerFocusAutomaticallyArguments:
+          messages.CameraControllerFocusAutomaticallyCommandArguments(
+        id: id,
+      ),
     );
-    await methodChannel.invokeCommand<void>(command);
-    valueListenable.value =
-        valueListenable.value?.copyWith(focusMode: FocusMode.auto);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
-  Future<void> focusManually(Size size, Offset offset) async {
-    await created.future;
+  Future<void> focusManually(double width, double height, double x, double y) {
     final command = messages.Command(
       category: messages
           .CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY,
-      uuid: uuid,
-      size: size.toMessage(),
-      offset: offset.toMessage(),
+      cameraControllerFocusManuallyArguments:
+          messages.CameraControllerFocusManuallyCommandArguments(
+        id: id,
+        width: width,
+        height: height,
+        x: x,
+        y: y,
+      ),
     );
-    await methodChannel.invokeCommand<void>(command);
-    valueListenable.value =
-        valueListenable.value?.copyWith(focusMode: FocusMode.manual);
-  }
-
-  @override
-  void dispose() async {
-    try {
-      await created.future;
-      final command = messages.Command(
-        category:
-            messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_DISPOSE,
-      );
-      await methodChannel.invokeCommand<void>(command);
-    } finally {
-      unsubsrcibe();
-      valueListenable.dispose();
-    }
+    return methodChannel.invokeCommand(command);
   }
 }
 
@@ -220,133 +126,48 @@ class $CameraSelector implements CameraSelector {
 
 class $CameraValue implements CameraValue {
   @override
-  final $TextureValue textureValue;
+  final int textureId;
   @override
-  final $TorchValue torchValue;
+  final int textureWidth;
   @override
-  final $ZoomValue zoomValue;
+  final int textureHeight;
   @override
-  final FocusMode focusMode;
+  final bool torchAvailable;
+  @override
+  final double zoomMinimum;
+  @override
+  final double zoomMaximum;
 
-  const $CameraValue({
-    required this.textureValue,
-    required this.torchValue,
-    required this.zoomValue,
-    this.focusMode = FocusMode.auto,
-  });
-
-  factory $CameraValue.fromProtobuf(Uint8List protoBuffer) {
-    final cameraValue = messages.CameraValue.fromBuffer(protoBuffer);
-    final textureValue = $TextureValue.fromMessage(cameraValue.textureValue);
-    final torchValue = $TorchValue.fromMessage(cameraValue.torchValue);
-    final zoomValue = $ZoomValue.fromMessage(cameraValue.zoomValue);
-    return $CameraValue(
-      textureValue: textureValue,
-      torchValue: torchValue,
-      zoomValue: zoomValue,
-    );
-  }
-
-  $CameraValue copyWith({
-    $TextureValue? textureValue,
-    $TorchValue? torchValue,
-    $ZoomValue? zoomValue,
-    FocusMode? focusMode,
-  }) {
-    textureValue ??= this.textureValue;
-    torchValue ??= this.torchValue;
-    zoomValue ??= this.zoomValue;
-    focusMode ??= this.focusMode;
-    return $CameraValue(
-      textureValue: textureValue,
-      torchValue: torchValue,
-      zoomValue: zoomValue,
-      focusMode: focusMode,
-    );
-  }
-}
-
-class $TextureValue implements TextureValue {
-  @override
-  final int id;
-  @override
-  final int width;
-  @override
-  final int height;
-  @override
-  final int quarterTurns;
-
-  const $TextureValue(
-    this.id,
-    this.width,
-    this.height,
-    this.quarterTurns,
+  const $CameraValue(
+    this.textureId,
+    this.textureWidth,
+    this.textureHeight,
+    this.torchAvailable,
+    this.zoomMinimum,
+    this.zoomMaximum,
   );
 
-  factory $TextureValue.fromMessage(messages.TextureValue textureValue) {
-    final id = textureValue.id;
-    final width = textureValue.width;
-    final height = textureValue.height;
-    final quarterTurns = textureValue.quarterTurns;
-    return $TextureValue(id, width, height, quarterTurns);
-  }
-
-  $TextureValue copyWith({int? quarterTurns}) {
-    quarterTurns ??= this.quarterTurns;
-    return $TextureValue(
-      id,
-      width,
-      height,
-      quarterTurns,
+  factory $CameraValue.fromMessage(messages.CameraValue cameraValue) {
+    final textureId = cameraValue.textureId;
+    final textureWidth = cameraValue.textureWidth;
+    final textureHeight = cameraValue.textureHeight;
+    final torchAvailable = cameraValue.torchAvailable;
+    final zoomMinimum = cameraValue.zoomMinimum;
+    final zoomMaximum = cameraValue.zoomMaximum;
+    return $CameraValue(
+      textureId,
+      textureWidth,
+      textureHeight,
+      torchAvailable,
+      zoomMinimum,
+      zoomMaximum,
     );
-  }
-}
-
-class $TorchValue implements TorchValue {
-  @override
-  final bool available;
-  @override
-  final bool state;
-
-  const $TorchValue(this.available, this.state);
-
-  factory $TorchValue.fromMessage(messages.TorchValue torchValue) {
-    final available = torchValue.available;
-    final state = torchValue.state;
-    return $TorchValue(available, state);
-  }
-
-  $TorchValue copyWith({bool? state}) {
-    state ??= this.state;
-    return $TorchValue(available, state);
-  }
-}
-
-class $ZoomValue implements ZoomValue {
-  @override
-  final double minimum;
-  @override
-  final double maximum;
-  @override
-  final double value;
-
-  const $ZoomValue(this.minimum, this.maximum, this.value);
-
-  factory $ZoomValue.fromMessage(messages.ZoomValue zoomValue) {
-    final minimum = zoomValue.minimum;
-    final maximum = zoomValue.maximum;
-    final value = zoomValue.value;
-    return $ZoomValue(minimum, maximum, value);
-  }
-
-  $ZoomValue copyWith({double? value}) {
-    value ??= this.value;
-    return $ZoomValue(minimum, maximum, value);
   }
 }
 
 class $ImageProxy implements ImageProxy {
-  final String uuid;
+  final String controllerId;
+  final String id;
   @override
   final Uint8List data;
   @override
@@ -355,45 +176,33 @@ class $ImageProxy implements ImageProxy {
   final int height;
 
   const $ImageProxy(
-    this.uuid,
+    this.controllerId,
+    this.id,
     this.data,
     this.width,
     this.height,
   );
 
-  factory $ImageProxy.fromMessage(messages.ImageProxy imageProxy) {
-    final uuid = imageProxy.uuid;
+  factory $ImageProxy.fromMessage(
+    String controllerId,
+    messages.ImageProxy imageProxy,
+  ) {
+    final id = imageProxy.id;
     final data = Uint8List.fromList(imageProxy.data);
     final width = imageProxy.width;
     final height = imageProxy.height;
-    return $ImageProxy(uuid, data, width, height);
+    return $ImageProxy(controllerId, id, data, width, height);
   }
 
   @override
-  Future<void> close() async {
+  Future<void> close() {
     final command = messages.Command(
       category: messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE,
-      uuid: uuid,
+      imageProxyCloseArguments: messages.ImageProxyCloseCommandArguments(
+        controllerId: controllerId,
+        id: id,
+      ),
     );
-    await methodChannel.invokeCommand<void>(command);
-  }
-}
-
-extension on CameraSelector {
-  messages.CameraSelector toMessage() {
-    final facing = messages.CameraFacing.values[this.facing.index];
-    return messages.CameraSelector(facing: facing);
-  }
-}
-
-extension on Size {
-  messages.Size toMessage() {
-    return messages.Size(width: width, height: height);
-  }
-}
-
-extension on Offset {
-  messages.Offset toMessage() {
-    return messages.Offset(x: dx, y: dy);
+    return methodChannel.invokeCommand(command);
   }
 }

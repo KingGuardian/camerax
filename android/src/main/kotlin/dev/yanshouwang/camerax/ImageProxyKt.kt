@@ -23,20 +23,20 @@ public object ImageProxyKt {
     internal fun _build(): dev.yanshouwang.camerax.Messages.ImageProxy = _builder.build()
 
     /**
-     * <code>string uuid = 1;</code>
+     * <code>string id = 1;</code>
      */
-    public var uuid: kotlin.String
-      @JvmName("getUuid")
-      get() = _builder.getUuid()
-      @JvmName("setUuid")
+    public var id: kotlin.String
+      @JvmName("getId")
+      get() = _builder.getId()
+      @JvmName("setId")
       set(value) {
-        _builder.setUuid(value)
+        _builder.setId(value)
       }
     /**
-     * <code>string uuid = 1;</code>
+     * <code>string id = 1;</code>
      */
-    public fun clearUuid() {
-      _builder.clearUuid()
+    public fun clearId() {
+      _builder.clearId()
     }
 
     /**
