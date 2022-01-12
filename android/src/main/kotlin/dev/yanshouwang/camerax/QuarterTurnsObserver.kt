@@ -1,6 +1,7 @@
 package dev.yanshouwang.camerax
 
 import android.app.Activity
+import android.view.Surface
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -30,3 +31,14 @@ class QuarterTurnsObserver(private val onChanged: (quarterTurns: Int) -> Unit) {
         timer!!.cancel()
     }
 }
+
+val Activity.quarterTurns: Int
+    get() {
+        return when (rotation) {
+            Surface.ROTATION_0 -> 0
+            Surface.ROTATION_90 -> 3
+            Surface.ROTATION_180 -> 2
+            Surface.ROTATION_270 -> 1
+            else -> throw IllegalArgumentException()
+        }
+    }

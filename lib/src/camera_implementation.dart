@@ -41,7 +41,7 @@ class $CameraController implements CameraController {
         ),
       ),
     );
-    return methodChannel.invokeCommand(command).then((reply) => $CameraValue
+    return methodChannel.execute(command).then((reply) => $CameraValue
         .fromMessage(reply!.cameraControllerBindArguments.cameraValue));
   }
 
@@ -55,7 +55,7 @@ class $CameraController implements CameraController {
         id: id,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 
   @override
@@ -69,7 +69,7 @@ class $CameraController implements CameraController {
         state: state,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 
   @override
@@ -83,7 +83,7 @@ class $CameraController implements CameraController {
         value: value,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 
   @override
@@ -96,7 +96,7 @@ class $CameraController implements CameraController {
         id: id,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 
   @override
@@ -113,7 +113,7 @@ class $CameraController implements CameraController {
         y: y,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 }
 
@@ -203,6 +203,6 @@ class $ImageProxy implements ImageProxy {
         id: id,
       ),
     );
-    return methodChannel.invokeCommand(command);
+    return methodChannel.execute(command);
   }
 }

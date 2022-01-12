@@ -1,7 +1,7 @@
 syntax = "proto3";
 package messages;
 
-option java_package = "dev.yanshouwang.camerax";
+option java_package = "dev.yanshouwang.camerax.messages";
 
 message Command {
   CommandCategory category = 1;

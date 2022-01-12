@@ -15,7 +15,7 @@ final eventStream = eventChannel
     .map((bytes) => messages.Event.fromBuffer(bytes));
 
 extension MethodChannelX on MethodChannel {
-  Future<messages.Reply?> invokeCommand(messages.Command command) {
+  Future<messages.Reply?> execute(messages.Command command) {
     const method = '';
     final arguments = command.writeToBuffer();
     return invokeMethod<Uint8List>(method, arguments).then((bytes) {

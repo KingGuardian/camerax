@@ -14,17 +14,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.protobuf.ByteString
+import dev.yanshouwang.camerax.messages.*
 import io.flutter.embedding.engine.plugins.FlutterPlugin
-import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.EventChannel
-import io.flutter.plugin.common.EventChannel.EventSink
-import io.flutter.plugin.common.EventChannel.StreamHandler
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
+import io.flutter.plugin.common.PluginRegistry
 import io.flutter.view.TextureRegistry
 import java.nio.ByteBuffer
 import java.util.concurrent.Executors
@@ -39,10 +36,10 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     private lateinit var textureRegistry: TextureRegistry
     private lateinit var binding: ActivityPluginBinding
 
-    private var eventSink: EventSink? = null
+    private var eventSink: EventChannel.EventSink? = null
 
     private val methodCallHandler by lazy {
-        MethodCallHandler { call, result ->
+        MethodChannel.MethodCallHandler { call, result ->
             val command = call.command
             when (command.category!!) {
                 Messages.CommandCategory.COMMAND_CATEGORY_GET_QUARTER_TURNS -> {
@@ -362,8 +359,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     private val streamHandler by lazy {
-        object : StreamHandler {
-            override fun onListen(arguments: Any?, events: EventSink?) {
+        object : EventChannel.StreamHandler {
+            override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
                 eventSink = events
             }
 
@@ -375,7 +372,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 
     private val requestPermissionResultListeners by lazy { mutableListOf<(granted: Boolean) -> Unit>() }
     private val requestPermissionResultListener by lazy {
-        RequestPermissionsResultListener { requestCode, _, grantResults ->
+        PluginRegistry.RequestPermissionsResultListener { requestCode, _, grantResults ->
             return@RequestPermissionsResultListener if (requestCode != REQUEST_CODE) false
             else {
                 val granted = grantResults.all { result ->
@@ -403,14 +400,14 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 
     private val controllers by lazy { mutableMapOf<String, CameraController>() }
 
-    override fun onAttachedToEngine(@NonNull binding: FlutterPluginBinding) {
+    override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         textureRegistry = binding.textureRegistry
         val messenger = binding.binaryMessenger
         MethodChannel(messenger, "$NAMESPACE/method").setMethodCallHandler(methodCallHandler)
         EventChannel(messenger, "$NAMESPACE/event").setStreamHandler(streamHandler)
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPluginBinding) {}
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {}
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         this.binding = binding
@@ -474,7 +471,7 @@ fun MethodChannel.Result.error(e: Exception) {
     error(errorCode, errorMessage, errorDetails)
 }
 
-fun EventSink.error(errorCode: String, errorMessage: String) {
+fun EventChannel.EventSink.error(errorCode: String, errorMessage: String) {
     error(errorCode, errorMessage, null)
 }
 
@@ -490,17 +487,6 @@ val Activity.rotationDegrees: Int
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180
             Surface.ROTATION_270 -> 270
-            else -> throw IllegalArgumentException()
-        }
-    }
-
-val Activity.quarterTurns: Int
-    get() {
-        return when (rotation) {
-            Surface.ROTATION_0 -> 0
-            Surface.ROTATION_90 -> 3
-            Surface.ROTATION_180 -> 2
-            Surface.ROTATION_270 -> 1
             else -> throw IllegalArgumentException()
         }
     }

@@ -35,7 +35,7 @@ class CameraView extends StatelessWidget {
                 messages.CommandCategory.COMMAND_CATEGORY_GET_QUARTER_TURNS,
           );
           final future = methodChannel
-              .invokeCommand(command)
+              .execute(command)
               .then((reply) => reply!.getQuarterTurnsArguments.quarterTurns);
           return FutureBuilder<int>(
             initialData: 0,
