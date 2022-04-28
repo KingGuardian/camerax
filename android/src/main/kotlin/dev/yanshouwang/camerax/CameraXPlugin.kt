@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
+import android.graphics.Rect
 import android.os.Build
 import android.util.Log
 import android.view.Surface
@@ -25,6 +26,8 @@ import io.flutter.plugin.common.PluginRegistry
 import io.flutter.view.TextureRegistry
 import java.nio.ByteBuffer
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 /** CameraXPlugin */
 class CameraXPlugin : FlutterPlugin, ActivityAware {
@@ -32,6 +35,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         private const val NAMESPACE = "yanshouwang.dev/camerax"
         private const val REQUEST_CODE = 3543
     }
+
+    private val methodExecutor by lazy { Executors.newSingleThreadExecutor() }
 
     private lateinit var textureRegistry: TextureRegistry
     private lateinit var binding: ActivityPluginBinding
@@ -56,11 +61,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val selector = arguments.selector.cameraxSelector
                     val activity = binding.activity
                     val runnable = Runnable {
-                        val future = ProcessCameraProvider.getInstance(activity)
+                        val listenable = ProcessCameraProvider.getInstance(activity)
                         val mainExecutor = ContextCompat.getMainExecutor(activity)
-                        future.addListener({
+                        listenable.addListener({
                             try {
-                                val provider = future.get()
+                                val provider = listenable.get()
                                 val lifecycleOwner = activity as LifecycleOwner
                                 val textureEntry = textureRegistry.createSurfaceTexture()
                                 val preview = Preview.Builder()
@@ -70,13 +75,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                     .setTargetRotation(Surface.ROTATION_0)
                                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                                     .build()
-                                val camera =
-                                    provider.bindToLifecycle(
-                                        lifecycleOwner,
-                                        selector,
-                                        preview,
-                                        imageAnalysis
-                                    )
+                                val camera = provider.bindToLifecycle(
+                                    lifecycleOwner,
+                                    selector,
+                                    preview,
+                                    imageAnalysis
+                                )
                                 val controller =
                                     CameraController(camera, textureEntry, preview, imageAnalysis)
                                 preview.setSurfaceProvider { request ->
@@ -87,7 +91,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                         resolution.height
                                     )
                                     val surface = Surface(texture)
-                                    request.provideSurface(surface, mainExecutor, { })
+                                    request.provideSurface(surface, mainExecutor) { }
                                     controllers[id] = controller
                                     val reply = reply {
                                         this.cameraControllerBindArguments =
@@ -135,12 +139,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                                     val imageBytes: ByteArray
                                                     val imageWidth: Int
                                                     val imageHeight: Int
-                                                    val rotationDegrees =
-                                                        (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees + 360) % 360
-                                                    Log.d(
-                                                        TAG,
-                                                        "The image proxy's rotation degrees is: $rotationDegrees"
-                                                    )
+                                                    // 计算需要旋转的角度
+                                                    var rotationDegrees =
+                                                        (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees) % 360
+                                                    if (rotationDegrees < 0) {
+                                                        rotationDegrees += 360
+                                                    }
                                                     when (rotationDegrees) {
                                                         0 -> {
                                                             imageBytes = imageProxy.bytes
@@ -215,11 +219,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val arguments = command.cameraControllerUnbindArguments
                     val id = arguments.id
                     val activity = binding.activity
-                    val future = ProcessCameraProvider.getInstance(activity)
+                    val listenable = ProcessCameraProvider.getInstance(activity)
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
-                    future.addListener({
+                    listenable.addListener({
                         try {
-                            val provider = future.get()
+                            val provider = listenable.get()
                             val controller = controllers.remove(id)!!
                             val preview = controller.preview
                             val imageAnalysis = controller.imageAnalysis
@@ -238,12 +242,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val state = arguments.state
                     val controller = controllers[id]!!
                     val camera = controller.camera
-                    val future = camera.cameraControl.enableTorch(state)
+                    val listenable = camera.cameraControl.enableTorch(state)
                     val activity = binding.activity
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
-                    future.addListener({
+                    listenable.addListener({
                         try {
-                            future.get()
+                            listenable.get()
                             result.success()
                         } catch (e: Exception) {
                             result.error(e)
@@ -256,12 +260,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val ratio = arguments.value.toFloat()
                     val controller = controllers[id]!!
                     val camera = controller.camera
-                    val future = camera.cameraControl.setZoomRatio(ratio)
+                    val listenable = camera.cameraControl.setZoomRatio(ratio)
                     val activity = binding.activity
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
-                    future.addListener({
+                    listenable.addListener({
                         try {
-                            future.get()
+                            listenable.get()
                             result.success()
                         } catch (e: Exception) {
                             result.error(e)
@@ -273,12 +277,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val id = arguments.id
                     val controller = controllers[id]!!
                     val camera = controller.camera
-                    val future = camera.cameraControl.cancelFocusAndMetering()
+                    val listenable = camera.cameraControl.cancelFocusAndMetering()
                     val activity = binding.activity
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
-                    future.addListener({
+                    listenable.addListener({
                         try {
-                            future.get()
+                            listenable.get()
                             result.success()
                         } catch (e: Exception) {
                             result.error(e)
@@ -297,9 +301,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val cameraInfo = camera.cameraInfo
                     val activity = binding.activity
                     // 转到相机方向需要的角度（逆时针）
-                    val rotationDegrees =
-                        (cameraInfo.sensorRotationDegrees - activity.rotationDegrees + 360) % 360
-                    Log.d(TAG, "The camera's rotation degrees is: $rotationDegrees")
+                    var rotationDegrees =
+                        (cameraInfo.sensorRotationDegrees - activity.rotationDegrees) % 360
+                    if (rotationDegrees < 0) {
+                        rotationDegrees += 360
+                    }
                     val point = when (rotationDegrees) {
                         0 -> {
                             SurfaceOrientedMeteringPointFactory(width, height).createPoint(x, y)
@@ -329,16 +335,31 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
                         .disableAutoCancel()
                         .build()
-                    val future = camera.cameraControl.startFocusAndMetering(action)
-                    val mainExecutor = ContextCompat.getMainExecutor(activity)
-                    future.addListener({
+                    val listenable = camera.cameraControl.startFocusAndMetering(action)
+                    // TODO: 目前 CameraX 在某些手机上不触发回调，等待官方解决
+                    methodExecutor.execute {
                         try {
-                            future.get()
-                            result.success()
+                            val fmr = listenable.get(5000, TimeUnit.MILLISECONDS)
+                            if (!fmr.isFocusSuccessful) {
+                                throw IllegalStateException("focusManually failed with $arguments.")
+                            }
+                            invokeOnMainThread { result.success() }
+                        } catch (e: TimeoutException) {
+                            Log.d(TAG, e.localizedMessage ?: "focusManually failed with $e.")
+                            invokeOnMainThread { result.success() }
                         } catch (e: Exception) {
-                            result.error(e)
+                            invokeOnMainThread { result.error(e) }
                         }
-                    }, mainExecutor)
+                    }
+//                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+//                    listenable.addListener({
+//                        try {
+//                            listenable.get()
+//                            result.success()
+//                        } catch (e: Exception) {
+//                            result.error(e)
+//                        }
+//                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE -> {
                     val arguments = command.imageProxyCloseArguments
@@ -357,7 +378,6 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
             }
         }
     }
-
     private val streamHandler by lazy {
         object : EventChannel.StreamHandler {
             override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
@@ -417,11 +437,11 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 
     override fun onDetachedFromActivity() {
         val activity = binding.activity
-        val future = ProcessCameraProvider.getInstance(activity)
+        val listenable = ProcessCameraProvider.getInstance(activity)
         val mainExecutor = ContextCompat.getMainExecutor(activity)
-        future.addListener({
+        listenable.addListener({
             try {
-                val provider = future.get()
+                val provider = listenable.get()
                 provider.unbindAll()
                 for (controller in controllers.values) {
                     val textureEntry = controller.textureEntry
@@ -502,9 +522,11 @@ val Messages.CameraSelector.cameraxSelector: CameraSelector
 
 val ImageProxy.bytes: ByteArray
     get() {
-        val crop = this.cropRect
-        val cropWidth = crop.width()
-        val cropHeight = crop.height()
+        // CameraX 升级到 beta2 版本后 cropRect 默认为（0，0，0，0）
+        val rect = Rect(0, 0, width, height)
+        this.setCropRect(rect)
+        val cropWidth = cropRect.width()
+        val cropHeight = cropRect.height()
         val pixelSize = cropWidth * cropHeight
         val bitsPerPixel = ImageFormat.getBitsPerPixel(ImageFormat.YUV_420_888)
         val byteBuffer = ByteBuffer.allocateDirect(pixelSize * bitsPerPixel / 8)
@@ -581,7 +603,7 @@ val ImageProxy.bytes: ByteArray
                 else (width - 1) * pixelStride + 1
             for (row in 0 until height) {
                 // Move buffer position to the beginning of this row
-                val newPosition = (row + crop.top) * rowStride + crop.left * pixelStride
+                val newPosition = (row + cropRect.top) * rowStride + cropRect.left * pixelStride
                 buffer.position(newPosition)
                 if (pixelStride == 1 && stride == 1) {
                     // When there is a single stride value for pixel and output, we can just copy
