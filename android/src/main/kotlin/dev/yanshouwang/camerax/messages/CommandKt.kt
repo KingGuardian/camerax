@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecommand")
 public inline fun command(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
   dev.yanshouwang.camerax.messages.CommandKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.Command.newBuilder()).apply { block() }._build()
 public object CommandKt {
@@ -218,3 +218,25 @@ public object CommandKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.Command.copy(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
   dev.yanshouwang.camerax.messages.CommandKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerBindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments?
+  get() = if (hasCameraControllerBindArguments()) getCameraControllerBindArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerUnbindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments?
+  get() = if (hasCameraControllerUnbindArguments()) getCameraControllerUnbindArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerTorchArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments?
+  get() = if (hasCameraControllerTorchArguments()) getCameraControllerTorchArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerZoomArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments?
+  get() = if (hasCameraControllerZoomArguments()) getCameraControllerZoomArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerFocusAutomaticallyArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments?
+  get() = if (hasCameraControllerFocusAutomaticallyArguments()) getCameraControllerFocusAutomaticallyArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerFocusManuallyArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments?
+  get() = if (hasCameraControllerFocusManuallyArguments()) getCameraControllerFocusManuallyArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.imageProxyCloseArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments?
+  get() = if (hasImageProxyCloseArguments()) getImageProxyCloseArguments() else null
+

@@ -675,6 +675,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -1626,8 +1628,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 2) {
             cameraControllerBindArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerBindArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerBindArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 2;
         return this;
@@ -1767,8 +1770,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 3) {
             cameraControllerUnbindArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerUnbindArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerUnbindArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 3;
         return this;
@@ -1908,8 +1912,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 4) {
             cameraControllerTorchArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerTorchArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerTorchArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 4;
         return this;
@@ -2049,8 +2054,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 5) {
             cameraControllerZoomArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerZoomArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerZoomArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 5;
         return this;
@@ -2190,8 +2196,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 6) {
             cameraControllerFocusAutomaticallyArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerFocusAutomaticallyArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerFocusAutomaticallyArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 6;
         return this;
@@ -2331,8 +2338,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 7) {
             cameraControllerFocusManuallyArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerFocusManuallyArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerFocusManuallyArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 7;
         return this;
@@ -2472,8 +2480,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 8) {
             imageProxyCloseArgumentsBuilder_.mergeFrom(value);
+          } else {
+            imageProxyCloseArgumentsBuilder_.setMessage(value);
           }
-          imageProxyCloseArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 8;
         return this;
@@ -2698,6 +2707,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -3441,6 +3452,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -4020,6 +4033,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -4659,6 +4674,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -5288,6 +5305,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -5900,6 +5919,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -6731,6 +6752,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -7471,6 +7494,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -8038,8 +8063,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 1) {
             getQuarterTurnsArgumentsBuilder_.mergeFrom(value);
+          } else {
+            getQuarterTurnsArgumentsBuilder_.setMessage(value);
           }
-          getQuarterTurnsArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 1;
         return this;
@@ -8179,8 +8205,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 2) {
             cameraControllerBindArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerBindArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerBindArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 2;
         return this;
@@ -8369,6 +8396,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -8874,6 +8903,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -9545,6 +9576,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -10201,8 +10234,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 2) {
             quarterTurnsChangedArgumentsBuilder_.mergeFrom(value);
+          } else {
+            quarterTurnsChangedArgumentsBuilder_.setMessage(value);
           }
-          quarterTurnsChangedArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 2;
         return this;
@@ -10342,8 +10376,9 @@ public final class Messages {
         } else {
           if (argumentsCase_ == 3) {
             cameraControllerImageProxiedArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerImageProxiedArgumentsBuilder_.setMessage(value);
           }
-          cameraControllerImageProxiedArgumentsBuilder_.setMessage(value);
         }
         argumentsCase_ = 3;
         return this;
@@ -10532,6 +10567,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -11056,6 +11093,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -11798,6 +11837,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -12371,6 +12412,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
@@ -13201,6 +13244,8 @@ public final class Messages {
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);

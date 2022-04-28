@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerTorchCommandArguments")
 public inline fun cameraControllerTorchCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerTorchCommandArgumentsKt {
@@ -60,3 +60,4 @@ public object CameraControllerTorchCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

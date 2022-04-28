@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializeimageProxyCloseCommandArguments")
 public inline fun imageProxyCloseCommandArguments(block: dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments =
   dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.newBuilder()).apply { block() }._build()
 public object ImageProxyCloseCommandArgumentsKt {
@@ -60,3 +60,4 @@ public object ImageProxyCloseCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.copy(block: dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments =
   dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

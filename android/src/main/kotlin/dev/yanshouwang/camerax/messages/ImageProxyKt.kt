@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializeimageProxy")
 public inline fun imageProxy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.ImageProxy.newBuilder()).apply { block() }._build()
 public object ImageProxyKt {
@@ -94,3 +94,4 @@ public object ImageProxyKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

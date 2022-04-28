@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraValue")
 public inline fun cameraValue(block: dev.yanshouwang.camerax.messages.CameraValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraValue =
   dev.yanshouwang.camerax.messages.CameraValueKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraValue.newBuilder()).apply { block() }._build()
 public object CameraValueKt {
@@ -128,3 +128,4 @@ public object CameraValueKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraValue.copy(block: dev.yanshouwang.camerax.messages.CameraValueKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraValue =
   dev.yanshouwang.camerax.messages.CameraValueKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

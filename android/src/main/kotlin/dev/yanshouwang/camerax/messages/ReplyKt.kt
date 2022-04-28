@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializereply")
 public inline fun reply(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
   dev.yanshouwang.camerax.messages.ReplyKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.Reply.newBuilder()).apply { block() }._build()
 public object ReplyKt {
@@ -81,3 +81,10 @@ public object ReplyKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.Reply.copy(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
   dev.yanshouwang.camerax.messages.ReplyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.getQuarterTurnsArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments?
+  get() = if (hasGetQuarterTurnsArguments()) getGetQuarterTurnsArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerBindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments?
+  get() = if (hasCameraControllerBindArguments()) getCameraControllerBindArguments() else null
+

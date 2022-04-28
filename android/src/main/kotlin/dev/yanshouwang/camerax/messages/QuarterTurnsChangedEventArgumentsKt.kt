@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializequarterTurnsChangedEventArguments")
 public inline fun quarterTurnsChangedEventArguments(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
   dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.newBuilder()).apply { block() }._build()
 public object QuarterTurnsChangedEventArgumentsKt {
@@ -43,3 +43,4 @@ public object QuarterTurnsChangedEventArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.copy(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
   dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

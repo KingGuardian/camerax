@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerFocusManuallyCommandArguments")
 public inline fun cameraControllerFocusManuallyCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerFocusManuallyCommandArgumentsKt {
@@ -111,3 +111,4 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

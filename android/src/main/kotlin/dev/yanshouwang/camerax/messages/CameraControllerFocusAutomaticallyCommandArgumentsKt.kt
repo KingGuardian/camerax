@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerFocusAutomaticallyCommandArguments")
 public inline fun cameraControllerFocusAutomaticallyCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerFocusAutomaticallyCommandArgumentsKt {
@@ -43,3 +43,4 @@ public object CameraControllerFocusAutomaticallyCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

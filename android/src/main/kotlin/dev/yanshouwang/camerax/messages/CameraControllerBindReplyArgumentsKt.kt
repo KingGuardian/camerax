@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerBindReplyArguments")
 public inline fun cameraControllerBindReplyArguments(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerBindReplyArgumentsKt {
@@ -50,3 +50,7 @@ public object CameraControllerBindReplyArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArgumentsOrBuilder.cameraValueOrNull: dev.yanshouwang.camerax.messages.Messages.CameraValue?
+  get() = if (hasCameraValue()) getCameraValue() else null
+

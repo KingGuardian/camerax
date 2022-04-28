@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraSelector")
 public inline fun cameraSelector(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
   dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder()).apply { block() }._build()
 public object CameraSelectorKt {
@@ -43,3 +43,4 @@ public object CameraSelectorKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraSelector.copy(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
   dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

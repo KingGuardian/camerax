@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializeevent")
 public inline fun event(block: dev.yanshouwang.camerax.messages.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Event =
   dev.yanshouwang.camerax.messages.EventKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.Event.newBuilder()).apply { block() }._build()
 public object EventKt {
@@ -98,3 +98,10 @@ public object EventKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.Event.copy(block: dev.yanshouwang.camerax.messages.EventKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Event =
   dev.yanshouwang.camerax.messages.EventKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.EventOrBuilder.quarterTurnsChangedArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments?
+  get() = if (hasQuarterTurnsChangedArguments()) getQuarterTurnsChangedArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.EventOrBuilder.cameraControllerImageProxiedArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments?
+  get() = if (hasCameraControllerImageProxiedArguments()) getCameraControllerImageProxiedArguments() else null
+

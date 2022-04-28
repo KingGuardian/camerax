@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerZoomCommandArguments")
 public inline fun cameraControllerZoomCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerZoomCommandArgumentsKt {
@@ -60,3 +60,4 @@ public object CameraControllerZoomCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

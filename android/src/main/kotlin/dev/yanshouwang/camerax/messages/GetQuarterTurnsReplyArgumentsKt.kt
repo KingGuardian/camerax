@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializegetQuarterTurnsReplyArguments")
 public inline fun getQuarterTurnsReplyArguments(block: dev.yanshouwang.camerax.messages.GetQuarterTurnsReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments =
   dev.yanshouwang.camerax.messages.GetQuarterTurnsReplyArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments.newBuilder()).apply { block() }._build()
 public object GetQuarterTurnsReplyArgumentsKt {
@@ -43,3 +43,4 @@ public object GetQuarterTurnsReplyArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments.copy(block: dev.yanshouwang.camerax.messages.GetQuarterTurnsReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments =
   dev.yanshouwang.camerax.messages.GetQuarterTurnsReplyArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

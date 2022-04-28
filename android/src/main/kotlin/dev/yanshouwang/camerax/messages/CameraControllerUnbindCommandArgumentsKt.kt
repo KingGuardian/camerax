@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerUnbindCommandArguments")
 public inline fun cameraControllerUnbindCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerUnbindCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerUnbindCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerUnbindCommandArgumentsKt {
@@ -43,3 +43,4 @@ public object CameraControllerUnbindCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerUnbindCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerUnbindCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+

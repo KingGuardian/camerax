@@ -3,7 +3,7 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmSynthetic
+@kotlin.jvm.JvmName("-initializecameraControllerImageProxiedEventArguments")
 public inline fun cameraControllerImageProxiedEventArguments(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
   dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.newBuilder()).apply { block() }._build()
 public object CameraControllerImageProxiedEventArgumentsKt {
@@ -67,3 +67,7 @@ public object CameraControllerImageProxiedEventArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
   dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArgumentsOrBuilder.imageProxyOrNull: dev.yanshouwang.camerax.messages.Messages.ImageProxy?
+  get() = if (hasImageProxy()) getImageProxy() else null
+
