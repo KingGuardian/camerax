@@ -14,22 +14,26 @@ const CommandCategory$json = const {
   '1': 'CommandCategory',
   '2': const [
     const {'1': 'COMMAND_CATEGORY_GET_QUARTER_TURNS', '2': 0},
-    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND', '2': 1},
-    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND', '2': 2},
-    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH', '2': 3},
-    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM', '2': 4},
+    const {
+      '1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION',
+      '2': 1
+    },
+    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND', '2': 2},
+    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND', '2': 3},
+    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH', '2': 4},
+    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM', '2': 5},
     const {
       '1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY',
-      '2': 5
+      '2': 6
     },
-    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY', '2': 6},
-    const {'1': 'COMMAND_CATEGORY_IMAGE_PROXY_CLOSE', '2': 7},
+    const {'1': 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY', '2': 7},
+    const {'1': 'COMMAND_CATEGORY_IMAGE_PROXY_CLOSE', '2': 8},
   ],
 };
 
 /// Descriptor for `CommandCategory`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List commandCategoryDescriptor = $convert.base64Decode(
-    'Cg9Db21tYW5kQ2F0ZWdvcnkSJgoiQ09NTUFORF9DQVRFR09SWV9HRVRfUVVBUlRFUl9UVVJOUxAAEisKJ0NPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfQklORBABEi0KKUNPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfVU5CSU5EEAISLAooQ09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9UT1JDSBADEisKJ0NPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfWk9PTRAEEjoKNkNPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfRk9DVVNfQVVUT01BVElDQUxMWRAFEjUKMUNPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfRk9DVVNfTUFOVUFMTFkQBhImCiJDT01NQU5EX0NBVEVHT1JZX0lNQUdFX1BST1hZX0NMT1NFEAc=');
+    'Cg9Db21tYW5kQ2F0ZWdvcnkSJgoiQ09NTUFORF9DQVRFR09SWV9HRVRfUVVBUlRFUl9UVVJOUxAAEjkKNUNPTU1BTkRfQ0FURUdPUllfQ0FNRVJBX0NPTlRST0xMRVJfUkVRVUVTVF9QRVJNSVNTSU9OEAESKwonQ09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9CSU5EEAISLQopQ09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9VTkJJTkQQAxIsCihDT01NQU5EX0NBVEVHT1JZX0NBTUVSQV9DT05UUk9MTEVSX1RPUkNIEAQSKwonQ09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9aT09NEAUSOgo2Q09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9GT0NVU19BVVRPTUFUSUNBTExZEAYSNQoxQ09NTUFORF9DQVRFR09SWV9DQU1FUkFfQ09OVFJPTExFUl9GT0NVU19NQU5VQUxMWRAHEiYKIkNPTU1BTkRfQ0FURUdPUllfSU1BR0VfUFJPWFlfQ0xPU0UQCA==');
 @$core.Deprecated('Use eventCategoryDescriptor instead')
 const EventCategory$json = const {
   '1': 'EventCategory',
@@ -297,8 +301,17 @@ const Reply$json = const {
       '10': 'getQuarterTurnsArguments'
     },
     const {
-      '1': 'camera_controller_bind_arguments',
+      '1': 'camera_controller_request_permission_arguments',
       '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraControllerRequestPermissionReplyArguments',
+      '9': 0,
+      '10': 'cameraControllerRequestPermissionArguments'
+    },
+    const {
+      '1': 'camera_controller_bind_arguments',
+      '3': 3,
       '4': 1,
       '5': 11,
       '6': '.messages.CameraControllerBindReplyArguments',
@@ -313,7 +326,7 @@ const Reply$json = const {
 
 /// Descriptor for `Reply`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List replyDescriptor = $convert.base64Decode(
-    'CgVSZXBseRJoChtnZXRfcXVhcnRlcl90dXJuc19hcmd1bWVudHMYASABKAsyJy5tZXNzYWdlcy5HZXRRdWFydGVyVHVybnNSZXBseUFyZ3VtZW50c0gAUhhnZXRRdWFydGVyVHVybnNBcmd1bWVudHMSdwogY2FtZXJhX2NvbnRyb2xsZXJfYmluZF9hcmd1bWVudHMYAiABKAsyLC5tZXNzYWdlcy5DYW1lcmFDb250cm9sbGVyQmluZFJlcGx5QXJndW1lbnRzSABSHWNhbWVyYUNvbnRyb2xsZXJCaW5kQXJndW1lbnRzQgsKCWFyZ3VtZW50cw==');
+    'CgVSZXBseRJoChtnZXRfcXVhcnRlcl90dXJuc19hcmd1bWVudHMYASABKAsyJy5tZXNzYWdlcy5HZXRRdWFydGVyVHVybnNSZXBseUFyZ3VtZW50c0gAUhhnZXRRdWFydGVyVHVybnNBcmd1bWVudHMSnwEKLmNhbWVyYV9jb250cm9sbGVyX3JlcXVlc3RfcGVybWlzc2lvbl9hcmd1bWVudHMYAiABKAsyOS5tZXNzYWdlcy5DYW1lcmFDb250cm9sbGVyUmVxdWVzdFBlcm1pc3Npb25SZXBseUFyZ3VtZW50c0gAUipjYW1lcmFDb250cm9sbGVyUmVxdWVzdFBlcm1pc3Npb25Bcmd1bWVudHMSdwogY2FtZXJhX2NvbnRyb2xsZXJfYmluZF9hcmd1bWVudHMYAyABKAsyLC5tZXNzYWdlcy5DYW1lcmFDb250cm9sbGVyQmluZFJlcGx5QXJndW1lbnRzSABSHWNhbWVyYUNvbnRyb2xsZXJCaW5kQXJndW1lbnRzQgsKCWFyZ3VtZW50cw==');
 @$core.Deprecated('Use getQuarterTurnsReplyArgumentsDescriptor instead')
 const GetQuarterTurnsReplyArguments$json = const {
   '1': 'GetQuarterTurnsReplyArguments',
@@ -326,6 +339,20 @@ const GetQuarterTurnsReplyArguments$json = const {
 final $typed_data.Uint8List getQuarterTurnsReplyArgumentsDescriptor =
     $convert.base64Decode(
         'Ch1HZXRRdWFydGVyVHVybnNSZXBseUFyZ3VtZW50cxIjCg1xdWFydGVyX3R1cm5zGAEgASgFUgxxdWFydGVyVHVybnM=');
+@$core.Deprecated(
+    'Use cameraControllerRequestPermissionReplyArgumentsDescriptor instead')
+const CameraControllerRequestPermissionReplyArguments$json = const {
+  '1': 'CameraControllerRequestPermissionReplyArguments',
+  '2': const [
+    const {'1': 'granted', '3': 1, '4': 1, '5': 8, '10': 'granted'},
+  ],
+};
+
+/// Descriptor for `CameraControllerRequestPermissionReplyArguments`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List
+    cameraControllerRequestPermissionReplyArgumentsDescriptor =
+    $convert.base64Decode(
+        'Ci9DYW1lcmFDb250cm9sbGVyUmVxdWVzdFBlcm1pc3Npb25SZXBseUFyZ3VtZW50cxIYCgdncmFudGVkGAEgASgIUgdncmFudGVk');
 @$core.Deprecated('Use cameraControllerBindReplyArgumentsDescriptor instead')
 const CameraControllerBindReplyArguments$json = const {
   '1': 'CameraControllerBindReplyArguments',

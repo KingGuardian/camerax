@@ -55,145 +55,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     }.toByteArray()
                     result.success(reply)
                 }
-                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND -> {
-                    val arguments = command.cameraControllerBindArguments
-                    val selector = arguments.selector
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION -> {
                     val activity = binding.activity
-                    val runnable = Runnable {
-                        val listenable = ProcessCameraProvider.getInstance(activity)
-                        val mainExecutor = ContextCompat.getMainExecutor(activity)
-                        listenable.addListener({
-                            try {
-                                val provider = listenable.get()
-                                val lifecycleOwner = activity as LifecycleOwner
-                                val textureEntry = textureRegistry.createSurfaceTexture()
-                                val preview = Preview.Builder()
-                                    .setTargetRotation(Surface.ROTATION_0)
-                                    .build()
-                                val imageAnalysis = ImageAnalysis.Builder()
-                                    .setTargetRotation(Surface.ROTATION_0)
-                                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                                    .build()
-                                val camera = provider.bindToLifecycle(
-                                    lifecycleOwner,
-                                    selector.cameraxSelector,
-                                    preview,
-                                    imageAnalysis
-                                )
-                                val controller =
-                                    CameraController(camera, textureEntry, preview, imageAnalysis)
-                                preview.setSurfaceProvider { request ->
-                                    val texture = textureEntry.surfaceTexture()
-                                    val resolution = request.resolution
-                                    texture.setDefaultBufferSize(
-                                        resolution.width,
-                                        resolution.height
-                                    )
-                                    val surface = Surface(texture)
-                                    request.provideSurface(surface, mainExecutor) { }
-                                    controllers[selector] = controller
-                                    val reply = reply {
-                                        this.cameraControllerBindArguments =
-                                            cameraControllerBindReplyArguments {
-                                                this.cameraValue = cameraValue {
-                                                    this.textureId = textureEntry.id().toInt()
-                                                    val cameraInfo = camera.cameraInfo
-                                                    if (cameraInfo.sensorRotationDegrees % 180 == 0) {
-                                                        this.textureWidth = resolution.width
-                                                        this.textureHeight = resolution.height
-                                                    } else {
-                                                        this.textureWidth = resolution.height
-                                                        this.textureHeight = resolution.width
-                                                    }
-                                                    this.torchAvailable =
-                                                        cameraInfo.hasFlashUnit()
-                                                    val zoomState = cameraInfo.zoomState.value!!
-                                                    this.zoomMinimum =
-                                                        zoomState.minZoomRatio.toDouble()
-                                                    this.zoomMaximum =
-                                                        zoomState.maxZoomRatio.toDouble()
-                                                }
-                                            }
-                                    }.toByteArray()
-                                    result.success(reply)
-                                }
-                                val imageAnalysisExecutor = Executors.newSingleThreadExecutor()
-                                imageAnalysis.setAnalyzer(imageAnalysisExecutor) { imageProxy ->
-                                    if (imageProxy.format != ImageFormat.YUV_420_888) {
-                                        val errorMessage =
-                                            "The image proxy's format is unsupported: ${imageProxy.format}"
-                                        eventSink?.error(TAG, errorMessage)
-                                    }
-                                    val imageProxyId = imageProxy.hashCode().toString()
-                                    val imageProxies = controller.imageProxies
-                                    imageProxies[imageProxyId] = imageProxy
-                                    val event = event {
-                                        this.category =
-                                            Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED
-                                        this.cameraControllerImageProxiedArguments =
-                                            cameraControllerImageProxiedEventArguments {
-                                                this.imageProxy = imageProxy {
-                                                    this.selector = selector
-                                                    this.id = imageProxyId
-                                                    val imageBytes: ByteArray
-                                                    val imageWidth: Int
-                                                    val imageHeight: Int
-                                                    // 计算需要旋转的角度
-                                                    var rotationDegrees =
-                                                        (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees) % 360
-                                                    if (rotationDegrees < 0) {
-                                                        rotationDegrees += 360
-                                                    }
-                                                    when (rotationDegrees) {
-                                                        0 -> {
-                                                            imageBytes = imageProxy.bytes
-                                                            imageWidth = imageProxy.width
-                                                            imageHeight = imageProxy.height
-                                                        }
-                                                        90 -> {
-                                                            imageBytes = rotate90(
-                                                                imageProxy.bytes,
-                                                                imageProxy.width,
-                                                                imageProxy.height
-                                                            )
-                                                            imageWidth = imageProxy.height
-                                                            imageHeight = imageProxy.width
-                                                        }
-                                                        180 -> {
-                                                            imageBytes = rotate180(
-                                                                imageProxy.bytes,
-                                                                imageProxy.width,
-                                                                imageProxy.height
-                                                            )
-                                                            imageWidth = imageProxy.width
-                                                            imageHeight = imageProxy.height
-                                                        }
-                                                        270 -> {
-                                                            imageBytes = rotate270(
-                                                                imageProxy.bytes,
-                                                                imageProxy.width,
-                                                                imageProxy.height
-                                                            )
-                                                            imageWidth = imageProxy.height
-                                                            imageHeight = imageProxy.width
-                                                        }
-                                                        else -> {
-                                                            throw NotImplementedError()
-                                                        }
-                                                    }
-                                                    this.data = ByteString.copyFrom(imageBytes)
-                                                    this.width = imageWidth
-                                                    this.height = imageHeight
-                                                }
-                                            }
-                                    }.toByteArray()
-                                    invokeOnMainThread { eventSink?.success(event) }
-                                }
-                            } catch (e: Exception) {
-                                result.error(e)
-                            }
-                        }, mainExecutor)
-                    }
                     val permissions = arrayOf(Manifest.permission.CAMERA)
                     val permissionsGranted = permissions.all { permission ->
                         ContextCompat.checkSelfPermission(
@@ -201,18 +64,160 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             permission
                         ) == PackageManager.PERMISSION_GRANTED
                     }
+
+                    fun runnable(granted: Boolean) {
+                        val reply = reply {
+                            this.cameraControllerRequestPermissionArguments =
+                                cameraControllerRequestPermissionReplyArguments {
+                                    this.granted = granted
+                                }
+                        }.toByteArray()
+                        result.success(reply)
+                    }
                     if (permissionsGranted) {
-                        runnable.run()
+                        runnable(permissionsGranted)
                     } else {
-                        requestPermissionResultListeners.add { granted ->
-                            if (granted) {
-                                runnable.run()
-                            } else {
-                                result.error(TAG, "Permissions was denied by user.")
-                            }
-                        }
+                        requestPermissionResultListeners.add { granted -> runnable(granted) }
                         ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE)
                     }
+                }
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND -> {
+                    val arguments = command.cameraControllerBindArguments
+                    val selector = arguments.selector
+                    val activity = binding.activity
+                    val listenable = ProcessCameraProvider.getInstance(activity)
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    listenable.addListener({
+                        try {
+                            val provider = listenable.get()
+                            val lifecycleOwner = activity as LifecycleOwner
+                            val textureEntry = textureRegistry.createSurfaceTexture()
+                            val preview = Preview.Builder()
+                                .setTargetRotation(Surface.ROTATION_0)
+                                .build()
+                            val imageAnalysis = ImageAnalysis.Builder()
+                                .setTargetRotation(Surface.ROTATION_0)
+                                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                .build()
+                            val camera = provider.bindToLifecycle(
+                                lifecycleOwner,
+                                selector.cameraxSelector,
+                                preview,
+                                imageAnalysis
+                            )
+                            val controller =
+                                CameraController(camera, textureEntry, preview, imageAnalysis)
+                            preview.setSurfaceProvider { request ->
+                                val texture = textureEntry.surfaceTexture()
+                                val resolution = request.resolution
+                                texture.setDefaultBufferSize(
+                                    resolution.width,
+                                    resolution.height
+                                )
+                                val surface = Surface(texture)
+                                request.provideSurface(surface, mainExecutor) { }
+                                controllers[selector] = controller
+                                val reply = reply {
+                                    this.cameraControllerBindArguments =
+                                        cameraControllerBindReplyArguments {
+                                            this.cameraValue = cameraValue {
+                                                this.textureId = textureEntry.id().toInt()
+                                                val cameraInfo = camera.cameraInfo
+                                                if (cameraInfo.sensorRotationDegrees % 180 == 0) {
+                                                    this.textureWidth = resolution.width
+                                                    this.textureHeight = resolution.height
+                                                } else {
+                                                    this.textureWidth = resolution.height
+                                                    this.textureHeight = resolution.width
+                                                }
+                                                this.torchAvailable =
+                                                    cameraInfo.hasFlashUnit()
+                                                val zoomState = cameraInfo.zoomState.value!!
+                                                this.zoomMinimum =
+                                                    zoomState.minZoomRatio.toDouble()
+                                                this.zoomMaximum =
+                                                    zoomState.maxZoomRatio.toDouble()
+                                            }
+                                        }
+                                }.toByteArray()
+                                result.success(reply)
+                            }
+                            val imageAnalysisExecutor = Executors.newSingleThreadExecutor()
+                            imageAnalysis.setAnalyzer(imageAnalysisExecutor) { imageProxy ->
+                                if (imageProxy.format != ImageFormat.YUV_420_888) {
+                                    val errorMessage =
+                                        "The image proxy's format is unsupported: ${imageProxy.format}"
+                                    eventSink?.error(TAG, errorMessage)
+                                }
+                                val imageProxyId = imageProxy.hashCode().toString()
+                                val imageProxies = controller.imageProxies
+                                imageProxies[imageProxyId] = imageProxy
+                                val event = event {
+                                    this.category =
+                                        Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED
+                                    this.cameraControllerImageProxiedArguments =
+                                        cameraControllerImageProxiedEventArguments {
+                                            this.imageProxy = imageProxy {
+                                                this.selector = selector
+                                                this.id = imageProxyId
+                                                val imageBytes: ByteArray
+                                                val imageWidth: Int
+                                                val imageHeight: Int
+                                                // 计算需要旋转的角度
+                                                var rotationDegrees =
+                                                    (imageProxy.imageInfo.rotationDegrees - activity.rotationDegrees) % 360
+                                                if (rotationDegrees < 0) {
+                                                    rotationDegrees += 360
+                                                }
+                                                when (rotationDegrees) {
+                                                    0 -> {
+                                                        imageBytes = imageProxy.bytes
+                                                        imageWidth = imageProxy.width
+                                                        imageHeight = imageProxy.height
+                                                    }
+                                                    90 -> {
+                                                        imageBytes = rotate90(
+                                                            imageProxy.bytes,
+                                                            imageProxy.width,
+                                                            imageProxy.height
+                                                        )
+                                                        imageWidth = imageProxy.height
+                                                        imageHeight = imageProxy.width
+                                                    }
+                                                    180 -> {
+                                                        imageBytes = rotate180(
+                                                            imageProxy.bytes,
+                                                            imageProxy.width,
+                                                            imageProxy.height
+                                                        )
+                                                        imageWidth = imageProxy.width
+                                                        imageHeight = imageProxy.height
+                                                    }
+                                                    270 -> {
+                                                        imageBytes = rotate270(
+                                                            imageProxy.bytes,
+                                                            imageProxy.width,
+                                                            imageProxy.height
+                                                        )
+                                                        imageWidth = imageProxy.height
+                                                        imageHeight = imageProxy.width
+                                                    }
+                                                    else -> {
+                                                        throw NotImplementedError()
+                                                    }
+                                                }
+                                                this.data = ByteString.copyFrom(imageBytes)
+                                                this.width = imageWidth
+                                                this.height = imageHeight
+                                            }
+                                        }
+                                }.toByteArray()
+                                invokeOnMainThread { eventSink?.success(event) }
+                            }
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND -> {
                     val arguments = command.cameraControllerUnbindArguments

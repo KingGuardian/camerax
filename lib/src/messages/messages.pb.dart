@@ -993,6 +993,7 @@ class ImageProxyCloseCommandArguments extends $pb.GeneratedMessage {
 
 enum Reply_Arguments {
   getQuarterTurnsArguments,
+  cameraControllerRequestPermissionArguments,
   cameraControllerBindArguments,
   notSet
 }
@@ -1000,7 +1001,8 @@ enum Reply_Arguments {
 class Reply extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, Reply_Arguments> _Reply_ArgumentsByTag = {
     1: Reply_Arguments.getQuarterTurnsArguments,
-    2: Reply_Arguments.cameraControllerBindArguments,
+    2: Reply_Arguments.cameraControllerRequestPermissionArguments,
+    3: Reply_Arguments.cameraControllerBindArguments,
     0: Reply_Arguments.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -1012,15 +1014,21 @@ class Reply extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<GetQuarterTurnsReplyArguments>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'getQuarterTurnsArguments',
         subBuilder: GetQuarterTurnsReplyArguments.create)
-    ..aOM<CameraControllerBindReplyArguments>(
+    ..aOM<CameraControllerRequestPermissionReplyArguments>(
         2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cameraControllerRequestPermissionArguments',
+        subBuilder: CameraControllerRequestPermissionReplyArguments.create)
+    ..aOM<CameraControllerBindReplyArguments>(
+        3,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'cameraControllerBindArguments',
@@ -1030,11 +1038,17 @@ class Reply extends $pb.GeneratedMessage {
   Reply._() : super();
   factory Reply({
     GetQuarterTurnsReplyArguments? getQuarterTurnsArguments,
+    CameraControllerRequestPermissionReplyArguments?
+        cameraControllerRequestPermissionArguments,
     CameraControllerBindReplyArguments? cameraControllerBindArguments,
   }) {
     final _result = create();
     if (getQuarterTurnsArguments != null) {
       _result.getQuarterTurnsArguments = getQuarterTurnsArguments;
+    }
+    if (cameraControllerRequestPermissionArguments != null) {
+      _result.cameraControllerRequestPermissionArguments =
+          cameraControllerRequestPermissionArguments;
     }
     if (cameraControllerBindArguments != null) {
       _result.cameraControllerBindArguments = cameraControllerBindArguments;
@@ -1085,20 +1099,37 @@ class Reply extends $pb.GeneratedMessage {
   GetQuarterTurnsReplyArguments ensureGetQuarterTurnsArguments() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  CameraControllerBindReplyArguments get cameraControllerBindArguments =>
-      $_getN(1);
+  CameraControllerRequestPermissionReplyArguments
+      get cameraControllerRequestPermissionArguments => $_getN(1);
   @$pb.TagNumber(2)
-  set cameraControllerBindArguments(CameraControllerBindReplyArguments v) {
+  set cameraControllerRequestPermissionArguments(
+      CameraControllerRequestPermissionReplyArguments v) {
     setField(2, v);
   }
 
   @$pb.TagNumber(2)
-  $core.bool hasCameraControllerBindArguments() => $_has(1);
+  $core.bool hasCameraControllerRequestPermissionArguments() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCameraControllerBindArguments() => clearField(2);
+  void clearCameraControllerRequestPermissionArguments() => clearField(2);
   @$pb.TagNumber(2)
+  CameraControllerRequestPermissionReplyArguments
+      ensureCameraControllerRequestPermissionArguments() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  CameraControllerBindReplyArguments get cameraControllerBindArguments =>
+      $_getN(2);
+  @$pb.TagNumber(3)
+  set cameraControllerBindArguments(CameraControllerBindReplyArguments v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasCameraControllerBindArguments() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCameraControllerBindArguments() => clearField(3);
+  @$pb.TagNumber(3)
   CameraControllerBindReplyArguments ensureCameraControllerBindArguments() =>
-      $_ensure(1);
+      $_ensure(2);
 }
 
 class GetQuarterTurnsReplyArguments extends $pb.GeneratedMessage {
@@ -1171,6 +1202,84 @@ class GetQuarterTurnsReplyArguments extends $pb.GeneratedMessage {
   $core.bool hasQuarterTurns() => $_has(0);
   @$pb.TagNumber(1)
   void clearQuarterTurns() => clearField(1);
+}
+
+class CameraControllerRequestPermissionReplyArguments
+    extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CameraControllerRequestPermissionReplyArguments',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'messages'),
+      createEmptyInstance: create)
+    ..aOB(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'granted')
+    ..hasRequiredFields = false;
+
+  CameraControllerRequestPermissionReplyArguments._() : super();
+  factory CameraControllerRequestPermissionReplyArguments({
+    $core.bool? granted,
+  }) {
+    final _result = create();
+    if (granted != null) {
+      _result.granted = granted;
+    }
+    return _result;
+  }
+  factory CameraControllerRequestPermissionReplyArguments.fromBuffer(
+          $core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CameraControllerRequestPermissionReplyArguments.fromJson(
+          $core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CameraControllerRequestPermissionReplyArguments clone() =>
+      CameraControllerRequestPermissionReplyArguments()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CameraControllerRequestPermissionReplyArguments copyWith(
+          void Function(CameraControllerRequestPermissionReplyArguments)
+              updates) =>
+      super.copyWith((message) => updates(
+              message as CameraControllerRequestPermissionReplyArguments))
+          as CameraControllerRequestPermissionReplyArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerRequestPermissionReplyArguments create() =>
+      CameraControllerRequestPermissionReplyArguments._();
+  CameraControllerRequestPermissionReplyArguments createEmptyInstance() =>
+      create();
+  static $pb.PbList<CameraControllerRequestPermissionReplyArguments>
+      createRepeated() =>
+          $pb.PbList<CameraControllerRequestPermissionReplyArguments>();
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerRequestPermissionReplyArguments getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<
+          CameraControllerRequestPermissionReplyArguments>(create);
+  static CameraControllerRequestPermissionReplyArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get granted => $_getBF(0);
+  @$pb.TagNumber(1)
+  set granted($core.bool v) {
+    $_setBool(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasGranted() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearGranted() => clearField(1);
 }
 
 class CameraControllerBindReplyArguments extends $pb.GeneratedMessage {

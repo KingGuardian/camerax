@@ -1,7 +1,7 @@
 $dartOut = "lib/src/messages"
 $javaOut = "android/src/main/java"
 $kotlinOut = "android/src/main/kotlin"
-$tails = "/com/additel/metis/scanner/messages"
+$tails = "/dev/yanshouwang/camerax/messages"
 $javaDirectory = "$javaOut$tails"
 $kotlinDirectory = "$kotlinOut$tails"
 if (Test-Path $dartOut) {

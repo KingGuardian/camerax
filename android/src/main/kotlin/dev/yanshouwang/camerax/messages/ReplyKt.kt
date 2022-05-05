@@ -47,7 +47,31 @@ public object ReplyKt {
     }
 
     /**
-     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 2;</code>
+     * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
+     */
+    public var cameraControllerRequestPermissionArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments
+      @JvmName("getCameraControllerRequestPermissionArguments")
+      get() = _builder.getCameraControllerRequestPermissionArguments()
+      @JvmName("setCameraControllerRequestPermissionArguments")
+      set(value) {
+        _builder.setCameraControllerRequestPermissionArguments(value)
+      }
+    /**
+     * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
+     */
+    public fun clearCameraControllerRequestPermissionArguments() {
+      _builder.clearCameraControllerRequestPermissionArguments()
+    }
+    /**
+     * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
+     * @return Whether the cameraControllerRequestPermissionArguments field is set.
+     */
+    public fun hasCameraControllerRequestPermissionArguments(): kotlin.Boolean {
+      return _builder.hasCameraControllerRequestPermissionArguments()
+    }
+
+    /**
+     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      */
     public var cameraControllerBindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments
       @JvmName("getCameraControllerBindArguments")
@@ -57,13 +81,13 @@ public object ReplyKt {
         _builder.setCameraControllerBindArguments(value)
       }
     /**
-     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 2;</code>
+     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      */
     public fun clearCameraControllerBindArguments() {
       _builder.clearCameraControllerBindArguments()
     }
     /**
-     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 2;</code>
+     * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      * @return Whether the cameraControllerBindArguments field is set.
      */
     public fun hasCameraControllerBindArguments(): kotlin.Boolean {
@@ -84,6 +108,9 @@ public inline fun dev.yanshouwang.camerax.messages.Messages.Reply.copy(block: de
 
 val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.getQuarterTurnsArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments?
   get() = if (hasGetQuarterTurnsArguments()) getGetQuarterTurnsArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerRequestPermissionArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments?
+  get() = if (hasCameraControllerRequestPermissionArguments()) getCameraControllerRequestPermissionArguments() else null
 
 val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerBindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments?
   get() = if (hasCameraControllerBindArguments()) getCameraControllerBindArguments() else null

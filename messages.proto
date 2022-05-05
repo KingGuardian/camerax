@@ -18,13 +18,14 @@ message Command {
 
 enum CommandCategory {
   COMMAND_CATEGORY_GET_QUARTER_TURNS = 0;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND = 1;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND = 2;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 3;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 4;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 5;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 6;
-  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 7;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION = 1;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND = 2;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND = 3;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 4;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 5;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 6;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 7;
+  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;
 }
 
 message CameraControllerBindCommandArguments {
@@ -65,12 +66,17 @@ message ImageProxyCloseCommandArguments {
 message Reply {
   oneof arguments {
     GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;
-    CameraControllerBindReplyArguments camera_controller_bind_arguments = 2;
+    CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;
+    CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;
   }
 }
 
 message GetQuarterTurnsReplyArguments {
   int32 quarter_turns = 1;
+}
+
+message CameraControllerRequestPermissionReplyArguments {
+  bool granted = 1;
 }
 
 message CameraControllerBindReplyArguments {

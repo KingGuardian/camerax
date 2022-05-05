@@ -36,6 +36,16 @@ class $CameraController implements CameraController {
   }
 
   @override
+  Future<bool> requestPermission() {
+    final command = messages.Command(
+      category: messages.CommandCategory
+          .COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION,
+    );
+    return methodChannel.invokeCommand(command).then(
+        (reply) => reply!.cameraControllerRequestPermissionArguments.granted);
+  }
+
+  @override
   Future<CameraValue> bind() {
     final command = messages.Command(
       category:
@@ -47,7 +57,7 @@ class $CameraController implements CameraController {
         ),
       ),
     );
-    return methodChannel.execute(command).then((reply) => $CameraValue
+    return methodChannel.invokeCommand(command).then((reply) => $CameraValue
         .fromMessage(reply!.cameraControllerBindArguments.cameraValue));
   }
 
@@ -63,7 +73,7 @@ class $CameraController implements CameraController {
         ),
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
@@ -79,7 +89,7 @@ class $CameraController implements CameraController {
         state: state,
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
@@ -95,7 +105,7 @@ class $CameraController implements CameraController {
         value: value,
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
@@ -110,7 +120,7 @@ class $CameraController implements CameraController {
         ),
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 
   @override
@@ -129,7 +139,7 @@ class $CameraController implements CameraController {
         y: y,
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 }
 
@@ -257,6 +267,6 @@ class $ImageProxy implements ImageProxy {
         id: id,
       ),
     );
-    return methodChannel.execute(command);
+    return methodChannel.invokeCommand(command);
   }
 }

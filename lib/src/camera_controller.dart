@@ -11,6 +11,7 @@ abstract class CameraController {
 
   Stream<ImageProxy> get imageStream;
 
+  Future<bool> requestPermission();
   Future<CameraValue> bind();
   Future<void> unbind();
   Future<void> torch(bool state);

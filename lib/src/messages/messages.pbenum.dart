@@ -16,52 +16,59 @@ class CommandCategory extends $pb.ProtobufEnum {
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_GET_QUARTER_TURNS');
+  static const CommandCategory
+      COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION = CommandCategory._(
+          1,
+          const $core.bool.fromEnvironment('protobuf.omit_enum_names')
+              ? ''
+              : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION');
   static const CommandCategory COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND =
       CommandCategory._(
-          1,
+          2,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND');
   static const CommandCategory COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND =
       CommandCategory._(
-          2,
+          3,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND');
   static const CommandCategory COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH =
       CommandCategory._(
-          3,
+          4,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH');
   static const CommandCategory COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM =
       CommandCategory._(
-          4,
+          5,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM');
   static const CommandCategory
       COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY =
       CommandCategory._(
-          5,
+          6,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY');
   static const CommandCategory
       COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = CommandCategory._(
-          6,
+          7,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY');
   static const CommandCategory COMMAND_CATEGORY_IMAGE_PROXY_CLOSE =
       CommandCategory._(
-          7,
+          8,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_IMAGE_PROXY_CLOSE');
 
   static const $core.List<CommandCategory> values = <CommandCategory>[
     COMMAND_CATEGORY_GET_QUARTER_TURNS,
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH,

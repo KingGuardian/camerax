@@ -39,6 +39,10 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () async {
+          final granted = await cameraController.requestPermission();
+          if (!granted) {
+            return;
+          }
           final cameraValue = await cameraController.bind();
           await Navigator.of(context).pushNamed(
             'scanner',
