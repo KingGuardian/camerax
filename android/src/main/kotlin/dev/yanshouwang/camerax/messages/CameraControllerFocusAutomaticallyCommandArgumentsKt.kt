@@ -23,24 +23,34 @@ public object CameraControllerFocusAutomaticallyCommandArgumentsKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments = _builder.build()
 
     /**
-     * <code>string id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var id: kotlin.String
-      @JvmName("getId")
-      get() = _builder.getId()
-      @JvmName("setId")
+    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+      @JvmName("getSelector")
+      get() = _builder.getSelector()
+      @JvmName("setSelector")
       set(value) {
-        _builder.setId(value)
+        _builder.setSelector(value)
       }
     /**
-     * <code>string id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearId() {
-      _builder.clearId()
+    public fun clearSelector() {
+      _builder.clearSelector()
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    public fun hasSelector(): kotlin.Boolean {
+      return _builder.hasSelector()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusAutomaticallyCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?
+  get() = if (hasSelector()) getSelector() else null
 

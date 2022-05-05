@@ -10,22 +10,29 @@ import 'image_proxy.dart';
 import 'messages.dart' as messages;
 
 class $CameraController implements CameraController {
+  static final controllers = <CameraSelector, $CameraController>{};
+
   final CameraSelector selector;
 
-  String get id => '$hashCode';
+  $CameraController._(this.selector);
 
-  $CameraController(this.selector);
+  factory $CameraController(CameraSelector selector) {
+    return controllers.putIfAbsent(
+      selector,
+      () => $CameraController._(selector),
+    );
+  }
 
   @override
-  Stream<ImageProxy> get imageProxied {
+  Stream<ImageProxy> get imageStream {
     return eventStream
         .where((event) =>
             event.category ==
-                messages.EventCategory
-                    .EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED &&
-            event.cameraControllerImageProxiedArguments.id == id)
-        .map((notification) => $ImageProxy.fromMessage(
-            id, notification.cameraControllerImageProxiedArguments.imageProxy));
+            messages
+                .EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED)
+        .map((event) => $ImageProxy.fromMessage(
+            event.cameraControllerImageProxiedArguments.imageProxy))
+        .where((imageProxy) => imageProxy.selector == selector);
   }
 
   @override
@@ -35,7 +42,6 @@ class $CameraController implements CameraController {
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND,
       cameraControllerBindArguments:
           messages.CameraControllerBindCommandArguments(
-        id: id,
         selector: messages.CameraSelector(
           facing: messages.CameraFacing.values[selector.facing.index],
         ),
@@ -52,7 +58,9 @@ class $CameraController implements CameraController {
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND,
       cameraControllerUnbindArguments:
           messages.CameraControllerUnbindCommandArguments(
-        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
       ),
     );
     return methodChannel.execute(command);
@@ -65,7 +73,9 @@ class $CameraController implements CameraController {
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH,
       cameraControllerTorchArguments:
           messages.CameraControllerTorchCommandArguments(
-        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
         state: state,
       ),
     );
@@ -79,7 +89,9 @@ class $CameraController implements CameraController {
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM,
       cameraControllerZoomArguments:
           messages.CameraControllerZoomCommandArguments(
-        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
         value: value,
       ),
     );
@@ -93,7 +105,9 @@ class $CameraController implements CameraController {
           .COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY,
       cameraControllerFocusAutomaticallyArguments:
           messages.CameraControllerFocusAutomaticallyCommandArguments(
-        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
       ),
     );
     return methodChannel.execute(command);
@@ -106,7 +120,9 @@ class $CameraController implements CameraController {
           .CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY,
       cameraControllerFocusManuallyArguments:
           messages.CameraControllerFocusManuallyCommandArguments(
-        id: id,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
         width: width,
         height: height,
         x: x,
@@ -122,6 +138,19 @@ class $CameraSelector implements CameraSelector {
   final CameraFacing facing;
 
   const $CameraSelector(this.facing);
+
+  factory $CameraSelector.fromMessage(messages.CameraSelector selector) {
+    final facing = CameraFacing.values[selector.facing.value];
+    return $CameraSelector(facing);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is $CameraSelector && other.facing == facing;
+  }
+
+  @override
+  int get hashCode => facing.hashCode;
 }
 
 class $CameraValue implements CameraValue {
@@ -163,10 +192,33 @@ class $CameraValue implements CameraValue {
       zoomMaximum,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is $CameraValue &&
+        other.textureId == textureId &&
+        other.textureWidth == textureWidth &&
+        other.textureHeight == textureHeight &&
+        other.torchAvailable == torchAvailable &&
+        other.zoomMinimum == zoomMinimum &&
+        other.zoomMaximum == zoomMaximum;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      textureId,
+      textureWidth,
+      textureHeight,
+      torchAvailable,
+      zoomMinimum,
+      zoomMaximum,
+    );
+  }
 }
 
 class $ImageProxy implements ImageProxy {
-  final String controllerId;
+  final CameraSelector selector;
   final String id;
   @override
   final Uint8List data;
@@ -176,7 +228,7 @@ class $ImageProxy implements ImageProxy {
   final int height;
 
   const $ImageProxy(
-    this.controllerId,
+    this.selector,
     this.id,
     this.data,
     this.width,
@@ -184,14 +236,14 @@ class $ImageProxy implements ImageProxy {
   );
 
   factory $ImageProxy.fromMessage(
-    String controllerId,
     messages.ImageProxy imageProxy,
   ) {
+    final selector = $CameraSelector.fromMessage(imageProxy.selector);
     final id = imageProxy.id;
     final data = Uint8List.fromList(imageProxy.data);
     final width = imageProxy.width;
     final height = imageProxy.height;
-    return $ImageProxy(controllerId, id, data, width, height);
+    return $ImageProxy(selector, id, data, width, height);
   }
 
   @override
@@ -199,7 +251,9 @@ class $ImageProxy implements ImageProxy {
     final command = messages.Command(
       category: messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE,
       imageProxyCloseArguments: messages.ImageProxyCloseCommandArguments(
-        controllerId: controllerId,
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
         id: id,
       ),
     );

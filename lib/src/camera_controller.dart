@@ -9,7 +9,7 @@ abstract class CameraController {
   factory CameraController(CameraSelector selector) =>
       $CameraController(selector);
 
-  Stream<ImageProxy> get imageProxied;
+  Stream<ImageProxy> get imageStream;
 
   Future<CameraValue> bind();
   Future<void> unbind();

@@ -142,10 +142,9 @@ final $typed_data.Uint8List commandDescriptor = $convert.base64Decode(
 const CameraControllerBindCommandArguments$json = const {
   '1': 'CameraControllerBindCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {
       '1': 'selector',
-      '3': 2,
+      '3': 1,
       '4': 1,
       '5': 11,
       '6': '.messages.CameraSelector',
@@ -157,25 +156,39 @@ const CameraControllerBindCommandArguments$json = const {
 /// Descriptor for `CameraControllerBindCommandArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cameraControllerBindCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'CiRDYW1lcmFDb250cm9sbGVyQmluZENvbW1hbmRBcmd1bWVudHMSDgoCaWQYASABKAlSAmlkEjQKCHNlbGVjdG9yGAIgASgLMhgubWVzc2FnZXMuQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9y');
+        'CiRDYW1lcmFDb250cm9sbGVyQmluZENvbW1hbmRBcmd1bWVudHMSNAoIc2VsZWN0b3IYASABKAsyGC5tZXNzYWdlcy5DYW1lcmFTZWxlY3RvclIIc2VsZWN0b3I=');
 @$core
     .Deprecated('Use cameraControllerUnbindCommandArgumentsDescriptor instead')
 const CameraControllerUnbindCommandArguments$json = const {
   '1': 'CameraControllerUnbindCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
   ],
 };
 
 /// Descriptor for `CameraControllerUnbindCommandArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cameraControllerUnbindCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'CiZDYW1lcmFDb250cm9sbGVyVW5iaW5kQ29tbWFuZEFyZ3VtZW50cxIOCgJpZBgBIAEoCVICaWQ=');
+        'CiZDYW1lcmFDb250cm9sbGVyVW5iaW5kQ29tbWFuZEFyZ3VtZW50cxI0CghzZWxlY3RvchgBIAEoCzIYLm1lc3NhZ2VzLkNhbWVyYVNlbGVjdG9yUghzZWxlY3Rvcg==');
 @$core.Deprecated('Use cameraControllerTorchCommandArgumentsDescriptor instead')
 const CameraControllerTorchCommandArguments$json = const {
   '1': 'CameraControllerTorchCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
     const {'1': 'state', '3': 2, '4': 1, '5': 8, '10': 'state'},
   ],
 };
@@ -183,12 +196,19 @@ const CameraControllerTorchCommandArguments$json = const {
 /// Descriptor for `CameraControllerTorchCommandArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cameraControllerTorchCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'CiVDYW1lcmFDb250cm9sbGVyVG9yY2hDb21tYW5kQXJndW1lbnRzEg4KAmlkGAEgASgJUgJpZBIUCgVzdGF0ZRgCIAEoCFIFc3RhdGU=');
+        'CiVDYW1lcmFDb250cm9sbGVyVG9yY2hDb21tYW5kQXJndW1lbnRzEjQKCHNlbGVjdG9yGAEgASgLMhgubWVzc2FnZXMuQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9yEhQKBXN0YXRlGAIgASgIUgVzdGF0ZQ==');
 @$core.Deprecated('Use cameraControllerZoomCommandArgumentsDescriptor instead')
 const CameraControllerZoomCommandArguments$json = const {
   '1': 'CameraControllerZoomCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
     const {'1': 'value', '3': 2, '4': 1, '5': 1, '10': 'value'},
   ],
 };
@@ -196,13 +216,20 @@ const CameraControllerZoomCommandArguments$json = const {
 /// Descriptor for `CameraControllerZoomCommandArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cameraControllerZoomCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'CiRDYW1lcmFDb250cm9sbGVyWm9vbUNvbW1hbmRBcmd1bWVudHMSDgoCaWQYASABKAlSAmlkEhQKBXZhbHVlGAIgASgBUgV2YWx1ZQ==');
+        'CiRDYW1lcmFDb250cm9sbGVyWm9vbUNvbW1hbmRBcmd1bWVudHMSNAoIc2VsZWN0b3IYASABKAsyGC5tZXNzYWdlcy5DYW1lcmFTZWxlY3RvclIIc2VsZWN0b3ISFAoFdmFsdWUYAiABKAFSBXZhbHVl');
 @$core.Deprecated(
     'Use cameraControllerFocusAutomaticallyCommandArgumentsDescriptor instead')
 const CameraControllerFocusAutomaticallyCommandArguments$json = const {
   '1': 'CameraControllerFocusAutomaticallyCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
   ],
 };
 
@@ -210,13 +237,20 @@ const CameraControllerFocusAutomaticallyCommandArguments$json = const {
 final $typed_data.Uint8List
     cameraControllerFocusAutomaticallyCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'CjJDYW1lcmFDb250cm9sbGVyRm9jdXNBdXRvbWF0aWNhbGx5Q29tbWFuZEFyZ3VtZW50cxIOCgJpZBgBIAEoCVICaWQ=');
+        'CjJDYW1lcmFDb250cm9sbGVyRm9jdXNBdXRvbWF0aWNhbGx5Q29tbWFuZEFyZ3VtZW50cxI0CghzZWxlY3RvchgBIAEoCzIYLm1lc3NhZ2VzLkNhbWVyYVNlbGVjdG9yUghzZWxlY3Rvcg==');
 @$core.Deprecated(
     'Use cameraControllerFocusManuallyCommandArgumentsDescriptor instead')
 const CameraControllerFocusManuallyCommandArguments$json = const {
   '1': 'CameraControllerFocusManuallyCommandArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
     const {'1': 'width', '3': 2, '4': 1, '5': 1, '10': 'width'},
     const {'1': 'height', '3': 3, '4': 1, '5': 1, '10': 'height'},
     const {'1': 'x', '3': 4, '4': 1, '5': 1, '10': 'x'},
@@ -228,12 +262,19 @@ const CameraControllerFocusManuallyCommandArguments$json = const {
 final $typed_data.Uint8List
     cameraControllerFocusManuallyCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'Ci1DYW1lcmFDb250cm9sbGVyRm9jdXNNYW51YWxseUNvbW1hbmRBcmd1bWVudHMSDgoCaWQYASABKAlSAmlkEhQKBXdpZHRoGAIgASgBUgV3aWR0aBIWCgZoZWlnaHQYAyABKAFSBmhlaWdodBIMCgF4GAQgASgBUgF4EgwKAXkYBSABKAFSAXk=');
+        'Ci1DYW1lcmFDb250cm9sbGVyRm9jdXNNYW51YWxseUNvbW1hbmRBcmd1bWVudHMSNAoIc2VsZWN0b3IYASABKAsyGC5tZXNzYWdlcy5DYW1lcmFTZWxlY3RvclIIc2VsZWN0b3ISFAoFd2lkdGgYAiABKAFSBXdpZHRoEhYKBmhlaWdodBgDIAEoAVIGaGVpZ2h0EgwKAXgYBCABKAFSAXgSDAoBeRgFIAEoAVIBeQ==');
 @$core.Deprecated('Use imageProxyCloseCommandArgumentsDescriptor instead')
 const ImageProxyCloseCommandArguments$json = const {
   '1': 'ImageProxyCloseCommandArguments',
   '2': const [
-    const {'1': 'controller_id', '3': 1, '4': 1, '5': 9, '10': 'controllerId'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
     const {'1': 'id', '3': 2, '4': 1, '5': 9, '10': 'id'},
   ],
 };
@@ -241,7 +282,7 @@ const ImageProxyCloseCommandArguments$json = const {
 /// Descriptor for `ImageProxyCloseCommandArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List imageProxyCloseCommandArgumentsDescriptor =
     $convert.base64Decode(
-        'Ch9JbWFnZVByb3h5Q2xvc2VDb21tYW5kQXJndW1lbnRzEiMKDWNvbnRyb2xsZXJfaWQYASABKAlSDGNvbnRyb2xsZXJJZBIOCgJpZBgCIAEoCVICaWQ=');
+        'Ch9JbWFnZVByb3h5Q2xvc2VDb21tYW5kQXJndW1lbnRzEjQKCHNlbGVjdG9yGAEgASgLMhgubWVzc2FnZXMuQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9yEg4KAmlkGAIgASgJUgJpZA==');
 @$core.Deprecated('Use replyDescriptor instead')
 const Reply$json = const {
   '1': 'Reply',
@@ -360,10 +401,9 @@ final $typed_data.Uint8List quarterTurnsChangedEventArgumentsDescriptor =
 const CameraControllerImageProxiedEventArguments$json = const {
   '1': 'CameraControllerImageProxiedEventArguments',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {
       '1': 'image_proxy',
-      '3': 2,
+      '3': 1,
       '4': 1,
       '5': 11,
       '6': '.messages.ImageProxy',
@@ -376,7 +416,7 @@ const CameraControllerImageProxiedEventArguments$json = const {
 final $typed_data.Uint8List
     cameraControllerImageProxiedEventArgumentsDescriptor =
     $convert.base64Decode(
-        'CipDYW1lcmFDb250cm9sbGVySW1hZ2VQcm94aWVkRXZlbnRBcmd1bWVudHMSDgoCaWQYASABKAlSAmlkEjUKC2ltYWdlX3Byb3h5GAIgASgLMhQubWVzc2FnZXMuSW1hZ2VQcm94eVIKaW1hZ2VQcm94eQ==');
+        'CipDYW1lcmFDb250cm9sbGVySW1hZ2VQcm94aWVkRXZlbnRBcmd1bWVudHMSNQoLaW1hZ2VfcHJveHkYASABKAsyFC5tZXNzYWdlcy5JbWFnZVByb3h5UgppbWFnZVByb3h5');
 @$core.Deprecated('Use cameraSelectorDescriptor instead')
 const CameraSelector$json = const {
   '1': 'CameraSelector',
@@ -427,13 +467,21 @@ final $typed_data.Uint8List cameraValueDescriptor = $convert.base64Decode(
 const ImageProxy$json = const {
   '1': 'ImageProxy',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'data', '3': 2, '4': 1, '5': 12, '10': 'data'},
-    const {'1': 'width', '3': 3, '4': 1, '5': 5, '10': 'width'},
-    const {'1': 'height', '3': 4, '4': 1, '5': 5, '10': 'height'},
+    const {
+      '1': 'selector',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.messages.CameraSelector',
+      '10': 'selector'
+    },
+    const {'1': 'id', '3': 2, '4': 1, '5': 9, '10': 'id'},
+    const {'1': 'data', '3': 3, '4': 1, '5': 12, '10': 'data'},
+    const {'1': 'width', '3': 4, '4': 1, '5': 5, '10': 'width'},
+    const {'1': 'height', '3': 5, '4': 1, '5': 5, '10': 'height'},
   ],
 };
 
 /// Descriptor for `ImageProxy`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode(
-    'CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZBISCgRkYXRhGAIgASgMUgRkYXRhEhQKBXdpZHRoGAMgASgFUgV3aWR0aBIWCgZoZWlnaHQYBCABKAVSBmhlaWdodA==');
+    'CgpJbWFnZVByb3h5EjQKCHNlbGVjdG9yGAEgASgLMhgubWVzc2FnZXMuQ2FtZXJhU2VsZWN0b3JSCHNlbGVjdG9yEg4KAmlkGAIgASgJUgJpZBISCgRkYXRhGAMgASgMUgRkYXRhEhQKBXdpZHRoGAQgASgFUgV3aWR0aBIWCgZoZWlnaHQYBSABKAVSBmhlaWdodA==');

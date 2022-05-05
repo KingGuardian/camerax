@@ -23,24 +23,7 @@ public object CameraControllerBindCommandArgumentsKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments = _builder.build()
 
     /**
-     * <code>string id = 1;</code>
-     */
-    public var id: kotlin.String
-      @JvmName("getId")
-      get() = _builder.getId()
-      @JvmName("setId")
-      set(value) {
-        _builder.setId(value)
-      }
-    /**
-     * <code>string id = 1;</code>
-     */
-    public fun clearId() {
-      _builder.clearId()
-    }
-
-    /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
     public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
       @JvmName("getSelector")
@@ -50,13 +33,13 @@ public object CameraControllerBindCommandArgumentsKt {
         _builder.setSelector(value)
       }
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
     public fun clearSelector() {
       _builder.clearSelector()
     }
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
     public fun hasSelector(): kotlin.Boolean {

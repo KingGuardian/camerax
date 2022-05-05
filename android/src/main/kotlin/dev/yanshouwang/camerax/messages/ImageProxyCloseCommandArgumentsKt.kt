@@ -23,20 +23,27 @@ public object ImageProxyCloseCommandArgumentsKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments = _builder.build()
 
     /**
-     * <code>string controller_id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var controllerId: kotlin.String
-      @JvmName("getControllerId")
-      get() = _builder.getControllerId()
-      @JvmName("setControllerId")
+    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+      @JvmName("getSelector")
+      get() = _builder.getSelector()
+      @JvmName("setSelector")
       set(value) {
-        _builder.setControllerId(value)
+        _builder.setSelector(value)
       }
     /**
-     * <code>string controller_id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearControllerId() {
-      _builder.clearControllerId()
+    public fun clearSelector() {
+      _builder.clearSelector()
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    public fun hasSelector(): kotlin.Boolean {
+      return _builder.hasSelector()
     }
 
     /**
@@ -60,4 +67,7 @@ public object ImageProxyCloseCommandArgumentsKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.copy(block: dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments =
   dev.yanshouwang.camerax.messages.ImageProxyCloseCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?
+  get() = if (hasSelector()) getSelector() else null
 

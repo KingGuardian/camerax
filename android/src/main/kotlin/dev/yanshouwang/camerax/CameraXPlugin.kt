@@ -57,8 +57,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND -> {
                     val arguments = command.cameraControllerBindArguments
-                    val id = arguments.id
-                    val selector = arguments.selector.cameraxSelector
+                    val selector = arguments.selector
                     val activity = binding.activity
                     val runnable = Runnable {
                         val listenable = ProcessCameraProvider.getInstance(activity)
@@ -77,7 +76,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                     .build()
                                 val camera = provider.bindToLifecycle(
                                     lifecycleOwner,
-                                    selector,
+                                    selector.cameraxSelector,
                                     preview,
                                     imageAnalysis
                                 )
@@ -92,7 +91,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                     )
                                     val surface = Surface(texture)
                                     request.provideSurface(surface, mainExecutor) { }
-                                    controllers[id] = controller
+                                    controllers[selector] = controller
                                     val reply = reply {
                                         this.cameraControllerBindArguments =
                                             cameraControllerBindReplyArguments {
@@ -133,8 +132,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                             Messages.EventCategory.EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED
                                         this.cameraControllerImageProxiedArguments =
                                             cameraControllerImageProxiedEventArguments {
-                                                this.id = id
                                                 this.imageProxy = imageProxy {
+                                                    this.selector = selector
                                                     this.id = imageProxyId
                                                     val imageBytes: ByteArray
                                                     val imageWidth: Int
@@ -217,14 +216,14 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND -> {
                     val arguments = command.cameraControllerUnbindArguments
-                    val id = arguments.id
+                    val selector = arguments.selector
                     val activity = binding.activity
                     val listenable = ProcessCameraProvider.getInstance(activity)
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
                     listenable.addListener({
                         try {
                             val provider = listenable.get()
-                            val controller = controllers.remove(id)!!
+                            val controller = controllers.remove(selector)!!
                             val preview = controller.preview
                             val imageAnalysis = controller.imageAnalysis
                             provider.unbind(preview, imageAnalysis)
@@ -238,9 +237,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH -> {
                     val arguments = command.cameraControllerTorchArguments
-                    val id = arguments.id
+                    val selector = arguments.selector
                     val state = arguments.state
-                    val controller = controllers[id]!!
+                    val controller = controllers[selector]!!
                     val camera = controller.camera
                     val listenable = camera.cameraControl.enableTorch(state)
                     val activity = binding.activity
@@ -256,9 +255,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM -> {
                     val arguments = command.cameraControllerZoomArguments
-                    val id = arguments.id
+                    val selector = arguments.selector
                     val ratio = arguments.value.toFloat()
-                    val controller = controllers[id]!!
+                    val controller = controllers[selector]!!
                     val camera = controller.camera
                     val listenable = camera.cameraControl.setZoomRatio(ratio)
                     val activity = binding.activity
@@ -274,8 +273,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY -> {
                     val arguments = command.cameraControllerFocusAutomaticallyArguments
-                    val id = arguments.id
-                    val controller = controllers[id]!!
+                    val selector = arguments.selector
+                    val controller = controllers[selector]!!
                     val camera = controller.camera
                     val listenable = camera.cameraControl.cancelFocusAndMetering()
                     val activity = binding.activity
@@ -291,12 +290,12 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY -> {
                     val arguments = command.cameraControllerFocusManuallyArguments
-                    val id = arguments.id
+                    val selector = arguments.selector
                     val width = arguments.width.toFloat()
                     val height = arguments.height.toFloat()
                     val x = arguments.x.toFloat()
                     val y = arguments.y.toFloat()
-                    val controller = controllers[id]!!
+                    val controller = controllers[selector]!!
                     val camera = controller.camera
                     val cameraInfo = camera.cameraInfo
                     val activity = binding.activity
@@ -363,9 +362,9 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE -> {
                     val arguments = command.imageProxyCloseArguments
-                    val controllerId = arguments.controllerId
+                    val selector = arguments.selector
                     val id = arguments.id
-                    val controller = controllers[controllerId]
+                    val controller = controllers[selector]
                     // 相机关闭后会释放 ImageProxy 实例
                     if (controller != null) {
                         val imageProxies = controller.imageProxies
@@ -418,7 +417,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
         }
     }
 
-    private val controllers by lazy { mutableMapOf<String, CameraController>() }
+    private val controllers by lazy { mutableMapOf<Messages.CameraSelector, CameraController>() }
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         textureRegistry = binding.textureRegistry

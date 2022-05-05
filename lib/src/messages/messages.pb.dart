@@ -308,13 +308,8 @@ class CameraControllerBindCommandArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'id')
     ..aOM<CameraSelector>(
-        2,
+        1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'selector',
@@ -323,13 +318,9 @@ class CameraControllerBindCommandArguments extends $pb.GeneratedMessage {
 
   CameraControllerBindCommandArguments._() : super();
   factory CameraControllerBindCommandArguments({
-    $core.String? id,
     CameraSelector? selector,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
-    }
     if (selector != null) {
       _result.selector = selector;
     }
@@ -369,30 +360,18 @@ class CameraControllerBindCommandArguments extends $pb.GeneratedMessage {
   static CameraControllerBindCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
-  }
-
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  CameraSelector get selector => $_getN(1);
-  @$pb.TagNumber(2)
   set selector(CameraSelector v) {
-    setField(2, v);
+    setField(1, v);
   }
 
-  @$pb.TagNumber(2)
-  $core.bool hasSelector() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSelector() => clearField(2);
-  @$pb.TagNumber(2)
-  CameraSelector ensureSelector() => $_ensure(1);
+  @$pb.TagNumber(1)
+  $core.bool hasSelector() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 }
 
 class CameraControllerUnbindCommandArguments extends $pb.GeneratedMessage {
@@ -405,20 +384,21 @@ class CameraControllerUnbindCommandArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'id')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..hasRequiredFields = false;
 
   CameraControllerUnbindCommandArguments._() : super();
   factory CameraControllerUnbindCommandArguments({
-    $core.String? id,
+    CameraSelector? selector,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (selector != null) {
+      _result.selector = selector;
     }
     return _result;
   }
@@ -456,16 +436,18 @@ class CameraControllerUnbindCommandArguments extends $pb.GeneratedMessage {
   static CameraControllerUnbindCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 }
 
 class CameraControllerTorchCommandArguments extends $pb.GeneratedMessage {
@@ -478,11 +460,12 @@ class CameraControllerTorchCommandArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'id')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..aOB(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -492,12 +475,12 @@ class CameraControllerTorchCommandArguments extends $pb.GeneratedMessage {
 
   CameraControllerTorchCommandArguments._() : super();
   factory CameraControllerTorchCommandArguments({
-    $core.String? id,
+    CameraSelector? selector,
     $core.bool? state,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (selector != null) {
+      _result.selector = selector;
     }
     if (state != null) {
       _result.state = state;
@@ -538,16 +521,18 @@ class CameraControllerTorchCommandArguments extends $pb.GeneratedMessage {
   static CameraControllerTorchCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.bool get state => $_getBF(1);
@@ -572,11 +557,12 @@ class CameraControllerZoomCommandArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'id')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..a<$core.double>(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -587,12 +573,12 @@ class CameraControllerZoomCommandArguments extends $pb.GeneratedMessage {
 
   CameraControllerZoomCommandArguments._() : super();
   factory CameraControllerZoomCommandArguments({
-    $core.String? id,
+    CameraSelector? selector,
     $core.double? value,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (selector != null) {
+      _result.selector = selector;
     }
     if (value != null) {
       _result.value = value;
@@ -633,16 +619,18 @@ class CameraControllerZoomCommandArguments extends $pb.GeneratedMessage {
   static CameraControllerZoomCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.double get value => $_getN(1);
@@ -668,20 +656,21 @@ class CameraControllerFocusAutomaticallyCommandArguments
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'id')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..hasRequiredFields = false;
 
   CameraControllerFocusAutomaticallyCommandArguments._() : super();
   factory CameraControllerFocusAutomaticallyCommandArguments({
-    $core.String? id,
+    CameraSelector? selector,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (selector != null) {
+      _result.selector = selector;
     }
     return _result;
   }
@@ -724,16 +713,18 @@ class CameraControllerFocusAutomaticallyCommandArguments
   static CameraControllerFocusAutomaticallyCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 }
 
 class CameraControllerFocusManuallyCommandArguments
@@ -747,11 +738,12 @@ class CameraControllerFocusManuallyCommandArguments
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'id')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..a<$core.double>(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -780,15 +772,15 @@ class CameraControllerFocusManuallyCommandArguments
 
   CameraControllerFocusManuallyCommandArguments._() : super();
   factory CameraControllerFocusManuallyCommandArguments({
-    $core.String? id,
+    CameraSelector? selector,
     $core.double? width,
     $core.double? height,
     $core.double? x,
     $core.double? y,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
+    if (selector != null) {
+      _result.selector = selector;
     }
     if (width != null) {
       _result.width = width;
@@ -841,16 +833,18 @@ class CameraControllerFocusManuallyCommandArguments
   static CameraControllerFocusManuallyCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.double get width => $_getN(1);
@@ -911,11 +905,12 @@ class ImageProxyCloseCommandArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
-            : 'controllerId')
+            : 'selector',
+        subBuilder: CameraSelector.create)
     ..aOS(
         2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -925,12 +920,12 @@ class ImageProxyCloseCommandArguments extends $pb.GeneratedMessage {
 
   ImageProxyCloseCommandArguments._() : super();
   factory ImageProxyCloseCommandArguments({
-    $core.String? controllerId,
+    CameraSelector? selector,
     $core.String? id,
   }) {
     final _result = create();
-    if (controllerId != null) {
-      _result.controllerId = controllerId;
+    if (selector != null) {
+      _result.selector = selector;
     }
     if (id != null) {
       _result.id = id;
@@ -970,16 +965,18 @@ class ImageProxyCloseCommandArguments extends $pb.GeneratedMessage {
   static ImageProxyCloseCommandArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get controllerId => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
-  set controllerId($core.String v) {
-    $_setString(0, v);
+  set selector(CameraSelector v) {
+    setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasControllerId() => $_has(0);
+  $core.bool hasSelector() => $_has(0);
   @$pb.TagNumber(1)
-  void clearControllerId() => clearField(1);
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get id => $_getSZ(1);
@@ -1474,13 +1471,8 @@ class CameraControllerImageProxiedEventArguments extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
-        1,
-        const $core.bool.fromEnvironment('protobuf.omit_field_names')
-            ? ''
-            : 'id')
     ..aOM<ImageProxy>(
-        2,
+        1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'imageProxy',
@@ -1489,13 +1481,9 @@ class CameraControllerImageProxiedEventArguments extends $pb.GeneratedMessage {
 
   CameraControllerImageProxiedEventArguments._() : super();
   factory CameraControllerImageProxiedEventArguments({
-    $core.String? id,
     ImageProxy? imageProxy,
   }) {
     final _result = create();
-    if (id != null) {
-      _result.id = id;
-    }
     if (imageProxy != null) {
       _result.imageProxy = imageProxy;
     }
@@ -1536,30 +1524,18 @@ class CameraControllerImageProxiedEventArguments extends $pb.GeneratedMessage {
   static CameraControllerImageProxiedEventArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  ImageProxy get imageProxy => $_getN(0);
   @$pb.TagNumber(1)
-  set id($core.String v) {
-    $_setString(0, v);
-  }
-
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  ImageProxy get imageProxy => $_getN(1);
-  @$pb.TagNumber(2)
   set imageProxy(ImageProxy v) {
-    setField(2, v);
+    setField(1, v);
   }
 
-  @$pb.TagNumber(2)
-  $core.bool hasImageProxy() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearImageProxy() => clearField(2);
-  @$pb.TagNumber(2)
-  ImageProxy ensureImageProxy() => $_ensure(1);
+  @$pb.TagNumber(1)
+  $core.bool hasImageProxy() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearImageProxy() => clearField(1);
+  @$pb.TagNumber(1)
+  ImageProxy ensureImageProxy() => $_ensure(0);
 }
 
 class CameraSelector extends $pb.GeneratedMessage {
@@ -1819,25 +1795,31 @@ class ImageProxy extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..aOS(
+    ..aOM<CameraSelector>(
         1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'selector',
+        subBuilder: CameraSelector.create)
+    ..aOS(
+        2,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'id')
     ..a<$core.List<$core.int>>(
-        2,
+        3,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'data',
         $pb.PbFieldType.OY)
     ..a<$core.int>(
-        3,
+        4,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'width',
         $pb.PbFieldType.O3)
     ..a<$core.int>(
-        4,
+        5,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'height',
@@ -1846,12 +1828,16 @@ class ImageProxy extends $pb.GeneratedMessage {
 
   ImageProxy._() : super();
   factory ImageProxy({
+    CameraSelector? selector,
     $core.String? id,
     $core.List<$core.int>? data,
     $core.int? width,
     $core.int? height,
   }) {
     final _result = create();
+    if (selector != null) {
+      _result.selector = selector;
+    }
     if (id != null) {
       _result.id = id;
     }
@@ -1893,50 +1879,64 @@ class ImageProxy extends $pb.GeneratedMessage {
   static ImageProxy? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
+  CameraSelector get selector => $_getN(0);
   @$pb.TagNumber(1)
+  set selector(CameraSelector v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSelector() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get id => $_getSZ(1);
+  @$pb.TagNumber(2)
   set id($core.String v) {
-    $_setString(0, v);
+    $_setString(1, v);
   }
 
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
+  @$pb.TagNumber(2)
+  $core.bool hasId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearId() => clearField(2);
 
-  @$pb.TagNumber(2)
-  $core.List<$core.int> get data => $_getN(1);
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(3)
+  $core.List<$core.int> get data => $_getN(2);
+  @$pb.TagNumber(3)
   set data($core.List<$core.int> v) {
-    $_setBytes(1, v);
+    $_setBytes(2, v);
   }
 
-  @$pb.TagNumber(2)
-  $core.bool hasData() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearData() => clearField(2);
+  @$pb.TagNumber(3)
+  $core.bool hasData() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearData() => clearField(3);
 
-  @$pb.TagNumber(3)
-  $core.int get width => $_getIZ(2);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(4)
+  $core.int get width => $_getIZ(3);
+  @$pb.TagNumber(4)
   set width($core.int v) {
-    $_setSignedInt32(2, v);
-  }
-
-  @$pb.TagNumber(3)
-  $core.bool hasWidth() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearWidth() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.int get height => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set height($core.int v) {
     $_setSignedInt32(3, v);
   }
 
   @$pb.TagNumber(4)
-  $core.bool hasHeight() => $_has(3);
+  $core.bool hasWidth() => $_has(3);
   @$pb.TagNumber(4)
-  void clearHeight() => clearField(4);
+  void clearWidth() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get height => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set height($core.int v) {
+    $_setSignedInt32(4, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasHeight() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearHeight() => clearField(5);
 }

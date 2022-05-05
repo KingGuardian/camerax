@@ -20,7 +20,7 @@ class _ScannerViewState extends State<ScannerView>
   late AnimationController animationConrtroller;
   late Animation<double> offsetAnimation;
   late Animation<double> opacityAnimation;
-  late StreamSubscription<ImageProxy> imageProxiedSubscription;
+  late StreamSubscription<ImageProxy> imageStreamSubscription;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _ScannerViewState extends State<ScannerView>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    imageProxiedSubscription = cameraController.imageProxied.listen(analyze);
+    imageStreamSubscription = cameraController.imageStream.listen(analyze);
     animationConrtroller.repeat();
     initAsync();
   }
@@ -126,7 +126,7 @@ class _ScannerViewState extends State<ScannerView>
 
   @override
   void dispose() {
-    imageProxiedSubscription.cancel();
+    imageStreamSubscription.cancel();
     animationConrtroller.dispose();
     super.dispose();
   }

@@ -2605,29 +2605,17 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
-     */
-    java.lang.String getId();
-    /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
-     */
-    com.google.protobuf.ByteString
-        getIdBytes();
-
-    /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
     boolean hasSelector();
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      * @return The selector.
      */
     dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
     dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
   }
@@ -2644,7 +2632,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerBindCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -2678,12 +2665,6 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            case 18: {
               dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
               if (selector_ != null) {
                 subBuilder = selector_.toBuilder();
@@ -2730,48 +2711,10 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
-    /**
-     * <code>string id = 1;</code>
-     * @return The id.
-     */
-    @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SELECTOR_FIELD_NUMBER = 2;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
     private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
     @java.lang.Override
@@ -2779,7 +2722,7 @@ public final class Messages {
       return selector_ != null;
     }
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      * @return The selector.
      */
     @java.lang.Override
@@ -2787,7 +2730,7 @@ public final class Messages {
       return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
     }
     /**
-     * <code>.messages.CameraSelector selector = 2;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
@@ -2808,11 +2751,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
-      }
       if (selector_ != null) {
-        output.writeMessage(2, getSelector());
+        output.writeMessage(1, getSelector());
       }
       unknownFields.writeTo(output);
     }
@@ -2823,12 +2763,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
-      }
       if (selector_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getSelector());
+          .computeMessageSize(1, getSelector());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2845,8 +2782,6 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
       if (hasSelector() != other.hasSelector()) return false;
       if (hasSelector()) {
         if (!getSelector()
@@ -2863,8 +2798,6 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
       if (hasSelector()) {
         hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
         hash = (53 * hash) + getSelector().hashCode();
@@ -3002,8 +2935,6 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
         if (selectorBuilder_ == null) {
           selector_ = null;
         } else {
@@ -3036,7 +2967,6 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments(this);
-        result.id_ = id_;
         if (selectorBuilder_ == null) {
           result.selector_ = selector_;
         } else {
@@ -3090,10 +3020,6 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
-        }
         if (other.hasSelector()) {
           mergeSelector(other.getSelector());
         }
@@ -3126,94 +3052,18 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
-      /**
-       * <code>string id = 1;</code>
-       * @return The id.
-       */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
-       */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-
       private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        * @return Whether the selector field is set.
        */
       public boolean hasSelector() {
         return selectorBuilder_ != null || selector_ != null;
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        * @return The selector.
        */
       public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
@@ -3224,7 +3074,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
         if (selectorBuilder_ == null) {
@@ -3240,7 +3090,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public Builder setSelector(
           dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
@@ -3254,7 +3104,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
         if (selectorBuilder_ == null) {
@@ -3272,7 +3122,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public Builder clearSelector() {
         if (selectorBuilder_ == null) {
@@ -3286,7 +3136,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
         
@@ -3294,7 +3144,7 @@ public final class Messages {
         return getSelectorFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
         if (selectorBuilder_ != null) {
@@ -3305,7 +3155,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.CameraSelector selector = 2;</code>
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
@@ -3378,16 +3228,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getId();
+    boolean hasSelector();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
   }
   /**
    * Protobuf type {@code messages.CameraControllerUnbindCommandArguments}
@@ -3402,7 +3255,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerUnbindCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -3436,9 +3288,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              id_ = s;
               break;
             }
             default: {
@@ -3475,42 +3334,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3527,8 +3374,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       unknownFields.writeTo(output);
     }
@@ -3539,8 +3386,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3557,8 +3405,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3570,8 +3421,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3705,8 +3558,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         return this;
       }
 
@@ -3733,7 +3590,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments(this);
-        result.id_ = id_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -3782,9 +3643,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3815,80 +3675,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3948,16 +3851,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getId();
+    boolean hasSelector();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
 
     /**
      * <code>bool state = 2;</code>
@@ -3978,7 +3884,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerTorchCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -4012,9 +3917,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              id_ = s;
               break;
             }
             case 16: {
@@ -4056,42 +3968,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     public static final int STATE_FIELD_NUMBER = 2;
@@ -4119,8 +4019,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       if (state_ != false) {
         output.writeBool(2, state_);
@@ -4134,8 +4034,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       if (state_ != false) {
         size += com.google.protobuf.CodedOutputStream
@@ -4156,8 +4057,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (getState()
           != other.getState()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -4171,8 +4075,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (37 * hash) + STATE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getState());
@@ -4309,8 +4215,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         state_ = false;
 
         return this;
@@ -4339,7 +4249,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments(this);
-        result.id_ = id_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         result.state_ = state_;
         onBuilt();
         return result;
@@ -4389,9 +4303,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         if (other.getState() != false) {
           setState(other.getState());
@@ -4425,80 +4338,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
 
       private boolean state_ ;
@@ -4589,16 +4545,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getId();
+    boolean hasSelector();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
 
     /**
      * <code>double value = 2;</code>
@@ -4619,7 +4578,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerZoomCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -4653,9 +4611,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              id_ = s;
               break;
             }
             case 17: {
@@ -4697,42 +4662,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     public static final int VALUE_FIELD_NUMBER = 2;
@@ -4760,8 +4713,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
         output.writeDouble(2, value_);
@@ -4775,8 +4728,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -4797,8 +4751,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (java.lang.Double.doubleToLongBits(getValue())
           != java.lang.Double.doubleToLongBits(
               other.getValue())) return false;
@@ -4813,8 +4770,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getValue()));
@@ -4951,8 +4910,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         value_ = 0D;
 
         return this;
@@ -4981,7 +4944,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments(this);
-        result.id_ = id_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         result.value_ = value_;
         onBuilt();
         return result;
@@ -5031,9 +4998,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         if (other.getValue() != 0D) {
           setValue(other.getValue());
@@ -5067,80 +5033,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
 
       private double value_ ;
@@ -5231,16 +5240,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getId();
+    boolean hasSelector();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
   }
   /**
    * Protobuf type {@code messages.CameraControllerFocusAutomaticallyCommandArguments}
@@ -5255,7 +5267,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerFocusAutomaticallyCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -5289,9 +5300,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              id_ = s;
               break;
             }
             default: {
@@ -5328,42 +5346,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -5380,8 +5386,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       unknownFields.writeTo(output);
     }
@@ -5392,8 +5398,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5410,8 +5417,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -5423,8 +5433,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5558,8 +5570,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         return this;
       }
 
@@ -5586,7 +5602,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments(this);
-        result.id_ = id_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -5635,9 +5655,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5668,80 +5687,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -5801,16 +5863,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getId();
+    boolean hasSelector();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
 
     /**
      * <code>double width = 2;</code>
@@ -5849,7 +5914,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerFocusManuallyCommandArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -5883,9 +5947,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              id_ = s;
               break;
             }
             case 17: {
@@ -5942,42 +6013,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     public static final int WIDTH_FIELD_NUMBER = 2;
@@ -6038,8 +6097,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
         output.writeDouble(2, width_);
@@ -6062,8 +6121,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -6096,8 +6156,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (java.lang.Double.doubleToLongBits(getWidth())
           != java.lang.Double.doubleToLongBits(
               other.getWidth())) return false;
@@ -6121,8 +6184,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (37 * hash) + WIDTH_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getWidth()));
@@ -6268,8 +6333,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         width_ = 0D;
 
         height_ = 0D;
@@ -6304,7 +6373,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments(this);
-        result.id_ = id_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         result.width_ = width_;
         result.height_ = height_;
         result.x_ = x_;
@@ -6357,9 +6430,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         if (other.getWidth() != 0D) {
           setWidth(other.getWidth());
@@ -6402,80 +6474,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
 
       private double width_ ;
@@ -6659,16 +6774,19 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string controller_id = 1;</code>
-     * @return The controllerId.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
-    java.lang.String getControllerId();
+    boolean hasSelector();
     /**
-     * <code>string controller_id = 1;</code>
-     * @return The bytes for controllerId.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
-    com.google.protobuf.ByteString
-        getControllerIdBytes();
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
 
     /**
      * <code>string id = 2;</code>
@@ -6695,7 +6813,6 @@ public final class Messages {
       super(builder);
     }
     private ImageProxyCloseCommandArguments() {
-      controllerId_ = "";
       id_ = "";
     }
 
@@ -6730,9 +6847,16 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
 
-              controllerId_ = s;
               break;
             }
             case 18: {
@@ -6775,42 +6899,30 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder.class);
     }
 
-    public static final int CONTROLLER_ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object controllerId_;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
     /**
-     * <code>string controller_id = 1;</code>
-     * @return The controllerId.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
      */
     @java.lang.Override
-    public java.lang.String getControllerId() {
-      java.lang.Object ref = controllerId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        controllerId_ = s;
-        return s;
-      }
+    public boolean hasSelector() {
+      return selector_ != null;
     }
     /**
-     * <code>string controller_id = 1;</code>
-     * @return The bytes for controllerId.
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getControllerIdBytes() {
-      java.lang.Object ref = controllerId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        controllerId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
     }
 
     public static final int ID_FIELD_NUMBER = 2;
@@ -6865,8 +6977,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(controllerId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, controllerId_);
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, id_);
@@ -6880,8 +6992,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(controllerId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, controllerId_);
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, id_);
@@ -6901,8 +7014,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) obj;
 
-      if (!getControllerId()
-          .equals(other.getControllerId())) return false;
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (!getId()
           .equals(other.getId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -6916,8 +7032,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CONTROLLER_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getControllerId().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -7053,8 +7171,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        controllerId_ = "";
-
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         id_ = "";
 
         return this;
@@ -7083,7 +7205,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments(this);
-        result.controllerId_ = controllerId_;
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         result.id_ = id_;
         onBuilt();
         return result;
@@ -7133,9 +7259,8 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance()) return this;
-        if (!other.getControllerId().isEmpty()) {
-          controllerId_ = other.controllerId_;
-          onChanged();
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
         }
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
@@ -7170,80 +7295,123 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object controllerId_ = "";
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
       /**
-       * <code>string controller_id = 1;</code>
-       * @return The controllerId.
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
        */
-      public java.lang.String getControllerId() {
-        java.lang.Object ref = controllerId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          controllerId_ = s;
-          return s;
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         } else {
-          return (java.lang.String) ref;
+          return selectorBuilder_.getMessage();
         }
       }
       /**
-       * <code>string controller_id = 1;</code>
-       * @return The bytes for controllerId.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getControllerIdBytes() {
-        java.lang.Object ref = controllerId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          controllerId_ = b;
-          return b;
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
         }
       }
       /**
-       * <code>string controller_id = 1;</code>
-       * @param value The controllerId to set.
-       * @return This builder for chaining.
+       * <code>.messages.CameraSelector selector = 1;</code>
        */
-      public Builder setControllerId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        controllerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string controller_id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearControllerId() {
-        
-        controllerId_ = getDefaultInstance().getControllerId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string controller_id = 1;</code>
-       * @param value The bytes for controllerId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setControllerIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        controllerId_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
       }
 
       private java.lang.Object id_ = "";
@@ -10991,29 +11159,17 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
-     */
-    java.lang.String getId();
-    /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
-     */
-    com.google.protobuf.ByteString
-        getIdBytes();
-
-    /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return Whether the imageProxy field is set.
      */
     boolean hasImageProxy();
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return The imageProxy.
      */
     dev.yanshouwang.camerax.messages.Messages.ImageProxy getImageProxy();
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
     dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder();
   }
@@ -11030,7 +11186,6 @@ public final class Messages {
       super(builder);
     }
     private CameraControllerImageProxiedEventArguments() {
-      id_ = "";
     }
 
     @java.lang.Override
@@ -11064,12 +11219,6 @@ public final class Messages {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              id_ = s;
-              break;
-            }
-            case 18: {
               dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder subBuilder = null;
               if (imageProxy_ != null) {
                 subBuilder = imageProxy_.toBuilder();
@@ -11116,48 +11265,10 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
-    /**
-     * <code>string id = 1;</code>
-     * @return The id.
-     */
-    @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        id_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        id_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IMAGE_PROXY_FIELD_NUMBER = 2;
+    public static final int IMAGE_PROXY_FIELD_NUMBER = 1;
     private dev.yanshouwang.camerax.messages.Messages.ImageProxy imageProxy_;
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return Whether the imageProxy field is set.
      */
     @java.lang.Override
@@ -11165,7 +11276,7 @@ public final class Messages {
       return imageProxy_ != null;
     }
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return The imageProxy.
      */
     @java.lang.Override
@@ -11173,7 +11284,7 @@ public final class Messages {
       return imageProxy_ == null ? dev.yanshouwang.camerax.messages.Messages.ImageProxy.getDefaultInstance() : imageProxy_;
     }
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
@@ -11194,11 +11305,8 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
-      }
       if (imageProxy_ != null) {
-        output.writeMessage(2, getImageProxy());
+        output.writeMessage(1, getImageProxy());
       }
       unknownFields.writeTo(output);
     }
@@ -11209,12 +11317,9 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
-      }
       if (imageProxy_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getImageProxy());
+          .computeMessageSize(1, getImageProxy());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -11231,8 +11336,6 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
       if (hasImageProxy() != other.hasImageProxy()) return false;
       if (hasImageProxy()) {
         if (!getImageProxy()
@@ -11249,8 +11352,6 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
       if (hasImageProxy()) {
         hash = (37 * hash) + IMAGE_PROXY_FIELD_NUMBER;
         hash = (53 * hash) + getImageProxy().hashCode();
@@ -11388,8 +11489,6 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
-
         if (imageProxyBuilder_ == null) {
           imageProxy_ = null;
         } else {
@@ -11422,7 +11521,6 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments(this);
-        result.id_ = id_;
         if (imageProxyBuilder_ == null) {
           result.imageProxy_ = imageProxy_;
         } else {
@@ -11476,10 +11574,6 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
-          onChanged();
-        }
         if (other.hasImageProxy()) {
           mergeImageProxy(other.getImageProxy());
         }
@@ -11512,94 +11606,18 @@ public final class Messages {
         return this;
       }
 
-      private java.lang.Object id_ = "";
-      /**
-       * <code>string id = 1;</code>
-       * @return The id.
-       */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          id_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
-       */
-      public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          id_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = getDefaultInstance().getId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-
       private dev.yanshouwang.camerax.messages.Messages.ImageProxy imageProxy_;
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.ImageProxy, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder> imageProxyBuilder_;
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        * @return Whether the imageProxy field is set.
        */
       public boolean hasImageProxy() {
         return imageProxyBuilder_ != null || imageProxy_ != null;
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        * @return The imageProxy.
        */
       public dev.yanshouwang.camerax.messages.Messages.ImageProxy getImageProxy() {
@@ -11610,7 +11628,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public Builder setImageProxy(dev.yanshouwang.camerax.messages.Messages.ImageProxy value) {
         if (imageProxyBuilder_ == null) {
@@ -11626,7 +11644,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public Builder setImageProxy(
           dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder builderForValue) {
@@ -11640,7 +11658,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public Builder mergeImageProxy(dev.yanshouwang.camerax.messages.Messages.ImageProxy value) {
         if (imageProxyBuilder_ == null) {
@@ -11658,7 +11676,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public Builder clearImageProxy() {
         if (imageProxyBuilder_ == null) {
@@ -11672,7 +11690,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder getImageProxyBuilder() {
         
@@ -11680,7 +11698,7 @@ public final class Messages {
         return getImageProxyFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
         if (imageProxyBuilder_ != null) {
@@ -11691,7 +11709,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>.messages.ImageProxy image_proxy = 2;</code>
+       * <code>.messages.ImageProxy image_proxy = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.ImageProxy, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder> 
@@ -13136,31 +13154,46 @@ public final class Messages {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    boolean hasSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
+
+    /**
+     * <code>string id = 2;</code>
      * @return The id.
      */
     java.lang.String getId();
     /**
-     * <code>string id = 1;</code>
+     * <code>string id = 2;</code>
      * @return The bytes for id.
      */
     com.google.protobuf.ByteString
         getIdBytes();
 
     /**
-     * <code>bytes data = 2;</code>
+     * <code>bytes data = 3;</code>
      * @return The data.
      */
     com.google.protobuf.ByteString getData();
 
     /**
-     * <code>int32 width = 3;</code>
+     * <code>int32 width = 4;</code>
      * @return The width.
      */
     int getWidth();
 
     /**
-     * <code>int32 height = 4;</code>
+     * <code>int32 height = 5;</code>
      * @return The height.
      */
     int getHeight();
@@ -13213,22 +13246,35 @@ public final class Messages {
               done = true;
               break;
             case 10: {
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               id_ = s;
               break;
             }
-            case 18: {
+            case 26: {
 
               data_ = input.readBytes();
               break;
             }
-            case 24: {
+            case 32: {
 
               width_ = input.readInt32();
               break;
             }
-            case 32: {
+            case 40: {
 
               height_ = input.readInt32();
               break;
@@ -13267,10 +13313,36 @@ public final class Messages {
               dev.yanshouwang.camerax.messages.Messages.ImageProxy.class, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    @java.lang.Override
+    public boolean hasSelector() {
+      return selector_ != null;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
+    }
+
+    public static final int ID_FIELD_NUMBER = 2;
     private volatile java.lang.Object id_;
     /**
-     * <code>string id = 1;</code>
+     * <code>string id = 2;</code>
      * @return The id.
      */
     @java.lang.Override
@@ -13287,7 +13359,7 @@ public final class Messages {
       }
     }
     /**
-     * <code>string id = 1;</code>
+     * <code>string id = 2;</code>
      * @return The bytes for id.
      */
     @java.lang.Override
@@ -13305,10 +13377,10 @@ public final class Messages {
       }
     }
 
-    public static final int DATA_FIELD_NUMBER = 2;
+    public static final int DATA_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString data_;
     /**
-     * <code>bytes data = 2;</code>
+     * <code>bytes data = 3;</code>
      * @return The data.
      */
     @java.lang.Override
@@ -13316,10 +13388,10 @@ public final class Messages {
       return data_;
     }
 
-    public static final int WIDTH_FIELD_NUMBER = 3;
+    public static final int WIDTH_FIELD_NUMBER = 4;
     private int width_;
     /**
-     * <code>int32 width = 3;</code>
+     * <code>int32 width = 4;</code>
      * @return The width.
      */
     @java.lang.Override
@@ -13327,10 +13399,10 @@ public final class Messages {
       return width_;
     }
 
-    public static final int HEIGHT_FIELD_NUMBER = 4;
+    public static final int HEIGHT_FIELD_NUMBER = 5;
     private int height_;
     /**
-     * <code>int32 height = 4;</code>
+     * <code>int32 height = 5;</code>
      * @return The height.
      */
     @java.lang.Override
@@ -13352,17 +13424,20 @@ public final class Messages {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, id_);
       }
       if (!data_.isEmpty()) {
-        output.writeBytes(2, data_);
+        output.writeBytes(3, data_);
       }
       if (width_ != 0) {
-        output.writeInt32(3, width_);
+        output.writeInt32(4, width_);
       }
       if (height_ != 0) {
-        output.writeInt32(4, height_);
+        output.writeInt32(5, height_);
       }
       unknownFields.writeTo(output);
     }
@@ -13373,20 +13448,24 @@ public final class Messages {
       if (size != -1) return size;
 
       size = 0;
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, id_);
       }
       if (!data_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, data_);
+          .computeBytesSize(3, data_);
       }
       if (width_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, width_);
+          .computeInt32Size(4, width_);
       }
       if (height_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, height_);
+          .computeInt32Size(5, height_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13403,6 +13482,11 @@ public final class Messages {
       }
       dev.yanshouwang.camerax.messages.Messages.ImageProxy other = (dev.yanshouwang.camerax.messages.Messages.ImageProxy) obj;
 
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
       if (!getId()
           .equals(other.getId())) return false;
       if (!getData()
@@ -13422,6 +13506,10 @@ public final class Messages {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + DATA_FIELD_NUMBER;
@@ -13563,6 +13651,12 @@ public final class Messages {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
         id_ = "";
 
         data_ = com.google.protobuf.ByteString.EMPTY;
@@ -13597,6 +13691,11 @@ public final class Messages {
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.ImageProxy buildPartial() {
         dev.yanshouwang.camerax.messages.Messages.ImageProxy result = new dev.yanshouwang.camerax.messages.Messages.ImageProxy(this);
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
         result.id_ = id_;
         result.data_ = data_;
         result.width_ = width_;
@@ -13649,6 +13748,9 @@ public final class Messages {
 
       public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.ImageProxy other) {
         if (other == dev.yanshouwang.camerax.messages.Messages.ImageProxy.getDefaultInstance()) return this;
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
+        }
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
           onChanged();
@@ -13691,9 +13793,128 @@ public final class Messages {
         return this;
       }
 
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
+       */
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        } else {
+          return selectorBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
+      }
+
       private java.lang.Object id_ = "";
       /**
-       * <code>string id = 1;</code>
+       * <code>string id = 2;</code>
        * @return The id.
        */
       public java.lang.String getId() {
@@ -13709,7 +13930,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>string id = 1;</code>
+       * <code>string id = 2;</code>
        * @return The bytes for id.
        */
       public com.google.protobuf.ByteString
@@ -13726,7 +13947,7 @@ public final class Messages {
         }
       }
       /**
-       * <code>string id = 1;</code>
+       * <code>string id = 2;</code>
        * @param value The id to set.
        * @return This builder for chaining.
        */
@@ -13741,7 +13962,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>string id = 1;</code>
+       * <code>string id = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearId() {
@@ -13751,7 +13972,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>string id = 1;</code>
+       * <code>string id = 2;</code>
        * @param value The bytes for id to set.
        * @return This builder for chaining.
        */
@@ -13769,7 +13990,7 @@ public final class Messages {
 
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>bytes data = 2;</code>
+       * <code>bytes data = 3;</code>
        * @return The data.
        */
       @java.lang.Override
@@ -13777,7 +13998,7 @@ public final class Messages {
         return data_;
       }
       /**
-       * <code>bytes data = 2;</code>
+       * <code>bytes data = 3;</code>
        * @param value The data to set.
        * @return This builder for chaining.
        */
@@ -13791,7 +14012,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>bytes data = 2;</code>
+       * <code>bytes data = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearData() {
@@ -13803,7 +14024,7 @@ public final class Messages {
 
       private int width_ ;
       /**
-       * <code>int32 width = 3;</code>
+       * <code>int32 width = 4;</code>
        * @return The width.
        */
       @java.lang.Override
@@ -13811,7 +14032,7 @@ public final class Messages {
         return width_;
       }
       /**
-       * <code>int32 width = 3;</code>
+       * <code>int32 width = 4;</code>
        * @param value The width to set.
        * @return This builder for chaining.
        */
@@ -13822,7 +14043,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>int32 width = 3;</code>
+       * <code>int32 width = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearWidth() {
@@ -13834,7 +14055,7 @@ public final class Messages {
 
       private int height_ ;
       /**
-       * <code>int32 height = 4;</code>
+       * <code>int32 height = 5;</code>
        * @return The height.
        */
       @java.lang.Override
@@ -13842,7 +14063,7 @@ public final class Messages {
         return height_;
       }
       /**
-       * <code>int32 height = 4;</code>
+       * <code>int32 height = 5;</code>
        * @param value The height to set.
        * @return This builder for chaining.
        */
@@ -13853,7 +14074,7 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>int32 height = 4;</code>
+       * <code>int32 height = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearHeight() {
@@ -14028,62 +14249,67 @@ public final class Messages {
       "s.CameraControllerFocusManuallyCommandAr" +
       "gumentsH\000\022P\n\033image_proxy_close_arguments" +
       "\030\010 \001(\0132).messages.ImageProxyCloseCommand" +
-      "ArgumentsH\000B\013\n\targuments\"^\n$CameraContro" +
-      "llerBindCommandArguments\022\n\n\002id\030\001 \001(\t\022*\n\010" +
-      "selector\030\002 \001(\0132\030.messages.CameraSelector" +
-      "\"4\n&CameraControllerUnbindCommandArgumen" +
-      "ts\022\n\n\002id\030\001 \001(\t\"B\n%CameraControllerTorchC" +
-      "ommandArguments\022\n\n\002id\030\001 \001(\t\022\r\n\005state\030\002 \001" +
-      "(\010\"A\n$CameraControllerZoomCommandArgumen" +
-      "ts\022\n\n\002id\030\001 \001(\t\022\r\n\005value\030\002 \001(\001\"@\n2CameraC" +
-      "ontrollerFocusAutomaticallyCommandArgume" +
-      "nts\022\n\n\002id\030\001 \001(\t\"p\n-CameraControllerFocus" +
-      "ManuallyCommandArguments\022\n\n\002id\030\001 \001(\t\022\r\n\005" +
-      "width\030\002 \001(\001\022\016\n\006height\030\003 \001(\001\022\t\n\001x\030\004 \001(\001\022\t" +
-      "\n\001y\030\005 \001(\001\"D\n\037ImageProxyCloseCommandArgum" +
-      "ents\022\025\n\rcontroller_id\030\001 \001(\t\022\n\n\002id\030\002 \001(\t\"" +
-      "\276\001\n\005Reply\022N\n\033get_quarter_turns_arguments" +
-      "\030\001 \001(\0132\'.messages.GetQuarterTurnsReplyAr" +
-      "gumentsH\000\022X\n camera_controller_bind_argu" +
-      "ments\030\002 \001(\0132,.messages.CameraControllerB" +
-      "indReplyArgumentsH\000B\013\n\targuments\"6\n\035GetQ" +
-      "uarterTurnsReplyArguments\022\025\n\rquarter_tur" +
-      "ns\030\001 \001(\005\"Q\n\"CameraControllerBindReplyArg" +
-      "uments\022+\n\014camera_value\030\001 \001(\0132\025.messages." +
-      "CameraValue\"\202\002\n\005Event\022)\n\010category\030\001 \001(\0162" +
-      "\027.messages.EventCategory\022V\n\037quarter_turn" +
-      "s_changed_arguments\030\002 \001(\0132+.messages.Qua" +
-      "rterTurnsChangedEventArgumentsH\000\022i\n)came" +
-      "ra_controller_image_proxied_arguments\030\003 " +
-      "\001(\01324.messages.CameraControllerImageProx" +
-      "iedEventArgumentsH\000B\013\n\targuments\":\n!Quar" +
-      "terTurnsChangedEventArguments\022\025\n\rquarter" +
-      "_turns\030\001 \001(\005\"c\n*CameraControllerImagePro" +
-      "xiedEventArguments\022\n\n\002id\030\001 \001(\t\022)\n\013image_" +
-      "proxy\030\002 \001(\0132\024.messages.ImageProxy\"8\n\016Cam" +
-      "eraSelector\022&\n\006facing\030\001 \001(\0162\026.messages.C" +
-      "ameraFacing\"\225\001\n\013CameraValue\022\022\n\ntexture_i" +
-      "d\030\001 \001(\005\022\025\n\rtexture_width\030\002 \001(\005\022\026\n\016textur" +
-      "e_height\030\003 \001(\005\022\027\n\017torch_available\030\004 \001(\010\022" +
-      "\024\n\014zoom_minimum\030\005 \001(\001\022\024\n\014zoom_maximum\030\006 " +
-      "\001(\001\"E\n\nImageProxy\022\n\n\002id\030\001 \001(\t\022\014\n\004data\030\002 " +
-      "\001(\014\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005*\213\003\n\017C" +
-      "ommandCategory\022&\n\"COMMAND_CATEGORY_GET_Q" +
-      "UARTER_TURNS\020\000\022+\n\'COMMAND_CATEGORY_CAMER" +
-      "A_CONTROLLER_BIND\020\001\022-\n)COMMAND_CATEGORY_" +
-      "CAMERA_CONTROLLER_UNBIND\020\002\022,\n(COMMAND_CA" +
-      "TEGORY_CAMERA_CONTROLLER_TORCH\020\003\022+\n\'COMM" +
-      "AND_CATEGORY_CAMERA_CONTROLLER_ZOOM\020\004\022:\n" +
-      "6COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCU" +
-      "S_AUTOMATICALLY\020\005\0225\n1COMMAND_CATEGORY_CA" +
-      "MERA_CONTROLLER_FOCUS_MANUALLY\020\006\022&\n\"COMM" +
-      "AND_CATEGORY_IMAGE_PROXY_CLOSE\020\007*m\n\rEven" +
-      "tCategory\022(\n$EVENT_CATEGORY_QUARTER_TURN" +
-      "S_CHANGED\020\000\0222\n.EVENT_CATEGORY_CAMERA_CON" +
-      "TROLLER_IMAGE_PROXIED\020\001*?\n\014CameraFacing\022" +
-      "\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMERA_FACING" +
-      "_FRONT\020\001B\"\n dev.yanshouwang.camerax.mess" +
-      "agesb\006proto3"
+      "ArgumentsH\000B\013\n\targuments\"R\n$CameraContro" +
+      "llerBindCommandArguments\022*\n\010selector\030\001 \001" +
+      "(\0132\030.messages.CameraSelector\"T\n&CameraCo" +
+      "ntrollerUnbindCommandArguments\022*\n\010select" +
+      "or\030\001 \001(\0132\030.messages.CameraSelector\"b\n%Ca" +
+      "meraControllerTorchCommandArguments\022*\n\010s" +
+      "elector\030\001 \001(\0132\030.messages.CameraSelector\022" +
+      "\r\n\005state\030\002 \001(\010\"a\n$CameraControllerZoomCo" +
+      "mmandArguments\022*\n\010selector\030\001 \001(\0132\030.messa" +
+      "ges.CameraSelector\022\r\n\005value\030\002 \001(\001\"`\n2Cam" +
+      "eraControllerFocusAutomaticallyCommandAr" +
+      "guments\022*\n\010selector\030\001 \001(\0132\030.messages.Cam" +
+      "eraSelector\"\220\001\n-CameraControllerFocusMan" +
+      "uallyCommandArguments\022*\n\010selector\030\001 \001(\0132" +
+      "\030.messages.CameraSelector\022\r\n\005width\030\002 \001(\001" +
+      "\022\016\n\006height\030\003 \001(\001\022\t\n\001x\030\004 \001(\001\022\t\n\001y\030\005 \001(\001\"Y" +
+      "\n\037ImageProxyCloseCommandArguments\022*\n\010sel" +
+      "ector\030\001 \001(\0132\030.messages.CameraSelector\022\n\n" +
+      "\002id\030\002 \001(\t\"\276\001\n\005Reply\022N\n\033get_quarter_turns" +
+      "_arguments\030\001 \001(\0132\'.messages.GetQuarterTu" +
+      "rnsReplyArgumentsH\000\022X\n camera_controller" +
+      "_bind_arguments\030\002 \001(\0132,.messages.CameraC" +
+      "ontrollerBindReplyArgumentsH\000B\013\n\targumen" +
+      "ts\"6\n\035GetQuarterTurnsReplyArguments\022\025\n\rq" +
+      "uarter_turns\030\001 \001(\005\"Q\n\"CameraControllerBi" +
+      "ndReplyArguments\022+\n\014camera_value\030\001 \001(\0132\025" +
+      ".messages.CameraValue\"\202\002\n\005Event\022)\n\010categ" +
+      "ory\030\001 \001(\0162\027.messages.EventCategory\022V\n\037qu" +
+      "arter_turns_changed_arguments\030\002 \001(\0132+.me" +
+      "ssages.QuarterTurnsChangedEventArguments" +
+      "H\000\022i\n)camera_controller_image_proxied_ar" +
+      "guments\030\003 \001(\01324.messages.CameraControlle" +
+      "rImageProxiedEventArgumentsH\000B\013\n\targumen" +
+      "ts\":\n!QuarterTurnsChangedEventArguments\022" +
+      "\025\n\rquarter_turns\030\001 \001(\005\"W\n*CameraControll" +
+      "erImageProxiedEventArguments\022)\n\013image_pr" +
+      "oxy\030\001 \001(\0132\024.messages.ImageProxy\"8\n\016Camer" +
+      "aSelector\022&\n\006facing\030\001 \001(\0162\026.messages.Cam" +
+      "eraFacing\"\225\001\n\013CameraValue\022\022\n\ntexture_id\030" +
+      "\001 \001(\005\022\025\n\rtexture_width\030\002 \001(\005\022\026\n\016texture_" +
+      "height\030\003 \001(\005\022\027\n\017torch_available\030\004 \001(\010\022\024\n" +
+      "\014zoom_minimum\030\005 \001(\001\022\024\n\014zoom_maximum\030\006 \001(" +
+      "\001\"q\n\nImageProxy\022*\n\010selector\030\001 \001(\0132\030.mess" +
+      "ages.CameraSelector\022\n\n\002id\030\002 \001(\t\022\014\n\004data\030" +
+      "\003 \001(\014\022\r\n\005width\030\004 \001(\005\022\016\n\006height\030\005 \001(\005*\213\003\n" +
+      "\017CommandCategory\022&\n\"COMMAND_CATEGORY_GET" +
+      "_QUARTER_TURNS\020\000\022+\n\'COMMAND_CATEGORY_CAM" +
+      "ERA_CONTROLLER_BIND\020\001\022-\n)COMMAND_CATEGOR" +
+      "Y_CAMERA_CONTROLLER_UNBIND\020\002\022,\n(COMMAND_" +
+      "CATEGORY_CAMERA_CONTROLLER_TORCH\020\003\022+\n\'CO" +
+      "MMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM\020\004\022" +
+      ":\n6COMMAND_CATEGORY_CAMERA_CONTROLLER_FO" +
+      "CUS_AUTOMATICALLY\020\005\0225\n1COMMAND_CATEGORY_" +
+      "CAMERA_CONTROLLER_FOCUS_MANUALLY\020\006\022&\n\"CO" +
+      "MMAND_CATEGORY_IMAGE_PROXY_CLOSE\020\007*m\n\rEv" +
+      "entCategory\022(\n$EVENT_CATEGORY_QUARTER_TU" +
+      "RNS_CHANGED\020\000\0222\n.EVENT_CATEGORY_CAMERA_C" +
+      "ONTROLLER_IMAGE_PROXIED\020\001*?\n\014CameraFacin" +
+      "g\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMERA_FACI" +
+      "NG_FRONT\020\001B\"\n dev.yanshouwang.camerax.me" +
+      "ssagesb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -14100,43 +14326,43 @@ public final class Messages {
     internal_static_messages_CameraControllerBindCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerBindCommandArguments_descriptor,
-        new java.lang.String[] { "Id", "Selector", });
+        new java.lang.String[] { "Selector", });
     internal_static_messages_CameraControllerUnbindCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_messages_CameraControllerUnbindCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerUnbindCommandArguments_descriptor,
-        new java.lang.String[] { "Id", });
+        new java.lang.String[] { "Selector", });
     internal_static_messages_CameraControllerTorchCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_messages_CameraControllerTorchCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerTorchCommandArguments_descriptor,
-        new java.lang.String[] { "Id", "State", });
+        new java.lang.String[] { "Selector", "State", });
     internal_static_messages_CameraControllerZoomCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_messages_CameraControllerZoomCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerZoomCommandArguments_descriptor,
-        new java.lang.String[] { "Id", "Value", });
+        new java.lang.String[] { "Selector", "Value", });
     internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor,
-        new java.lang.String[] { "Id", });
+        new java.lang.String[] { "Selector", });
     internal_static_messages_CameraControllerFocusManuallyCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_messages_CameraControllerFocusManuallyCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerFocusManuallyCommandArguments_descriptor,
-        new java.lang.String[] { "Id", "Width", "Height", "X", "Y", });
+        new java.lang.String[] { "Selector", "Width", "Height", "X", "Y", });
     internal_static_messages_ImageProxyCloseCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_messages_ImageProxyCloseCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxyCloseCommandArguments_descriptor,
-        new java.lang.String[] { "ControllerId", "Id", });
+        new java.lang.String[] { "Selector", "Id", });
     internal_static_messages_Reply_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_messages_Reply_fieldAccessorTable = new
@@ -14172,7 +14398,7 @@ public final class Messages {
     internal_static_messages_CameraControllerImageProxiedEventArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerImageProxiedEventArguments_descriptor,
-        new java.lang.String[] { "Id", "ImageProxy", });
+        new java.lang.String[] { "ImageProxy", });
     internal_static_messages_CameraSelector_descriptor =
       getDescriptor().getMessageTypes().get(14);
     internal_static_messages_CameraSelector_fieldAccessorTable = new
@@ -14190,7 +14416,7 @@ public final class Messages {
     internal_static_messages_ImageProxy_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxy_descriptor,
-        new java.lang.String[] { "Id", "Data", "Width", "Height", });
+        new java.lang.String[] { "Selector", "Id", "Data", "Width", "Height", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

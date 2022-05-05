@@ -23,24 +23,7 @@ public object CameraControllerImageProxiedEventArgumentsKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments = _builder.build()
 
     /**
-     * <code>string id = 1;</code>
-     */
-    public var id: kotlin.String
-      @JvmName("getId")
-      get() = _builder.getId()
-      @JvmName("setId")
-      set(value) {
-        _builder.setId(value)
-      }
-    /**
-     * <code>string id = 1;</code>
-     */
-    public fun clearId() {
-      _builder.clearId()
-    }
-
-    /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
     public var imageProxy: dev.yanshouwang.camerax.messages.Messages.ImageProxy
       @JvmName("getImageProxy")
@@ -50,13 +33,13 @@ public object CameraControllerImageProxiedEventArgumentsKt {
         _builder.setImageProxy(value)
       }
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
     public fun clearImageProxy() {
       _builder.clearImageProxy()
     }
     /**
-     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return Whether the imageProxy field is set.
      */
     public fun hasImageProxy(): kotlin.Boolean {

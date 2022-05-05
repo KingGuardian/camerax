@@ -23,7 +23,31 @@ public object ImageProxyKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Messages.ImageProxy = _builder.build()
 
     /**
-     * <code>string id = 1;</code>
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+      @JvmName("getSelector")
+      get() = _builder.getSelector()
+      @JvmName("setSelector")
+      set(value) {
+        _builder.setSelector(value)
+      }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    public fun clearSelector() {
+      _builder.clearSelector()
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    public fun hasSelector(): kotlin.Boolean {
+      return _builder.hasSelector()
+    }
+
+    /**
+     * <code>string id = 2;</code>
      */
     public var id: kotlin.String
       @JvmName("getId")
@@ -33,14 +57,14 @@ public object ImageProxyKt {
         _builder.setId(value)
       }
     /**
-     * <code>string id = 1;</code>
+     * <code>string id = 2;</code>
      */
     public fun clearId() {
       _builder.clearId()
     }
 
     /**
-     * <code>bytes data = 2;</code>
+     * <code>bytes data = 3;</code>
      */
     public var data: com.google.protobuf.ByteString
       @JvmName("getData")
@@ -50,14 +74,14 @@ public object ImageProxyKt {
         _builder.setData(value)
       }
     /**
-     * <code>bytes data = 2;</code>
+     * <code>bytes data = 3;</code>
      */
     public fun clearData() {
       _builder.clearData()
     }
 
     /**
-     * <code>int32 width = 3;</code>
+     * <code>int32 width = 4;</code>
      */
     public var width: kotlin.Int
       @JvmName("getWidth")
@@ -67,14 +91,14 @@ public object ImageProxyKt {
         _builder.setWidth(value)
       }
     /**
-     * <code>int32 width = 3;</code>
+     * <code>int32 width = 4;</code>
      */
     public fun clearWidth() {
       _builder.clearWidth()
     }
 
     /**
-     * <code>int32 height = 4;</code>
+     * <code>int32 height = 5;</code>
      */
     public var height: kotlin.Int
       @JvmName("getHeight")
@@ -84,7 +108,7 @@ public object ImageProxyKt {
         _builder.setHeight(value)
       }
     /**
-     * <code>int32 height = 4;</code>
+     * <code>int32 height = 5;</code>
      */
     public fun clearHeight() {
       _builder.clearHeight()
@@ -94,4 +118,7 @@ public object ImageProxyKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?
+  get() = if (hasSelector()) getSelector() else null
 
