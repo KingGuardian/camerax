@@ -8,16 +8,25 @@ import AVFoundation
 
 typealias Command = Messages_Command
 typealias CommandCategory = Messages_CommandCategory
-typealias OpenArguments = Messages_OpenArguments
+//typealias OpenArguments = Message
 typealias CameraSelector = Messages_CameraSelector
 typealias CameraFacing = Messages_CameraFacing
 typealias CameraValue = Messages_CameraValue
-typealias TextureValue = Messages_TextureValue
-typealias TorchValue = Messages_TorchValue
-typealias ZoomValue = Messages_ZoomValue
+//typealias TextureValue = Messages_TextureValue
+typealias BindArguments = Messages_CameraControllerBindCommandArguments
+typealias UnbindArguments = Messages_CameraControllerUnbindCommandArguments
+typealias TorchArguments = Messages_CameraControllerTorchCommandArguments
+typealias ZoomArguments = Messages_CameraControllerZoomCommandArguments
+typealias QuarterTurnsArguments = Messages_GetQuarterTurnsReplyArguments
 typealias ImageProxy = Messages_ImageProxy
+typealias ImageProxyCloseArguments = Messages_ImageProxyCloseCommandArguments
+typealias FocusAutomaticallyArguments = Messages_CameraControllerFocusAutomaticallyCommandArguments
+typealias FocusManuallyArguments = Messages_CameraControllerFocusManuallyCommandArguments
 typealias Event = Messages_Event
 typealias EventCategory = Messages_EventCategory
+typealias EventImageProxyArguments = Messages_CameraControllerImageProxiedEventArguments
+
+typealias PermissionReplyArguments = Messages_CameraControllerRequestPermissionReplyArguments
 
 extension CVBuffer {
     var image: UIImage {

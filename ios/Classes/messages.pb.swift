@@ -22,35 +22,47 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 
 enum Messages_CommandCategory: SwiftProtobuf.Enum {
   typealias RawValue = Int
-  case `open` // = 0
-  case close // = 1
-  case torch // = 2
-  case zoom // = 3
-  case closeImageProxy // = 4
+  case getQuarterTurns // = 0
+  case cameraControllerRequestPermission // = 1
+  case cameraControllerBind // = 2
+  case cameraControllerUnbind // = 3
+  case cameraControllerTorch // = 4
+  case cameraControllerZoom // = 5
+  case cameraControllerFocusAutomatically // = 6
+  case cameraControllerFocusManually // = 7
+  case imageProxyClose // = 8
   case UNRECOGNIZED(Int)
 
   init() {
-    self = .open
+    self = .getQuarterTurns
   }
 
   init?(rawValue: Int) {
     switch rawValue {
-    case 0: self = .open
-    case 1: self = .close
-    case 2: self = .torch
-    case 3: self = .zoom
-    case 4: self = .closeImageProxy
+    case 0: self = .getQuarterTurns
+    case 1: self = .cameraControllerRequestPermission
+    case 2: self = .cameraControllerBind
+    case 3: self = .cameraControllerUnbind
+    case 4: self = .cameraControllerTorch
+    case 5: self = .cameraControllerZoom
+    case 6: self = .cameraControllerFocusAutomatically
+    case 7: self = .cameraControllerFocusManually
+    case 8: self = .imageProxyClose
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
 
   var rawValue: Int {
     switch self {
-    case .open: return 0
-    case .close: return 1
-    case .torch: return 2
-    case .zoom: return 3
-    case .closeImageProxy: return 4
+    case .getQuarterTurns: return 0
+    case .cameraControllerRequestPermission: return 1
+    case .cameraControllerBind: return 2
+    case .cameraControllerUnbind: return 3
+    case .cameraControllerTorch: return 4
+    case .cameraControllerZoom: return 5
+    case .cameraControllerFocusAutomatically: return 6
+    case .cameraControllerFocusManually: return 7
+    case .imageProxyClose: return 8
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -62,11 +74,15 @@ enum Messages_CommandCategory: SwiftProtobuf.Enum {
 extension Messages_CommandCategory: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   static var allCases: [Messages_CommandCategory] = [
-    .open,
-    .close,
-    .torch,
-    .zoom,
-    .closeImageProxy,
+    .getQuarterTurns,
+    .cameraControllerRequestPermission,
+    .cameraControllerBind,
+    .cameraControllerUnbind,
+    .cameraControllerTorch,
+    .cameraControllerZoom,
+    .cameraControllerFocusAutomatically,
+    .cameraControllerFocusManually,
+    .imageProxyClose,
   ]
 }
 
@@ -75,9 +91,7 @@ extension Messages_CommandCategory: CaseIterable {
 enum Messages_EventCategory: SwiftProtobuf.Enum {
   typealias RawValue = Int
   case quarterTurnsChanged // = 0
-  case torchStateChanged // = 1
-  case zoomValueChanged // = 2
-  case imageProxyReceived // = 3
+  case cameraControllerImageProxied // = 1
   case UNRECOGNIZED(Int)
 
   init() {
@@ -87,9 +101,7 @@ enum Messages_EventCategory: SwiftProtobuf.Enum {
   init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .quarterTurnsChanged
-    case 1: self = .torchStateChanged
-    case 2: self = .zoomValueChanged
-    case 3: self = .imageProxyReceived
+    case 1: self = .cameraControllerImageProxied
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -97,9 +109,7 @@ enum Messages_EventCategory: SwiftProtobuf.Enum {
   var rawValue: Int {
     switch self {
     case .quarterTurnsChanged: return 0
-    case .torchStateChanged: return 1
-    case .zoomValueChanged: return 2
-    case .imageProxyReceived: return 3
+    case .cameraControllerImageProxied: return 1
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -112,9 +122,7 @@ extension Messages_EventCategory: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
   static var allCases: [Messages_EventCategory] = [
     .quarterTurnsChanged,
-    .torchStateChanged,
-    .zoomValueChanged,
-    .imageProxyReceived,
+    .cameraControllerImageProxied,
   ]
 }
 
@@ -165,59 +173,109 @@ struct Messages_Command {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var key: String = String()
+  var category: Messages_CommandCategory = .getQuarterTurns
 
-  var category: Messages_CommandCategory = .open
+  var arguments: Messages_Command.OneOf_Arguments? = nil
 
-  var stub: Messages_Command.OneOf_Stub? = nil
-
-  var openArguments: Messages_OpenArguments {
+  var cameraControllerBindArguments: Messages_CameraControllerBindCommandArguments {
     get {
-      if case .openArguments(let v)? = stub {return v}
-      return Messages_OpenArguments()
+      if case .cameraControllerBindArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerBindCommandArguments()
     }
-    set {stub = .openArguments(newValue)}
+    set {arguments = .cameraControllerBindArguments(newValue)}
   }
 
-  var torchState: Bool {
+  var cameraControllerUnbindArguments: Messages_CameraControllerUnbindCommandArguments {
     get {
-      if case .torchState(let v)? = stub {return v}
-      return false
+      if case .cameraControllerUnbindArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerUnbindCommandArguments()
     }
-    set {stub = .torchState(newValue)}
+    set {arguments = .cameraControllerUnbindArguments(newValue)}
   }
 
-  var zoomValue: Double {
+  var cameraControllerTorchArguments: Messages_CameraControllerTorchCommandArguments {
     get {
-      if case .zoomValue(let v)? = stub {return v}
-      return 0
+      if case .cameraControllerTorchArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerTorchCommandArguments()
     }
-    set {stub = .zoomValue(newValue)}
+    set {arguments = .cameraControllerTorchArguments(newValue)}
+  }
+
+  var cameraControllerZoomArguments: Messages_CameraControllerZoomCommandArguments {
+    get {
+      if case .cameraControllerZoomArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerZoomCommandArguments()
+    }
+    set {arguments = .cameraControllerZoomArguments(newValue)}
+  }
+
+  var cameraControllerFocusAutomaticallyArguments: Messages_CameraControllerFocusAutomaticallyCommandArguments {
+    get {
+      if case .cameraControllerFocusAutomaticallyArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerFocusAutomaticallyCommandArguments()
+    }
+    set {arguments = .cameraControllerFocusAutomaticallyArguments(newValue)}
+  }
+
+  var cameraControllerFocusManuallyArguments: Messages_CameraControllerFocusManuallyCommandArguments {
+    get {
+      if case .cameraControllerFocusManuallyArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerFocusManuallyCommandArguments()
+    }
+    set {arguments = .cameraControllerFocusManuallyArguments(newValue)}
+  }
+
+  var imageProxyCloseArguments: Messages_ImageProxyCloseCommandArguments {
+    get {
+      if case .imageProxyCloseArguments(let v)? = arguments {return v}
+      return Messages_ImageProxyCloseCommandArguments()
+    }
+    set {arguments = .imageProxyCloseArguments(newValue)}
   }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Stub: Equatable {
-    case openArguments(Messages_OpenArguments)
-    case torchState(Bool)
-    case zoomValue(Double)
+  enum OneOf_Arguments: Equatable {
+    case cameraControllerBindArguments(Messages_CameraControllerBindCommandArguments)
+    case cameraControllerUnbindArguments(Messages_CameraControllerUnbindCommandArguments)
+    case cameraControllerTorchArguments(Messages_CameraControllerTorchCommandArguments)
+    case cameraControllerZoomArguments(Messages_CameraControllerZoomCommandArguments)
+    case cameraControllerFocusAutomaticallyArguments(Messages_CameraControllerFocusAutomaticallyCommandArguments)
+    case cameraControllerFocusManuallyArguments(Messages_CameraControllerFocusManuallyCommandArguments)
+    case imageProxyCloseArguments(Messages_ImageProxyCloseCommandArguments)
 
   #if !swift(>=4.1)
-    static func ==(lhs: Messages_Command.OneOf_Stub, rhs: Messages_Command.OneOf_Stub) -> Bool {
+    static func ==(lhs: Messages_Command.OneOf_Arguments, rhs: Messages_Command.OneOf_Arguments) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.openArguments, .openArguments): return {
-        guard case .openArguments(let l) = lhs, case .openArguments(let r) = rhs else { preconditionFailure() }
+      case (.cameraControllerBindArguments, .cameraControllerBindArguments): return {
+        guard case .cameraControllerBindArguments(let l) = lhs, case .cameraControllerBindArguments(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
-      case (.torchState, .torchState): return {
-        guard case .torchState(let l) = lhs, case .torchState(let r) = rhs else { preconditionFailure() }
+      case (.cameraControllerUnbindArguments, .cameraControllerUnbindArguments): return {
+        guard case .cameraControllerUnbindArguments(let l) = lhs, case .cameraControllerUnbindArguments(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
-      case (.zoomValue, .zoomValue): return {
-        guard case .zoomValue(let l) = lhs, case .zoomValue(let r) = rhs else { preconditionFailure() }
+      case (.cameraControllerTorchArguments, .cameraControllerTorchArguments): return {
+        guard case .cameraControllerTorchArguments(let l) = lhs, case .cameraControllerTorchArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerZoomArguments, .cameraControllerZoomArguments): return {
+        guard case .cameraControllerZoomArguments(let l) = lhs, case .cameraControllerZoomArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerFocusAutomaticallyArguments, .cameraControllerFocusAutomaticallyArguments): return {
+        guard case .cameraControllerFocusAutomaticallyArguments(let l) = lhs, case .cameraControllerFocusAutomaticallyArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerFocusManuallyArguments, .cameraControllerFocusManuallyArguments): return {
+        guard case .cameraControllerFocusManuallyArguments(let l) = lhs, case .cameraControllerFocusManuallyArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.imageProxyCloseArguments, .imageProxyCloseArguments): return {
+        guard case .imageProxyCloseArguments(let l) = lhs, case .imageProxyCloseArguments(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -229,89 +287,7 @@ struct Messages_Command {
   init() {}
 }
 
-struct Messages_Event {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var key: String = String()
-
-  var category: Messages_EventCategory = .quarterTurnsChanged
-
-  var stub: Messages_Event.OneOf_Stub? = nil
-
-  var quarterTurns: Int32 {
-    get {
-      if case .quarterTurns(let v)? = stub {return v}
-      return 0
-    }
-    set {stub = .quarterTurns(newValue)}
-  }
-
-  var torchState: Bool {
-    get {
-      if case .torchState(let v)? = stub {return v}
-      return false
-    }
-    set {stub = .torchState(newValue)}
-  }
-
-  var zoomValue: Double {
-    get {
-      if case .zoomValue(let v)? = stub {return v}
-      return 0
-    }
-    set {stub = .zoomValue(newValue)}
-  }
-
-  var image: Messages_ImageProxy {
-    get {
-      if case .image(let v)? = stub {return v}
-      return Messages_ImageProxy()
-    }
-    set {stub = .image(newValue)}
-  }
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  enum OneOf_Stub: Equatable {
-    case quarterTurns(Int32)
-    case torchState(Bool)
-    case zoomValue(Double)
-    case image(Messages_ImageProxy)
-
-  #if !swift(>=4.1)
-    static func ==(lhs: Messages_Event.OneOf_Stub, rhs: Messages_Event.OneOf_Stub) -> Bool {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch (lhs, rhs) {
-      case (.quarterTurns, .quarterTurns): return {
-        guard case .quarterTurns(let l) = lhs, case .quarterTurns(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.torchState, .torchState): return {
-        guard case .torchState(let l) = lhs, case .torchState(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.zoomValue, .zoomValue): return {
-        guard case .zoomValue(let l) = lhs, case .zoomValue(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.image, .image): return {
-        guard case .image(let l) = lhs, case .image(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      default: return false
-      }
-    }
-  #endif
-  }
-
-  init() {}
-}
-
-struct Messages_OpenArguments {
+struct Messages_CameraControllerBindCommandArguments {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -332,6 +308,343 @@ struct Messages_OpenArguments {
   fileprivate var _selector: Messages_CameraSelector? = nil
 }
 
+struct Messages_CameraControllerUnbindCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_CameraControllerTorchCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var state: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_CameraControllerZoomCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var value: Double = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_CameraControllerFocusAutomaticallyCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_CameraControllerFocusManuallyCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var width: Double = 0
+
+  var height: Double = 0
+
+  var x: Double = 0
+
+  var y: Double = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_ImageProxyCloseCommandArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var id: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
+}
+
+struct Messages_Reply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var arguments: Messages_Reply.OneOf_Arguments? = nil
+
+  var getQuarterTurnsArguments: Messages_GetQuarterTurnsReplyArguments {
+    get {
+      if case .getQuarterTurnsArguments(let v)? = arguments {return v}
+      return Messages_GetQuarterTurnsReplyArguments()
+    }
+    set {arguments = .getQuarterTurnsArguments(newValue)}
+  }
+
+  var cameraControllerRequestPermissionArguments: Messages_CameraControllerRequestPermissionReplyArguments {
+    get {
+      if case .cameraControllerRequestPermissionArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerRequestPermissionReplyArguments()
+    }
+    set {arguments = .cameraControllerRequestPermissionArguments(newValue)}
+  }
+
+  var cameraControllerBindArguments: Messages_CameraControllerBindReplyArguments {
+    get {
+      if case .cameraControllerBindArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerBindReplyArguments()
+    }
+    set {arguments = .cameraControllerBindArguments(newValue)}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum OneOf_Arguments: Equatable {
+    case getQuarterTurnsArguments(Messages_GetQuarterTurnsReplyArguments)
+    case cameraControllerRequestPermissionArguments(Messages_CameraControllerRequestPermissionReplyArguments)
+    case cameraControllerBindArguments(Messages_CameraControllerBindReplyArguments)
+
+  #if !swift(>=4.1)
+    static func ==(lhs: Messages_Reply.OneOf_Arguments, rhs: Messages_Reply.OneOf_Arguments) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.getQuarterTurnsArguments, .getQuarterTurnsArguments): return {
+        guard case .getQuarterTurnsArguments(let l) = lhs, case .getQuarterTurnsArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerRequestPermissionArguments, .cameraControllerRequestPermissionArguments): return {
+        guard case .cameraControllerRequestPermissionArguments(let l) = lhs, case .cameraControllerRequestPermissionArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerBindArguments, .cameraControllerBindArguments): return {
+        guard case .cameraControllerBindArguments(let l) = lhs, case .cameraControllerBindArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  init() {}
+}
+
+struct Messages_GetQuarterTurnsReplyArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var quarterTurns: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Messages_CameraControllerRequestPermissionReplyArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var granted: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Messages_CameraControllerBindReplyArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var cameraValue: Messages_CameraValue {
+    get {return _cameraValue ?? Messages_CameraValue()}
+    set {_cameraValue = newValue}
+  }
+  /// Returns true if `cameraValue` has been explicitly set.
+  var hasCameraValue: Bool {return self._cameraValue != nil}
+  /// Clears the value of `cameraValue`. Subsequent reads from it will return its default value.
+  mutating func clearCameraValue() {self._cameraValue = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _cameraValue: Messages_CameraValue? = nil
+}
+
+struct Messages_Event {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var category: Messages_EventCategory = .quarterTurnsChanged
+
+  var arguments: Messages_Event.OneOf_Arguments? = nil
+
+  var quarterTurnsChangedArguments: Messages_QuarterTurnsChangedEventArguments {
+    get {
+      if case .quarterTurnsChangedArguments(let v)? = arguments {return v}
+      return Messages_QuarterTurnsChangedEventArguments()
+    }
+    set {arguments = .quarterTurnsChangedArguments(newValue)}
+  }
+
+  var cameraControllerImageProxiedArguments: Messages_CameraControllerImageProxiedEventArguments {
+    get {
+      if case .cameraControllerImageProxiedArguments(let v)? = arguments {return v}
+      return Messages_CameraControllerImageProxiedEventArguments()
+    }
+    set {arguments = .cameraControllerImageProxiedArguments(newValue)}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum OneOf_Arguments: Equatable {
+    case quarterTurnsChangedArguments(Messages_QuarterTurnsChangedEventArguments)
+    case cameraControllerImageProxiedArguments(Messages_CameraControllerImageProxiedEventArguments)
+
+  #if !swift(>=4.1)
+    static func ==(lhs: Messages_Event.OneOf_Arguments, rhs: Messages_Event.OneOf_Arguments) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.quarterTurnsChangedArguments, .quarterTurnsChangedArguments): return {
+        guard case .quarterTurnsChangedArguments(let l) = lhs, case .quarterTurnsChangedArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cameraControllerImageProxiedArguments, .cameraControllerImageProxiedArguments): return {
+        guard case .cameraControllerImageProxiedArguments(let l) = lhs, case .cameraControllerImageProxiedArguments(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  init() {}
+}
+
+struct Messages_QuarterTurnsChangedEventArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var quarterTurns: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Messages_CameraControllerImageProxiedEventArguments {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var imageProxy: Messages_ImageProxy {
+    get {return _imageProxy ?? Messages_ImageProxy()}
+    set {_imageProxy = newValue}
+  }
+  /// Returns true if `imageProxy` has been explicitly set.
+  var hasImageProxy: Bool {return self._imageProxy != nil}
+  /// Clears the value of `imageProxy`. Subsequent reads from it will return its default value.
+  mutating func clearImageProxy() {self._imageProxy = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _imageProxy: Messages_ImageProxy? = nil
+}
+
 struct Messages_CameraSelector {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -349,86 +662,17 @@ struct Messages_CameraValue {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var key: String = String()
+  var textureID: Int32 = 0
 
-  var textureValue: Messages_TextureValue {
-    get {return _textureValue ?? Messages_TextureValue()}
-    set {_textureValue = newValue}
-  }
-  /// Returns true if `textureValue` has been explicitly set.
-  var hasTextureValue: Bool {return self._textureValue != nil}
-  /// Clears the value of `textureValue`. Subsequent reads from it will return its default value.
-  mutating func clearTextureValue() {self._textureValue = nil}
+  var textureWidth: Int32 = 0
 
-  var torchValue: Messages_TorchValue {
-    get {return _torchValue ?? Messages_TorchValue()}
-    set {_torchValue = newValue}
-  }
-  /// Returns true if `torchValue` has been explicitly set.
-  var hasTorchValue: Bool {return self._torchValue != nil}
-  /// Clears the value of `torchValue`. Subsequent reads from it will return its default value.
-  mutating func clearTorchValue() {self._torchValue = nil}
+  var textureHeight: Int32 = 0
 
-  var zoomValue: Messages_ZoomValue {
-    get {return _zoomValue ?? Messages_ZoomValue()}
-    set {_zoomValue = newValue}
-  }
-  /// Returns true if `zoomValue` has been explicitly set.
-  var hasZoomValue: Bool {return self._zoomValue != nil}
-  /// Clears the value of `zoomValue`. Subsequent reads from it will return its default value.
-  mutating func clearZoomValue() {self._zoomValue = nil}
+  var torchAvailable: Bool = false
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  var zoomMinimum: Double = 0
 
-  init() {}
-
-  fileprivate var _textureValue: Messages_TextureValue? = nil
-  fileprivate var _torchValue: Messages_TorchValue? = nil
-  fileprivate var _zoomValue: Messages_ZoomValue? = nil
-}
-
-struct Messages_TextureValue {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var id: Int32 = 0
-
-  var width: Int32 = 0
-
-  var height: Int32 = 0
-
-  var quarterTurns: Int32 = 0
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct Messages_TorchValue {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var available: Bool = false
-
-  var state: Bool = false
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct Messages_ZoomValue {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var minimum: Double = 0
-
-  var maximum: Double = 0
-
-  var value: Double = 0
+  var zoomMaximum: Double = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -440,7 +684,16 @@ struct Messages_ImageProxy {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var key: String = String()
+  var selector: Messages_CameraSelector {
+    get {return _selector ?? Messages_CameraSelector()}
+    set {_selector = newValue}
+  }
+  /// Returns true if `selector` has been explicitly set.
+  var hasSelector: Bool {return self._selector != nil}
+  /// Clears the value of `selector`. Subsequent reads from it will return its default value.
+  mutating func clearSelector() {self._selector = nil}
+
+  var id: String = String()
 
   var data: Data = Data()
 
@@ -451,7 +704,36 @@ struct Messages_ImageProxy {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _selector: Messages_CameraSelector? = nil
 }
+
+#if swift(>=5.5) && canImport(_Concurrency)
+extension Messages_CommandCategory: @unchecked Sendable {}
+extension Messages_EventCategory: @unchecked Sendable {}
+extension Messages_CameraFacing: @unchecked Sendable {}
+extension Messages_Command: @unchecked Sendable {}
+extension Messages_Command.OneOf_Arguments: @unchecked Sendable {}
+extension Messages_CameraControllerBindCommandArguments: @unchecked Sendable {}
+extension Messages_CameraControllerUnbindCommandArguments: @unchecked Sendable {}
+extension Messages_CameraControllerTorchCommandArguments: @unchecked Sendable {}
+extension Messages_CameraControllerZoomCommandArguments: @unchecked Sendable {}
+extension Messages_CameraControllerFocusAutomaticallyCommandArguments: @unchecked Sendable {}
+extension Messages_CameraControllerFocusManuallyCommandArguments: @unchecked Sendable {}
+extension Messages_ImageProxyCloseCommandArguments: @unchecked Sendable {}
+extension Messages_Reply: @unchecked Sendable {}
+extension Messages_Reply.OneOf_Arguments: @unchecked Sendable {}
+extension Messages_GetQuarterTurnsReplyArguments: @unchecked Sendable {}
+extension Messages_CameraControllerRequestPermissionReplyArguments: @unchecked Sendable {}
+extension Messages_CameraControllerBindReplyArguments: @unchecked Sendable {}
+extension Messages_Event: @unchecked Sendable {}
+extension Messages_Event.OneOf_Arguments: @unchecked Sendable {}
+extension Messages_QuarterTurnsChangedEventArguments: @unchecked Sendable {}
+extension Messages_CameraControllerImageProxiedEventArguments: @unchecked Sendable {}
+extension Messages_CameraSelector: @unchecked Sendable {}
+extension Messages_CameraValue: @unchecked Sendable {}
+extension Messages_ImageProxy: @unchecked Sendable {}
+#endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
@@ -459,38 +741,43 @@ fileprivate let _protobuf_package = "messages"
 
 extension Messages_CommandCategory: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "OPEN"),
-    1: .same(proto: "CLOSE"),
-    2: .same(proto: "TORCH"),
-    3: .same(proto: "ZOOM"),
-    4: .same(proto: "CLOSE_IMAGE_PROXY"),
+    0: .same(proto: "COMMAND_CATEGORY_GET_QUARTER_TURNS"),
+    1: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_REQUEST_PERMISSION"),
+    2: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND"),
+    3: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND"),
+    4: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH"),
+    5: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM"),
+    6: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY"),
+    7: .same(proto: "COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY"),
+    8: .same(proto: "COMMAND_CATEGORY_IMAGE_PROXY_CLOSE"),
   ]
 }
 
 extension Messages_EventCategory: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "QUARTER_TURNS_CHANGED"),
-    1: .same(proto: "TORCH_STATE_CHANGED"),
-    2: .same(proto: "ZOOM_VALUE_CHANGED"),
-    3: .same(proto: "IMAGE_PROXY_RECEIVED"),
+    0: .same(proto: "EVENT_CATEGORY_QUARTER_TURNS_CHANGED"),
+    1: .same(proto: "EVENT_CATEGORY_CAMERA_CONTROLLER_IMAGE_PROXIED"),
   ]
 }
 
 extension Messages_CameraFacing: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "BACK"),
-    1: .same(proto: "FRONT"),
+    0: .same(proto: "CAMERA_FACING_BACK"),
+    1: .same(proto: "CAMERA_FACING_FRONT"),
   ]
 }
 
 extension Messages_Command: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Command"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "key"),
-    2: .same(proto: "category"),
-    3: .standard(proto: "open_arguments"),
-    4: .standard(proto: "torch_state"),
-    5: .standard(proto: "zoom_value"),
+    1: .same(proto: "category"),
+    2: .standard(proto: "camera_controller_bind_arguments"),
+    3: .standard(proto: "camera_controller_unbind_arguments"),
+    4: .standard(proto: "camera_controller_torch_arguments"),
+    5: .standard(proto: "camera_controller_zoom_arguments"),
+    6: .standard(proto: "camera_controller_focus_automatically_arguments"),
+    7: .standard(proto: "camera_controller_focus_manually_arguments"),
+    8: .standard(proto: "image_proxy_close_arguments"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -499,35 +786,96 @@ extension Messages_Command: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
-      case 2: try { try decoder.decodeSingularEnumField(value: &self.category) }()
-      case 3: try {
-        var v: Messages_OpenArguments?
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.category) }()
+      case 2: try {
+        var v: Messages_CameraControllerBindCommandArguments?
         var hadOneofValue = false
-        if let current = self.stub {
+        if let current = self.arguments {
           hadOneofValue = true
-          if case .openArguments(let m) = current {v = m}
+          if case .cameraControllerBindArguments(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {
           if hadOneofValue {try decoder.handleConflictingOneOf()}
-          self.stub = .openArguments(v)
+          self.arguments = .cameraControllerBindArguments(v)
+        }
+      }()
+      case 3: try {
+        var v: Messages_CameraControllerUnbindCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerUnbindArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerUnbindArguments(v)
         }
       }()
       case 4: try {
-        var v: Bool?
-        try decoder.decodeSingularBoolField(value: &v)
+        var v: Messages_CameraControllerTorchCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerTorchArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
         if let v = v {
-          if self.stub != nil {try decoder.handleConflictingOneOf()}
-          self.stub = .torchState(v)
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerTorchArguments(v)
         }
       }()
       case 5: try {
-        var v: Double?
-        try decoder.decodeSingularDoubleField(value: &v)
+        var v: Messages_CameraControllerZoomCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerZoomArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
         if let v = v {
-          if self.stub != nil {try decoder.handleConflictingOneOf()}
-          self.stub = .zoomValue(v)
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerZoomArguments(v)
+        }
+      }()
+      case 6: try {
+        var v: Messages_CameraControllerFocusAutomaticallyCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerFocusAutomaticallyArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerFocusAutomaticallyArguments(v)
+        }
+      }()
+      case 7: try {
+        var v: Messages_CameraControllerFocusManuallyCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerFocusManuallyArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerFocusManuallyArguments(v)
+        }
+      }()
+      case 8: try {
+        var v: Messages_ImageProxyCloseCommandArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .imageProxyCloseArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .imageProxyCloseArguments(v)
         }
       }()
       default: break
@@ -540,24 +888,37 @@ extension Messages_Command: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.key.isEmpty {
-      try visitor.visitSingularStringField(value: self.key, fieldNumber: 1)
+    if self.category != .getQuarterTurns {
+      try visitor.visitSingularEnumField(value: self.category, fieldNumber: 1)
     }
-    if self.category != .open {
-      try visitor.visitSingularEnumField(value: self.category, fieldNumber: 2)
-    }
-    switch self.stub {
-    case .openArguments?: try {
-      guard case .openArguments(let v)? = self.stub else { preconditionFailure() }
+    switch self.arguments {
+    case .cameraControllerBindArguments?: try {
+      guard case .cameraControllerBindArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case .cameraControllerUnbindArguments?: try {
+      guard case .cameraControllerUnbindArguments(let v)? = self.arguments else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
-    case .torchState?: try {
-      guard case .torchState(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    case .cameraControllerTorchArguments?: try {
+      guard case .cameraControllerTorchArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     }()
-    case .zoomValue?: try {
-      guard case .zoomValue(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularDoubleField(value: v, fieldNumber: 5)
+    case .cameraControllerZoomArguments?: try {
+      guard case .cameraControllerZoomArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
+    case .cameraControllerFocusAutomaticallyArguments?: try {
+      guard case .cameraControllerFocusAutomaticallyArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    }()
+    case .cameraControllerFocusManuallyArguments?: try {
+      guard case .cameraControllerFocusManuallyArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    }()
+    case .imageProxyCloseArguments?: try {
+      guard case .imageProxyCloseArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
     }()
     case nil: break
     }
@@ -565,119 +926,15 @@ extension Messages_Command: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 
   static func ==(lhs: Messages_Command, rhs: Messages_Command) -> Bool {
-    if lhs.key != rhs.key {return false}
     if lhs.category != rhs.category {return false}
-    if lhs.stub != rhs.stub {return false}
+    if lhs.arguments != rhs.arguments {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Messages_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Event"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "key"),
-    2: .same(proto: "category"),
-    3: .same(proto: "quarterTurns"),
-    4: .standard(proto: "torch_state"),
-    5: .standard(proto: "zoom_value"),
-    6: .same(proto: "image"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
-      case 2: try { try decoder.decodeSingularEnumField(value: &self.category) }()
-      case 3: try {
-        var v: Int32?
-        try decoder.decodeSingularInt32Field(value: &v)
-        if let v = v {
-          if self.stub != nil {try decoder.handleConflictingOneOf()}
-          self.stub = .quarterTurns(v)
-        }
-      }()
-      case 4: try {
-        var v: Bool?
-        try decoder.decodeSingularBoolField(value: &v)
-        if let v = v {
-          if self.stub != nil {try decoder.handleConflictingOneOf()}
-          self.stub = .torchState(v)
-        }
-      }()
-      case 5: try {
-        var v: Double?
-        try decoder.decodeSingularDoubleField(value: &v)
-        if let v = v {
-          if self.stub != nil {try decoder.handleConflictingOneOf()}
-          self.stub = .zoomValue(v)
-        }
-      }()
-      case 6: try {
-        var v: Messages_ImageProxy?
-        var hadOneofValue = false
-        if let current = self.stub {
-          hadOneofValue = true
-          if case .image(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {
-          if hadOneofValue {try decoder.handleConflictingOneOf()}
-          self.stub = .image(v)
-        }
-      }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.key.isEmpty {
-      try visitor.visitSingularStringField(value: self.key, fieldNumber: 1)
-    }
-    if self.category != .quarterTurnsChanged {
-      try visitor.visitSingularEnumField(value: self.category, fieldNumber: 2)
-    }
-    switch self.stub {
-    case .quarterTurns?: try {
-      guard case .quarterTurns(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularInt32Field(value: v, fieldNumber: 3)
-    }()
-    case .torchState?: try {
-      guard case .torchState(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
-    }()
-    case .zoomValue?: try {
-      guard case .zoomValue(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularDoubleField(value: v, fieldNumber: 5)
-    }()
-    case .image?: try {
-      guard case .image(let v)? = self.stub else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    }()
-    case nil: break
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Messages_Event, rhs: Messages_Event) -> Bool {
-    if lhs.key != rhs.key {return false}
-    if lhs.category != rhs.category {return false}
-    if lhs.stub != rhs.stub {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Messages_OpenArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".OpenArguments"
+extension Messages_CameraControllerBindCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerBindCommandArguments"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "selector"),
   ]
@@ -705,8 +962,598 @@ extension Messages_OpenArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Messages_OpenArguments, rhs: Messages_OpenArguments) -> Bool {
+  static func ==(lhs: Messages_CameraControllerBindCommandArguments, rhs: Messages_CameraControllerBindCommandArguments) -> Bool {
     if lhs._selector != rhs._selector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerUnbindCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerUnbindCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerUnbindCommandArguments, rhs: Messages_CameraControllerUnbindCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerTorchCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerTorchCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+    2: .same(proto: "state"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.state) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.state != false {
+      try visitor.visitSingularBoolField(value: self.state, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerTorchCommandArguments, rhs: Messages_CameraControllerTorchCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.state != rhs.state {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerZoomCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerZoomCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+    2: .same(proto: "value"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self.value) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.value != 0 {
+      try visitor.visitSingularDoubleField(value: self.value, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerZoomCommandArguments, rhs: Messages_CameraControllerZoomCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.value != rhs.value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerFocusAutomaticallyCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerFocusAutomaticallyCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerFocusAutomaticallyCommandArguments, rhs: Messages_CameraControllerFocusAutomaticallyCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerFocusManuallyCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerFocusManuallyCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+    2: .same(proto: "width"),
+    3: .same(proto: "height"),
+    4: .same(proto: "x"),
+    5: .same(proto: "y"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self.width) }()
+      case 3: try { try decoder.decodeSingularDoubleField(value: &self.height) }()
+      case 4: try { try decoder.decodeSingularDoubleField(value: &self.x) }()
+      case 5: try { try decoder.decodeSingularDoubleField(value: &self.y) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.width != 0 {
+      try visitor.visitSingularDoubleField(value: self.width, fieldNumber: 2)
+    }
+    if self.height != 0 {
+      try visitor.visitSingularDoubleField(value: self.height, fieldNumber: 3)
+    }
+    if self.x != 0 {
+      try visitor.visitSingularDoubleField(value: self.x, fieldNumber: 4)
+    }
+    if self.y != 0 {
+      try visitor.visitSingularDoubleField(value: self.y, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerFocusManuallyCommandArguments, rhs: Messages_CameraControllerFocusManuallyCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.width != rhs.width {return false}
+    if lhs.height != rhs.height {return false}
+    if lhs.x != rhs.x {return false}
+    if lhs.y != rhs.y {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_ImageProxyCloseCommandArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ImageProxyCloseCommandArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+    2: .same(proto: "id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_ImageProxyCloseCommandArguments, rhs: Messages_ImageProxyCloseCommandArguments) -> Bool {
+    if lhs._selector != rhs._selector {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_Reply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Reply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "get_quarter_turns_arguments"),
+    2: .standard(proto: "camera_controller_request_permission_arguments"),
+    3: .standard(proto: "camera_controller_bind_arguments"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try {
+        var v: Messages_GetQuarterTurnsReplyArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .getQuarterTurnsArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .getQuarterTurnsArguments(v)
+        }
+      }()
+      case 2: try {
+        var v: Messages_CameraControllerRequestPermissionReplyArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerRequestPermissionArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerRequestPermissionArguments(v)
+        }
+      }()
+      case 3: try {
+        var v: Messages_CameraControllerBindReplyArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerBindArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerBindArguments(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    switch self.arguments {
+    case .getQuarterTurnsArguments?: try {
+      guard case .getQuarterTurnsArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }()
+    case .cameraControllerRequestPermissionArguments?: try {
+      guard case .cameraControllerRequestPermissionArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case .cameraControllerBindArguments?: try {
+      guard case .cameraControllerBindArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_Reply, rhs: Messages_Reply) -> Bool {
+    if lhs.arguments != rhs.arguments {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_GetQuarterTurnsReplyArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetQuarterTurnsReplyArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "quarter_turns"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.quarterTurns) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.quarterTurns != 0 {
+      try visitor.visitSingularInt32Field(value: self.quarterTurns, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_GetQuarterTurnsReplyArguments, rhs: Messages_GetQuarterTurnsReplyArguments) -> Bool {
+    if lhs.quarterTurns != rhs.quarterTurns {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerRequestPermissionReplyArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerRequestPermissionReplyArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "granted"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.granted) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.granted != false {
+      try visitor.visitSingularBoolField(value: self.granted, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerRequestPermissionReplyArguments, rhs: Messages_CameraControllerRequestPermissionReplyArguments) -> Bool {
+    if lhs.granted != rhs.granted {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerBindReplyArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerBindReplyArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "camera_value"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._cameraValue) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._cameraValue {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerBindReplyArguments, rhs: Messages_CameraControllerBindReplyArguments) -> Bool {
+    if lhs._cameraValue != rhs._cameraValue {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Event"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "category"),
+    2: .standard(proto: "quarter_turns_changed_arguments"),
+    3: .standard(proto: "camera_controller_image_proxied_arguments"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.category) }()
+      case 2: try {
+        var v: Messages_QuarterTurnsChangedEventArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .quarterTurnsChangedArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .quarterTurnsChangedArguments(v)
+        }
+      }()
+      case 3: try {
+        var v: Messages_CameraControllerImageProxiedEventArguments?
+        var hadOneofValue = false
+        if let current = self.arguments {
+          hadOneofValue = true
+          if case .cameraControllerImageProxiedArguments(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.arguments = .cameraControllerImageProxiedArguments(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.category != .quarterTurnsChanged {
+      try visitor.visitSingularEnumField(value: self.category, fieldNumber: 1)
+    }
+    switch self.arguments {
+    case .quarterTurnsChangedArguments?: try {
+      guard case .quarterTurnsChangedArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case .cameraControllerImageProxiedArguments?: try {
+      guard case .cameraControllerImageProxiedArguments(let v)? = self.arguments else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_Event, rhs: Messages_Event) -> Bool {
+    if lhs.category != rhs.category {return false}
+    if lhs.arguments != rhs.arguments {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_QuarterTurnsChangedEventArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QuarterTurnsChangedEventArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "quarter_turns"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.quarterTurns) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.quarterTurns != 0 {
+      try visitor.visitSingularInt32Field(value: self.quarterTurns, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_QuarterTurnsChangedEventArguments, rhs: Messages_QuarterTurnsChangedEventArguments) -> Bool {
+    if lhs.quarterTurns != rhs.quarterTurns {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_CameraControllerImageProxiedEventArguments: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CameraControllerImageProxiedEventArguments"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "image_proxy"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._imageProxy) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._imageProxy {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraControllerImageProxiedEventArguments, rhs: Messages_CameraControllerImageProxiedEventArguments) -> Bool {
+    if lhs._imageProxy != rhs._imageProxy {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -747,10 +1594,12 @@ extension Messages_CameraSelector: SwiftProtobuf.Message, SwiftProtobuf._Message
 extension Messages_CameraValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".CameraValue"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "key"),
-    2: .standard(proto: "texture_value"),
-    3: .standard(proto: "torch_value"),
-    4: .standard(proto: "zoom_value"),
+    1: .standard(proto: "texture_id"),
+    2: .standard(proto: "texture_width"),
+    3: .standard(proto: "texture_height"),
+    4: .standard(proto: "torch_available"),
+    5: .standard(proto: "zoom_minimum"),
+    6: .standard(proto: "zoom_maximum"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -759,10 +1608,72 @@ extension Messages_CameraValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._textureValue) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._torchValue) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._zoomValue) }()
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.textureID) }()
+      case 2: try { try decoder.decodeSingularInt32Field(value: &self.textureWidth) }()
+      case 3: try { try decoder.decodeSingularInt32Field(value: &self.textureHeight) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.torchAvailable) }()
+      case 5: try { try decoder.decodeSingularDoubleField(value: &self.zoomMinimum) }()
+      case 6: try { try decoder.decodeSingularDoubleField(value: &self.zoomMaximum) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.textureID != 0 {
+      try visitor.visitSingularInt32Field(value: self.textureID, fieldNumber: 1)
+    }
+    if self.textureWidth != 0 {
+      try visitor.visitSingularInt32Field(value: self.textureWidth, fieldNumber: 2)
+    }
+    if self.textureHeight != 0 {
+      try visitor.visitSingularInt32Field(value: self.textureHeight, fieldNumber: 3)
+    }
+    if self.torchAvailable != false {
+      try visitor.visitSingularBoolField(value: self.torchAvailable, fieldNumber: 4)
+    }
+    if self.zoomMinimum != 0 {
+      try visitor.visitSingularDoubleField(value: self.zoomMinimum, fieldNumber: 5)
+    }
+    if self.zoomMaximum != 0 {
+      try visitor.visitSingularDoubleField(value: self.zoomMaximum, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Messages_CameraValue, rhs: Messages_CameraValue) -> Bool {
+    if lhs.textureID != rhs.textureID {return false}
+    if lhs.textureWidth != rhs.textureWidth {return false}
+    if lhs.textureHeight != rhs.textureHeight {return false}
+    if lhs.torchAvailable != rhs.torchAvailable {return false}
+    if lhs.zoomMinimum != rhs.zoomMinimum {return false}
+    if lhs.zoomMaximum != rhs.zoomMaximum {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Messages_ImageProxy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ImageProxy"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "selector"),
+    2: .same(proto: "id"),
+    3: .same(proto: "data"),
+    4: .same(proto: "width"),
+    5: .same(proto: "height"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._selector) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      case 4: try { try decoder.decodeSingularInt32Field(value: &self.width) }()
+      case 5: try { try decoder.decodeSingularInt32Field(value: &self.height) }()
       default: break
       }
     }
@@ -773,205 +1684,27 @@ extension Messages_CameraValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.key.isEmpty {
-      try visitor.visitSingularStringField(value: self.key, fieldNumber: 1)
-    }
-    try { if let v = self._textureValue {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    try { if let v = self._selector {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
-    try { if let v = self._torchValue {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._zoomValue {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Messages_CameraValue, rhs: Messages_CameraValue) -> Bool {
-    if lhs.key != rhs.key {return false}
-    if lhs._textureValue != rhs._textureValue {return false}
-    if lhs._torchValue != rhs._torchValue {return false}
-    if lhs._zoomValue != rhs._zoomValue {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Messages_TextureValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".TextureValue"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .same(proto: "width"),
-    3: .same(proto: "height"),
-    4: .same(proto: "quarterTurns"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt32Field(value: &self.id) }()
-      case 2: try { try decoder.decodeSingularInt32Field(value: &self.width) }()
-      case 3: try { try decoder.decodeSingularInt32Field(value: &self.height) }()
-      case 4: try { try decoder.decodeSingularInt32Field(value: &self.quarterTurns) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.id != 0 {
-      try visitor.visitSingularInt32Field(value: self.id, fieldNumber: 1)
-    }
-    if self.width != 0 {
-      try visitor.visitSingularInt32Field(value: self.width, fieldNumber: 2)
-    }
-    if self.height != 0 {
-      try visitor.visitSingularInt32Field(value: self.height, fieldNumber: 3)
-    }
-    if self.quarterTurns != 0 {
-      try visitor.visitSingularInt32Field(value: self.quarterTurns, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Messages_TextureValue, rhs: Messages_TextureValue) -> Bool {
-    if lhs.id != rhs.id {return false}
-    if lhs.width != rhs.width {return false}
-    if lhs.height != rhs.height {return false}
-    if lhs.quarterTurns != rhs.quarterTurns {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Messages_TorchValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".TorchValue"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "available"),
-    2: .same(proto: "state"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBoolField(value: &self.available) }()
-      case 2: try { try decoder.decodeSingularBoolField(value: &self.state) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.available != false {
-      try visitor.visitSingularBoolField(value: self.available, fieldNumber: 1)
-    }
-    if self.state != false {
-      try visitor.visitSingularBoolField(value: self.state, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Messages_TorchValue, rhs: Messages_TorchValue) -> Bool {
-    if lhs.available != rhs.available {return false}
-    if lhs.state != rhs.state {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Messages_ZoomValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ZoomValue"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "minimum"),
-    2: .same(proto: "maximum"),
-    3: .same(proto: "value"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularDoubleField(value: &self.minimum) }()
-      case 2: try { try decoder.decodeSingularDoubleField(value: &self.maximum) }()
-      case 3: try { try decoder.decodeSingularDoubleField(value: &self.value) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.minimum != 0 {
-      try visitor.visitSingularDoubleField(value: self.minimum, fieldNumber: 1)
-    }
-    if self.maximum != 0 {
-      try visitor.visitSingularDoubleField(value: self.maximum, fieldNumber: 2)
-    }
-    if self.value != 0 {
-      try visitor.visitSingularDoubleField(value: self.value, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Messages_ZoomValue, rhs: Messages_ZoomValue) -> Bool {
-    if lhs.minimum != rhs.minimum {return false}
-    if lhs.maximum != rhs.maximum {return false}
-    if lhs.value != rhs.value {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Messages_ImageProxy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ImageProxy"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "key"),
-    2: .same(proto: "data"),
-    3: .same(proto: "width"),
-    4: .same(proto: "height"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
-      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
-      case 3: try { try decoder.decodeSingularInt32Field(value: &self.width) }()
-      case 4: try { try decoder.decodeSingularInt32Field(value: &self.height) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.key.isEmpty {
-      try visitor.visitSingularStringField(value: self.key, fieldNumber: 1)
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
     }
     if !self.data.isEmpty {
-      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 2)
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 3)
     }
     if self.width != 0 {
-      try visitor.visitSingularInt32Field(value: self.width, fieldNumber: 3)
+      try visitor.visitSingularInt32Field(value: self.width, fieldNumber: 4)
     }
     if self.height != 0 {
-      try visitor.visitSingularInt32Field(value: self.height, fieldNumber: 4)
+      try visitor.visitSingularInt32Field(value: self.height, fieldNumber: 5)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Messages_ImageProxy, rhs: Messages_ImageProxy) -> Bool {
-    if lhs.key != rhs.key {return false}
+    if lhs._selector != rhs._selector {return false}
+    if lhs.id != rhs.id {return false}
     if lhs.data != rhs.data {return false}
     if lhs.width != rhs.width {return false}
     if lhs.height != rhs.height {return false}
