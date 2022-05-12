@@ -6,7 +6,7 @@ import 'package:camerax_example/views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-final cameraController = CameraController(CameraSelector.back);
+final cameraController = CameraController.fromSelector(CameraSelector.back);
 
 void main() {
   runZonedGuarded(onStartup, onCrashed);

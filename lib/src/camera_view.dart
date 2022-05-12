@@ -1,3 +1,4 @@
+import 'package:camerax/camerax.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_value.dart';
@@ -5,25 +6,27 @@ import 'channels.dart';
 import 'messages.dart' as messages;
 
 class CameraView extends StatelessWidget {
-  final CameraValue cameraValue;
+  final CameraController cameraController;
   final BoxFit fit;
   final FilterQuality filterQuality;
 
   const CameraView({
     Key? key,
-    required this.cameraValue,
+    required this.cameraController,
     this.fit = BoxFit.cover,
     this.filterQuality = FilterQuality.low,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     // 监听屏幕方向
     final stream = eventStream
         .where((event) =>
-            event.category ==
-            messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS_CHANGED)
+    event.category ==
+        messages.EventCategory.EVENT_CATEGORY_QUARTER_TURNS_CHANGED)
         .map((event) => event.quarterTurnsChangedArguments.quarterTurns);
+
     return StreamBuilder<int>(
       stream: stream,
       builder: (context, snapshot) {
@@ -55,8 +58,8 @@ class CameraView extends StatelessWidget {
   Widget buildWhenQuarterTurnsChanged(BuildContext context, int quarterTurns) {
     // 获取物理像素与逻辑像素的比值
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final width = cameraValue.textureWidth / devicePixelRatio;
-    final height = cameraValue.textureHeight / devicePixelRatio;
+    final width = cameraController.value.textureWidth / devicePixelRatio;
+    final height = cameraController.value.textureHeight / devicePixelRatio;
     return RotatedBox(
       quarterTurns: quarterTurns,
       child: FittedBox(
@@ -66,7 +69,7 @@ class CameraView extends StatelessWidget {
           width: width,
           height: height,
           child: Texture(
-            textureId: cameraValue.textureId,
+            textureId: cameraController.value.textureId,
             filterQuality: filterQuality,
           ),
         ),

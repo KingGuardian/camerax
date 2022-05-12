@@ -1,18 +1,24 @@
 import 'dart:async';
+import 'dart:ffi';
+
+import 'package:flutter/cupertino.dart';
 
 import 'camera_implementation.dart';
 import 'camera_selector.dart';
 import 'camera_value.dart';
 import 'image_proxy.dart';
 
-abstract class CameraController {
-  factory CameraController(CameraSelector selector) =>
+abstract class CameraController extends ValueNotifier<CameraValue> {
+
+  CameraController() : super(const CameraValue.generateDefault());
+
+  factory CameraController.fromSelector(CameraSelector selector) =>
       $CameraController(selector);
 
   Stream<ImageProxy> get imageStream;
 
   Future<bool> requestPermission();
-  Future<CameraValue> bind();
+  Future<void> bind();
   Future<void> unbind();
   Future<void> torch(bool state);
   Future<void> zoom(double value);

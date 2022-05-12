@@ -52,8 +52,8 @@ class _ScannerViewState extends State<ScannerView>
 
   @override
   Widget build(BuildContext context) {
-    final cameraValue =
-        ModalRoute.of(context)!.settings.arguments as CameraValue;
+    final cameraController =
+        ModalRoute.of(context)!.settings.arguments as CameraController;
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation = CurvedAnimation(
       parent: animationConrtroller,
@@ -65,7 +65,7 @@ class _ScannerViewState extends State<ScannerView>
         children: [
           // 相机
           CameraView(
-            cameraValue: cameraValue,
+            cameraController: cameraController,
           ),
           // 闪光灯
           Container(
@@ -74,7 +74,7 @@ class _ScannerViewState extends State<ScannerView>
             child: ValueListenableBuilder<TorchState>(
               valueListenable: torchStateNotifier,
               builder: (context, torchState, child) {
-                final torchAvailable = cameraValue.torchAvailable;
+                final torchAvailable = cameraController.value.torchAvailable;
                 final color = torchState == TorchState.torchedOn
                     ? Colors.white
                     : Colors.grey;

@@ -4,24 +4,15 @@ import 'dart:typed_data';
 import 'camera_controller.dart';
 import 'camera_facing.dart';
 import 'camera_selector.dart';
-import 'camera_value.dart';
 import 'channels.dart';
 import 'image_proxy.dart';
 import 'messages.dart' as messages;
 
-class $CameraController implements CameraController {
-  static final controllers = <CameraSelector, $CameraController>{};
+class $CameraController extends CameraController {
 
   final CameraSelector selector;
 
-  $CameraController._(this.selector);
-
-  factory $CameraController(CameraSelector selector) {
-    return controllers.putIfAbsent(
-      selector,
-      () => $CameraController._(selector),
-    );
-  }
+  $CameraController(this.selector) : super();
 
   @override
   Stream<ImageProxy> get imageStream {
@@ -46,7 +37,7 @@ class $CameraController implements CameraController {
   }
 
   @override
-  Future<CameraValue> bind() {
+  Future<void> bind() {
     final command = messages.Command(
       category:
           messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_BIND,
@@ -57,8 +48,12 @@ class $CameraController implements CameraController {
         ),
       ),
     );
-    return methodChannel.invokeCommand(command).then((reply) => $CameraValue
-        .fromMessage(reply!.cameraControllerBindArguments.cameraValue));
+
+    return methodChannel.invokeCommand(command).then((reply) =>
+      value = value.copyWithMessage(cameraValue: reply?.cameraControllerBindArguments.cameraValue));
+
+    // return methodChannel.invokeCommand(command).then((reply) => CameraValue
+    //     .fromMessage(reply!.cameraControllerBindArguments.cameraValue));
   }
 
   @override
@@ -163,69 +158,6 @@ class $CameraSelector implements CameraSelector {
   int get hashCode => facing.hashCode;
 }
 
-class $CameraValue implements CameraValue {
-  @override
-  final int textureId;
-  @override
-  final int textureWidth;
-  @override
-  final int textureHeight;
-  @override
-  final bool torchAvailable;
-  @override
-  final double zoomMinimum;
-  @override
-  final double zoomMaximum;
-
-  const $CameraValue(
-    this.textureId,
-    this.textureWidth,
-    this.textureHeight,
-    this.torchAvailable,
-    this.zoomMinimum,
-    this.zoomMaximum,
-  );
-
-  factory $CameraValue.fromMessage(messages.CameraValue cameraValue) {
-    final textureId = cameraValue.textureId;
-    final textureWidth = cameraValue.textureWidth;
-    final textureHeight = cameraValue.textureHeight;
-    final torchAvailable = cameraValue.torchAvailable;
-    final zoomMinimum = cameraValue.zoomMinimum;
-    final zoomMaximum = cameraValue.zoomMaximum;
-    return $CameraValue(
-      textureId,
-      textureWidth,
-      textureHeight,
-      torchAvailable,
-      zoomMinimum,
-      zoomMaximum,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is $CameraValue &&
-        other.textureId == textureId &&
-        other.textureWidth == textureWidth &&
-        other.textureHeight == textureHeight &&
-        other.torchAvailable == torchAvailable &&
-        other.zoomMinimum == zoomMinimum &&
-        other.zoomMaximum == zoomMaximum;
-  }
-
-  @override
-  int get hashCode {
-    return Object.hash(
-      textureId,
-      textureWidth,
-      textureHeight,
-      torchAvailable,
-      zoomMinimum,
-      zoomMaximum,
-    );
-  }
-}
 
 class $ImageProxy implements ImageProxy {
   final CameraSelector selector;
