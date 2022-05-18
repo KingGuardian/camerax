@@ -54,6 +54,7 @@ class _ScannerViewState extends State<ScannerView>
   Widget build(BuildContext context) {
     final cameraController =
         ModalRoute.of(context)!.settings.arguments as CameraController;
+
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation = CurvedAnimation(
       parent: animationConrtroller,
@@ -64,8 +65,26 @@ class _ScannerViewState extends State<ScannerView>
         fit: StackFit.expand,
         children: [
           // 相机
-          CameraView(
-            cameraController: cameraController,
+          LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return GestureDetector(
+              onTapDown: (TapDownDetails details) =>
+                  onViewFinderTap(cameraController, details, constraints),
+              child: CameraView(
+                cameraController: cameraController,
+              ),
+            );
+          }),
+
+          Container(
+            margin: const EdgeInsets.fromLTRB(30, 0, 0, 80),
+            alignment: Alignment.bottomLeft,
+            child: ElevatedButton(
+              onPressed: () {
+                _onAnalysisClick(cameraController);
+              },
+              child: const Text("图像分析"),
+            ),
           ),
           // 闪光灯
           Container(
@@ -122,6 +141,16 @@ class _ScannerViewState extends State<ScannerView>
         ],
       ),
     );
+  }
+
+  void onViewFinderTap(CameraController controller, TapDownDetails details, BoxConstraints constraints) {
+    controller.focusManually(constraints.maxWidth, constraints.maxHeight, details.localPosition.dx, details.localPosition.dy);
+  }
+
+  void _onAnalysisClick(CameraController controller) {
+    controller.imageStream.first.then((value) => {
+      Navigator.of(context).pushNamed("analysis", arguments: value)
+    });
   }
 
   @override

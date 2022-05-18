@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camerax/camerax.dart';
 import 'package:flutter/widgets.dart';
 
@@ -60,6 +62,17 @@ class CameraView extends StatelessWidget {
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     final width = cameraController.value.textureWidth / devicePixelRatio;
     final height = cameraController.value.textureHeight / devicePixelRatio;
+
+    if (!Platform.isAndroid) {
+      return SizedBox(
+        width: width,
+        height: height,
+        child: Texture(
+          textureId: cameraController.value.textureId,
+          filterQuality: filterQuality,
+        ),
+      );
+    }
     return RotatedBox(
       quarterTurns: quarterTurns,
       child: FittedBox(
