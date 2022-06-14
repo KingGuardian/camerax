@@ -294,7 +294,7 @@ extension CameraController {
                 let bytePerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
                 
                 let length = bytePerRow * imageHeight
-                imageData = NSData.init(bytesNoCopy: planeAddress, length: length) as Data
+                imageData = NSData.init(bytes: planeAddress, length: length) as Data
             }
             CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
             
